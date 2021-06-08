@@ -1,8 +1,6 @@
 # A Yang Data Model for Operations, Administration, and Maintenance of ALTO Protocol
 
-[![Action Status](https://github.com/openalto/draft-alto-oam-yang/actions/workflows/ghpages.yml/badge.svg)](https://github.com/openalto/draft-alto-oam-yang/actions/workflows/ghpages.yml)
-
-This is the working area for the individual Internet-Draft, "Considerations of Providing ALTO Services using BGP-LS".
+This is the working area for the individual Internet-Draft, "A Yang Data Model for Operations, Administration, and Maintenance of ALTO Protocol".
 
 * [Editor's Copy](https://openalto.github.io/draft-alto-oam-yang/#go.draft-zhang-alto-oam-yang.html)
 * [Individual Draft](https://tools.ietf.org/html/draft-zhang-alto-oam-yang)
