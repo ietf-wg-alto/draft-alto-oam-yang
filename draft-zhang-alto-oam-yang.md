@@ -53,6 +53,15 @@ author:
     country: China
     org: Sichuan University
     email: kaigao@scu.edu.cn
+ -
+    ins: Q. Wu
+    name: Qin Wu
+    street: 101 Software Avenue, Yuhua District
+    city: Nanjing
+    code: Jiangsu 210012
+    country: China
+    org: Huawei
+    email: bill.wu@huawei.com
 
 normative:
   RFC2119:

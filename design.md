@@ -53,6 +53,7 @@ module: ietf-alto
            +--:(external)
            |  +--rw external-source-params
            |     +--rw source-uri    inet:uri
+           |     +--rw query-data    string
            +--:(reactive)
               +--rw reactive-source-params
                  +--rw reactive-source-uri  inet:uri
