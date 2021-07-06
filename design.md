@@ -21,7 +21,7 @@ module: ietf-alto
      |   +--rw meta-value     string
      +--rw resource* [resource-id]
      |   +--rw resource-id    resource-id
-     |   +--rw resource-type  service-type
+     |   +--rw resource-type  identityref
      |   +--rw description?   string
      |   +--rw accepted-group* [user-group]
      |   +--rw dependency*    resource-id
@@ -68,18 +68,20 @@ module: ietf-alto
      |            +--rw (algorithm)
      +--rw data-source* [source-id]
         +--rw source-id   string
-        +--rw source-type source-type
+        +--rw source-type identityref
+        +--rw (update-policy)
+        |  +--:(reactive)
+        |  |  +--rw reactive         boolean
+        |  +--:(proactive)
+        |     +--rw poll-interval    uint32
         +--rw (source-params)
            +--:(internal)
            |  +--rw internal-source-params
            |     +--rw source-path   yang:xpath1.0
            +--:(external)
-           |  +--rw external-source-params
-           |     +--rw source-uri    inet:uri
-           |     +--rw query-data    string
-           +--:(reactive)
-              +--rw reactive-source-params
-                 +--rw reactive-source-uri  inet:uri
+              +--rw external-source-params
+                 +--rw source-uri    inet:uri
+                 +--rw query-data?   string
 ~~~
 
 ## Meta Information of ALTO Server
@@ -113,8 +115,48 @@ module: ietf-alto
 
 ## Intent-based Interfaces for ALTO Information Resources Management
 
-The operator of the ALTO server can use this YANG data model to create, update,
-and remove the ALTO information resource.
+The ALTO server instance contains a list of `resource` entries. Each `resource`
+entry contains the configurations of an ALTO information resource (See Section
+8.1 of {{RFC7285}}). The operator of the ALTO server can use this model to
+create, update, and remove the ALTO information resource.
+
+Each `resoruce` entry is considered as an intent to create or update an ALTO
+information resource.  Adding a new `resource` entry will submit an ALTO
+information resource creation intent to the intent system to create a new ALTO
+information resource. Updating an existing `resource` entry will update the
+corresponding ALTO information resource creation intent. Removing an existing
+`resource` entry will remove the corresponding ALTO information resource
+creation intent and also the created ALTO information resource.
+
+The parameter of the intent interface defined by a `resource` entry MUST include
+a unique `resource-id` and a `resource-type`.
+
+It can also include an `accepted-group` node containing a list of `user-group`s
+that can access this ALTO information resource.
+
+For some `resource-type`, the parameter of the intent interface MUST also
+include the a `dependency` node containing the `resource-id` of the dependent
+ALTO information resources (See Section 9.1.5 of {{RFC7285}}).
+
+For each type of ALTO information resource, the creation intent MAY also need
+type-specific parameters. These type-specific parameters include two categories:
+
+1. One categories of the type-specific parameters are common for the same type
+   of ALTO information resource. They declare the Capabilities of the ALTO
+   information resource (See Section 9.1.3 of {{RFC7285}}).
+2. The other categories of the type-specific parameters are algorithm-specific.
+   The developer of the ALTO server can implement their own creation altorithms
+   and augment the `algorithm` node to declare algorithm-specific input
+   parameters.
+
+Except for the `ird` resource, all the other types of `resource` entries have
+augmented `algorithm` node. The augmented `algorithm` node can reference data
+sources subscribed by the `data-source` entries (See [](#data-source)).
+
+The developer cannot customize the creation algorithm of the `ird` resource. The
+default `ird` resource will be created automatically based on all the added
+`resource` entries. The delegated `ird` resource will be created as a static
+ALTO information resource (See Section 9.2.4 of {{RFC7285}}).
 
 ~~~
 module: ietf-alto
@@ -122,7 +164,7 @@ module: ietf-alto
      ...
      +--rw resource* [resource-id]
      |   +--rw resource-id    resource-id
-     |   +--rw resource-type  service-type
+     |   +--rw resource-type  identityref
      |   +--rw description?   string
      |   +--rw accepted-group* [user-group]
      |   +--rw dependency*    resource-id
@@ -170,7 +212,71 @@ module: ietf-alto
      ...
 ~~~
 
-## Data Sources Subscription
+## Data Sources Subscription {#data-source}
+
+The ALTO server instance contains a list of `data-source` entries to subscribe
+the data sources from which ALTO information resources are derived (See Section
+16.2.4 of {{RFC7285}}).
+
+A `data-source` entry MUST include:
+
+- a unique `source-id` for resource creation algorithms to reference,
+- the `source-type` attribute to declare the type of the data source,
+- the `update-policy` to specify how to get the data update from the data
+  source,
+- the `source-params` to specify where and how to query the data.
+
+The update policy can be either reactive or proactive. For the reactive update,
+the ALTO server gets the update as soon as the data source changes. For the
+proactive update, the ALTO server has to proactively fetch the data source
+periodically.
+
+To use the reactive update, the `reactive` attribute MUST be set true. To use
+the proactive update, the `poll-interval` attribute MUST be greater than zero.
+The value of `poll-interval` specifies the interval of fetching the data in
+milliseconds. If `reactive` is false or `poll-interval` is zero, the ALTO server
+will not update the data source.
+
+The target of the data source can be either internal or external.
+
+~~~
+module: ietf-alto
+  +--rw alto-server
+     ...
+     +--rw data-source* [source-id]
+        +--rw source-id   string
+        +--rw source-type identityref
+        +--rw (update-policy)
+        |  +--:(reactive)
+        |  |  +--rw reactive         boolean
+        |  +--:(proactive)
+        |     +--rw poll-interval    uint32
+        +--rw (source-params)
+           +--:(internal)
+           |  +--rw internal-source-params
+           |     +--rw source-path   yang:xpath1.0
+           +--:(external)
+              +--rw external-source-params
+                 +--rw source-uri    inet:uri
+                 +--rw query-data?   string
+~~~
+
+### Internal Data Source Subscription
+
+The `internal-source-params` is used to subscribe the internel data source which
+is located in the same YANG model-drive data store supplying the current ALTO
+OAM data model. The `source-path` is used to specify the XPath of the data
+source node.
+
+### External Data Source Subscription
+
+The `external-source-params` is sued to subscribe the external data source which
+is located in other database systems, e.g., an SNMP server, a prometheus
+monitor, or a SQL database. The `source-uir` is used to establish the connection
+with the external data source. The `query-data` is used to speficify the
+potential query expression.
+
+## Model for ALTO Statistics
 
 TBD.
 
