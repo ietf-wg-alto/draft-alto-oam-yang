@@ -53,15 +53,6 @@ author:
     country: China
     org: Sichuan University
     email: kaigao@scu.edu.cn
- -
-    ins: Q. Wu
-    name: Qin Wu
-    street: 101 Software Avenue, Yuhua District
-    city: Nanjing
-    code: Jiangsu 210012
-    country: China
-    org: Huawei
-    email: bill.wu@huawei.com
 
 normative:
   RFC2119:
@@ -70,16 +61,18 @@ normative:
   RFC7286:
   RFC7971:
   RFC8174:
+  RFC8189:
   RFC8340:
   RFC8571:
   RFC8686:
   RFC8895:
   RFC8896:
 informative:
-  RFC8189:
+  RFC8346:
   I-D.ietf-alto-path-vector:
   I-D.ietf-alto-unified-props-new:
   I-D.ietf-alto-cost-calendar:
+  I-D.ietf-alto-performance-metrics:
 
 --- abstract
 

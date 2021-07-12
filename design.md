@@ -5,6 +5,10 @@
 The ALTO YANG module defined in this document has all the common building blocks
 for ALTO OAM.
 
+NOTE: So far, the ALTO YANG module only focuses on the ALTO server related
+configuration. The ALTO client related configuration will be added in a future
+version of the document.
+
 The container "alto-server" in the ALTO yang module contains all the configured
 and operational parameters of the adminstrated ALTO server instance.
 
@@ -95,7 +99,7 @@ used in the URI of each information resource provided by the ALTO server.
 The cost type list is the registry for the cost types that can be used in the
 ALTO server.
 
-The meta list contains the customized meta data of the ALTO server. It will be
+The `meta` list contains the customized meta data of the ALTO server. It will be
 populated into the meta field of the default Information Resource Directory
 (IRD).
 
@@ -212,7 +216,42 @@ module: ietf-alto
      ...
 ~~~
 
-## Data Sources Subscription {#data-source}
+### Information Resource Creation Algorithm Example
+
+The following example shows how the developer can augment a creation algorithm
+for the network map resource.
+
+~~~
+  augment /alto:alto-server/alto:resource/alto:resource-params
+            /alto:networkmap/alto:alto-networkmap-params
+            /alto:algorithm:
+    +--rw l3-unicast-cluster-algorithm
+       +--rw l3-unicast-topo
+       |       -> /alto:alto-server/data-source/source-id
+       +--rw depth?    uint32
+~~~
+
+This example defines a creation algorithm called `l3-unicast-cluster-algorithm`
+for the network map resource. It takes two algorithm-specific parameters:
+
+l3-unicast-topo
+: This parameter refers to the source id of a data source node subscribed in the
+  `data-source` list (See [](#data-source)). The corresponding data source is
+  assumed to be an internel data source (See [](#internal-data-source)) for an
+  IETF layer 3 unicast topology defined in {{RFC8346}}. The algorithm uses the
+  topology data from this data source to compute the ALTO network map resource.
+
+depth
+: This optional parameter sets the depth of the clustering algorithm. For
+  example, if the depth sets to 1, the algorithm will generate PID for every
+  l3-node in the topology.
+
+The creation algorithm can be reactively called once the referenced data source
+updates. Therefore, the ALTO network map resource can be updated dynamically.
+The update of the reference data source depends on the used `update-policy` (See
+[](#data-source)).
+
+## Data Sources {#data-source}
 
 The ALTO server instance contains a list of `data-source` entries to subscribe
 the data sources from which ALTO information resources are derived (See Section
@@ -261,20 +300,24 @@ module: ietf-alto
                  +--rw query-data?   string
 ~~~
 
-### Internal Data Source Subscription
+### Internal Data Source {#internal-data-source}
 
 The `internal-source-params` is used to subscribe the internel data source which
-is located in the same YANG model-drive data store supplying the current ALTO
+is located in the same YANG model-driven data store supplying the current ALTO
 OAM data model. The `source-path` is used to specify the XPath of the data
 source node.
 
-### External Data Source Subscription
+### External Data Source {#external-data-source}
 
 The `external-source-params` is sued to subscribe the external data source which
 is located in other database systems, e.g., an SNMP server, a prometheus
 monitor, or a SQL database. The `source-uir` is used to establish the connection
 with the external data source. The `query-data` is used to speficify the
 potential query expression.
+
+## Model for ALTO Server-to-server Communication
+
+TBD.
 
 ## Model for ALTO Statistics
 
