@@ -45,7 +45,8 @@ module: ietf-alto
      |      |     +--rw cost-type-names*   string
      |      |     +--rw cost-constraints?  boolean
      |      |     +--rw max-cost-types?    uint32 {multi-cost}?
-     |      |     +--rw testable-cost-type-names* string {multi-cost}?
+     |      |     +--rw testable-cost-type-names*
+     |      |             string {multi-cost}?
      |      |     +--rw calendar?          boolean {cost-calendar}?
      |      |     +--rw (algorithm)
      |      +--:(endpointcost)
@@ -55,7 +56,8 @@ module: ietf-alto
      |      |     |  +--rw cost-metric     cost-metric
      |      |     +--rw cost-constraints?  boolean
      |      |     +--rw max-cost-types?    uint32 {multi-cost}?
-     |      |     +--rw testable-cost-type-names* string {multi-cost}?
+     |      |     +--rw testable-cost-type-names*
+     |      |             string {multi-cost}?
      |      |     +--rw calendar?          boolean {cost-calendar}?
      |      |     +--rw (algorithm)
      |      +--:(endpointprop)
@@ -188,7 +190,8 @@ module: ietf-alto
      |      |     +--rw cost-type-names*   string
      |      |     +--rw cost-constraints?  boolean
      |      |     +--rw max-cost-types?    uint32 {multi-cost}?
-     |      |     +--rw testable-cost-type-names* string {multi-cost}?
+     |      |     +--rw testable-cost-type-names*
+     |      |             string {multi-cost}?
      |      |     +--rw calendar?          boolean {cost-calendar}?
      |      |     +--rw (algorithm)
      |      +--:(endpointcost)
@@ -198,7 +201,8 @@ module: ietf-alto
      |      |     |  +--rw cost-metric     cost-metric
      |      |     +--rw cost-constraints?  boolean
      |      |     +--rw max-cost-types?    uint32 {multi-cost}?
-     |      |     +--rw testable-cost-type-names* string {multi-cost}?
+     |      |     +--rw testable-cost-type-names*
+     |      |             string {multi-cost}?
      |      |     +--rw calendar?          boolean {cost-calendar}?
      |      |     +--rw (algorithm)
      |      +--:(endpointprop)
