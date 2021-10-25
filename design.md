@@ -29,6 +29,11 @@ module: ietf-alto
      |   +--rw description?   string
      |   +--rw accepted-group* [user-group]
      |   +--rw dependency*    resource-id
+     |   +--rw auth
+     |   |  +--rw (auth-type-selection)
+     |   |     +--:(auth-key-chain)
+     |   |     +--:(auth-key)
+     |   |     +--:(auth-tls)
      |   |  ...
      |   +--rw (resource-params)
      |      +--:(ird)
@@ -140,6 +145,11 @@ a unique `resource-id` and a `resource-type`.
 It can also include an `accepted-group` node containing a list of `user-group`s
 that can access this ALTO information resource.
 
+As section 15.5.2 of {{RFC7285}} suggests, the module also defines
+authentication related configuration to employ access control at information
+resource level. The ALTO server returns the IRD to the ALTO client based on its
+authentication information.
+
 For some `resource-type`, the parameter of the intent interface MUST also
 include the a `dependency` node containing the `resource-id` of the dependent
 ALTO information resources (See Section 9.1.5 of {{RFC7285}}).
@@ -174,6 +184,11 @@ module: ietf-alto
      |   +--rw description?   string
      |   +--rw accepted-group* [user-group]
      |   +--rw dependency*    resource-id
+     |   +--rw auth
+     |   |  +--rw (auth-type-selection)
+     |   |     +--:(auth-key-chain)
+     |   |     +--:(auth-key)
+     |   |     +--:(auth-tls)
      |   |  ...
      |   +--rw (resource-params)
      |      +--:(ird)
@@ -319,12 +334,51 @@ monitor, or a SQL database. The `source-uir` is used to establish the connection
 with the external data source. The `query-data` is used to speficify the
 potential query expression.
 
+Current external source configuration still has limitations. It should be
+revised to support more general southbound and data retrieval mechanisms.
+
 ## Model for ALTO Server-to-server Communication
 
 TBD.
 
 ## Model for ALTO Statistics
 
-TBD.
+As section 16.2.5 of {{RFC7285}} suggests, the YANG data module defined in this
+document also contains statistics for ALTO-specific performance metrics.
+
+Note that this module only contains statstics for performance information that a
+common web server or an OAM tool cannot provide.
+
+The module, "ietf-alto-stats", augments the ietf-alto module to include
+statistics at the ALTO server and information resource level.
+
+~~~
+module: ietf-alto-stats
+
+  augment /alto:alto-server/alto:resource:
+    +--ro num-res-upd?    yang:counter32
+    +--ro res-mem-size?   yang:counter32
+    +--ro res-enc-size?   yang:counter32
+
+  augment /alto:alto-server/alto:resource/alto:resource-params
+            /alto:networkmap/alto:alto-networkmap-params:
+    +--ro num-map-pid?    yang:counter32
+
+  augment /alto:alto-server/alto:resource/alto:resource-params
+            /alto:propmap/alto:alto-propmap-params:
+    +--ro num-map-entry?  yang:counter32
+
+  augment /alto:alto-server/alto:resource/alto:resource-params
+            /alto:cdni/alto:alto-cdni-params:
+    +--ro num-base-obj?   yang:counter32
+
+  augment /alto:alto-server/alto:resource/alto:resource-params
+            /alto:update/alto:alto-update-params:
+    +--ro num-upd-sess    yang:counter32
+    +--ro num-event-total yang:counter32
+    +--ro num-event-max?  yang:counter32
+    +--ro num-event-min?  yang:counter32
+    +--ro num-event-avg?  yang:counter32
+~~~
 
 <!-- End of sections -->

@@ -86,3 +86,39 @@ application demand change
 |           +--rw reactive-source-uri  uri
 +--rw (algorithm)
 ```
+
+
+======
+
+1. I agree management consideration provide a set of requirements for ALTO data
+model design and is a good input to this document. I am wondering whether we
+have other reference work as input such as server discovery, server to server
+communication, I assume ALTO deployment document can be one of them, related to
+sever to server communication, what about server discovery? Do we need to
+configure the ALTO client for server discovery?  Do we need to configure ALTO
+server for server discovery, suppose we use DNS mechanism to discover ALTO
+server, I think we actually need to configure DNS server? What am I missing? I
+encourage to take a close look at server discovery aspect, what is needed for
+ALTO data model?
+
+2. I agree we need to better manage ALTO information resource and data source,
+Do we need to monitor ALTO information resource lifecycle management, what is
+missing part is performance measurement aspect, I think we should reference
+section 16.2.5 to see how to provide ALTO information resource monitoring?  Also
+consider how to integrate generic measurement framework into this data model,
+one relevant work is draft-xie-alto-lmap-00?
+
+3. For data source aspect, I am wondering whether we should also consider not
+only where to collect data, but also how to collect data or what kind of data we
+can collect?  e.g., we can use pub sub mechanism to collect the data, suppose we
+collect the routing data, topology data, performance related data, how these
+data are translated into network map or cost map? I know we support reactive
+update and proactive update, but it looks both are poll based which is slow.
+
+4. For Access Control, I feel it is confusing, I don't think access control is
+about a list of permissions associated with a system resource (object),e.g, data
+flow with the specific 5 tuples, I think access control is related to security
+policy such as HTTP authentication, TLS client and server authentication, TLS
+encryption parameters, this can be used not only in client server communication
+but also in server to server communication. I am wondering how this can be
+modelled in the ALTO data model?
