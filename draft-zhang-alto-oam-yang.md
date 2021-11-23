@@ -53,6 +53,15 @@ author:
     country: China
     org: Sichuan University
     email: kaigao@scu.edu.cn
+ -
+    ins: R. Schott
+    name: Roland Schott
+    organization: Deutsche Telekom
+    email: Roland.Schott@telekom.de
+    street: Heinrich-Hertz-Strasse 3-7
+    city: Darmstadt
+    code: 64295
+    country: Germany
 
 normative:
   RFC2119:
@@ -71,8 +80,8 @@ informative:
   RFC8346:
   I-D.ietf-alto-path-vector:
   I-D.ietf-alto-unified-props-new:
-  I-D.ietf-alto-cost-calendar:
   I-D.ietf-alto-performance-metrics:
+  I-D.ietf-alto-cdni-request-routing-alto:
 
 --- abstract
 

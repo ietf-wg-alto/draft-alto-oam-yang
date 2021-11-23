@@ -86,11 +86,11 @@ module: ietf-alto
         |  +--:(proactive)
         |     +--rw poll-interval    uint32
         +--rw (source-params)
-           +--:(internal)
-           |  +--rw internal-source-params
+           +--:(yang-datastore)
+           |  +--rw yang-datastore-source-params
            |     +--rw source-path   yang:xpath1.0
-           +--:(external)
-              +--rw external-source-params
+           +--:(prometheus)
+              +--rw prometheus-source-params
                  +--rw source-uri    inet:uri
                  +--rw query-data?   string
 ~~~
@@ -295,7 +295,10 @@ The value of `poll-interval` specifies the interval of fetching the data in
 milliseconds. If `reactive` is false or `poll-interval` is zero, the ALTO server
 will not update the data source.
 
-The target of the data source can be either internal or external.
+The `data-source/source-params` node can be augmented for different types of
+data sources. This data model only includes import interfaces for a list of
+predefined data sources. More data sources can be supported by future documents
+and other third-party providers.
 
 ~~~
 module: ietf-alto
@@ -310,32 +313,31 @@ module: ietf-alto
         |  +--:(proactive)
         |     +--rw poll-interval    uint32
         +--rw (source-params)
-           +--:(internal)
-           |  +--rw internal-source-params
+           +--:(yang-datastore)
+           |  +--rw yang-datastore-source-params
            |     +--rw source-path   yang:xpath1.0
-           +--:(external)
-              +--rw external-source-params
+           +--:(prometheus)
+              +--rw prometheus-source-params
                  +--rw source-uri    inet:uri
                  +--rw query-data?   string
 ~~~
 
-### Internal Data Source {#internal-data-source}
+Note: Current source configuration still has limitations. It should be
+revised to support more general southbound and data retrieval mechanisms.
 
-The `internal-source-params` is used to subscribe the internel data source which
+### Yang DataStore Data Source {#internal-data-source}
+
+The `yang-datastore-source-params` is used to import the YANG data which
 is located in the same YANG model-driven data store supplying the current ALTO
 OAM data model. The `source-path` is used to specify the XPath of the data
 source node.
 
-### External Data Source {#external-data-source}
+### Prometheus Data Source {#external-data-source}
 
-The `external-source-params` is sued to subscribe the external data source which
-is located in other database systems, e.g., an SNMP server, a prometheus
-monitor, or a SQL database. The `source-uir` is used to establish the connection
-with the external data source. The `query-data` is used to speficify the
-potential query expression.
-
-Current external source configuration still has limitations. It should be
-revised to support more general southbound and data retrieval mechanisms.
+The `prometheus-source-params` is used to import common performance metrics
+data which is provided by a Prometheus server. The `source-uir` is used to
+establish the connection with the Prometheus server. The `query-data` is used
+to speficify the potential query expression in PromQL.
 
 ## Model for ALTO Server-to-server Communication
 
@@ -346,8 +348,31 @@ TBD.
 As section 16.2.5 of {{RFC7285}} suggests, the YANG data module defined in this
 document also contains statistics for ALTO-specific performance metrics.
 
+More specifically, this data model contains the following measurement
+information suggested by {{RFC7971}}:
+
+- Measurement of impact
+    - Total amount and distribution of traffic
+    - Application performance
+- System and service performance
+    - Requests and responses for each information resource
+    - CPU and memory utilization
+    - ALTO map updates
+    - Number of PIDs
+    - ALTO map sizes
+
+Besides the measurement information suggested by {{RFC7971}}, this data model
+also contains useful measurement information for other ALTO extensions:
+
+- Number of generic ALTO entities (for {{I-D.ietf-alto-unified-props-new}} and
+  {{I-D.ietf-alto-cdni-request-routing-alto}})
+- Statistics for update sessions and events (for {{RFC8189}})
+- Statistics for calendar (for {{RFC8896}})
+
+<!--
 Note that this module only contains statstics for performance information that a
 common web server or an OAM tool cannot provide.
+-->
 
 The module, "ietf-alto-stats", augments the ietf-alto module to include
 statistics at the ALTO server and information resource level.

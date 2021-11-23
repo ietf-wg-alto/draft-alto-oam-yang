@@ -13,7 +13,7 @@ document mainly focuses on the support of the base ALTO protocol {{RFC7285}} and
 the existing ALTO standard extensions (including {{RFC8189}}, {{RFC8895}} and
 {{RFC8896}}), the design will also be extensible for future standard extensions
 (e.g., {{I-D.ietf-alto-path-vector}}, {{I-D.ietf-alto-unified-props-new}},
-{{I-D.ietf-alto-cost-calendar}}, and {{I-D.ietf-alto-performance-metrics}}).
+{{RFC8896}}, and {{I-D.ietf-alto-performance-metrics}}).
 
 # Requirements Language
 
