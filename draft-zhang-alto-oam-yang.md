@@ -2,7 +2,7 @@
 docname: draft-zhang-alto-oam-yang-latest
 title: A Yang Data Model for Operations, Administration, and Maintenance of ALTO Protocol
 abbrev: ALTO OAM YANG
-category: info
+category: std
 
 ipr: trust200902
 area: Networks
