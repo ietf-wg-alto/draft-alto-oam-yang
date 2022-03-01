@@ -9,11 +9,11 @@ module ietf-alto {
     reference
       "RFC 6991: Common YANG Data Types";
   }
-  
+
   import ietf-yang-types {
     prefix "yang";
     reference
-      "RFC 6991: Common YANG Data Types";         
+      "RFC 6991: Common YANG Data Types";
   }
 
   import ietf-key-chain {
@@ -60,7 +60,7 @@ module ietf-alto {
       "RFC XXXX: A YANG Data Model for Operations, Administration,
        and Maintenance of ALTO Protocol.";
   }
-  
+
   typedef cost-mode {
     type enumeration {
       enum numerical {
@@ -84,7 +84,7 @@ module ietf-alto {
     reference
       "Section 6.1.2 of RFC 7285.";
   }
-  
+
   typedef cost-metric {
     type string;
     description
@@ -93,7 +93,7 @@ module ietf-alto {
     reference
       "Section 6.1.1 of RFC 7285.";
   }
-  
+
   typedef resource-id {
     type string {
       length "1..64";
@@ -104,47 +104,47 @@ module ietf-alto {
     reference
       "Section 9.1.1 of RFC 7285.";
   }
-  
+
   identity resource-types {
     description
       "Base identity for type of information resource.";
   }
-  
+
   identity source-types {
     description
       "Base identity for type of data source.";
   }
-  
+
   identity network-map {
     base resource-types;
     description
       "Identity for network map.";
   }
-  
+
   identity cost-map {
     base resource-types;
     description
       "Identity for cost map.";
   }
-  
+
   identity property-map {
     base resource-types;
     description
       "Identity for property map.";
   }
-  
+
   identity yang-datastore {
     base source-types;
     description
       "Identity for data source of YANG-based datastore.";
   }
-  
+
   identity prometheus {
     base source-types;
     description
       "Identity for data source of prometheus system.";
   }
-  
+
   feature multi-cost {
     description
       "Support multi-cost extension.";
@@ -152,7 +152,7 @@ module ietf-alto {
       "RFC 8189: Multi-Cost Application-Layer Traffic Optimization
        (ALTO)";
   }
-  
+
   feature cost-calendar {
     description
       "Support cost calendar extension.";
@@ -160,14 +160,14 @@ module ietf-alto {
       "RFC 8896: Application-Layer Traffic Optimization (ALTO) Cost
        Calendar";
   }
-  
+
   feature propmap {
     description
       "Support entity property map extension.";
     reference
       "RFC XXXX: An ALTO Extension: Entity Property Maps";
   }
-  
+
   feature cdni {
     description
       "Support CDNi extension.";
@@ -176,7 +176,7 @@ module ietf-alto {
        Request Routing: CDNI Footprint and Capabilities
        Advertisement using ALTO";
   }
-  
+
   feature incr-update {
     description
       "Support incremental update extension.";
@@ -258,7 +258,7 @@ module ietf-alto {
         "Section 4.1 of RFC 8896.";
     }
   }
-  
+
   grouping algorithm {
     choice algorithm {
       mandatory true;
@@ -269,7 +269,7 @@ module ietf-alto {
       "This grouping defines base data model for information
        resource creation algorithm.";
   }
-  
+
   container alto-server {
     description
       "The ALTO server instance.";
@@ -426,7 +426,7 @@ module ietf-alto {
               "Section 11.5 of RFC 7285";
             uses filt-costmap-cap;
             uses algorithm;
-          }      
+          }
         }
         case endpointprop {
           container alto-endpointprop-params {
