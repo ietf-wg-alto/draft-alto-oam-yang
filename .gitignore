@@ -28,6 +28,7 @@ metadata.min.js
 pulls.json
 report.xml
 tracker.log
+tmp/
 venv/
 lib
 draft-zhang-alto-oam-yang.xml
