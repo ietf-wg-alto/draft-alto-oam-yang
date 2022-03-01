@@ -18,6 +18,7 @@ prefix associated with the corresponding YANG module, as shown in [](#tbl-yang-p
 |:-|:-|:-
 | yang | ietf-yang-types | {{RFC6991}}
 | inet | ietf-inet-types | {{RFC6991}}
+| key-chain | ietf-key-chain | {{RFC8177}}
 {: #tbl-yang-prefixes title="Prefixes and corresponding YANG modules"}
 
 <!-- End of sections -->

@@ -12,6 +12,7 @@
 *~
 .floo
 .flooignore
+.python-version
 .refcache
 .tags
 .targets.mk

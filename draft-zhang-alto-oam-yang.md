@@ -70,6 +70,7 @@ normative:
   RFC7286:
   RFC7971:
   RFC8174:
+  RFC8177:
   RFC8189:
   RFC8340:
   RFC8571:
@@ -100,6 +101,8 @@ and collect statistical data.
 {::include objectives.md}
 
 {::include design.md}
+
+{::include modules.md}
 
 {::include others.md}
 

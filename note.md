@@ -31,7 +31,7 @@ practices in ALTO operations automation, including
 interop/interfaces/protocols with routing systems and measurement tools.
 
 
-=======
+---
 
 
 
@@ -88,7 +88,7 @@ application demand change
 ```
 
 
-======
+---
 
 1. I agree management consideration provide a set of requirements for ALTO data
 model design and is a good input to this document. I am wondering whether we
@@ -122,3 +122,16 @@ policy such as HTTP authentication, TLS client and server authentication, TLS
 encryption parameters, this can be used not only in client server communication
 but also in server to server communication. I am wondering how this can be
 modelled in the ALTO data model?
+
+
+---
+
+
+Useful materials:
+
+- LIME WG: https://datatracker.ietf.org/wg/lime/documents/
+- YANG Data Model for LMAP: https://datatracker.ietf.org/doc/html/rfc8194
+- Information Model for LMAP: https://datatracker.ietf.org/doc/html/rfc8193
+- YANG Data Model for Syslog Config: https://datatracker.ietf.org/doc/html/draft-ietf-netmod-syslog-model
+- MEF-38: https://www.mef.net/wp-content/uploads/2012/04/MEF_38.pdf
+
