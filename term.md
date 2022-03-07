@@ -1,5 +1,10 @@
 # Terminology
 
+This document uses the following acronyms:
+
+- OAM - Operations, Administration, and Maintainance
+- O&M - OAM and Management
+
 ## Tree Diagrams
 
 A simplified graphical representation of the data model is used in this

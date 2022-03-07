@@ -1,7 +1,7 @@
 ---
 docname: draft-zhang-alto-oam-yang-latest
-title: A Yang Data Model for Operations, Administration, and Maintenance of ALTO Protocol
-abbrev: ALTO OAM YANG
+title: A Yang Data Model for OAM and Management of ALTO Protocol
+abbrev: ALTO O&M YANG
 category: std
 
 ipr: trust200902
@@ -65,19 +65,20 @@ author:
 
 normative:
   RFC2119:
+  RFC3688:
+  RFC6020:
   RFC6991:
   RFC7285:
   RFC7286:
-  RFC7971:
   RFC8174:
   RFC8177:
   RFC8189:
   RFC8340:
-  RFC8571:
   RFC8686:
   RFC8895:
   RFC8896:
 informative:
+  RFC7971:
   RFC8346:
   I-D.ietf-alto-path-vector:
   I-D.ietf-alto-unified-props-new:
@@ -86,11 +87,11 @@ informative:
 
 --- abstract
 
-This document defines a YANG data model for the operations and management of
-Application-Layer Traffic Optimization (ALTO) Protocol. The operator can use
-the data model to create and update ALTO information resources, manage the
-access control, configure server-to-server communication and server discovery,
-and collect statistical data.
+This document defines a YANG data model for Operations, Administration,
+and Maintenance (OAM) & Management of Application-Layer Traffic Optimization
+(ALTO) Protocol. The operator can use the data model to create and update ALTO
+information resources, manage the access control, configure server-to-server
+communication and server discovery, and collect statistical data.
 
 --- middle
 
@@ -102,10 +103,32 @@ and collect statistical data.
 
 {::include design.md}
 
-{::include modules.md}
+<!--
+Note: current kramdown-rfc tool does not support recursive inclusion.
+Simply put the YANG module section here and wait for a future update.
+See details: https://github.com/cabo/kramdown-rfc/issues/106
+-->
+
+# ALTO OAM YANG Module
+
+## The ietf-alto Module
+
+~~~ yang
+{::include yang/ietf-alto.yang}
+~~~
+{: sourcecode-markers="true" sourcecode-name="ietf-alto@2022-03-07.yang"}
+
+## The ietf-alto-stats Module
+
+~~~ yang
+{::include yang/ietf-alto-stats.yang}
+~~~
+{: sourcecode-markers="true" sourcecode-name="ietf-alto-stats@2022-03-07.yang"}
 
 {::include others.md}
 
 --- back
 
 {::include appendix.md}
+
+{::include ack.md}

@@ -57,8 +57,8 @@ module ietf-alto {
     description
       "Initial Version.";
     reference
-      "RFC XXXX: A YANG Data Model for Operations, Administration,
-       and Maintenance of ALTO Protocol.";
+      "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
+       Protocol.";
   }
 
   typedef cost-mode {
@@ -398,7 +398,8 @@ module ietf-alto {
               type boolean;
               default false;
               description
-                "Configure whether filtered network map is supported.";
+                "Configure whether filtered network map is
+                 supported.";
             }
             uses algorithm;
           }

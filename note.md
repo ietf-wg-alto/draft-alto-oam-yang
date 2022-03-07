@@ -126,6 +126,10 @@ modelled in the ALTO data model?
 
 ---
 
+{::include comments/adrian-20220124.md}
+
+---
+
 
 Useful materials:
 

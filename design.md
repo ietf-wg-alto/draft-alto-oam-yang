@@ -1,16 +1,16 @@
-# Design of ALTO OAM Data Model
+# Design of ALTO O&M Data Model
 
-## Overview of ALTO OAM Data Model
+## Overview of ALTO O&M Data Model
 
-The ALTO YANG module defined in this document has all the common building blocks
-for ALTO OAM.
+The ietf-alto module defined in this document provide all the basic ALTO O&M
+data models fitting the requirements listed in [](#sec-req).
+
+The container "alto-server" in the ietf-alto module contains all the configured
+and operational parameters of the adminstrated ALTO server instance.
 
 NOTE: So far, the ALTO YANG module only focuses on the ALTO server related
 configuration. The ALTO client related configuration will be added in a future
 version of the document.
-
-The container "alto-server" in the ALTO yang module contains all the configured
-and operational parameters of the adminstrated ALTO server instance.
 
 ~~~
 module: ietf-alto
@@ -113,6 +113,9 @@ The `meta` list contains the customized meta data of the ALTO server. It will be
 populated into the meta field of the default Information Resource Directory
 (IRD).
 
+TODO: As suggested by {{RFC7286}} and {{RFC8686}}, the configuration related to
+ALTO server discovery should also be included here.
+
 ~~~
 module: ietf-alto
   +--rw alto-server
@@ -127,15 +130,15 @@ module: ietf-alto
      ...
 ~~~
 
-## Intent-based Interfaces for ALTO Information Resources Management
+## ALTO Information Resources Configuration Management
 
 The ALTO server instance contains a list of `resource` entries. Each `resource`
 entry contains the configurations of an ALTO information resource (See Section
 8.1 of {{RFC7285}}). The operator of the ALTO server can use this model to
 create, update, and remove the ALTO information resource.
 
-Each `resoruce` entry is considered as an intent to create or update an ALTO
-information resource.  Adding a new `resource` entry will submit an ALTO
+Each `resoruce` entry provide configuration defining how to create or update an ALTO
+information resource. Adding a new `resource` entry will submit an ALTO
 information resource creation intent to the intent system to create a new ALTO
 information resource. Updating an existing `resource` entry will update the
 corresponding ALTO information resource creation intent. Removing an existing
@@ -241,41 +244,6 @@ module: ietf-alto
      ...
 ~~~
 
-### Information Resource Creation Algorithm Example
-
-The following example shows how the developer can augment a creation algorithm
-for the network map resource.
-
-~~~
-  augment /alto:alto-server/alto:resource/alto:resource-params
-            /alto:networkmap/alto:alto-networkmap-params
-            /alto:algorithm:
-    +--rw l3-unicast-cluster-algorithm
-       +--rw l3-unicast-topo
-       |       -> /alto:alto-server/data-source/source-id
-       +--rw depth?    uint32
-~~~
-
-This example defines a creation algorithm called `l3-unicast-cluster-algorithm`
-for the network map resource. It takes two algorithm-specific parameters:
-
-l3-unicast-topo
-: This parameter refers to the source id of a data source node subscribed in the
-  `data-source` list (See [](#data-source)). The corresponding data source is
-  assumed to be an internel data source (See [](#internal-data-source)) for an
-  IETF layer 3 unicast topology defined in {{RFC8346}}. The algorithm uses the
-  topology data from this data source to compute the ALTO network map resource.
-
-depth
-: This optional parameter sets the depth of the clustering algorithm. For
-  example, if the depth sets to 1, the algorithm will generate PID for every
-  l3-node in the topology.
-
-The creation algorithm can be reactively called once the referenced data source
-updates. Therefore, the ALTO network map resource can be updated dynamically.
-The update of the reference data source depends on the used `update-policy` (See
-[](#data-source)).
-
 ## Data Sources {#data-source}
 
 The ALTO server instance contains a list of `data-source` entries to subscribe
@@ -335,7 +303,7 @@ revised to support more general southbound and data retrieval mechanisms.
 
 The `yang-datastore-source-params` is used to import the YANG data which
 is located in the same YANG model-driven data store supplying the current ALTO
-OAM data model. The `source-path` is used to specify the XPath of the data
+O&M data model. The `source-path` is used to specify the XPath of the data
 source node.
 
 ### Prometheus Data Source {#external-data-source}
@@ -377,7 +345,7 @@ also contains useful measurement information for other ALTO extensions:
 
 <!--
 Note that this module only contains statstics for performance information that a
-common web server or an OAM tool cannot provide.
+common web server or an O&M tool cannot provide.
 -->
 
 The module, "ietf-alto-stats", augments the ietf-alto module to include
@@ -411,5 +379,58 @@ module: ietf-alto-stats
     +--ro num-event-min?  yang:counter32
     +--ro num-event-avg?  yang:counter32
 ~~~
+
+# Extension of ALTO O&M Data Model
+
+As ALTO protocol is extensible, new protocol extensions can be developed after
+this data model is published. To support future ALTO protocol extensions, the
+extension documents can augment the existing cases of the `resource-params`
+choice with new configuration parameters for existing ALTO information resource
+extensions, or augment the `resource-params` with new cases for new ALTO
+information resources.
+
+Developers and operators can also extend this ALTO O&M data model to align
+with their own implementations. Specifically, the following nodes of the data
+model can be augmented:
+
+- The `algorithm` choice of the `resource-params` of each `resource`.
+- The `data-source` choice.
+
+The following example shows how the developer augments the `algorithm`
+choice of `alto-networkmap-params` with a creation algorithm for the network
+map resource.
+
+~~~
+module: example-ietf-alto-alg
+
+  augment /alto:alto-server/alto:resource/alto:resource-params
+            /alto:networkmap/alto:alto-networkmap-params
+            /alto:algorithm:
+    +--:(l3-unicast-cluster)
+       +--rw l3-unicast-cluster-algorithm
+          +--rw l3-unicast-topo
+          |       -> /alto:alto-server/data-source/source-id
+          +--rw depth?             uint32
+~~~
+
+This example defines a creation algorithm called `l3-unicast-cluster-algorithm`
+for the network map resource. It takes two algorithm-specific parameters:
+
+l3-unicast-topo
+: This parameter refers to the source id of a data source node subscribed in the
+  `data-source` list (See [](#data-source)). The corresponding data source is
+  assumed to be an internel data source (See [](#internal-data-source)) for an
+  IETF layer 3 unicast topology defined in {{RFC8346}}. The algorithm uses the
+  topology data from this data source to compute the ALTO network map resource.
+
+depth
+: This optional parameter sets the depth of the clustering algorithm. For
+  example, if the depth sets to 1, the algorithm will generate PID for every
+  l3-node in the topology.
+
+The creation algorithm can be reactively called once the referenced data source
+updates. Therefore, the ALTO network map resource can be updated dynamically.
+The update of the reference data source depends on the used `update-policy` (See
+[](#data-source)).
 
 <!-- End of sections -->
