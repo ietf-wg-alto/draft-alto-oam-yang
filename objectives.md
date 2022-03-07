@@ -17,7 +17,8 @@ implementation, including:
 - Data structures for how to store/deliver ALTO information resources (e.g.,
   database schema to store a network map).
 - Data structures for how to store information collected from data sources.
-  (e.g., database schema to store topology collected from an I2RS client)
+  (e.g., database schema to store topology collected from an Interface to the
+  Routing System (I2RS) client {{RFC7921}})
 
 ## Basic Requirements
 

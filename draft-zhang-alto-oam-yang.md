@@ -78,6 +78,7 @@ normative:
   RFC8895:
   RFC8896:
 informative:
+  RFC7921:
   RFC7971:
   RFC8346:
   I-D.ietf-alto-path-vector:

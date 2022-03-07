@@ -26,14 +26,14 @@ module ietf-alto {
     "IETF ALTO Working Group";
 
   contact
-    "WG Web:   <http://tools.ietf.org/wg/alto>
+    "WG Web:   <https://datatracker.ietf.org/wg/alto/about/>
      WG List:  <alto@ietf.org>";
 
   description
     "This YANG module defines all the configured and operational
      parameters of the administrated ALTO server instance.
 
-     Copyright (c) 2021 IETF Trust and the persons identified as
+     Copyright (c) 2022 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -53,7 +53,7 @@ module ietf-alto {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision "2022-03-01" {
+  revision "2022-03-07" {
     description
       "Initial Version.";
     reference

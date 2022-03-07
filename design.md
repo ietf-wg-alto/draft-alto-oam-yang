@@ -317,7 +317,7 @@ to speficify the potential query expression in PromQL.
 
 TBD.
 
-## Model for ALTO Statistics
+# Design of ALTO O&M Statistics Data Model
 
 As section 16.2.5 of {{RFC7285}} suggests, the YANG data module defined in this
 document also contains statistics for ALTO-specific performance metrics.
