@@ -1,12 +1,17 @@
-# A Yang Data Model for Operations, Administration, and Maintenance of ALTO Protocol
+# A Yang Data Model for OAM and Management of ALTO Protocol
 
-[![Action Status](https://github.com/openalto/draft-alto-oam-yang/actions/workflows/ghpages.yml/badge.svg)](https://github.com/openalto/draft-alto-oam-yang/actions/workflows/ghpages.yml)
+[![Action Status](https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/actions/workflows/ghpages.yml/badge.svg)](https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/actions/workflows/ghpages.yml)
 
-This is the working area for the individual Internet-Draft, "A Yang Data Model for Operations, Administration, and Maintenance of ALTO Protocol".
+This is the working area for the Working Group Internet-Draft, "A Yang Data
+Model for OAM and Management of ALTO Protocol", to meet the
+[ALTO WG Charter](https://datatracker.ietf.org/doc/charter-ietf-alto/).
 
-* [Editor's Copy](https://openalto.github.io/draft-alto-oam-yang/#go.draft-ietf-alto-oam-yang.html)
-* [Individual Draft](https://tools.ietf.org/html/draft-ietf-alto-oam-yang)
-* [Compare Editor's Copy to Individual Draft](https://openalto.github.io/draft-alto-oam-yang/#go.draft-ietf-alto-oam-yang.diff)
+* [Editor's Copy](https://ietf-wg-alto.github.io/draft-ietf-alto-oam-yang/#go.draft-ietf-alto-oam-yang.html)
+* [WG Draft](https://tools.ietf.org/html/draft-ietf-alto-oam-yang)
+* [Compare Editor's Copy to WG Draft](https://ietf-wg-alto.github.io/draft-ietf-alto-oam-yang/#go.draft-ietf-alto-oam-yang.diff)
+
+If you have any question or comment, please feel free to
+[open an issue](https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues).
 
 ## Building the Draft
 
@@ -23,4 +28,4 @@ This requires that you have the necessary software installed.  See
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/openalto/draft-alto-oam-yang/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/main/CONTRIBUTING.md).
