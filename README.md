@@ -4,9 +4,9 @@
 
 This is the working area for the individual Internet-Draft, "A Yang Data Model for Operations, Administration, and Maintenance of ALTO Protocol".
 
-* [Editor's Copy](https://openalto.github.io/draft-alto-oam-yang/#go.draft-zhang-alto-oam-yang.html)
-* [Individual Draft](https://tools.ietf.org/html/draft-zhang-alto-oam-yang)
-* [Compare Editor's Copy to Individual Draft](https://openalto.github.io/draft-alto-oam-yang/#go.draft-zhang-alto-oam-yang.diff)
+* [Editor's Copy](https://openalto.github.io/draft-alto-oam-yang/#go.draft-ietf-alto-oam-yang.html)
+* [Individual Draft](https://tools.ietf.org/html/draft-ietf-alto-oam-yang)
+* [Compare Editor's Copy to Individual Draft](https://openalto.github.io/draft-alto-oam-yang/#go.draft-ietf-alto-oam-yang.diff)
 
 ## Building the Draft
 

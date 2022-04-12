@@ -83,4 +83,46 @@ communication between the administrated ALTO server and other ALTO servers will
 be considered in a future version of the document.
 -->
 
+## Overview of ALTO O&M Data Model for Reference ALTO Architecture
+
+[](#alto-ref-arch) shows a reference architecture for ALTO server
+implementation and YANG modules that server components implement. The server
+manager, information resource manager and data source listeners need to
+implement `ietf-alto.yang` (see [](#alto-model)). The performance monitor and
+logging and fault manager need to implement `ietf-alto-stats.yang` (see
+[](#alto-stats-model)).
+
+The data broker and algorithm plugins are not in the scope of the data model
+defined in this document. But user specified YANG modules can be applied to
+different algorithm plugins by augmenting the data model defined in this
+document (see [](#alto-ext-model)).
+
+~~~
+  +----------------------+      +-----------------+
+  | Performance Monitor: |<-----| Server Manager: |
+  | ietf-alto-stats.yang |<-+ +-| ietf-alto.yang  |
+  +----------------------+  | | +-----------------+
+                          report
+  +----------------------+  | | +-------------------+
+  | Logging and Fault    |  +---| Information       |
+  | Manager:             |<---+ | Resource Manager: |
+  | ietf-alto-stats.yang |<-----| ietf-alto.yang    |
+  +----------------------+      +-------------------+
+                                         ^|
+                                         || callback
+                                         |v
+     .............          ..............................
+    /             \ ------> . Algorithm Plugin:          .
+    . Data Broker .  read   . example-ietf-alto-alg.yang .
+    ...............         ..............................
+           ^
+           | write
+  +----------------+  Southbound  ++=============++
+  | Data Source    |     API      ||             ||
+  | Listener:      | <==========> || Data Source ||
+  | ietf-alto.yang |              ||             ||
+  +----------------+              ++=============++
+~~~
+{: #alto-ref-arch title="A Reference ALTO Server Architecture and YANG Modules"}
+
 <!-- End of sections -->

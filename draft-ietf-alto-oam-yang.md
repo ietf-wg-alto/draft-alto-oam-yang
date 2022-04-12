@@ -1,5 +1,5 @@
 ---
-docname: draft-zhang-alto-oam-yang-latest
+docname: draft-ietf-alto-oam-yang-latest
 title: A Yang Data Model for OAM and Management of ALTO Protocol
 abbrev: ALTO O&M YANG
 category: std

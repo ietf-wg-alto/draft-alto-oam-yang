@@ -1,4 +1,4 @@
-# Design of ALTO O&M Data Model
+# Design of ALTO O&M Data Model {#alto-model}
 
 ## Overview of ALTO O&M Data Model
 
@@ -317,7 +317,17 @@ to speficify the potential query expression in PromQL.
 
 TBD.
 
-# Design of ALTO O&M Statistics Data Model
+# Design of ALTO O&M Statistics Data Model {#alto-stats-model}
+
+## Model for ALTO Logging and Fault Management
+
+As section 16.2.1 and section 16.2.3 of {{RFC7285}} suggest, the YANG data
+module defined in this document contains statistics for logging and failure
+detection.
+
+NOTE: The detailed YANG module will appear in the future version.
+
+## Model for ALTO-specific Performance Monitoring
 
 As section 16.2.5 of {{RFC7285}} suggests, the YANG data module defined in this
 document also contains statistics for ALTO-specific performance metrics.
@@ -380,7 +390,7 @@ module: ietf-alto-stats
     +--ro num-event-avg?  yang:counter32
 ~~~
 
-# Extension of ALTO O&M Data Model
+# Extension of ALTO O&M Data Model {#alto-ext-model}
 
 As ALTO protocol is extensible, new protocol extensions can be developed after
 this data model is published. To support future ALTO protocol extensions, the
