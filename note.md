@@ -139,3 +139,47 @@ Useful materials:
 - YANG Data Model for Syslog Config: https://datatracker.ietf.org/doc/html/draft-ietf-netmod-syslog-model
 - MEF-38: https://www.mef.net/wp-content/uploads/2012/04/MEF_38.pdf
 
+---
+
+How to define a data source subscription:
+
+source-id: how to reference the data source
+engine-type: which south-bound protocol to be used to talk with the data source
+data-type: how to parse the message from the data source
+access-config: information about how to access the data source, e.g., uri, auth, query-expr, polling-interval
+
+References:
+
+1. https://grafana.com/docs/grafana/latest/datasources/
+2. https://www.ibm.com/docs/en/zos/2.3.0?topic=network-topology-database
+
+```
+---------------------------
+  +-------------+
+  | Information |
+  |  Resource   |
+  +-------------+
+         ^
+         |
+   +-----------+
+   | Algorithm |
+   +-----------+
+         ^|
+         |v
++-----------------+
+|  ALTO-specific  |
+| Database/Broker | : topology, routing, attributes
++-----------------+
+         ^
+         |
+  +-------------+
+  | Data Source |
+  |  Listener   |
+  +-------------+
+         ^|
+---------||-----------------
+         |v
+  +-------------+
+  | Data Source |
+  +-------------+
+```

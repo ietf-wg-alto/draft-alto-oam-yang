@@ -42,12 +42,59 @@ module ietf-alto-stats {
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
      for full legal notices.";
 
-  revision "2022-03-07" {
+  revision "2022-06-28" {
     description
       "Initial Version.";
     reference
       "RFC XXXX: A YANG Data Model for Operations, Administration,
        and Maintenance of ALTO Protocol.";
+  }
+
+  augment "/alto:alto-server/" {
+    description
+      "Top-level statistics for the whole ALTO server.";
+    leaf num-total-req {
+      type yang:counter32;
+      config false;
+      description
+        "The total number of ALTO requests received by this ALTO
+         server.";
+    }
+    leaf num-total-succ {
+      type yang:counter32;
+      config false;
+      description
+        "The total number of successful responses sent by this ALTO
+         server.";
+    }
+    leaf num-total-fail {
+      type yang:counter32;
+      config false;
+      description
+        "The total number of failed responses sent by this ALTO
+         server.";
+    }
+    leaf num-total-last-req {
+      type yang:counter32;
+      config false;
+      description
+        "The total number of ALTO requests received within the last
+         5 minutes.";
+    }
+    leaf num-total-last-succ {
+      type yang:counter32;
+      config false;
+      description
+        "The total number of successful responses sent by this ALTO
+         server within the last 5 minutes.";
+    }
+    leaf num-total-last-fail {
+      type yang:counter32;
+      config false;
+      description
+        "The total number of failed responses sent by this ALTO
+         server within the last 5 minutes.";
+    }
   }
 
   augment "/alto:alto-server/alto:resource" {
@@ -72,6 +119,26 @@ module ietf-alto-stats {
       description
         "Size (Bytes) of JSON encoded data of the information
          resource.";
+    }
+    leaf num-res-req {
+      type yang:counter32;
+      config false;
+      description
+        "The number of ALTO requests to this information resource.";
+    }
+    leaf num-res-succ {
+      type yang:counter32;
+      config false;
+      description
+        "The number of successful responses for requests to this
+         information resource.";
+    }
+    leaf num-res-fail {
+      type yang:counter32;
+      config false;
+      description
+        "The total number of failed responses for requests to this
+         information resource.";
     }
   }
 

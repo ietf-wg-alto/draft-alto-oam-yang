@@ -22,6 +22,24 @@ module ietf-alto {
       "RFC 8177: YANG Data Model for Key Chains";
   }
 
+  import ietf-tcp-server {
+    prefix tcp;
+    reference
+      "RFC DDDD: YANG Groupings for TCP Clients and TCP Servers";
+  }
+
+  import ietf-tls-server {
+    prefix tls;
+    reference
+      "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
+  }
+
+  import ietf-http-server {
+    prefix http;
+    reference
+      "RFC GGGG: YANG Groupings for HTTP Clients and HTTP Servers";
+  }
+
   organization
     "IETF ALTO Working Group";
 
@@ -53,7 +71,7 @@ module ietf-alto {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision "2022-03-07" {
+  revision "2022-06-28" {
     description
       "Initial Version.";
     reference
@@ -145,6 +163,13 @@ module ietf-alto {
       "Identity for data source of prometheus system.";
   }
 
+  feature http-listen {
+    description
+      "The 'http-listen' feature is only used for test depolyment.
+       According to Sec 8.3.5 of RFC 7285, it shouldn't be used in
+       the production depolyment.";
+  }
+
   feature multi-cost {
     description
       "Support multi-cost extension.";
@@ -165,14 +190,14 @@ module ietf-alto {
     description
       "Support entity property map extension.";
     reference
-      "RFC XXXX: An ALTO Extension: Entity Property Maps";
+      "RFC 9240: An ALTO Extension: Entity Property Maps";
   }
 
   feature cdni {
     description
       "Support CDNi extension.";
     reference
-      "RFC XXXX: Content Delivery Network Interconnection (CDNI)
+      "RFC 9241: Content Delivery Network Interconnection (CDNI)
        Request Routing: CDNI Footprint and Capabilities
        Advertisement using ALTO";
   }
@@ -268,6 +293,98 @@ module ietf-alto {
     description
       "This grouping defines base data model for information
        resource creation algorithm.";
+  }
+
+  grouping alto-server-grouping {
+    description
+      "A reuseable grouping for configuring an ALTO server without
+       any consideration for how underlying transport sessions are
+       established.";
+    // TODO: ALTO specific server-level configuration
+  }
+
+  grouping alto-server-listen-stack-grouping {
+    description
+      "A reuseable grouping for configuring an ALTO server
+       'listen' protocol stack for a single connection.";
+    choice transport {
+      mandatory true;
+      description
+        "Selects between available transports.";
+      case http {
+        if-feature "http-listen";
+        container http {
+          description
+            "Configures ALTO server stack assuming that
+             TLS-termination is handled externally.";
+          container tcp-server-parameters {
+            description
+              "A wrapper around the TCP server parameters
+               to avoid name collisions.";
+            uses tcp:tcp-server-grouping {
+              refine "local-port" {
+                default "80";
+                description
+                  "The RESTCONF server will listen on the IANA-
+                   assigned well-known port value for 'http'
+                   (80) if no value is specified.";
+              }
+            }
+          }
+          container http-server-parameters {
+            description
+              "A wrapper around the HTTP server parameters
+               to avoid name collisions.";
+            uses http:http-server-grouping;
+          }
+          container alto-server-parameters {
+            description
+              "A wrapper around the ALTO server parameters
+               to avoid name collisiions.";
+            uses alto-server-grouping;
+          }
+        }
+      }
+      case https {
+        container https {
+          description
+            "Configures ALTO server stack assuming that
+             TLS-termination is handled internally.";
+          container tcp-server-parameters {
+            description
+              "A wrapper around the TCP server parameters
+               to avoid name collisions.";
+            uses tcp:tcp-server-grouping {
+              refine "local-port" {
+                default "443";
+                description
+                  "The ALTO server will listen on the IANA-
+                   assigned well-known port value for 'https'
+                   (443) if no value is specified.";
+              }
+            }
+            container tls-server-parameters {
+              description
+                "A wrapper around the TLS server parameters
+                 to avoid name collisions.";
+              uses tls:tls-server-grouping;
+            }
+            container http-server-parameters {
+              description
+                "A wrapper around the HTTP server parameters
+                 to avoid name collisions.";
+              uses http:http-server-grouping;
+            }
+            container alto-server-parameters {
+              description
+                "A wrapper around the ALTO server parameters
+                 to avoid name collisions.";
+              uses alto-server-grouping;
+            }
+          }
+        }
+      }
+    }
   }
 
   container alto-server {
