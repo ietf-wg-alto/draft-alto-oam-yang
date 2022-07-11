@@ -40,6 +40,13 @@ module ietf-alto {
       "RFC GGGG: YANG Groupings for HTTP Clients and HTTP Servers";
   }
 
+  import ietf-restconf-client {
+    prefix rcc;
+    reference
+      "RFC IIII: YANG Groupings for RESTCONF Clients and RESTCONF
+       Servers";
+  }
+
   organization
     "IETF ALTO Working Group";
 
@@ -71,45 +78,12 @@ module ietf-alto {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision "2022-06-28" {
+  revision "2022-07-11" {
     description
       "Initial Version.";
     reference
       "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
        Protocol.";
-  }
-
-  typedef cost-mode {
-    type enumeration {
-      enum numerical {
-        value 1;
-        description
-          "This mode indicates that it is safe to perform numerical
-           operations";
-      }
-      enum ordinal {
-        value 2;
-        description
-          "This mode indicates that the cost values in a cost map
-           represent ranking";
-      }
-    }
-    description
-      "The cost mode attribute indicates how costs should be
-       interpreted. Specifically, the cost mode attribute indicates
-       whether returned costs should be interpreted as numerical
-       values or ordinal rankings.";
-    reference
-      "Section 6.1.2 of RFC 7285.";
-  }
-
-  typedef cost-metric {
-    type string;
-    description
-      "The cost metric attribute indicates what the cost
-       represents.";
-    reference
-      "Section 6.1.1 of RFC 7285.";
   }
 
   typedef resource-id {
@@ -123,45 +97,171 @@ module ietf-alto {
       "Section 9.1.1 of RFC 7285.";
   }
 
-  identity resource-types {
+  // Base identities
+
+  identity resource-type {
     description
       "Base identity for type of information resource.";
   }
 
-  identity source-types {
+  identity source-type {
     description
       "Base identity for type of data source.";
   }
 
+  identity cost-mode {
+    description
+      "The cost mode attribute indicates how costs should be
+       interpreted. Specifically, the cost mode attribute indicates
+       whether returned costs should be interpreted as numerical
+       values or ordinal rankings.";
+    reference
+      "Section 6.1.2 of RFC 7285.";
+  }
+
+  identity cost-metric {
+    description
+      "The cost metric attribute indicates what the cost
+       represents.";
+    reference
+      "Section 6.1.1 of RFC 7285.";
+  }
+
+  // Identities for ALTO information resources
+
   identity network-map {
-    base resource-types;
+    base resource-type;
     description
       "Identity for network map.";
   }
 
   identity cost-map {
-    base resource-types;
+    base resource-type;
     description
       "Identity for cost map.";
   }
 
   identity property-map {
-    base resource-types;
+    base resource-type;
     description
       "Identity for property map.";
   }
 
+  // Identities for predefined data sources
+
   identity yang-datastore {
-    base source-types;
+    base source-type;
     description
       "Identity for data source of YANG-based datastore.";
   }
 
   identity prometheus {
-    base source-types;
+    base source-type;
     description
       "Identity for data source of prometheus system.";
   }
+
+  // Identities for cost mode
+
+  identity numerical {
+    base cost-mode;
+    description
+      "This mode indicates that it is safe to perform numerical
+       operations";
+  }
+
+  identity ordinal {
+    base cost-mode;
+    description
+      "This mode indicates that the cost values in a cost map
+       represent ranking";
+  }
+
+  identity array {
+    if-feature "path-vector";
+    base cost-mode;
+    description
+      "This mode indicates that every cost value in the response body
+       of a (Filtered) Cost Map or an Endpoint Cost Service MUST be
+       interpreted as a JSON array.";
+  }
+
+  // Identities for cost metrics
+
+  identity routingcost {
+    base cost-metric;
+    description
+      "This metric conveys a generic measure for the cost of routing
+       traffic from a source to a destination.";
+  }
+
+  identity ane-path {
+    if-feature "path-vector";
+    base cost-metric;
+    description
+      "This metric indicates that the value of such a cost type
+       conveys an array of Abstract Network Element (ANE) names,
+       where each ANE name uniquely represents an ANE traversed by
+       traffic from a source to a destination.";
+  }
+
+  identity delay-ow {
+    if-feature "performance-metrics";
+    base cost-metric;
+    description
+      "Section 4.1 of RFC XXXX";
+  }
+
+  identity delay-rt {
+    if-feature "performance-metrics";
+    base cost-metric;
+    description
+      "Section 4.2 of RFC XXXX";
+  }
+
+  identity delay-variation {
+    if-feature "performance-metrics";
+    base cost-metric;
+    description
+      "Section 4.3 of RFC XXXX";
+  }
+
+  identity lossrate {
+    if-feature "performance-metrics";
+    base cost-metric;
+    description
+      "Section 4.4 of RFC XXXX";
+  }
+
+  identity hopcount {
+    if-feature "performance-metrics";
+    base cost-metric;
+    description
+      "Section 4.5 of RFC XXXX";
+  }
+
+  identity tput {
+    if-feature "performance-metrics";
+    base cost-metric;
+    description
+      "Section 5.1 of RFC XXXX";
+  }
+
+  identity bw-residual {
+    if-feature "performance-metrics";
+    base cost-metric;
+    description
+      "Section 5.2 of RFC XXXX";
+  }
+
+  identity bw-available {
+    if-feature "performance-metrics";
+    base cost-metric;
+    description
+      "Section 5.3 of RFC XXXX";
+  }
+
+  // Features
 
   feature http-listen {
     description
@@ -176,6 +276,14 @@ module ietf-alto {
     reference
       "RFC 8189: Multi-Cost Application-Layer Traffic Optimization
        (ALTO)";
+  }
+
+  feature incr-update {
+    description
+      "Support incremental update extension.";
+    reference
+      "RFC 8895: Application-Layer Traffic Optimization (ALTO)
+       Incremental Updates Using Server-Sent Events (SSE)";
   }
 
   feature cost-calendar {
@@ -202,13 +310,21 @@ module ietf-alto {
        Advertisement using ALTO";
   }
 
-  feature incr-update {
+  feature path-vector {
     description
-      "Support incremental update extension.";
+      "Support path vector extension.";
     reference
-      "RFC 8896: Application-Layer Traffic Optimization (ALTO)
-       Incremental Updates Using Server-Sent Events (SSE)";
+      "RFC XXXX: An ALTO Extension: Path Vector";
   }
+
+  feature performance-metrics {
+    description
+      "Support performance metrics extension.";
+    reference
+      "RFC XXXX: ALTO Performance Cost Metrics";
+  }
+
+  // Groupings
 
   grouping filt-costmap-cap {
     description
@@ -387,13 +503,15 @@ module ietf-alto {
     }
   }
 
+  // Top-level container
+
   container alto-server {
     description
       "The ALTO server instance.";
-    leaf hostname {
-      type inet:host;
+    container listen {
       description
-        "The name that is used to access the ALTO server.";
+        "Configure the ALTO server to listen for ALTO clients.";
+      uses alto-server-listen-stack-grouping;
     }
     list cost-type {
       key "cost-type-name";
@@ -403,13 +521,17 @@ module ietf-alto {
           "The name to reference cost type";
       }
       leaf cost-mode {
-        type cost-mode;
+        type identityref {
+          base cost-mode;
+        }
         mandatory true;
         description
           "The referenced cost mode";
       }
       leaf cost-metric {
-        type cost-metric;
+        type identityref {
+          base cost-metric;
+        }
         mandatory true;
         description
           "The referenced cost metric";
@@ -444,7 +566,7 @@ module ietf-alto {
       }
       leaf resource-type {
         type identityref {
-          base resource-types;
+          base resource-type;
         }
         mandatory true;
         description
@@ -600,7 +722,7 @@ module ietf-alto {
       }
       leaf source-type {
         type identityref {
-          base source-types;
+          base source-type;
         }
         mandatory true;
         description
@@ -638,6 +760,16 @@ module ietf-alto {
             }
             description
               "YANG datastore specific configuration";
+            choice restconf-endpoint {
+              case local {
+                // Use local API to access YANG datastore
+              }
+              case remote {
+                container restconf-endpoint-params {
+                  uses rcc:restconf-client-listen-stack-grouping;
+                }
+              }
+            }
           }
         }
         case prometheus {

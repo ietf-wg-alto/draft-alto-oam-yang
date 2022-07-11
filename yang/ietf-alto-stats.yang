@@ -42,7 +42,7 @@ module ietf-alto-stats {
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
      for full legal notices.";
 
-  revision "2022-06-28" {
+  revision "2022-07-11" {
     description
       "Initial Version.";
     reference
@@ -50,7 +50,7 @@ module ietf-alto-stats {
        and Maintenance of ALTO Protocol.";
   }
 
-  augment "/alto:alto-server/" {
+  augment "/alto:alto-server" {
     description
       "Top-level statistics for the whole ALTO server.";
     leaf num-total-req {

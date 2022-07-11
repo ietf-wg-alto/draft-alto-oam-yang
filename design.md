@@ -15,11 +15,12 @@ version of the document.
 ~~~
 module: ietf-alto
   +--rw alto-server
-     +--rw hostname?      inet:host
+     +--rw listen
+     |  +---u alto-server-listen-stack-grouping
      +--rw cost-type* [cost-type-name]
      |  +--rw cost-type-name    string
-     |  +--rw cost-mode         cost-mode
-     |  +--rw cost-metric       cost-metric
+     |  +--rw cost-mode         identityref
+     |  +--rw cost-metric       identityref
      +--rw meta* [meta-key]
      |  +--rw meta-key      string
      |  +--rw meta-value    string
@@ -43,43 +44,29 @@ module: ietf-alto
      |     |  +--rw alto-networkmap-params
      |     |     +--rw is-default?   boolean
      |     |     +--rw filtered?     boolean
-     |     |     +--rw (algorithm)
+     |     |     +---u algorithm
      |     +--:(costmap)
      |     |  +--rw alto-costmap-params
-     |     |     +--rw filtered?                   boolean
-     |     |     +--rw cost-type-names*            string
-     |     |     +--rw cost-constraints?           boolean
-     |     |     +--rw max-cost-types?             uint32 {multi-cost}?
-     |     |     +--rw testable-cost-type-names*   string {multi-cost}?
-     |     |     +--rw calendar-attributes {cost-calendar}?
-     |     |     |  +--rw cost-type-names*       string
-     |     |     |  +--rw time-interval-size     decimal64
-     |     |     |  +--rw number-of-intervals    uint32
-     |     |     +--rw (algorithm)
+     |     |     +--rw filtered?           boolean
+     |     |     +---u filt-costmap-cap
+     |     |     +---u algorithm
      |     +--:(endpointcost)
      |     |  +--rw alto-endpointcost-params
-     |     |     +--rw cost-type-names*            string
-     |     |     +--rw cost-constraints?           boolean
-     |     |     +--rw max-cost-types?             uint32 {multi-cost}?
-     |     |     +--rw testable-cost-type-names*   string {multi-cost}?
-     |     |     +--rw calendar-attributes {cost-calendar}?
-     |     |     |  +--rw cost-type-names*       string
-     |     |     |  +--rw time-interval-size     decimal64
-     |     |     |  +--rw number-of-intervals    uint32
-     |     |     +--rw (algorithm)
+     |     |     +---u filt-costmap-cap
+     |     |     +---u algorithm
      |     +--:(endpointprop)
      |     |  +--rw alto-endpointprop-params
      |     |     +--rw prop-types*   string
-     |     |     +--rw (algorithm)
+     |     |     +---u algorithm
      |     +--:(propmap) {propmap}?
      |     |  +--rw alto-propmap-params
-     |     |     +--rw (algorithm)
+     |     |     +---u algorithm
      |     +--:(cdni) {cdni}?
      |     |  +--rw alto-cdni-params
-     |     |     +--rw (algorithm)
+     |     |     +---u algorithm
      |     +--:(update) {incr-update}?
      |        +--rw alto-update-params
-     |           +--rw (algorithm)
+     |           +---u algorithm
      +--rw data-source* [source-id]
         +--rw source-id                             string
         +--rw source-type                           identityref
@@ -91,7 +78,13 @@ module: ietf-alto
         +--rw (source-params)?
            +--:(yang-datastore)
            |  +--rw yang-datastore-source-params
-           |     +--rw source-path    yang:xpath1.0
+           |     +--rw source-path
+           |     |       yang:xpath1.0
+           |     +--rw (restconf-endpoint)?
+           |        +--:(local)
+           |        +--:(remote)
+           |           +--rw restconf-endpoint-params
+           |              +---u rcc:restconf-client-listen-stack-grouping
            +--:(prometheus)
               +--rw prometheus-source-params
                  +--rw source-uri    inet:uri
@@ -103,13 +96,36 @@ module: ietf-alto
 The ALTO server instance contains the following basic configurations for the
 server setup.
 
-The hostname is the name that is used to access the ALTO server. It will be also
-used in the URI of each information resource provided by the ALTO server.
+The "listen" contains all the configurations for the whole server listen stack
+across HTTP layer, TLS layer and TCP layer.
 
-The cost type list is the registry for the cost types that can be used in the
+~~~
+  grouping alto-server-listen-stack-grouping
+    +-- (transport)
+       +--:(http) {http-listen}?
+       |  +-- http
+       |     +-- tcp-server-parameters
+       |     |  +---u tcp:tcp-server-grouping
+       |     +-- http-server-parameters
+       |     |  +---u http:http-server-grouping
+       |     +-- alto-server-parameters
+       +--:(https)
+          +-- https
+             +-- tcp-server-parameters
+                +---u tcp:tcp-server-grouping
+                +-- tls-server-parameters
+                |  +---u tls:tls-server-grouping
+                +-- http-server-parameters
+                |  +---u http:http-server-grouping
+                +-- alto-server-parameters
+~~~
+
+TODO: A "base-uri" for ALTO clients to access may still be needed.
+
+The "cost-type" list is the registry for the cost types that can be used in the
 ALTO server.
 
-The `meta` list contains the customized meta data of the ALTO server. It will be
+The "meta" list contains the customized meta data of the ALTO server. It will be
 populated into the meta field of the default Information Resource Directory
 (IRD).
 
@@ -119,11 +135,12 @@ ALTO server discovery should also be included here.
 ~~~
 module: ietf-alto
   +--rw alto-server
-     +--rw hostname?      inet:host
+     +--rw listen
+     |  +---u alto-server-listen-stack-grouping
      +--rw cost-type* [cost-type-name]
      |  +--rw cost-type-name    string
-     |  +--rw cost-mode         cost-mode
-     |  +--rw cost-metric       cost-metric
+     |  +--rw cost-mode         identityref
+     |  +--rw cost-metric       identityref
      +--rw meta* [meta-key]
      |  +--rw meta-key      string
      |  +--rw meta-value    string
@@ -204,44 +221,40 @@ module: ietf-alto
      |     |  +--rw alto-networkmap-params
      |     |     +--rw is-default?   boolean
      |     |     +--rw filtered?     boolean
-     |     |     +--rw (algorithm)
+     |     |     +---u algorithm
      |     +--:(costmap)
      |     |  +--rw alto-costmap-params
-     |     |     +--rw filtered?                   boolean
-     |     |     +--rw cost-type-names*            string
-     |     |     +--rw cost-constraints?           boolean
-     |     |     +--rw max-cost-types?             uint32 {multi-cost}?
-     |     |     +--rw testable-cost-type-names*   string {multi-cost}?
-     |     |     +--rw calendar-attributes {cost-calendar}?
-     |     |     |  +--rw cost-type-names*       string
-     |     |     |  +--rw time-interval-size     decimal64
-     |     |     |  +--rw number-of-intervals    uint32
-     |     |     +--rw (algorithm)
+     |     |     +--rw filtered?           boolean
+     |     |     +---u filt-costmap-cap
+     |     |     +---u algorithm
      |     +--:(endpointcost)
      |     |  +--rw alto-endpointcost-params
-     |     |     +--rw cost-type-names*            string
-     |     |     +--rw cost-constraints?           boolean
-     |     |     +--rw max-cost-types?             uint32 {multi-cost}?
-     |     |     +--rw testable-cost-type-names*   string {multi-cost}?
-     |     |     +--rw calendar-attributes {cost-calendar}?
-     |     |     |  +--rw cost-type-names*       string
-     |     |     |  +--rw time-interval-size     decimal64
-     |     |     |  +--rw number-of-intervals    uint32
-     |     |     +--rw (algorithm)
+     |     |     +---u filt-costmap-cap
+     |     |     +---u algorithm
      |     +--:(endpointprop)
      |     |  +--rw alto-endpointprop-params
      |     |     +--rw prop-types*   string
-     |     |     +--rw (algorithm)
+     |     |     +---u algorithm
      |     +--:(propmap) {propmap}?
      |     |  +--rw alto-propmap-params
-     |     |     +--rw (algorithm)
+     |     |     +---u algorithm
      |     +--:(cdni) {cdni}?
      |     |  +--rw alto-cdni-params
-     |     |     +--rw (algorithm)
+     |     |     +---u algorithm
      |     +--:(update) {incr-update}?
      |        +--rw alto-update-params
-     |           +--rw (algorithm)
+     |           +---u algorithm
      ...
+
+  grouping filt-costmap-cap
+    +-- cost-type-names*            string
+    +-- cost-constraints?           boolean
+    +-- max-cost-types?             uint32 {multi-cost}?
+    +-- testable-cost-type-names*   string {multi-cost}?
+    +-- calendar-attributes {cost-calendar}?
+       +-- cost-type-names*       string
+       +-- time-interval-size     decimal64
+       +-- number-of-intervals    uint32
 ~~~
 
 ## Data Sources {#data-source}
@@ -289,7 +302,13 @@ module: ietf-alto
         +--rw (source-params)?
            +--:(yang-datastore)
            |  +--rw yang-datastore-source-params
-           |     +--rw source-path    yang:xpath1.0
+           |     +--rw source-path
+           |     |       yang:xpath1.0
+           |     +--rw (restconf-endpoint)?
+           |        +--:(local)
+           |        +--:(remote)
+           |           +--rw restconf-endpoint-params
+           |              +---u rcc:restconf-client-listen-stack-grouping
            +--:(prometheus)
               +--rw prometheus-source-params
                  +--rw source-uri    inet:uri
@@ -301,9 +320,19 @@ revised to support more general southbound and data retrieval mechanisms.
 
 ### Yang DataStore Data Source {#internal-data-source}
 
-The `yang-datastore-source-params` is used to import the YANG data which
-is located in the same YANG model-driven data store supplying the current ALTO
-O&M data model. The `source-path` is used to specify the XPath of the data
+The `yang-datastore-source-params` is used to import the YANG data from a YANG model-driven data store.
+
+It supports two types of endpoints: local and remote.
+
+- For a local endpoint, the YANG data is located the data from the same
+  YANG model-driven data store supplying the current ALTO O&M data model.
+  Therefore, the ALTO data source listener retrieves the data using the
+  internal API provided by the data store.
+- For a remote endpoint, the ALTO data source listener establishes an HTTP
+  connection to the remote RESTCONF server, and retrieve the data using the
+  RESTCONF API.
+
+The `source-path` is used to specify the XPath of the data
 source node.
 
 ### Prometheus Data Source {#external-data-source}
@@ -315,7 +344,13 @@ to speficify the potential query expression in PromQL.
 
 ## Model for ALTO Server-to-server Communication
 
-TBD.
+In practice, multiple ALTO servers can be deployed for scalability. That may
+require communication among different ALTO servers.
+
+The YANG module defined in this document contains the configuration for
+the communication between two ALTO servers.
+
+TODO: this is still under the open discussion status.
 
 # Design of ALTO O&M Statistics Data Model {#alto-stats-model}
 
@@ -364,30 +399,36 @@ statistics at the ALTO server and information resource level.
 ~~~
 module: ietf-alto-stats
 
+  augment /alto:alto-server:
+    +--ro num-total-req?         yang:counter32
+    +--ro num-total-succ?        yang:counter32
+    +--ro num-total-fail?        yang:counter32
+    +--ro num-total-last-req?    yang:counter32
+    +--ro num-total-last-succ?   yang:counter32
+    +--ro num-total-last-fail?   yang:counter32
   augment /alto:alto-server/alto:resource:
     +--ro num-res-upd?    yang:counter32
     +--ro res-mem-size?   yang:counter32
     +--ro res-enc-size?   yang:counter32
-
+    +--ro num-res-req?    yang:counter32
+    +--ro num-res-succ?   yang:counter32
+    +--ro num-res-fail?   yang:counter32
   augment /alto:alto-server/alto:resource/alto:resource-params
             /alto:networkmap/alto:alto-networkmap-params:
-    +--ro num-map-pid?    yang:counter32
-
+    +--ro num-map-pid?   yang:counter32
   augment /alto:alto-server/alto:resource/alto:resource-params
             /alto:propmap/alto:alto-propmap-params:
-    +--ro num-map-entry?  yang:counter32
-
+    +--ro num-map-entry?   yang:counter32
   augment /alto:alto-server/alto:resource/alto:resource-params
             /alto:cdni/alto:alto-cdni-params:
     +--ro num-base-obj?   yang:counter32
-
   augment /alto:alto-server/alto:resource/alto:resource-params
             /alto:update/alto:alto-update-params:
-    +--ro num-upd-sess    yang:counter32
-    +--ro num-event-total yang:counter32
-    +--ro num-event-max?  yang:counter32
-    +--ro num-event-min?  yang:counter32
-    +--ro num-event-avg?  yang:counter32
+    +--ro num-upd-sess?      yang:counter32
+    +--ro num-event-total?   yang:counter32
+    +--ro num-event-max?     yang:counter32
+    +--ro num-event-min?     yang:counter32
+    +--ro num-event-avg?     yang:counter32
 ~~~
 
 # Extension of ALTO O&M Data Model {#alto-ext-model}
