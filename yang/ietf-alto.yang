@@ -508,6 +508,23 @@ module ietf-alto {
   container alto-server {
     description
       "The ALTO server instance.";
+    container scope {
+      description
+        "Configure the IP prefixes in the scope of the ALTO server
+         for server discovery.";
+      leaf-list static {
+        type inet:ip-prefix;
+        description
+          "Static IP prefixes in the scope.";
+      }
+      leaf-list dynamic {
+        type leafref {
+          path "/alto:alto-server/alto:data-source/alto:source-id";
+        }
+        description
+          "Dynamic IP prefixes collected from data sources";
+      }
+    }
     container listen {
       description
         "Configure the ALTO server to listen for ALTO clients.";
@@ -583,7 +600,9 @@ module ietf-alto {
           "Access list for authenticated clients.";
       }
       leaf-list dependency {
-        type resource-id;
+        type leafref {
+          path "/alto:alto-server/alto:resource/alto:resource-id";
+        }
         description
           "A list of dependent information resources.";
       }

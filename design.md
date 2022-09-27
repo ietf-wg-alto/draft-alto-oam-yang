@@ -15,6 +15,9 @@ version of the document.
 ~~~
 module: ietf-alto
   +--rw alto-server
+     +--rw scope
+     |  +--rw static*    inet:ip-prefix
+     |  +--rw dynamic*   -> /alto-server/data-source/source-id
      +--rw listen
      |  +---u alto-server-listen-stack-grouping
      +--rw cost-type* [cost-type-name]
@@ -29,7 +32,8 @@ module: ietf-alto
      |  +--rw resource-type                     identityref
      |  +--rw description?                      string
      |  +--rw accepted-group*                   string
-     |  +--rw dependency*                       resource-id
+     |  +--rw dependency*
+     |  |       -> /alto-server/resource/resource-id
      |  +--rw auth
      |  |  +--rw (auth-type-selection)?
      |  |     +--:(auth-key-chain)
@@ -122,6 +126,13 @@ across HTTP layer, TLS layer and TCP layer.
 
 TODO: A "base-uri" for ALTO clients to access may still be needed.
 
+The "scope" container is used to configure endpoints in the scope of the
+network domain serving this ALTO server. It contains two leaf lists. The
+"static" list contains a list of manual configured endpoints. The "dynamic"
+list points to a list of data sources to retrieve the endpoints dynamically. As
+suggested by {{RFC7286}} and {{RFC8686}}, the IP prefixes in the scope will be
+translated into DNS NAPTR resource records for server discovery.
+
 The "cost-type" list is the registry for the cost types that can be used in the
 ALTO server.
 
@@ -129,12 +140,12 @@ The "meta" list contains the customized meta data of the ALTO server. It will be
 populated into the meta field of the default Information Resource Directory
 (IRD).
 
-TODO: As suggested by {{RFC7286}} and {{RFC8686}}, the configuration related to
-ALTO server discovery should also be included here.
-
 ~~~
 module: ietf-alto
   +--rw alto-server
+     +--rw scope
+     |  +--rw static*    inet:ip-prefix
+     |  +--rw dynamic*   -> /alto-server/data-source/source-id
      +--rw listen
      |  +---u alto-server-listen-stack-grouping
      +--rw cost-type* [cost-type-name]
@@ -206,7 +217,8 @@ module: ietf-alto
      |  +--rw resource-type                     identityref
      |  +--rw description?                      string
      |  +--rw accepted-group*                   string
-     |  +--rw dependency*                       resource-id
+     |  +--rw dependency*
+     |  |       -> /alto-server/resource/resource-id
      |  +--rw auth
      |  |  +--rw (auth-type-selection)?
      |  |     +--:(auth-key-chain)
