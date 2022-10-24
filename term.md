@@ -24,6 +24,9 @@ prefix associated with the corresponding YANG module, as shown in [](#tbl-yang-p
 | yang | ietf-yang-types | {{RFC6991}}
 | inet | ietf-inet-types | {{RFC6991}}
 | key-chain | ietf-key-chain | {{RFC8177}}
+| tcp | ietf-tcp-server | {{I-D.ietf-netconf-tcp-client-server}}
+| tls | ietf-tls-server | {{I-D.ietf-netconf-tls-client-server}}
+| http | ietf-http-server | {{I-D.ietf-netconf-http-client-server}}
 {: #tbl-yang-prefixes title="Prefixes and corresponding YANG modules"}
 
 <!-- End of sections -->

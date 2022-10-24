@@ -10,12 +10,6 @@ module ietf-alto {
       "RFC 6991: Common YANG Data Types";
   }
 
-  import ietf-yang-types {
-    prefix "yang";
-    reference
-      "RFC 6991: Common YANG Data Types";
-  }
-
   import ietf-key-chain {
     prefix key-chain;
     reference
@@ -38,13 +32,6 @@ module ietf-alto {
     prefix http;
     reference
       "RFC GGGG: YANG Groupings for HTTP Clients and HTTP Servers";
-  }
-
-  import ietf-restconf-client {
-    prefix rcc;
-    reference
-      "RFC IIII: YANG Groupings for RESTCONF Clients and RESTCONF
-       Servers";
   }
 
   organization
@@ -78,7 +65,7 @@ module ietf-alto {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision "2022-07-11" {
+  revision "2022-10-24" {
     description
       "Initial Version.";
     reference
@@ -145,20 +132,6 @@ module ietf-alto {
     base resource-type;
     description
       "Identity for property map.";
-  }
-
-  // Identities for predefined data sources
-
-  identity yang-datastore {
-    base source-type;
-    description
-      "Identity for data source of YANG-based datastore.";
-  }
-
-  identity prometheus {
-    base source-type;
-    description
-      "Identity for data source of prometheus system.";
   }
 
   // Identities for cost mode
@@ -326,7 +299,7 @@ module ietf-alto {
 
   // Groupings
 
-  grouping filt-costmap-cap {
+  grouping filter-costmap-cap {
     description
       "This grouping defines data model for
        FilteredCostMapCapabilities.";
@@ -400,6 +373,16 @@ module ietf-alto {
     }
   }
 
+  grouping endpoint-cost-cap {
+    uses filter-costmap-cap;
+    description
+      "This grouping defines EndpointCostCapabilities as the same as
+       FilteredCostMapCapabilities defined by the grouping
+       filter-costmap-cap.";
+    reference
+      "Section 11.5.1.4 of RFC 7285";
+  }
+
   grouping algorithm {
     choice algorithm {
       mandatory true;
@@ -416,7 +399,11 @@ module ietf-alto {
       "A reuseable grouping for configuring an ALTO server without
        any consideration for how underlying transport sessions are
        established.";
-    // TODO: ALTO specific server-level configuration
+    leaf base-uri {
+      type inet:uri;
+      description
+        "The base URI for the ALTO server.";
+    }
   }
 
   grouping alto-server-listen-stack-grouping {
@@ -503,32 +490,117 @@ module ietf-alto {
     }
   }
 
+  grouping alto-server-discovery-grouping {
+    description
+      "Configure how to set up server discovery for clients or other
+       ALTO servers to discovery the URI of this ALTO server.";
+    choice server-discovery-manner {
+      description
+        "Selects among available server discovery manners";
+      case reverse-dns {
+        description
+          "Configure DNS NAPTR records for cross-domain ALTO server
+           discovery using reverse DNS lookup.";
+        container rdns-naptr-records {
+          description
+            "Configuration parameters for DNS NAPTR records.";
+          leaf-list static-prefix {
+            type inet:ip-prefix;
+            description
+              "Static IP prefixes in the scope.";
+          }
+          leaf-list dynamic-prefix-source {
+            type leafref {
+              path "/alto:alto-server/alto:data-source/alto:source-id";
+            }
+            description
+              "Dynamic IP prefixes collected from data sources.";
+          }
+        }
+        reference
+          "RFC 8686: Application-Layer Traffic Optimization (ALTO)
+           Cross-Domain Server Discovery.";
+      }
+      case internet-routing-registry {
+        description
+          "Update descr attributes of a aut-num class in a Internet
+           Routing Registry (IRR) database for ALTO server discovery
+           using RPSL.";
+        reference
+          "RFC 2622: Routing Policy Specification Language (RPSL).";
+        container irr-params {
+          description
+            "Configuration parameters for IRR database.";
+          leaf aut-num {
+            type inet:as-number;
+            description
+              "The autonomous system (AS) to be updated.";
+          }
+        }
+      }
+      case peeringdb {
+        description
+          "Update metadata of a network record in PeeringDB database
+           for ALTO server discovery using PeeringDB lookup.";
+        container peeringdb-params {
+          description
+            "Configuration parameters for PeeringDB database.";
+          leaf org-id {
+            type uint32;
+            description
+              "The ID referring to the org object of the
+               organization record in PeeringDB.";
+          }
+        }
+      }
+    }
+  }
+
+  grouping alto-logging-system-grouping {
+    description
+      "Grouping for configuration of logging system used by the ALTO
+       server.";
+    choice logging-system {
+      description
+        "Selects among available logging systems";
+      case syslog {
+        description
+          "Use syslog as logging system.";
+        container syslog-params {
+          description
+            "Configuration parameters for syslog.";
+          leaf config-file {
+            type inet:uri {
+              pattern 'file:.*';
+            }
+            description
+              "The file location of the syslog configuration.";
+          }
+        }
+      }
+    }
+  }
+
   // Top-level container
 
   container alto-server {
     description
       "The ALTO server instance.";
-    container scope {
-      description
-        "Configure the IP prefixes in the scope of the ALTO server
-         for server discovery.";
-      leaf-list static {
-        type inet:ip-prefix;
-        description
-          "Static IP prefixes in the scope.";
-      }
-      leaf-list dynamic {
-        type leafref {
-          path "/alto:alto-server/alto:data-source/alto:source-id";
-        }
-        description
-          "Dynamic IP prefixes collected from data sources";
-      }
-    }
     container listen {
       description
         "Configure the ALTO server to listen for ALTO clients.";
       uses alto-server-listen-stack-grouping;
+    }
+    container server-discovery {
+      description
+        "Configure how the ALTO server to be discovered by others.";
+      uses alto-server-discovery-grouping;
+    }
+    container logging-system {
+      description
+        "Configure logging system to capture log messages generated
+         by the ALTO server.";
+      uses alto-logging-system-grouping;
     }
     list cost-type {
       key "cost-type-name";
@@ -573,6 +645,50 @@ module ietf-alto {
         "Mapping of custom meta information";
       reference
         "Section 8.4.1 of RFC 7285.";
+    }
+    list data-source {
+      key "source-id";
+      leaf source-id {
+        type string;
+        description
+          "Data source id that can be referenced by information
+           resource creation algorithms.";
+      }
+      leaf source-type {
+        type identityref {
+          base source-type;
+        }
+        mandatory true;
+        description
+          "Identify the type of the data source.";
+      }
+      choice update-policy {
+        mandatory true;
+        case reactive {
+          leaf reactive {
+            type boolean;
+            mandatory true;
+            description
+              "Reactive mode.";
+          }
+        }
+        case proactive {
+          leaf poll-interval {
+            type uint32;
+            mandatory true;
+            description
+              "Polling interval in seconds for proactive mode.";
+          }
+        }
+        description
+          "Policy to get updates from data sources.";
+      }
+      choice source-params {
+        description
+          "Data source specific configuration.";
+      }
+      description
+        "List of subscribed data sources.";
     }
     list resource {
       key "resource-id";
@@ -635,22 +751,22 @@ module ietf-alto {
               type inet:uri;
               mandatory true;
               description
-                "Upstream IRD to be delegated";
+                "Upstream IRD to be delegated.";
             }
             description
-              "IRD-specific configuration";
+              "IRD-specific configuration.";
           }
         }
         case networkmap {
           container alto-networkmap-params {
             description
-              "(Filtered) Network Map specific configuration";
+              "(Filtered) Network Map specific configuration.";
             reference
               "Section 11.2.1 and Section 11.3.1 of RFC 7285.";
             leaf is-default {
               type boolean;
               description
-                "Set whether this is the default network map";
+                "Set whether this is the default network map.";
             }
             leaf filtered {
               type boolean;
@@ -665,7 +781,7 @@ module ietf-alto {
         case costmap {
           container alto-costmap-params {
             description
-              "(Filtered) Cost Map specific configuration";
+              "(Filtered) Cost Map specific configuration.";
             reference
               "Section 11.2.2 and Section 11.3.2 of RFC 7285.";
             leaf filtered {
@@ -673,26 +789,26 @@ module ietf-alto {
               description
                 "Configure whether filtered cost map is supported.";
             }
-            uses filt-costmap-cap;
+            uses filter-costmap-cap;
             uses algorithm;
           }
         }
         case endpointcost {
           container alto-endpointcost-params {
             description
-              "Endpoint Cost Service specific configuration";
+              "Endpoint Cost Service specific configuration.";
             reference
-              "Section 11.5 of RFC 7285";
-            uses filt-costmap-cap;
+              "Section 11.5 of RFC 7285.";
+            uses endpoint-cost-cap;
             uses algorithm;
           }
         }
         case endpointprop {
           container alto-endpointprop-params {
             description
-              "Endpoint Cost Service specific configuration";
+              "Endpoint Cost Service specific configuration.";
             reference
-              "Section 11.5 of RFC 7285";
+              "Section 11.5 of RFC 7285.";
             leaf-list prop-types {
               type string;
               min-elements 1;
@@ -708,7 +824,7 @@ module ietf-alto {
             uses algorithm;
             description
               "(Filtered) Entity Property Map specific
-               configuration";
+               configuration.";
           }
         }
         case cdni {
@@ -730,89 +846,6 @@ module ietf-alto {
       }
       description
         "ALTO information resources to be defined";
-    }
-    list data-source {
-      key "source-id";
-      leaf source-id {
-        type string;
-        description
-          "Data source id that can be referenced by information
-           resource creation algorithms.";
-      }
-      leaf source-type {
-        type identityref {
-          base source-type;
-        }
-        mandatory true;
-        description
-          "Source-type to be defined";
-      }
-      choice update-policy {
-        mandatory true;
-        case reactive {
-          leaf reactive {
-            type boolean;
-            mandatory true;
-            description
-              "Reactive mode";
-          }
-        }
-        case proactive {
-          leaf poll-interval {
-            type uint32;
-            mandatory true;
-            description
-              "Polling interval in seconds for proactive mode";
-          }
-        }
-        description
-          "Policy to get updates from data sources";
-      }
-      choice source-params {
-        case yang-datastore {
-          container yang-datastore-source-params {
-            leaf source-path {
-              type yang:xpath1.0;
-              mandatory true;
-              description
-                "XPath to subscribed YANG datastore node";
-            }
-            description
-              "YANG datastore specific configuration";
-            choice restconf-endpoint {
-              case local {
-                // Use local API to access YANG datastore
-              }
-              case remote {
-                container restconf-endpoint-params {
-                  uses rcc:restconf-client-listen-stack-grouping;
-                }
-              }
-            }
-          }
-        }
-        case prometheus {
-          container prometheus-source-params {
-            leaf source-uri {
-              type inet:uri;
-              mandatory true;
-              description
-                "URI to prometheus agent";
-            }
-            leaf query-data {
-              type string;
-              description
-                "Query expression";
-            }
-            description
-              "Prometheus specific configuration";
-          }
-        }
-        description
-          "Data source specific configuration";
-      }
-      description
-        "List of subscribed data sources.";
     }
   }
 }

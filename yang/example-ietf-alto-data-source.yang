@@ -1,0 +1,81 @@
+module example-ietf-alto-data-source {
+
+  namespace "urn:example:ietf-alto-data-source";
+  prefix "alto-ds";
+
+  import ietf-alto {
+    prefix alto;
+  }
+
+  import ietf-yang-types {
+    prefix "yang";
+    reference
+      "RFC 6991: Common YANG Data Types";
+  }
+
+  import ietf-restconf-client {
+    prefix rcc;
+    reference
+      "RFC IIII: YANG Groupings for RESTCONF Clients and RESTCONF
+       Servers";
+  }
+
+  identity yang-datastore {
+    base alto:source-type;
+    description
+      "Identity for data source of YANG-based datastore.";
+  }
+
+  identity prometheus {
+    base alto:source-type;
+    description
+      "Identity for data source of prometheus system.";
+  }
+
+  augment "/alto:alto-server/alto:data-source/alto:source-params" {
+    case yang-datastore {
+      when 'derived-from-or-self(source-type, "alto:yang-datastore"';
+      container yang-datastore-source-params {
+        leaf source-path {
+          type yang:xpath1.0;
+          mandatory true;
+          description
+            "XPath to subscribed YANG datastore node.";
+        }
+        description
+          "YANG datastore specific configuration.";
+        choice restconf-endpoint {
+          case local {
+            // Use local API to access YANG datastore
+          }
+          case remote {
+            container restconf-endpoint-params {
+              uses rcc:restconf-client-listen-stack-grouping;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  augment "/alto:alto-server/alto:data-source/alto:source-params" {
+    case prometheus {
+      when 'derived-from-or-self(source-type, "alto:prometheus")';
+      container prometheus-source-params {
+        leaf source-uri {
+          type inet:uri;
+          mandatory true;
+          description
+            "URI to prometheus agent.";
+        }
+        leaf query-data {
+          type string;
+          description
+            "Query expression.";
+        }
+        description
+          "Prometheus specific configuration.";
+      }
+    }
+  }
+}

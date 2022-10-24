@@ -18,10 +18,6 @@
 .targets.mk
 /*-[0-9][0-9].xml
 archive.json
-draft-*-alto-bgp-ls.html
-draft-*-alto-bgp-ls.pdf
-draft-*-alto-bgp-ls.txt
-draft-*-alto-bgp-ls.xml
 issues.json
 lib/
 metadata.min.js

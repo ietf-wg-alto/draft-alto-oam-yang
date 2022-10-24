@@ -20,7 +20,7 @@ implementation, including:
   (e.g., database schema to store topology collected from an Interface to the
   Routing System (I2RS) client {{RFC7921}})
 
-## Basic Requirements
+## Basic Requirements {#requirements}
 
 Based on discussions and recommendations in {{RFC7285}} and {{RFC7971}}, the
 data model provided by this document satisfies basic requirements listed in
@@ -31,12 +31,12 @@ data model provided by this document satisfies basic requirements listed in
 | R1: The data model should support configuration for ALTO server setup.                              | Section 16.1 of {{RFC7285}}                               |
 | R2: The data model should provide logging management.                                               | Section 16.2.1 of {{RFC7285}}                             |
 | R3: The data model should provide ALTO-related management information.                              | Section 16.2.2 of {{RFC7285}}                             |
-| R4: The data model should provide metrics for server failures.                                      | Section 16.2.3 of {{RFC7285}}, Section 3.3 of {{RFC7971}} |
+| R4: The data model should support configuration for security policy management.                     | Section 16.2.6 of {{RFC7285}}                             |
 | R5-1: The data model should support configuration for different data sources.                       | Section 16.2.4 of {{RFC7285}}, Section 3.2 of {{RFC7971}} |
 | R5-2: The data model should support configuration for information resource generation algorithms.   | Section 16.2.4 of {{RFC7285}}                             |
 | R5-3: The data model should support configuration for access control at information resource level. | Section 16.2.4 of {{RFC7285}}                             |
-| R6: The data model should provide performance monitoring for ALTO-specific metrics.                 | Section 16.2.5 of {{RFC7285}}, Section 3.4 of {{RFC7971}} |
-| R7: The data model should support configuration for security policy management.                     | Section 16.2.6 of {{RFC7285}}                             |
+| R6: The data model should provide metrics for server failures.                                      | Section 16.2.3 of {{RFC7285}}, Section 3.3 of {{RFC7971}} |
+| R7: The data model should provide performance monitoring for ALTO-specific metrics.                 | Section 16.2.5 of {{RFC7285}}, Section 3.4 of {{RFC7971}} |
 {: #TableReq title="Basic Requirements of Data Model for ALTO O&M."}
 
 ## Additional Requirements for Extensibility

@@ -1,0 +1,34 @@
+{
+    "ietf-alto:alto-server": {
+        "data-source": [
+            {
+                "source-id": "test-prometheus",
+                "source-type": "prometheus",
+                "reactive": true,
+                "prometheus-source-params": {
+                    "query-data": "",
+                    "source-uri": "https://prometheus/"
+                }
+            }
+        ],
+        "listen": {
+            "https": {
+                "tcp-server-parameters": {
+                    "alto-server-parameters": {},
+                    "http-server-parameters": {},
+                    "local-address": "127.0.0.1",
+                    "tls-server-parameters": {
+                        "server-identity": {}
+                    }
+                }
+            }
+        },
+        "scope": {
+            "dynamic": [],
+            "static": []
+        }
+    },
+    "ietf-key-chain:key-chains": {
+        "key-chain": []
+    }
+}
