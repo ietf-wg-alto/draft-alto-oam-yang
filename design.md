@@ -435,6 +435,7 @@ module: ietf-alto-stats
     +--ro num-event-min?     yang:counter32
     +--ro num-event-avg?     yang:counter32
 ~~~
+
 ## Model for ALTO Server Failure Monitoring
 
 To satisfy R6 in [](#requirements), the YANG data module defined in this
