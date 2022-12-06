@@ -5,84 +5,105 @@
 The ietf-alto module defined in this document provide all the basic ALTO O&M
 data models fitting the requirements listed in [](#sec-req).
 
-The container "alto-server" in the ietf-alto module contains all the configured
-and operational parameters of the adminstrated ALTO server instance.
+The top-level container "alto" in the ietf-alto module contains a single
+"alto-server" and multiple "alto-client"s.
 
-<!--
-NOTE: So far, the ALTO YANG module only focuses on the ALTO server related
-configuration. The ALTO client related configuration will be added in a future
-version of the document.
--->
+The list "alto-client" defines a list of configurations for other applications
+to launch an ALTO client. They can also be used by data sources and information
+resource creation algorithms that are configured by an ALTO server instance.
+
+The container "alto-server" contains all the configured and operational
+parameters of the administrated ALTO server instance.
 
 ~~~
 module: ietf-alto
-  +--rw alto-server
-     +--rw listen
-     |  +---u alto-server-listen-stack-grouping
-     +--rw server-discovery
-     |  +---u alto-server-discovery-grouping
-     +--rw logging-system
-     |  +---u alto-logging-system-grouping
-     +--rw cost-type* [cost-type-name]
-     |  +--rw cost-type-name    string
-     |  +--rw cost-mode         identityref
-     |  +--rw cost-metric       identityref
-     +--rw meta* [meta-key]
-     |  +--rw meta-key      string
-     |  +--rw meta-value    string
-     +--rw data-source* [source-id]
-     |  +--rw source-id              string
-     |  +--rw source-type            identityref
-     |  +--rw (update-policy)
-     |  |  +--:(reactive)
-     |  |  |  +--rw reactive         boolean
-     |  |  +--:(proactive)
-     |  |     +--rw poll-interval    uint32
-     |  +--rw (source-params)?
-     +--rw resource* [resource-id]
-        +--rw resource-id                       resource-id
-        +--rw resource-type                     identityref
-        +--rw description?                      string
-        +--rw accepted-group*                   string
-        +--rw dependency*
-        |       -> /alto-server/resource/resource-id
-        +--rw auth
-        |  +--rw (auth-type-selection)?
-        |     +--:(auth-key-chain)
-        |     |  +--rw key-chain?   key-chain:key-chain-ref
-        |     +--:(auth-key)
-        |     +--:(auth-tls)
-        +--rw (resource-params)?
-           +--:(ird)
-           |  +--rw alto-ird-params
-           |     +--rw delegation    inet:uri
-           +--:(networkmap)
-           |  +--rw alto-networkmap-params
-           |     +--rw is-default?   boolean
-           |     +--rw filtered?     boolean
-           |     +---u algorithm
-           +--:(costmap)
-           |  +--rw alto-costmap-params
-           |     +--rw filtered?             boolean
-           |     +---u filter-costmap-cap
-           |     +---u algorithm
-           +--:(endpointcost)
-           |  +--rw alto-endpointcost-params
-           |     +---u endpoint-cost-cap
-           |     +---u algorithm
-           +--:(endpointprop)
-           |  +--rw alto-endpointprop-params
-           |     +--rw prop-types*   string
-           |     +---u algorithm
-           +--:(propmap) {propmap}?
-           |  +--rw alto-propmap-params
-           |     +---u algorithm
-           +--:(cdni) {cdni}?
-           |  +--rw alto-cdni-params
-           |     +---u algorithm
-           +--:(update) {incr-update}?
-              +--rw alto-update-params
-                 +---u algorithm
+  +--rw alto!
+     +--rw alto-client* [client-id]
+     |  +--rw client-id                  string
+     |  +--rw server-discovery-client
+     |     +---u alto-server-discovery-client-grouping
+     +--rw alto-server
+        +--rw listen
+        |  +---u alto-server-listen-stack-grouping
+        +--rw server-discovery
+        |  +---u alto-server-discovery-grouping
+        +--rw logging-system
+        |  +---u alto-logging-system-grouping
+        +--rw cost-type* [cost-type-name]
+        |  +--rw cost-type-name    string
+        |  +--rw cost-mode         identityref
+        |  +--rw cost-metric       identityref
+        |  +--rw description?      string
+        |  +--rw cost-context {performance-metrics}?
+        |     +--rw cost-source    identityref
+        |     +--rw parameters
+        |        +--rw (parameters)?
+        +--rw meta* [meta-key]
+        |  +--rw meta-key      string
+        |  +--rw meta-value    string
+        +--rw user-group* [group-id]
+        |  +--rw group-id    string
+        |  +--rw client*     inet:ip-prefix
+        +--rw data-source* [source-id]
+        |  +--rw source-id              string
+        |  +--rw source-type            identityref
+        |  +--rw (update-policy)
+        |  |  +--:(reactive)
+        |  |  |  +--rw reactive         boolean
+        |  |  +--:(proactive)
+        |  |     +--rw poll-interval    uint32
+        |  +--rw (source-params)?
+        +--rw resource* [resource-id]
+           +--rw resource-id                       resource-id
+           +--rw resource-type                     identityref
+           +--rw description?                      string
+           +--rw accepted-group*
+           |       -> /alto/alto-server/user-group/group-id
+           +--rw dependency*
+           |       -> /alto/alto-server/resource/resource-id
+           +--rw (resource-params)?
+              +--:(ird)
+              |  +--rw alto-ird-params
+              |     +--rw delegation    inet:uri
+              +--:(networkmap)
+              |  +--rw alto-networkmap-params
+              |     +--rw is-default?   boolean
+              |     +--rw filtered?     boolean
+              |     +---u algorithm
+              +--:(costmap)
+              |  +--rw alto-costmap-params
+              |     +--rw filtered?             boolean
+              |     +---u filter-costmap-cap
+              |     +---u algorithm
+              +--:(endpointcost)
+              |  +--rw alto-endpointcost-params
+              |     +---u endpoint-cost-cap
+              |     +---u algorithm
+              +--:(endpointprop)
+              |  +--rw alto-endpointprop-params
+              |     +--rw prop-types*   string
+              |     +---u algorithm
+              +--:(propmap) {propmap}?
+              |  +--rw alto-propmap-params
+              |     +---u algorithm
+              +--:(cdni) {cdni}?
+              |  +--rw alto-cdni-params
+              |     +---u algorithm
+              +--:(update) {incr-update}?
+                 +--rw alto-update-params
+                    +---u algorithm
+~~~
+
+## Data Model for ALTO Client Operation and Management
+
+~~~
+module: ietf-alto
+  +--rw alto!
+     +--rw alto-client* [client-id]
+     |  +--rw client-id                  string
+     |  +--rw server-discovery-client
+     |     +---u alto-server-discovery-client-grouping
+     ...
 ~~~
 
 ## Data Model for Server-level Operation and Management
@@ -93,20 +114,30 @@ server-level operation and management for ALTO, which satisfies R1 - R4 in
 
 ~~~
 module: ietf-alto
-  +--rw alto-server
-     +--rw listen
-     |  +---u alto-server-listen-stack-grouping
-     +--rw server-discovery
-     |  +---u alto-server-discovery-grouping
-     +--rw logging-system
-     |  +---u alto-logging-system-grouping
-     +--rw cost-type* [cost-type-name]
-     |  +--rw cost-type-name    string
-     |  +--rw cost-mode         identityref
-     |  +--rw cost-metric       identityref
-     +--rw meta* [meta-key]
-     |  +--rw meta-key      string
-     |  +--rw meta-value    string
+  +--rw alto!
+     ...
+     +--rw alto-server
+        +--rw listen
+        |  +---u alto-server-listen-stack-grouping
+        +--rw server-discovery
+        |  +---u alto-server-discovery-grouping
+        +--rw logging-system
+        |  +---u alto-logging-system-grouping
+        +--rw cost-type* [cost-type-name]
+        |  +--rw cost-type-name    string
+        |  +--rw cost-mode         identityref
+        |  +--rw cost-metric       identityref
+        |  +--rw description?      string
+        |  +--rw cost-context {performance-metrics}?
+        |     +--rw cost-source    identityref
+        |     +--rw parameters
+        |        +--rw (parameters)?
+        +--rw meta* [meta-key]
+        |  +--rw meta-key      string
+        |  +--rw meta-value    string
+        +--rw user-group* [group-id]
+        |  +--rw group-id    string
+        |  +--rw client*     inet:ip-prefix
      ...
 ~~~
 
@@ -157,29 +188,25 @@ demand.
   grouping alto-server-discovery-grouping:
     +-- (server-discovery-manner)?
        +--:(reverse-dns)
-       |  +-- rdns-naptr-records
-       |     +-- static-prefix*           inet:ip-prefix
-       |     +-- dynamic-prefix-source*
-       |             -> /alto-server/data-source/source-id
-       +--:(internet-routing-registry)
-       |  +-- irr-params
-       |     +-- aut-num?   inet:as-number
-       +--:(peeringdb)
-          +-- peeringdb-params
-             +-- org-id?   uint32
+          +-- rdns-naptr-records
+             +-- static-prefix*           inet:ip-prefix
+             +-- dynamic-prefix-source*
+                     -> /alto-server/data-source/source-id
 ~~~
 
-The `server-discovery` node provides configuration for ALTO server
-discovery using different mechanisms.
+The `server-discovery` node provides configuration for ALTO server discovery
+using different mechanisms. The initial module only defines the `reverse-dns`
+case that is used to configure DNS NAPTR records for ALTO server discovery,
+which is sugested by {{RFC7286}} and {{RFC8686}}. It configures a set of
+endpoints in the scope of the network domain serving this ALTO server. The node
+contains two leaf lists. The `static` list contains a list of manual configured
+endpoints. The `dynamic` list points to a list of data sources to retrieve the
+endpoints dynamically. As suggested by {{RFC7286}} and {{RFC8686}}, the IP
+prefixes in the scope will be translated into DNS NAPTR resource records for
+server discovery. Cases for other mechanisms can be augmented in the future
+modules.
 
-- The `reverse-dns` case is used to configure DNS NAPTR records for ALTO server
-  discovery, which is suugested by {{RFC7286}} and {{RFC8686}}. It configures a
-  set of endpoints in the scope of the network domain serving this ALTO server.
-  The node contains two leaf lists. The `static` list contains a list of manual
-  configured endpoints. The `dynamic` list points to a list of data sources to
-  retrieve the endpoints dynamically. As suggested by {{RFC7286}} and
-  {{RFC8686}}, the IP prefixes in the scope will be translated into DNS NAPTR
-  resource records for server discovery.
+<!--
 - The `internet-routing-registry` case is used to configure objects in an
   Internet Routing Registry (IRR) database. Other ALTO servers/clients can query
   an IRR database using the Routing Policy Specification Language (RPSL)
@@ -188,6 +215,7 @@ discovery using different mechanisms.
 - The `peeringdb` case is used to configure organization records in PeeringDB.
   Other ALTO servers/clients can directly query the PeeringDB to get the
   corresponding ALTO server to a given network.
+-->
 
 ### Data Model for Logging Management
 
@@ -262,18 +290,20 @@ data sources.
 
 ~~~
 module: ietf-alto
-  +--rw alto-server
+  +--rw alto!
      ...
-     +--rw data-source* [source-id]
-     |  +--rw source-id              string
-     |  +--rw source-type            identityref
-     |  +--rw (update-policy)
-     |  |  +--:(reactive)
-     |  |  |  +--rw reactive         boolean
-     |  |  +--:(proactive)
-     |  |     +--rw poll-interval    uint32
-     |  +--rw (source-params)?
-     ...
+     +--rw alto-server
+        ...
+        +--rw data-source* [source-id]
+        |  +--rw source-id              string
+        |  +--rw source-type            identityref
+        |  +--rw (update-policy)
+        |  |  +--:(reactive)
+        |  |  |  +--rw reactive         boolean
+        |  |  +--:(proactive)
+        |  |     +--rw poll-interval    uint32
+        |  +--rw (source-params)?
+        ...
 ~~~
 
 This data model only includes common configuration parameters for an ALTO server
@@ -334,52 +364,49 @@ ALTO information resource (See Section 9.2.4 of {{RFC7285}}).
 
 ~~~
 module: ietf-alto
-  +--rw alto-server
+  +--rw alto!
      ...
-     +--rw resource* [resource-id]
-        +--rw resource-id                       resource-id
-        +--rw resource-type                     identityref
-        +--rw description?                      string
-        +--rw accepted-group*                   string
-        +--rw dependency*
-        |       -> /alto-server/resource/resource-id
-        +--rw auth
-        |  +--rw (auth-type-selection)?
-        |     +--:(auth-key-chain)
-        |     |  +--rw key-chain?   key-chain:key-chain-ref
-        |     +--:(auth-key)
-        |     +--:(auth-tls)
-        +--rw (resource-params)?
-           +--:(ird)
-           |  +--rw alto-ird-params
-           |     +--rw delegation    inet:uri
-           +--:(networkmap)
-           |  +--rw alto-networkmap-params
-           |     +--rw is-default?   boolean
-           |     +--rw filtered?     boolean
-           |     +---u algorithm
-           +--:(costmap)
-           |  +--rw alto-costmap-params
-           |     +--rw filtered?             boolean
-           |     +---u filter-costmap-cap
-           |     +---u algorithm
-           +--:(endpointcost)
-           |  +--rw alto-endpointcost-params
-           |     +---u endpoint-cost-cap
-           |     +---u algorithm
-           +--:(endpointprop)
-           |  +--rw alto-endpointprop-params
-           |     +--rw prop-types*   string
-           |     +---u algorithm
-           +--:(propmap) {propmap}?
-           |  +--rw alto-propmap-params
-           |     +---u algorithm
-           +--:(cdni) {cdni}?
-           |  +--rw alto-cdni-params
-           |     +---u algorithm
-           +--:(update) {incr-update}?
-              +--rw alto-update-params
-                 +---u algorithm
+     +--rw alto-server
+        ...
+        +--rw resource* [resource-id]
+           +--rw resource-id                       resource-id
+           +--rw resource-type                     identityref
+           +--rw description?                      string
+           +--rw accepted-group*
+           |       -> /alto/alto-server/user-group/group-id
+           +--rw dependency*
+           |       -> /alto/alto-server/resource/resource-id
+           +--rw (resource-params)?
+              +--:(ird)
+              |  +--rw alto-ird-params
+              |     +--rw delegation    inet:uri
+              +--:(networkmap)
+              |  +--rw alto-networkmap-params
+              |     +--rw is-default?   boolean
+              |     +--rw filtered?     boolean
+              |     +---u algorithm
+              +--:(costmap)
+              |  +--rw alto-costmap-params
+              |     +--rw filtered?             boolean
+              |     +---u filter-costmap-cap
+              |     +---u algorithm
+              +--:(endpointcost)
+              |  +--rw alto-endpointcost-params
+              |     +---u endpoint-cost-cap
+              |     +---u algorithm
+              +--:(endpointprop)
+              |  +--rw alto-endpointprop-params
+              |     +--rw prop-types*   string
+              |     +---u algorithm
+              +--:(propmap) {propmap}?
+              |  +--rw alto-propmap-params
+              |     +---u algorithm
+              +--:(cdni) {cdni}?
+              |  +--rw alto-cdni-params
+              |     +---u algorithm
+              +--:(update) {incr-update}?
+                 +--rw alto-update-params
+                    +---u algorithm
 
   grouping filter-costmap-cap:
     +-- cost-type-names*            string

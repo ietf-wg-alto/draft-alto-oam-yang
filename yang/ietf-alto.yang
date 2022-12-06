@@ -10,12 +10,6 @@ module ietf-alto {
       "RFC 6991: Common YANG Data Types";
   }
 
-  import ietf-key-chain {
-    prefix key-chain;
-    reference
-      "RFC 8177: YANG Data Model for Key Chains";
-  }
-
   import ietf-tcp-server {
     prefix tcp;
     reference
@@ -65,7 +59,7 @@ module ietf-alto {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision "2022-10-24" {
+  revision "2022-11-29" {
     description
       "Initial Version.";
     reference
@@ -114,7 +108,21 @@ module ietf-alto {
       "Section 6.1.1 of RFC 7285.";
   }
 
+  identity cost-source {
+    description
+      "Theh cost source attribute indicates the high-level type of the
+       data source.";
+    reference
+      "Section 3.1 of RFC YYYY.";
+  }
+
   // Identities for ALTO information resources
+
+  identity ird {
+    base resource-type;
+    description
+      "Identity for information resource directory.";
+  }
 
   identity network-map {
     base resource-type;
@@ -128,10 +136,35 @@ module ietf-alto {
       "Identity for cost map.";
   }
 
+  identity endpoint-cost {
+    base resource-type;
+    description
+      "Identity for endpoint cost service.";
+  }
+
+  identity endpoint-prop {
+    base resource-type;
+    description
+      "Identity for endpoint property service.";
+  }
+
   identity property-map {
     base resource-type;
     description
       "Identity for property map.";
+  }
+
+  identity cdni {
+    base resource-type;
+    description
+      "Identity for content delivery network interconnection (CDNI)
+       advertisement service.";
+  }
+
+  identity update {
+    base resource-type;
+    description
+      "Identity for update stream service.";
   }
 
   // Identities for cost mode
@@ -182,56 +215,89 @@ module ietf-alto {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 4.1 of RFC XXXX";
+      "Section 4.1 of RFC YYYY";
   }
 
   identity delay-rt {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 4.2 of RFC XXXX";
+      "Section 4.2 of RFC YYYY";
   }
 
   identity delay-variation {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 4.3 of RFC XXXX";
+      "Section 4.3 of RFC YYYY";
   }
 
   identity lossrate {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 4.4 of RFC XXXX";
+      "Section 4.4 of RFC YYYY";
   }
 
   identity hopcount {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 4.5 of RFC XXXX";
+      "Section 4.5 of RFC YYYY";
   }
 
   identity tput {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 5.1 of RFC XXXX";
+      "Section 5.1 of RFC YYYY";
   }
 
   identity bw-residual {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 5.2 of RFC XXXX";
+      "Section 5.2 of RFC YYYY";
   }
 
   identity bw-available {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 5.3 of RFC XXXX";
+      "Section 5.3 of RFC YYYY";
+  }
+
+  // Identities for cost sources
+
+  identity nomial {
+    if-feature "performance-metrics";
+    base cost-source;
+    description
+      "The 'nominal' category indicates that the metric value is
+       statically configured by the underlying devices.";
+    reference
+      "Section 3.1 of RFC YYYY";
+  }
+
+  identity sla {
+    if-feature "performance-metrics";
+    base cost-source;
+    description
+      "The 'sla' category indicates that the metric value is derived
+       from some commitment which this document refers to as
+       service-level agreement (SLA).";
+    reference
+      "Section 3.1 of RFC YYYY";
+  }
+
+  identity estimation {
+    if-feature "performance-metrics";
+    base cost-source;
+    description
+      "The 'estimation' category indicates that the metric value is
+       computed through an estimation process.";
+    reference
+      "Section 3.1 of RFC YYYY";
   }
 
   // Features
@@ -241,6 +307,14 @@ module ietf-alto {
       "The 'http-listen' feature is only used for test depolyment.
        According to Sec 8.3.5 of RFC 7285, it shouldn't be used in
        the production depolyment.";
+  }
+
+  feature xdom-disc {
+    description
+      "Support cross-domain server discovery.";
+    reference
+      "RFC8686: Application-Layer Traffic Optimization (ALTO)
+       Cross-Domain Server Discovery";
   }
 
   feature multi-cost {
@@ -287,14 +361,15 @@ module ietf-alto {
     description
       "Support path vector extension.";
     reference
-      "RFC XXXX: An ALTO Extension: Path Vector";
+      "RFC 9275: An Extension for Application-Layer Traffic
+       Optimization (ALTO): Path Vector";
   }
 
   feature performance-metrics {
     description
       "Support performance metrics extension.";
     reference
-      "RFC XXXX: ALTO Performance Cost Metrics";
+      "RFC YYYY: ALTO Performance Cost Metrics";
   }
 
   // Groupings
@@ -492,12 +567,14 @@ module ietf-alto {
 
   grouping alto-server-discovery-grouping {
     description
-      "Configure how to set up server discovery for clients or other
-       ALTO servers to discovery the URI of this ALTO server.";
+      "Grouping for configuration of how to set up server discovery
+       for clients or other ALTO servers to discovery the URI of this
+       ALTO server.";
     choice server-discovery-manner {
       description
         "Selects among available server discovery manners";
       case reverse-dns {
+        if-feature xdom-disc;
         description
           "Configure DNS NAPTR records for cross-domain ALTO server
            discovery using reverse DNS lookup.";
@@ -511,7 +588,8 @@ module ietf-alto {
           }
           leaf-list dynamic-prefix-source {
             type leafref {
-              path "/alto:alto-server/alto:data-source/alto:source-id";
+              path "/alto:alto/alto:alto-server/alto:data-source"
+                 + "/alto:source-id";
             }
             description
               "Dynamic IP prefixes collected from data sources.";
@@ -521,35 +599,30 @@ module ietf-alto {
           "RFC 8686: Application-Layer Traffic Optimization (ALTO)
            Cross-Domain Server Discovery.";
       }
-      case internet-routing-registry {
+    }
+  }
+
+  grouping alto-server-discovery-client-grouping {
+    description
+      "Grouping for configuration of how a client can discover another
+       ALTO server.";
+    choice server-discovery-client-manner {
+      description
+        "Selects among available server discovery manners.";
+      case reverse-dns {
+        if-feature xdom-disc;
         description
-          "Update descr attributes of a aut-num class in a Internet
-           Routing Registry (IRR) database for ALTO server discovery
-           using RPSL.";
+          "Use reverse DNS lookup to discover an ALTO server.";
         reference
-          "RFC 2622: Routing Policy Specification Language (RPSL).";
-        container irr-params {
+          "RFC 8686: Application-Layer Traffic Optimization (ALTO)
+           Cross-Domain Server Discovery.";
+        container rdns-params {
           description
-            "Configuration parameters for IRR database.";
-          leaf aut-num {
-            type inet:as-number;
+            "Configuration for reverse DNS lookup.";
+          leaf-list dns-server {
+            type inet:host;
             description
-              "The autonomous system (AS) to be updated.";
-          }
-        }
-      }
-      case peeringdb {
-        description
-          "Update metadata of a network record in PeeringDB database
-           for ALTO server discovery using PeeringDB lookup.";
-        container peeringdb-params {
-          description
-            "Configuration parameters for PeeringDB database.";
-          leaf org-id {
-            type uint32;
-            description
-              "The ID referring to the org object of the
-               organization record in PeeringDB.";
+              "DNS server list for reverse DNS lookup.";
           }
         }
       }
@@ -562,7 +635,7 @@ module ietf-alto {
        server.";
     choice logging-system {
       description
-        "Selects among available logging systems";
+        "Selects among available logging systems.";
       case syslog {
         description
           "Use syslog as logging system.";
@@ -573,6 +646,7 @@ module ietf-alto {
             type inet:uri {
               pattern 'file:.*';
             }
+            default 'file:/etc/syslog.conf';
             description
               "The file location of the syslog configuration.";
           }
@@ -583,269 +657,332 @@ module ietf-alto {
 
   // Top-level container
 
-  container alto-server {
+  container alto {
+    presence "The ALTO is enabled";
     description
-      "The ALTO server instance.";
-    container listen {
+      "Parameters for the ALTO client and server.";
+    list alto-client {
       description
-        "Configure the ALTO server to listen for ALTO clients.";
-      uses alto-server-listen-stack-grouping;
-    }
-    container server-discovery {
-      description
-        "Configure how the ALTO server to be discovered by others.";
-      uses alto-server-discovery-grouping;
-    }
-    container logging-system {
-      description
-        "Configure logging system to capture log messages generated
-         by the ALTO server.";
-      uses alto-logging-system-grouping;
-    }
-    list cost-type {
-      key "cost-type-name";
-      leaf cost-type-name {
+        "The ALTO client configuration.";
+      key client-id;
+      leaf client-id {
         type string;
         description
-          "The name to reference cost type";
+          "Identifier of a client that can be referenced by a data
+           source or a resource creation algorithm to communicate with
+           other ALTO servers.";
       }
-      leaf cost-mode {
-        type identityref {
-          base cost-mode;
-        }
-        mandatory true;
+      container server-discovery-client {
+        uses alto-server-discovery-client-grouping;
         description
-          "The referenced cost mode";
+          "Configuration of how to discover another ALTO server.";
       }
-      leaf cost-metric {
-        type identityref {
-          base cost-metric;
-        }
-        mandatory true;
-        description
-          "The referenced cost metric";
-      }
-      description
-        "Mapping between name and referenced cost type";
     }
-    list meta {
-      key "meta-key";
-      leaf meta-key {
-        type string;
-        description
-          "Custom meta key";
-      }
-      leaf meta-value {
-        type string;
-        mandatory true;
-        description
-          "Custom meta value";
-      }
+    container alto-server {
       description
-        "Mapping of custom meta information";
-      reference
-        "Section 8.4.1 of RFC 7285.";
-    }
-    list data-source {
-      key "source-id";
-      leaf source-id {
-        type string;
+        "The ALTO server instance configuration.";
+      container listen {
         description
-          "Data source id that can be referenced by information
-           resource creation algorithms.";
+          "Configure the ALTO server to listen for ALTO clients.";
+        uses alto-server-listen-stack-grouping;
       }
-      leaf source-type {
-        type identityref {
-          base source-type;
-        }
-        mandatory true;
+      container server-discovery {
         description
-          "Identify the type of the data source.";
+          "Configure how the ALTO server to be discovered by others.";
+        uses alto-server-discovery-grouping;
       }
-      choice update-policy {
-        mandatory true;
-        case reactive {
-          leaf reactive {
-            type boolean;
-            mandatory true;
-            description
-              "Reactive mode.";
-          }
-        }
-        case proactive {
-          leaf poll-interval {
-            type uint32;
-            mandatory true;
-            description
-              "Polling interval in seconds for proactive mode.";
-          }
-        }
+      container logging-system {
         description
-          "Policy to get updates from data sources.";
+          "Configure logging system to capture log messages generated
+           by the ALTO server.";
+        uses alto-logging-system-grouping;
       }
-      choice source-params {
-        description
-          "Data source specific configuration.";
-      }
-      description
-        "List of subscribed data sources.";
-    }
-    list resource {
-      key "resource-id";
-      leaf resource-id {
-        type resource-id;
-        description
-          "resource-id to be defined.";
-      }
-      leaf resource-type {
-        type identityref {
-          base resource-type;
-        }
-        mandatory true;
-        description
-          "identityref to be defined.";
-      }
-      leaf description {
-        type string;
-        description
-          "The optional description for this information resource.";
-      }
-      leaf-list accepted-group {
-        type string;
-        description
-          "Access list for authenticated clients.";
-      }
-      leaf-list dependency {
-        type leafref {
-          path "/alto:alto-server/alto:resource/alto:resource-id";
-        }
-        description
-          "A list of dependent information resources.";
-      }
-      container auth {
-        description
-          "The authentication options";
-        choice auth-type-selection {
+      list cost-type {
+        key "cost-type-name";
+        leaf cost-type-name {
+          type string;
           description
-            "Options for expressing authentication
-             setting.";
-          case auth-key-chain {
-            leaf key-chain {
-              type key-chain:key-chain-ref;
-              description
-                "key-chain name.";
-            }
-          }
-          case auth-key {
-          }
-          case auth-tls {
-          }
+            "The name to reference cost type";
         }
-      }
-      choice resource-params {
+        leaf cost-mode {
+          type identityref {
+            base cost-mode;
+          }
+          mandatory true;
+          description
+            "The referenced cost mode";
+        }
+        leaf cost-metric {
+          type identityref {
+            base cost-metric;
+          }
+          mandatory true;
+          description
+            "The referenced cost metric";
+        }
+        leaf description {
+          type string;
+          description
+            "The human-readable description fo the cost-mode and
+             cost-mode";
+        }
+        container cost-context {
+          if-feature "performance-metrics";
+          leaf cost-source {
+            type identityref {
+              base cost-source;
+            }
+            mandatory true;
+            description
+              "The referenced cost source";
+          }
+          container parameters {
+            choice parameters {
+              description
+                "Cases of parameters to be augmented.";
+            }
+            description
+              "Additional computation parameters for the cost
+               source.";
+          }
+          description
+            "Context of how the metric is obtained.";
+        }
         description
-          "Resource-specific configuration.";
-        case ird {
-          container alto-ird-params {
-            leaf delegation {
-              type inet:uri;
+          "Mapping between name and referenced cost type";
+      }
+      list meta {
+        key "meta-key";
+        leaf meta-key {
+          type string;
+          description
+            "Custom meta key";
+        }
+        leaf meta-value {
+          type string;
+          mandatory true;
+          description
+            "Custom meta value";
+        }
+        description
+          "Mapping of custom meta information";
+        reference
+          "Section 8.4.1 of RFC 7285.";
+      }
+      list user-group {
+        key "group-id";
+        leaf group-id {
+          type string;
+          description
+            "Identifier to reference a user group.";
+        }
+        leaf-list client {
+          type inet:ip-prefix;
+          description
+            "List of IP prefixes of clients.";
+        }
+        description
+          "List of user groups that can be used by access control.";
+      }
+      list data-source {
+        key "source-id";
+        leaf source-id {
+          type string;
+          description
+            "Data source id that can be referenced by information
+             resource creation algorithms.";
+        }
+        leaf source-type {
+          type identityref {
+            base source-type;
+          }
+          mandatory true;
+          description
+            "Identify the type of the data source.";
+        }
+        choice update-policy {
+          mandatory true;
+          case reactive {
+            leaf reactive {
+              type boolean;
               mandatory true;
               description
-                "Upstream IRD to be delegated.";
+                "Reactive mode.";
             }
-            description
-              "IRD-specific configuration.";
           }
-        }
-        case networkmap {
-          container alto-networkmap-params {
-            description
-              "(Filtered) Network Map specific configuration.";
-            reference
-              "Section 11.2.1 and Section 11.3.1 of RFC 7285.";
-            leaf is-default {
-              type boolean;
+          case proactive {
+            leaf poll-interval {
+              type uint32;
+              mandatory true;
               description
-                "Set whether this is the default network map.";
+                "Polling interval in seconds for proactive mode.";
             }
-            leaf filtered {
-              type boolean;
-              default false;
-              description
-                "Configure whether filtered network map is
-                 supported.";
-            }
-            uses algorithm;
           }
+          description
+            "Policy to get updates from data sources.";
         }
-        case costmap {
-          container alto-costmap-params {
-            description
-              "(Filtered) Cost Map specific configuration.";
-            reference
-              "Section 11.2.2 and Section 11.3.2 of RFC 7285.";
-            leaf filtered {
-              type boolean;
-              description
-                "Configure whether filtered cost map is supported.";
-            }
-            uses filter-costmap-cap;
-            uses algorithm;
-          }
+        choice source-params {
+          description
+            "Data source specific configuration.";
         }
-        case endpointcost {
-          container alto-endpointcost-params {
-            description
-              "Endpoint Cost Service specific configuration.";
-            reference
-              "Section 11.5 of RFC 7285.";
-            uses endpoint-cost-cap;
-            uses algorithm;
-          }
-        }
-        case endpointprop {
-          container alto-endpointprop-params {
-            description
-              "Endpoint Cost Service specific configuration.";
-            reference
-              "Section 11.5 of RFC 7285.";
-            leaf-list prop-types {
-              type string;
-              min-elements 1;
-              description
-                "Supported endpoint properties.";
-            }
-            uses algorithm;
-          }
-        }
-        case propmap {
-          if-feature "propmap";
-          container alto-propmap-params {
-            uses algorithm;
-            description
-              "(Filtered) Entity Property Map specific
-               configuration.";
-          }
-        }
-        case cdni {
-          if-feature "cdni";
-          container alto-cdni-params {
-            uses algorithm;
-            description
-              "CDNi specific configuration";
-          }
-        }
-        case update {
-          if-feature "incr-update";
-          container alto-update-params {
-            uses algorithm;
-            description
-              "Incremental Updates specific configuration";
-          }
-        }
+        description
+          "List of subscribed data sources.";
       }
-      description
-        "ALTO information resources to be defined";
+      list resource {
+        key "resource-id";
+        leaf resource-id {
+          type resource-id;
+          description
+            "resource-id to be defined.";
+        }
+        leaf resource-type {
+          type identityref {
+            base resource-type;
+          }
+          mandatory true;
+          description
+            "identityref to be defined.";
+        }
+        leaf description {
+          type string;
+          description
+            "The optional description for this information resource.";
+        }
+        leaf-list accepted-group {
+          type leafref {
+            path "/alto:alto/alto:alto-server/alto:user-group"
+               + "/alto:group-id";
+          }
+          description
+            "Access list for authenticated clients.";
+        }
+        leaf-list dependency {
+          type leafref {
+            path "/alto:alto/alto:alto-server/alto:resource"
+               + "/alto:resource-id";
+          }
+          description
+            "A list of dependent information resources.";
+        }
+        choice resource-params {
+          description
+            "Resource-specific configuration.";
+          case ird {
+            when 'derived-from-or-self(resource-type, "alto:ird")';
+            container alto-ird-params {
+              leaf delegation {
+                type inet:uri;
+                mandatory true;
+                description
+                  "Upstream IRD to be delegated.";
+              }
+              description
+                "IRD-specific configuration.";
+            }
+          }
+          case networkmap {
+            when 'derived-from-or-self(resource-type,'
+               + '"alto:network-map")';
+            container alto-networkmap-params {
+              description
+                "(Filtered) Network Map specific configuration.";
+              reference
+                "Section 11.2.1 and Section 11.3.1 of RFC 7285.";
+              leaf is-default {
+                type boolean;
+                description
+                  "Set whether this is the default network map.";
+              }
+              leaf filtered {
+                type boolean;
+                default false;
+                description
+                  "Configure whether filtered network map is
+                   supported.";
+              }
+              uses algorithm;
+            }
+          }
+          case costmap {
+            when 'derived-from-or-self(resource-type,'
+               + '"alto:cost-map")';
+            container alto-costmap-params {
+              description
+                "(Filtered) Cost Map specific configuration.";
+              reference
+                "Section 11.2.2 and Section 11.3.2 of RFC 7285.";
+              leaf filtered {
+                type boolean;
+                description
+                  "Configure whether filtered cost map is supported.";
+              }
+              uses filter-costmap-cap;
+              uses algorithm;
+            }
+          }
+          case endpointcost {
+            when 'derived-from-or-self(resource-type,'
+               + '"alto:endpoint-cost")';
+            container alto-endpointcost-params {
+              description
+                "Endpoint Cost Service specific configuration.";
+              reference
+                "Section 11.5 of RFC 7285.";
+              uses endpoint-cost-cap;
+              uses algorithm;
+            }
+          }
+          case endpointprop {
+            when 'derived-from-or-self(resource-type,'
+               + '"alto:endpoint-prop")';
+            container alto-endpointprop-params {
+              description
+                "Endpoint Cost Service specific configuration.";
+              reference
+                "Section 11.5 of RFC 7285.";
+              leaf-list prop-types {
+                type string;
+                min-elements 1;
+                description
+                  "Supported endpoint properties.";
+              }
+              uses algorithm;
+            }
+          }
+          case propmap {
+            when 'derived-from-or-self(resource-type,'
+               + '"alto:property-map")';
+            if-feature "propmap";
+            container alto-propmap-params {
+              uses algorithm;
+              description
+                "(Filtered) Entity Property Map specific
+                 configuration.";
+            }
+          }
+          case cdni {
+            when 'derived-from-or-self(resource-type, "alto:cdni")';
+            if-feature "cdni";
+            container alto-cdni-params {
+              uses algorithm;
+              description
+                "CDNi specific configuration";
+            }
+          }
+          case update {
+            when 'derived-from-or-self(resource-type,'
+               + '"alto:update")';
+            if-feature "incr-update";
+            container alto-update-params {
+              uses algorithm;
+              description
+                "Incremental Updates specific configuration";
+            }
+          }
+        }
+        description
+          "ALTO information resources to be defined";
+      }
     }
   }
 }

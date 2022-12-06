@@ -1,10 +1,14 @@
 module example-ietf-alto-data-source {
+  yang-version 1.1;
 
   namespace "urn:example:ietf-alto-data-source";
   prefix "alto-ds";
 
   import ietf-alto {
     prefix alto;
+    reference
+      "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
+       Protocol.";
   }
 
   import ietf-yang-types {
@@ -20,6 +24,39 @@ module example-ietf-alto-data-source {
        Servers";
   }
 
+  organization
+    "IETF ALTO Working Group";
+
+  contact
+    "WG Web:   <https://datatracker.ietf.org/wg/alto/about/>
+     WG List:  <alto@ietf.org>";
+
+  description
+    "This YANG module defines all the configured and operational
+     parameters of the administrated ALTO server instance.
+
+     Copyright (c) 2022 IETF Trust and the persons identified as
+     authors of the code.  All rights reserved.
+
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject to
+     the license terms contained in, the Revised BSD License set
+     forth in Section 4.c of the IETF Trust's Legal Provisions
+     Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     This version of this YANG module is part of RFC XXXX
+     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+     for full legal notices.";
+
+  revision "2022-10-24" {
+    description
+      "Initial Version.";
+    reference
+      "RFC XXXX: A YANG Data Model for Operations, Administration,
+       and Maintenance of ALTO Protocol.";
+  }
+
   identity yang-datastore {
     base alto:source-type;
     description
@@ -32,9 +69,14 @@ module example-ietf-alto-data-source {
       "Identity for data source of prometheus system.";
   }
 
-  augment "/alto:alto-server/alto:data-source/alto:source-params" {
+  augment "/alto:alto/alto:alto-server/alto:data-source"
+        + "/alto:source-params" {
+    description
+      "Example of data source for YANG datastore.";
     case yang-datastore {
-      when 'derived-from-or-self(source-type, "alto:yang-datastore"';
+      when 'derived-from-or-self(source-type, "alto:yang-datastore")';
+      description
+        "Example data source for local and/or remote YANG datastore.";
       container yang-datastore-source-params {
         leaf source-path {
           type yang:xpath1.0;
@@ -45,36 +87,24 @@ module example-ietf-alto-data-source {
         description
           "YANG datastore specific configuration.";
         choice restconf-endpoint {
+          description
+            "Restconf endpoint configuration for YANG datastore.";
           case local {
             // Use local API to access YANG datastore
+            description
+              "Local YANG datastore.";
           }
           case remote {
+            description
+              "Remote YANG datastore.";
             container restconf-endpoint-params {
+              description
+                "Parameters for restconf endpoint of the YANG
+                 datastore.";
               uses rcc:restconf-client-listen-stack-grouping;
             }
           }
         }
-      }
-    }
-  }
-
-  augment "/alto:alto-server/alto:data-source/alto:source-params" {
-    case prometheus {
-      when 'derived-from-or-self(source-type, "alto:prometheus")';
-      container prometheus-source-params {
-        leaf source-uri {
-          type inet:uri;
-          mandatory true;
-          description
-            "URI to prometheus agent.";
-        }
-        leaf query-data {
-          type string;
-          description
-            "Query expression.";
-        }
-        description
-          "Prometheus specific configuration.";
       }
     }
   }
