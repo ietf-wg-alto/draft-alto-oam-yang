@@ -41,9 +41,14 @@ module: ietf-alto
         +--rw meta* [meta-key]
         |  +--rw meta-key      string
         |  +--rw meta-value    string
-        +--rw user-group* [group-id]
-        |  +--rw group-id    string
-        |  +--rw client*     inet:ip-prefix
+        +--rw auth-client* [client-id]
+        |  +--rw client-id    string
+        |  +--rw (authentication)?
+        +--rw role* [role-name]
+        |  +--rw role-name    role-name
+        |  +--rw client* [client-id]
+        |     +--rw client-id
+        |             -> /alto/alto-server/auth-client/client-id
         +--rw data-source* [source-id]
         |  +--rw source-id              string
         |  +--rw source-type            identityref
@@ -57,8 +62,8 @@ module: ietf-alto
            +--rw resource-id                       resource-id
            +--rw resource-type                     identityref
            +--rw description?                      string
-           +--rw accepted-group*
-           |       -> /alto/alto-server/user-group/group-id
+           +--rw accepted-role*
+           |       -> /alto/alto-server/role/role-name
            +--rw dependency*
            |       -> /alto/alto-server/resource/resource-id
            +--rw (resource-params)?
@@ -95,6 +100,10 @@ module: ietf-alto
 ~~~
 
 ## Data Model for ALTO Client Operation and Management
+
+The `alto-client` list contains a list of client-side configurations.
+`server-discovery-client` is defined to configure how an ALTO client discover
+the ALTO server.
 
 ~~~
 module: ietf-alto
@@ -135,9 +144,6 @@ module: ietf-alto
         +--rw meta* [meta-key]
         |  +--rw meta-key      string
         |  +--rw meta-value    string
-        +--rw user-group* [group-id]
-        |  +--rw group-id    string
-        |  +--rw client*     inet:ip-prefix
      ...
 ~~~
 
@@ -329,12 +335,9 @@ ALTO information resource.
 
 A `resource` entry MUST include a unique `resource-id` and a `resource-type`.
 
-It can also include an `accepted-group` node containing a list of `user-group`s
-that can access this ALTO information resource.  As section 15.5.2 of
-{{RFC7285}} suggests, the module also defines authentication related
-configuration to employ access control at information resource level. The ALTO
-server returns the IRD to the ALTO client based on its authentication
-information.
+It can also include an `accepted-role` node containing a list of `role-name`s
+that is used by role-based access control for this ALTO information resource.
+See [](#alto-rbac) for details of information resource access control.
 
 For some `resource-type`, the `resource` entry MUST also include the a
 `dependency` node containing the `resource-id` of the dependent ALTO information
@@ -372,8 +375,8 @@ module: ietf-alto
            +--rw resource-id                       resource-id
            +--rw resource-type                     identityref
            +--rw description?                      string
-           +--rw accepted-group*
-           |       -> /alto/alto-server/user-group/group-id
+           +--rw accepted-role*
+           |       -> /alto/alto-server/role/role-name
            +--rw dependency*
            |       -> /alto/alto-server/resource/resource-id
            +--rw (resource-params)?
@@ -422,6 +425,46 @@ module: ietf-alto
   grouping algorithm:
     +-- (algorithm)
 ~~~
+
+### ALTO Information Resource Access Control Management {#alto-rbac}
+
+As section 15.5.2 of {{RFC7285}} suggests, the module also defines
+authentication and authorization related configuration to employ access control
+at information resource level. The ALTO server returns the IRD to the ALTO
+client based on its authentication information.
+
+The information resource access control is supported by the following
+configuration:
+
+~~~
+module: ietf-alto
+  +--rw alto!
+     ...
+     +--rw alto-server
+        ...
+        +--rw auth-client* [client-id]
+        |  +--rw client-id    string
+        |  +--rw (authentication)?
+        +--rw role* [role-name]
+        |  +--rw role-name    role-name
+        |  +--rw client* [client-id]
+        |     +--rw client-id
+        |             -> /alto/alto-server/auth-client/client-id
+        ...
+~~~
+
+It configures the role-based access control:
+
+- `auth-client` declares a list of ALTO clients that can be authenticated by
+  the internal or external authorization server. This basic model does not
+  define any authentication approach, but the operators or future documents can
+  augment the `authentication` choice for different authentication mechanisms.
+- `role` defines a list of roles for access control. Each role contains a list
+  of authenticated ALTO clients. Each client can be assigned to multiple roles.
+  The `role-name` can be referenced by the `accepted-role` list of a
+  `resource`. For a given authenticated ALTO client, if one of the roles
+  containing it is allowed to access a resource, this client is allowed to
+  access the resource.
 
 # Design of ALTO O&M Statistics Data Model {#alto-stats-model}
 

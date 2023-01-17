@@ -78,6 +78,12 @@ module ietf-alto {
       "Section 9.1.1 of RFC 7285.";
   }
 
+  typedef role-name {
+    type string;
+    description
+      "Name of a role for role-based access control.";
+  }
+
   // Base identities
 
   identity resource-type {
@@ -769,20 +775,41 @@ module ietf-alto {
         reference
           "Section 8.4.1 of RFC 7285.";
       }
-      list user-group {
-        key "group-id";
-        leaf group-id {
+      list auth-client {
+        key "client-id";
+        leaf client-id {
           type string;
           description
-            "Identifier to reference a user group.";
+            "Identifier to reference an ALTO client.";
         }
-        leaf-list client {
-          type inet:ip-prefix;
+        choice authentication {
           description
-            "List of IP prefixes of clients.";
+            "Choice of authentication methods to identify this
+             ALTO client.";
         }
         description
-          "List of user groups that can be used by access control.";
+          "List of authenticated ALTO clients.";
+      }
+      list role {
+        key "role-name";
+        leaf role-name {
+          type role-name;
+          description
+            "Name of a role for access control.";
+        }
+        list client {
+          key "client-id";
+          leaf client-id {
+            type leafref {
+              path "/alto:alto/alto:alto-server/alto:auth-client"
+                 + "/alto:client-id";
+            }
+            description
+              "Identifier of an ALTO client assigned to the role.";
+          }
+          description
+            "List of roles for access control.";
+        }
       }
       list data-source {
         key "source-id";
@@ -848,13 +875,13 @@ module ietf-alto {
           description
             "The optional description for this information resource.";
         }
-        leaf-list accepted-group {
+        leaf-list accepted-role {
           type leafref {
-            path "/alto:alto/alto:alto-server/alto:user-group"
-               + "/alto:group-id";
+            path "/alto:alto/alto:alto-server/alto:role"
+               + "/alto:role-name";
           }
           description
-            "Access list for authenticated clients.";
+            "Roles allowed to access this information resource.";
         }
         leaf-list dependency {
           type leafref {
