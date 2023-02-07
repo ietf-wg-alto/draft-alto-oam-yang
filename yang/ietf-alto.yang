@@ -59,7 +59,7 @@ module ietf-alto {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision "2022-11-29" {
+  revision "2023-02-07" {
     description
       "Initial Version.";
     reference
@@ -668,8 +668,6 @@ module ietf-alto {
     description
       "Parameters for the ALTO client and server.";
     list alto-client {
-      description
-        "The ALTO client configuration.";
       key client-id;
       leaf client-id {
         type string;
@@ -683,6 +681,8 @@ module ietf-alto {
         description
           "Configuration of how to discover another ALTO server.";
       }
+      description
+        "The ALTO client configuration.";
     }
     container alto-server {
       description
@@ -810,6 +810,8 @@ module ietf-alto {
           description
             "List of roles for access control.";
         }
+        description
+          "List of roles for access control.";
       }
       list data-source {
         key "source-id";
@@ -830,14 +832,43 @@ module ietf-alto {
         choice update-policy {
           mandatory true;
           case reactive {
-            leaf reactive {
-              type boolean;
-              mandatory true;
+            description
+              "Configuration for the data source listener to
+               reactively subscribe data and wait for updates
+               published by the data source.";
+            choice publish-mode {
               description
-                "Reactive mode.";
+                "Configuration for when the data source publish an
+                 update.";
+              case on-change {
+                description
+                  "The data source is requested to publish an update
+                   once the data has a change.";
+                leaf on-change {
+                  type empty;
+                  mandatory true;
+                  description
+                    "Indicate an on-change subscription.";
+                }
+              }
+              case periodic {
+                description
+                  "The data source is requested to periodically
+                   publish an update.";
+                leaf feed-interval {
+                  type uint32;
+                  mandatory true;
+                  description
+                    "Duration of time that should occur between
+                     periodic push updates, in units of seconds.";
+                }
+              }
             }
           }
           case proactive {
+            description
+              "Configuration for the data source listener to
+               proactively pull data from the data source.";
             leaf poll-interval {
               type uint32;
               mandatory true;

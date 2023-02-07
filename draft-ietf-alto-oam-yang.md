@@ -81,7 +81,9 @@ informative:
   RFC2622:
   RFC7921:
   RFC7971:
+  RFC8342:
   RFC8346:
+  RFC8641:
   RFC9240:
   RFC9241:
   RFC9275:
@@ -89,6 +91,8 @@ informative:
   I-D.ietf-netconf-tcp-client-server:
   I-D.ietf-netconf-tls-client-server:
   I-D.ietf-netconf-http-client-server:
+  I-D.ietf-netconf-netconf-client-server:
+  I-D.ietf-netconf-restconf-client-server:
 
 --- abstract
 

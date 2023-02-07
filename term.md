@@ -43,6 +43,8 @@ Please apply the following replacements:
 - DDDD --> the assigned RFC value for draft-ietf-netconf-tcp-client-server
 - FFFF --> the assigned RFC value for draft-ietf-netconf-tls-client-server
 - GGGG --> the assigned RFC value for draft-ietf-netconf-http-client-server
+- HHHH --> the assigned RFC value for draft-ietf-netconf-netconf-client-server
+- IIII --> the assigned RFC value for draft-ietf-netconf-restconf-client-server
 - XXXX --> the assigned RFC value for this draft
 - YYYY --> the assigned RFC value for draft-ietf-alto-performance-metrics
 

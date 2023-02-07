@@ -1,6 +1,6 @@
 YANGDIR ?= yang
 
-STDYANGDIR ?= $(YANGDIR)/yang
+STDYANGDIR ?= tools/yang
 $(STDYANGDIR):
 	git clone --depth 10 -b main https://github.com/YangModels/yang $@
 
@@ -16,7 +16,7 @@ TXT=$(patsubst $(YANGDIR)/%.yang,%-diagram.txt,$(YANG))
 .PHONY: yang-lint yang-gen-diagram yang-clean
 
 yang-lint: $(YANG) $(STDYANGDIR)
-	pyang -V --lint -p $(YANG_PATH) $<
+	pyang -V --lint -p $(YANG_PATH) $(YANG)
 
 yang-gen-diagram: yang-lint $(TXT)
 

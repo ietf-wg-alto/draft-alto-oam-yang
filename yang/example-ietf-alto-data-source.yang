@@ -11,10 +11,23 @@ module example-ietf-alto-data-source {
        Protocol.";
   }
 
-  import ietf-yang-types {
-    prefix "yang";
+  import ietf-datastores {
+    prefix ds;
     reference
-      "RFC 6991: Common YANG Data Types";
+      "RFC8342: Network Management Datastore Architecture (NMDA)";
+  }
+
+  import ietf-yang-push {
+    prefix yp;
+    reference
+      "RFC8641: Subscription to YANG Notifications for Datastore
+       Updates";
+  }
+
+  import ietf-netconf-client {
+    prefix ncc;
+    reference
+      "RFC HHHH: NETCONF Client and Server Models";
   }
 
   import ietf-restconf-client {
@@ -49,7 +62,7 @@ module example-ietf-alto-data-source {
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
      for full legal notices.";
 
-  revision "2022-10-24" {
+  revision "2023-02-07" {
     description
       "Initial Version.";
     reference
@@ -63,10 +76,21 @@ module example-ietf-alto-data-source {
       "Identity for data source of YANG-based datastore.";
   }
 
-  identity prometheus {
-    base alto:source-type;
+  identity protocol-type {
     description
-      "Identity for data source of prometheus system.";
+      "Base identity for protocol type.";
+  }
+
+  identity netconf {
+    base protocol-type;
+    description
+      "Identity for NETCONF protocol.";
+  }
+
+  identity restconf {
+    base protocol-type;
+    description
+      "Identity for RESTCONF protocol.";
   }
 
   augment "/alto:alto/alto:alto-server/alto:data-source"
@@ -74,36 +98,50 @@ module example-ietf-alto-data-source {
     description
       "Example of data source for YANG datastore.";
     case yang-datastore {
-      when 'derived-from-or-self(source-type, "alto:yang-datastore")';
+      when 'derived-from-or-self(source-type, "alto-ds:yang-datastore")';
       description
         "Example data source for local and/or remote YANG datastore.";
       container yang-datastore-source-params {
-        leaf source-path {
-          type yang:xpath1.0;
-          mandatory true;
-          description
-            "XPath to subscribed YANG datastore node.";
-        }
         description
           "YANG datastore specific configuration.";
-        choice restconf-endpoint {
+        leaf datastore {
+          type ds:datastore-ref;
+          mandatory true;
           description
-            "Restconf endpoint configuration for YANG datastore.";
-          case local {
-            // Use local API to access YANG datastore
+            "Identity reference of the datastore from which to get
+             data.";
+        }
+        list target-paths {
+          key name;
+          description
+            "XPath to subscribed YANG datastore node or subtree.";
+          leaf name {
+            type string;
             description
-              "Local YANG datastore.";
+              "Identifier of the supported xpath or subtree filters.";
           }
-          case remote {
-            description
-              "Remote YANG datastore.";
-            container restconf-endpoint-params {
-              description
-                "Parameters for restconf endpoint of the YANG
-                 datastore.";
-              uses rcc:restconf-client-listen-stack-grouping;
-            }
+          uses yp:selection-filter-types;
+        }
+        leaf protocol {
+          type identityref {
+            base protocol-type;
           }
+          description
+            "Protocol used to access the YANG datastore.";
+        }
+        container restconf {
+          uses rcc:restconf-client-app-grouping {
+            when 'derived-from-or-self(../protocol, "restconf")';
+          }
+          description
+            "Parameters for restconf endpoint of the YANG datastore.";
+        }
+        container netconf {
+          uses ncc:netconf-client-app-grouping {
+            when 'derived-from-or-self(../protocol, "netconf")';
+          }
+          description
+            "Parameters for netconf endpoint of the YANG datastore.";
         }
       }
     }

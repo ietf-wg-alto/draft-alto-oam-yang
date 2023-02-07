@@ -50,13 +50,17 @@ module: ietf-alto
         |     +--rw client-id
         |             -> /alto/alto-server/auth-client/client-id
         +--rw data-source* [source-id]
-        |  +--rw source-id              string
-        |  +--rw source-type            identityref
+        |  +--rw source-id                    string
+        |  +--rw source-type                  identityref
         |  +--rw (update-policy)
         |  |  +--:(reactive)
-        |  |  |  +--rw reactive         boolean
+        |  |  |  +--rw (publish-mode)?
+        |  |  |     +--:(on-change)
+        |  |  |     |  +--rw on-change        empty
+        |  |  |     +--:(periodic)
+        |  |  |        +--rw feed-interval    uint32
         |  |  +--:(proactive)
-        |  |     +--rw poll-interval    uint32
+        |  |     +--rw poll-interval          uint32
         |  +--rw (source-params)?
         +--rw resource* [resource-id]
            +--rw resource-id                       resource-id
@@ -281,15 +285,24 @@ A `data-source` entry MUST include:
 - the `source-params` to specify where and how to query the data.
 
 The update policy can be either reactive or proactive. For the reactive update,
-the ALTO server gets the update as soon as the data source changes. For the
+the ALTO server reactively waits the data source for pushing updates. For the
 proactive update, the ALTO server has to proactively fetch the data source
 periodically.
 
-To use the reactive update, the `reactive` attribute MUST be set true. To use
-the proactive update, the `poll-interval` attribute MUST be greater than zero.
-The value of `poll-interval` specifies the interval of fetching the data in
-milliseconds. If `reactive` is false or `poll-interval` is zero, the ALTO server
-will not update the data source.
+To use the reactive update, there are two publish modes:
+
+- If the `on-change` attribute presents, the data source is expected to push
+  the update as soon as the data source changes.
+- Otherwise, if the `feed-interval` attribute presents, the data source is
+  expected to push the updates periodically. The value of `feed-interval`
+  specifies the interval of pushing the data change updates in milliseconds.
+  If `feed-interval` is zero, the data source is expected to work in the
+  `on-change` mode.
+
+To use the proactive update, the `poll-interval` attribute MUST present. The
+value of `poll-interval` specifies the interval of fetching the data in
+milliseconds. If `poll-interval` is zero, the ALTO server will not fetch the
+data source.
 
 The `data-source/source-params` node can be augmented for different types of
 data sources.
@@ -301,13 +314,17 @@ module: ietf-alto
      +--rw alto-server
         ...
         +--rw data-source* [source-id]
-        |  +--rw source-id              string
-        |  +--rw source-type            identityref
+        |  +--rw source-id                    string
+        |  +--rw source-type                  identityref
         |  +--rw (update-policy)
         |  |  +--:(reactive)
-        |  |  |  +--rw reactive         boolean
+        |  |  |  +--rw (publish-mode)?
+        |  |  |     +--:(on-change)
+        |  |  |     |  +--rw on-change        empty
+        |  |  |     +--:(periodic)
+        |  |  |        +--rw feed-interval    uint32
         |  |  +--:(proactive)
-        |  |     +--rw poll-interval    uint32
+        |  |     +--rw poll-interval          uint32
         |  +--rw (source-params)?
         ...
 ~~~

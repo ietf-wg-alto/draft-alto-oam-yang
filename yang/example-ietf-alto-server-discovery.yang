@@ -42,7 +42,7 @@ module example-ietf-alto-server-discovery {
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
      for full legal notices.";
 
-  revision "2022-11-29" {
+  revision "2023-02-07" {
     description
       "Initial Version.";
     reference
@@ -52,6 +52,9 @@ module example-ietf-alto-server-discovery {
 
   augment "/alto:alto/alto:alto-server/alto:server-discovery"
         + "/alto:server-discovery-manner" {
+    description
+      "Examples of server discovery mechanisms provided by the ALTO
+       server.";
     case internet-routing-registry {
       description
         "Update descr attributes of a aut-num class in a Internet
@@ -88,6 +91,9 @@ module example-ietf-alto-server-discovery {
 
   augment "/alto:alto/alto:alto-client/alto:server-discovery-client"
         + "/alto:server-discovery-client-manner" {
+    description
+      "Examples of server discovery mechanisms used by the ALTO
+       client.";
     case internet-routing-registry {
       description
         "Use Internet Routing Registry (IRR) to discover an ALTO
