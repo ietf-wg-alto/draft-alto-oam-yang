@@ -1,10 +1,24 @@
 module example-ietf-alto-alg {
+  yang-version 1.1;
 
   namespace "urn:example:ietf-alto-alg";
   prefix "alto-alg";
 
   import ietf-alto {
-    prefix "alto";
+    prefix alto;
+    reference
+      "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
+       Protocol.";
+  }
+
+  import ietf-datastores {
+    prefix ds;
+    reference
+      "RFC8342: Network Management Datastore Architecture (NMDA)";
+  }
+
+  import example-ietf-alto-data-source {
+    prefix "alto-ds";
   }
 
   organization
@@ -15,8 +29,9 @@ module example-ietf-alto-alg {
      WG List:  <alto@ietf.org>";
 
   description
-    "This YANG module defines all the configured and operational
-     parameters of the administrated ALTO server instance.
+    "This YANG module defines an example of the extended ALTO
+     information resource creation algorithm for translating an L3
+     unicast topology of I2RS to an ALTO network map.
 
      Copyright (c) 2022 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -32,7 +47,7 @@ module example-ietf-alto-alg {
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
      for full legal notices.";
 
-  revision "2022-11-24" {
+  revision "2023-02-10" {
     description
       "Initial Version.";
     reference
@@ -47,7 +62,7 @@ module example-ietf-alto-alg {
       "Example of network map creation algorithm.";
     case l3-unicast-cluster {
       description
-        "Example algorithm translating a L3 unicast topology of I2RS
+        "Example algorithm translating an L3 unicast topology of I2RS
          to an ALTO network map";
       container l3-unicast-cluster-algorithm {
         description
@@ -55,8 +70,11 @@ module example-ietf-alto-alg {
         leaf l3-unicast-topo {
           type leafref {
             path "/alto:alto/alto:alto-server/alto:data-source"
-               + "/alto:source-id";
+               + "/alto-ds:yang-datastore-source-params"
+               + "/alto-ds:target-paths/alto-ds:name";
           }
+          must 'deref(.)/../..'
+             + '/alto-ds:datastore = "ds:operational"';
           mandatory true;
           description
             "The data source to an IETF layer 3 unicast topology.";

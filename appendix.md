@@ -11,7 +11,15 @@ model can be augmented:
 
 ## Example Module for Extended Server Discovery Manners {#example-server-disc}
 
-TBD.
+The base data model defined by ietf-alto.yang only includes a reverse DNS based
+server discovery manner. The following example module demonstrates how
+additional server discovery manners can be augmented into the base data model.
+
+The case `internet-routing-registry` allows the ALTO server to update the
+server URI to the attribute of the corresponding aut-num class in IRR.
+
+The case `peeringdb` allows the ALTO server to update the server URI to the org
+object of the organization record in PeeringDB.
 
 ~~~
 module example-ietf-alto-server-discovery {
@@ -41,8 +49,8 @@ module example-ietf-alto-server-discovery {
      WG List:  <alto@ietf.org>";
 
   description
-    "This YANG module defines all the configured and operational
-     parameters of the administrated ALTO server instance.
+    "This YANG module defines an example of the extended ALTO server
+     discovery manners for IRR and PeeringDB.
 
      Copyright (c) 2022 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -58,7 +66,7 @@ module example-ietf-alto-server-discovery {
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
      for full legal notices.";
 
-  revision "2023-02-07" {
+  revision "2023-02-10" {
     description
       "Initial Version.";
     reference
@@ -145,7 +153,114 @@ module example-ietf-alto-server-discovery {
 
 ## Example Module for Extended Client Authentication Approaches {#example-client-auth}
 
-TBD.
+The base data model defined by ietf-alto.yang does not include any choice cases
+for specific client authentication approaches. The following example module
+demonstrates how additional client authentication approaches can be augmented
+into the base data model.
+
+The case `http-basic` includes the `username` and `password` which are required
+by the ALTO server to authenticate an ALTO client using the HTTP basic
+authentication.
+
+The case `oauth2` includes the URI to a third-party OAuth 2.0 based
+authorization server that the ALTO server can redirect to for the client
+authentication.
+
+~~~
+module example-ietf-alto-alg {
+  yang-version 1.1;
+
+  namespace "urn:example:ietf-alto-auth";
+  prefix "alto-auth";
+
+  import ietf-inet-types {
+    prefix "inet";
+    reference
+      "RFC 6991: Common YANG Data Types";
+  }
+
+  import ietf-alto {
+    prefix alto;
+    reference
+      "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
+       Protocol.";
+  }
+
+  organization
+    "IETF ALTO Working Group";
+
+  contact
+    "WG Web:   <https://datatracker.ietf.org/wg/alto/about/>
+     WG List:  <alto@ietf.org>";
+
+  description
+    "This YANG module defines an example of the extended ALTO client
+     authentication approaches for the role-based access control.
+
+     Copyright (c) 2022 IETF Trust and the persons identified as
+     authors of the code.  All rights reserved.
+
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject to
+     the license terms contained in, the Revised BSD License set
+     forth in Section 4.c of the IETF Trust's Legal Provisions
+     Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     This version of this YANG module is part of RFC XXXX
+     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+     for full legal notices.";
+
+  revision "2023-02-10" {
+    description
+      "Initial Version.";
+    reference
+      "RFC XXXX: A YANG Data Model for Operations, Administration,
+       and Maintenance of ALTO Protocol.";
+  }
+
+  augment "/alto:alto/alto:alto-server/alto:auth-client"
+        + "/alto:authentication" {
+    description
+      "Example of extended ALTO client authentication approaches.";
+    case http-basic {
+      description
+        "Example of the HTTP basic authentication.";
+      container basic-auth {
+        description
+          "Parameters for the HTTP basic authentication.";
+        leaf username {
+          type string;
+          mandatory true;
+          description
+            "username of the HTTP basic authentication.";
+        }
+        leaf password {
+          type string;
+          mandatory true;
+          description
+            "password of the HTTP basic authentication.";
+        }
+      }
+    }
+    case oauth2 {
+      description
+        "Example of authentication by a third-party OAuth 2.0
+         server.";
+      container oauth2 {
+        description
+          "Parameters for authentication by a third-party OAuth 2.0
+           server.";
+        leaf oauth2-server {
+          type inet:uri;
+          description
+            "The URI to the authorization server.";
+        }
+      }
+    }
+  }
+}
+~~~
 
 ## Example Module for Extended Data Sources {#example-data-source}
 
@@ -154,21 +269,12 @@ for specific data sources. The following example module demonstrates how a
 implementation-specific data source can be augmented into the base data model.
 
 The `yang-datastore` case is used to import the YANG data from a YANG
-model-driven data store.
+model-driven datastore. It includes:
 
-<!--
-It supports two types of endpoints: local and remote.
-
-- For a local endpoint, the YANG data is located the data from the same
-  YANG model-driven data store supplying the current ALTO O&M data model.
-  Therefore, the ALTO data source listener retrieves the data using the
-  internal API provided by the data store.
-- For a remote endpoint, the ALTO data source listener establishes an HTTP
-  connection to the remote RESTCONF server, and retrieve the data using the
-  RESTCONF API.
-
-The `source-path` is used to specify the XPath of the data source node.
--->
+- `datastore` to indicate which datastore is fetched.
+- `target-paths` to specify the list of nodes or subtrees in the datastore.
+- `protocol` to indicate which protocol is used to access the datastore. Either
+  `restconf` or `netconf` can be used.
 
 ~~~
 module example-ietf-alto-data-source {
@@ -218,8 +324,8 @@ module example-ietf-alto-data-source {
      WG List:  <alto@ietf.org>";
 
   description
-    "This YANG module defines all the configured and operational
-     parameters of the administrated ALTO server instance.
+    "This YANG module defines an example of the extended ALTO data
+     source for YANG-based datastore.
 
      Copyright (c) 2022 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -235,7 +341,7 @@ module example-ietf-alto-data-source {
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
      for full legal notices.";
 
-  revision "2023-02-07" {
+  revision "2023-02-10" {
     description
       "Initial Version.";
     reference
@@ -334,13 +440,12 @@ layer 3 unicast topology into a network map.
 ~~~
 module: example-ietf-alto-alg
 
-  augment /alto:alto-server/alto:resource/alto:resource-params
-            /alto:networkmap/alto:alto-networkmap-params
-            /alto:algorithm:
+  augment /alto:alto/alto:alto-server/alto:resource
+            /alto:resource-params/alto:networkmap
+            /alto:alto-networkmap-params/alto:algorithm:
     +--:(l3-unicast-cluster)
        +--rw l3-unicast-cluster-algorithm
-          +--rw l3-unicast-topo
-          |       -> /alto:alto-server/data-source/source-id
+          +--rw l3-unicast-topo    leafref
           +--rw depth?             uint32
 ~~~
 
@@ -348,10 +453,11 @@ This example defines a creation algorithm called `l3-unicast-cluster-algorithm`
 for the network map resource. It takes two algorithm-specific parameters:
 
 l3-unicast-topo
-: This parameter refers to the source id of a data source node subscribed in the
-  `data-source` list (See [](#data-source)). The corresponding data source is
-  assumed to be a `yang-datastore` data source (See [](#example-data-source)) for an
-  IETF layer 3 unicast topology defined in {{RFC8346}}. The algorithm uses the
+: This parameter refers to the target path name of an operational
+  `yang-datastore` data source node (See [](#example-data-source)) subscribed
+  in the `data-source` list (See [](#data-source)). The referenced target path
+  in the corresponding `yang-datastore` data source is assumed for an IETF
+  layer 3 unicast topology defined in {{RFC8346}}. The algorithm uses the
   topology data from this data source to compute the ALTO network map resource.
 
 depth
@@ -366,23 +472,82 @@ The update of the reference data source depends on the used `update-policy` (See
 
 ~~~
 module example-ietf-alto-alg {
+  yang-version 1.1;
 
   namespace "urn:example:ietf-alto-alg";
   prefix "alto-alg";
 
   import ietf-alto {
-    prefix "alto";
+    prefix alto;
+    reference
+      "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
+       Protocol.";
   }
 
-  augment "/alto:alto-server/alto:resource/alto:resource-params"
-        + "/alto:networkmap/alto:alto-networkmap-params"
-        + "/alto:algorithm" {
+  import ietf-datastores {
+    prefix ds;
+    reference
+      "RFC8342: Network Management Datastore Architecture (NMDA)";
+  }
+
+  import example-ietf-alto-data-source {
+    prefix "alto-ds";
+  }
+
+  organization
+    "IETF ALTO Working Group";
+
+  contact
+    "WG Web:   <https://datatracker.ietf.org/wg/alto/about/>
+     WG List:  <alto@ietf.org>";
+
+  description
+    "This YANG module defines an example of the extended ALTO
+     information resource creation algorithm for translating an L3
+     unicast topology of I2RS to an ALTO network map.
+
+     Copyright (c) 2022 IETF Trust and the persons identified as
+     authors of the code.  All rights reserved.
+
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject to
+     the license terms contained in, the Revised BSD License set
+     forth in Section 4.c of the IETF Trust's Legal Provisions
+     Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     This version of this YANG module is part of RFC XXXX
+     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+     for full legal notices.";
+
+  revision "2023-02-10" {
+    description
+      "Initial Version.";
+    reference
+      "RFC XXXX: A YANG Data Model for Operations, Administration,
+       and Maintenance of ALTO Protocol.";
+  }
+
+  augment "/alto:alto/alto:alto-server/alto:resource"
+        + "/alto:resource-params/alto:networkmap"
+        + "/alto:alto-networkmap-params/alto:algorithm" {
+    description
+      "Example of network map creation algorithm.";
     case l3-unicast-cluster {
+      description
+        "Example algorithm translating an L3 unicast topology of I2RS
+         to an ALTO network map";
       container l3-unicast-cluster-algorithm {
+        description
+          "Parameters for l3-unicast-cluster algorithm";
         leaf l3-unicast-topo {
           type leafref {
-            path "/alto:alto-server/data-source/source-id";
+            path "/alto:alto/alto:alto-server/alto:data-source"
+               + "/alto-ds:yang-datastore-source-params"
+               + "/alto-ds:target-paths/alto-ds:name";
           }
+          must 'deref(.)/../..'
+             + '/alto-ds:datastore = "ds:operational"';
           mandatory true;
           description
             "The data source to an IETF layer 3 unicast topology.";
@@ -396,6 +561,7 @@ module example-ietf-alto-alg {
     }
   }
 }
+
 ~~~
 
 <!-- End of sections -->

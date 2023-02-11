@@ -25,8 +25,8 @@ module ietf-alto-stats {
      WG List:  <alto@ietf.org>";
 
   description
-    "This YANG module defines all the configured and operational
-     parameters of the administrated ALTO server instance.
+    "This YANG module defines all the statistics of the administrated
+     ALTO server instance.
 
      Copyright (c) 2022 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -42,7 +42,7 @@ module ietf-alto-stats {
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
      for full legal notices.";
 
-  revision "2023-02-07" {
+  revision "2023-02-10" {
     description
       "Initial Version.";
     reference

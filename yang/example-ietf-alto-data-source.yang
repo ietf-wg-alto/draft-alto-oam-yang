@@ -45,8 +45,8 @@ module example-ietf-alto-data-source {
      WG List:  <alto@ietf.org>";
 
   description
-    "This YANG module defines all the configured and operational
-     parameters of the administrated ALTO server instance.
+    "This YANG module defines an example of the extended ALTO data
+     source for YANG-based datastore.
 
      Copyright (c) 2022 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -62,7 +62,7 @@ module example-ietf-alto-data-source {
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
      for full legal notices.";
 
-  revision "2023-02-07" {
+  revision "2023-02-10" {
     description
       "Initial Version.";
     reference

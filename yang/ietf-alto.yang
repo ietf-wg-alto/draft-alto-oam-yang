@@ -59,7 +59,7 @@ module ietf-alto {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision "2023-02-07" {
+  revision "2023-02-10" {
     description
       "Initial Version.";
     reference

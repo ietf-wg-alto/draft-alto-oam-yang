@@ -79,10 +79,13 @@ normative:
   RFC8896:
 informative:
   RFC2622:
+  RFC6241:
   RFC7921:
   RFC7971:
+  RFC8341:
   RFC8342:
   RFC8346:
+  RFC8040:
   RFC8641:
   RFC9240:
   RFC9241:
