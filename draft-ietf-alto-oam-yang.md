@@ -49,6 +49,7 @@ author:
     name: Kai Gao
     street: "No.24 South Section 1, Yihuan Road"
     city: Chengdu
+    region: Sichuan
     code: 610000
     country: China
     org: Sichuan University
@@ -62,6 +63,16 @@ author:
     city: Darmstadt
     code: 64295
     country: Germany
+ -
+    ins: Q. Ma
+    name: Qiufang Ma
+    street: "101 Software Avenue, Yuhua District"
+    city: Nanjing
+    region: Jiangsu
+    code: 210012
+    country: China
+    org: Huawei
+    email: maqiufang1@huawei.com
 
 normative:
   RFC2119:
@@ -99,11 +110,11 @@ informative:
 
 --- abstract
 
-This document defines a YANG data model for Operations, Administration,
-and Maintenance (OAM) & Management of Application-Layer Traffic Optimization
-(ALTO) Protocol. The operator can use the data model to create and update ALTO
-information resources, manage the access control, configure server-to-server
-communication and server discovery, and collect statistical data.
+This document defines a YANG data model for Operations, Administration, and
+Maintenance (OAM) & Management of Application-Layer Traffic Optimization (ALTO)
+Protocol. The operator can use the data model to create, update and remove ALTO
+information resources, manage the access control, configure server discovery,
+and collect statistical data.
 
 --- middle
 

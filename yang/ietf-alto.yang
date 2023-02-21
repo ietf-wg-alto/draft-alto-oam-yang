@@ -310,16 +310,18 @@ module ietf-alto {
 
   feature http-listen {
     description
-      "The 'http-listen' feature is only used for test depolyment.
+      "The 'http-listen' feature is only used for test deployment.
        According to Sec 8.3.5 of RFC 7285, it shouldn't be used in
-       the production depolyment.";
+       the production deployment.";
+    reference
+      "Section 8.3.5 of RFC 7285.";
   }
 
   feature xdom-disc {
     description
       "Support cross-domain server discovery.";
     reference
-      "RFC8686: Application-Layer Traffic Optimization (ALTO)
+      "RFC 8686: Application-Layer Traffic Optimization (ALTO)
        Cross-Domain Server Discovery";
   }
 
@@ -382,7 +384,7 @@ module ietf-alto {
 
   grouping filter-costmap-cap {
     description
-      "This grouping defines data model for
+      "This grouping defines a data model for
        FilteredCostMapCapabilities.";
     reference
       "Sec 11.3.2.4 of RFC 7285.";
@@ -471,7 +473,7 @@ module ietf-alto {
         "Information resource creation algorithm to be augmented.";
     }
     description
-      "This grouping defines base data model for information
+      "This grouping defines the base data model for information
        resource creation algorithm.";
   }
 
@@ -573,9 +575,9 @@ module ietf-alto {
 
   grouping alto-server-discovery-grouping {
     description
-      "Grouping for configuration of how to set up server discovery
-       for clients or other ALTO servers to discovery the URI of this
-       ALTO server.";
+      "Grouping for the configuration of how to set up server
+       discovery for clients or other ALTO servers to discovery the
+       URI of this ALTO server.";
     choice server-discovery-manner {
       description
         "Selects among available server discovery manners";

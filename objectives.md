@@ -2,14 +2,12 @@
 
 ## Scope of Data Model for ALTO O&M
 
-What is in the scope of this document?
+Generally, the following items are in the scope of this document:
 
-- Data model for deploy an ALTO server/client.
-- Data model for operate and manage a running ALTO server/client.
-- Data model for functionality/capability configuration for ALTO services.
+- Data model for deploying an ALTO server/client.
+- Data model for operating and managing a running ALTO server/client.
+- Data model for functionality/capability configuration of ALTO services.
 - Data model for monitoring ALTO-related performance metrics.
-
-What is not in the scope of this document?
 
 This document does not define any data model related to specific
 implementation, including:
@@ -43,45 +41,6 @@ data model provided by this document satisfies basic requirements listed in
 
 R8: As the ALTO protocol is extensible, the data model for ALTO O&M should
 allow for augmentation to support potential future extensions.
-
-<!--
-To satisfy all the basic requirements and consider the potential requirements
-for future extensions, this document focuses on the design objectives for the
-YANG data model as follows:
-
-- The data model should support configuration for ALTO server setup (e.g.,
-  caching policy at information resource level, metadata for server discovery).
-- The data model should provide configurable data model for administrators to
-  create, update and remove ALTO information resources.
-    - The data model should support different types of data source
-      provisioning.
-    - The data model should allow developers to augment new APIs for ALTO
-      information resource generation algorithms.
-    - The data model should be extensible for new ALTO information resources.
-- The data model should collect statistics information of the
-  requests/responses for each ALTO information resource.
-- The data model should support security policy configuration at the
-  information resource level.
--->
-
-
-<!--
-- The data model should provide intent-based interfaces for administrators to
-  create, update and remove ALTO information resources.
-  - The data model should be extensible for new ALTO information resources.
-  - The data model should allow developers to augment new APIs for ALTO
-    information resource generation.
-- The data model should support configuration for ALTO server discovery.
-- The data model should support access control at the information resource level.
-- The data model should collect statistics information of the requests to each
-  ALTO information resource.
--->
-
-<!--
-NOTE: The data model supporting configuration for the ALTO client and the
-communication between the administrated ALTO server and other ALTO servers will
-be considered in a future version of the document.
--->
 
 ## Overview of ALTO O&M Data Model for Reference ALTO Architecture
 
