@@ -1,14 +1,16 @@
-# Terminology
+# Acronyms and Abbreviations
 
 This document uses the following acronyms:
 
-- OAM - Operations, Administration, and Maintainance
-- O&M - OAM and Management
+OAM:
+  : Operations, Administration, and Maintenance (Section 3 of {{?RFC6291}})
+
+O&M:
+  : OAM and Management (Section 3 of {{?RFC6291}})
 
 ## Tree Diagrams
 
-A simplified graphical representation of the data model is used in this
-document. The meaning of the symbols in these diagrams is defined in
+The meaning of the symbols in the tree diagrams is defined in
 {{RFC8340}}.
 
 ## Prefixes in Data Node Names
@@ -28,24 +30,23 @@ prefix associated with the corresponding YANG module, as shown in [](#tbl-yang-p
 | http | ietf-http-server | {{I-D.ietf-netconf-http-client-server}}
 {: #tbl-yang-prefixes title="Prefixes and corresponding YANG modules"}
 
-## Placeholders in reference Statement
+## Placeholders in Reference Statements
 
 Note to the RFC Editor: This section is to be removed prior to publication.
 
-This draft contains placeholder values that need to be replaced with finalized
+This document contains placeholder values that need to be replaced with finalized
 values at the time of publication.  This note summarizes all of the
 substitutions that are needed.  No other RFC Editor instructions are specified
 elsewhere in this document.
 
-Artwork in this document contains shorthand references to drafts in progress.
 Please apply the following replacements:
 
-- DDDD --> the assigned RFC value for draft-ietf-netconf-tcp-client-server
-- FFFF --> the assigned RFC value for draft-ietf-netconf-tls-client-server
-- GGGG --> the assigned RFC value for draft-ietf-netconf-http-client-server
-- HHHH --> the assigned RFC value for draft-ietf-netconf-netconf-client-server
-- IIII --> the assigned RFC value for draft-ietf-netconf-restconf-client-server
-- XXXX --> the assigned RFC value for this draft
-- YYYY --> the assigned RFC value for draft-ietf-alto-performance-metrics
+- DDDD --> the assigned RFC number for {{I-D.ietf-netconf-tcp-client-server}}
+- FFFF --> the assigned RFC number for {{I-D.ietf-netconf-tls-client-server}}
+- GGGG --> the assigned RFC number for {{I-D.ietf-netconf-http-client-server}}
+- HHHH --> the assigned RFC number for {{I-D.ietf-netconf-netconf-client-server}}
+- IIII --> the assigned RFC number for {{I-D.ietf-netconf-restconf-client-server}}
+- XXXX --> the assigned RFC number for this draft
+- YYYY --> the assigned RFC number for {{I-D.ietf-alto-performance-metrics}}
 
 <!-- End of sections -->
