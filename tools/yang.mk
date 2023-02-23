@@ -11,12 +11,16 @@ else
 YANG_PATH="$(YANGDIR):$(STDYANGDIR)/standard/ietf/RFC/:$(STDYANGDIR)/experimental/ietf-extracted-YANG-modules"
 endif
 YANG=$(wildcard $(YANGDIR)/*.yang)
+STDYANG=$(wildcard $(YANGDIR)/ietf-*.yang)
 TXT=$(patsubst $(YANGDIR)/%.yang,%-diagram.txt,$(YANG))
 
 .PHONY: yang-lint yang-gen-diagram yang-clean
 
-yang-lint: $(YANG) $(STDYANGDIR)
-	pyang -V --lint -p $(YANG_PATH) $(YANG)
+pyang-lint: $(YANG) $(STDYANGDIR)
+	pyang -V --ietf -p $(YANG_PATH) $(YANG)
+
+yang-lint: $(STDYANG) $(STDYANGDIR)
+	yanglint --verbose -p $(YANGDIR) -p $(STDYANGDIR)/standard/ietf/RFC/ -p $(STDYANGDIR)/experimental/ietf-extracted-YANG-modules $(STDYANG) -i
 
 yang-gen-diagram: yang-lint $(TXT)
 

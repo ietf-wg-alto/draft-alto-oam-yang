@@ -46,9 +46,13 @@ module: ietf-alto
         |  +--rw (authentication)?
         |     +--:(http)
         |     |  +--rw http-auth-client
+        |     |          {http-listen,http:client-auth-supported,
+        |     |           http:local-users-supported}?
         |     |     +--rw user-id    leafref
         |     +--:(https)
         |        +--rw https-auth-client
+        |                {http:client-auth-supported,
+        |                 http:local-users-supported}?
         |           +--rw user-id    leafref
         +--rw role* [role-name]
         |  +--rw role-name    role-name
@@ -461,9 +465,13 @@ module: ietf-alto
         |  +--rw (authentication)?
         |     +--:(http)
         |     |  +--rw http-auth-client
+        |     |          {http-listen,http:client-auth-supported,
+        |     |           http:local-users-supported}?
         |     |     +--rw user-id    leafref
         |     +--:(https)
         |        +--rw https-auth-client
+        |                {http:client-auth-supported,
+        |                 http:local-users-supported}?
         |           +--rw user-id    leafref
         +--rw role* [role-name]
         |  +--rw role-name    role-name

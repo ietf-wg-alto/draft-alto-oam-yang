@@ -59,7 +59,7 @@ module ietf-alto {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision "2023-02-10" {
+  revision "2023-02-23" {
     description
       "Initial Version.";
     reference
@@ -792,6 +792,9 @@ module ietf-alto {
             description
               "The client is authenticated by the HTTP server.";
             container http-auth-client {
+              if-feature "http-listen";
+              if-feature "http:client-auth-supported";
+              if-feature "http:local-users-supported";
               description
                 "Parameters of the authenticated HTTP client.";
               leaf user-id {
@@ -812,6 +815,8 @@ module ietf-alto {
             description
               "The client is authenticated by the HTTP server.";
             container https-auth-client {
+              if-feature "http:client-auth-supported";
+              if-feature "http:local-users-supported";
               description
                 "Parameters of the authenticated HTTPS client.";
               leaf user-id {
