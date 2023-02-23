@@ -3,7 +3,7 @@
 This document defines a YANG data model for the Operations, Administration, and
 Maintenance (OAM) & Management of Application-Layer Traffic Optimization (ALTO)
 Protocol. The basic purpose of this YANG data model is discussed in Section 16
-of {{RFC7285}}. The operator can use the data model to setup the ALTO server,
+of {{RFC7285}}. The operator can use the data model to set up the ALTO server,
 create, update and remove ALTO information resources, manage the access
 control, configure server discovery, and collect statistical data.
 
