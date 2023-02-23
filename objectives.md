@@ -51,8 +51,8 @@ to implement `ietf-alto.yang` (see [](#alto-model)). The performance monitor
 and logging and fault manager need to implement `ietf-alto-stats.yang` (see
 [](#alto-stats-model)).
 
-The data broker and algorithm plugins are not in the scope of the data model
-defined in this document. But user specified YANG modules can be applied to
+The data broker and algorithm plugins are not in the scope of the data models
+defined in this document. But user-specified YANG modules can be applied to
 different algorithm plugins by augmenting the data model defined in this
 document (see [](#alto-ext-model)).
 

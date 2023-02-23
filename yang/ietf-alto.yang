@@ -275,7 +275,7 @@ module ietf-alto {
 
   // Identities for cost sources
 
-  identity nomial {
+  identity nominal {
     if-feature "performance-metrics";
     base cost-source;
     description

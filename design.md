@@ -209,7 +209,7 @@ using different mechanisms. The initial module only defines the `reverse-dns`
 case that is used to configure DNS NAPTR records for ALTO server discovery,
 which is sugested by {{RFC7286}} and {{RFC8686}}. It configures a set of
 endpoints that can be served by this ALTO server. The node
-contains two leaf lists. The `static` list contains a list of manual configured
+contains two leaf lists. The `static` list contains a list of manually configured
 endpoints. The `dynamic` list points to a list of data sources to retrieve the
 endpoints dynamically. As suggested by {{RFC7286}} and {{RFC8686}}, the IP
 prefixes of the endpoints configured by both `static` and `dynamic` lists will
