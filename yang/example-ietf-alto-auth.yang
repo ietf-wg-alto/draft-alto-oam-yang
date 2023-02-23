@@ -54,26 +54,6 @@ module example-ietf-alto-auth {
         + "/alto:authentication" {
     description
       "Example of extended ALTO client authentication approaches.";
-    case http-basic {
-      description
-        "Example of the HTTP basic authentication.";
-      container basic-auth {
-        description
-          "Parameters for the HTTP basic authentication.";
-        leaf username {
-          type string;
-          mandatory true;
-          description
-            "username of the HTTP basic authentication.";
-        }
-        leaf password {
-          type string;
-          mandatory true;
-          description
-            "password of the HTTP basic authentication.";
-        }
-      }
-    }
     case oauth2 {
       description
         "Example of authentication by a third-party OAuth 2.0

@@ -42,13 +42,18 @@ module: ietf-alto
         |  +--rw meta-key      string
         |  +--rw meta-value    string
         +--rw auth-client* [client-id]
-        |  +--rw client-id    string
+        |  +--rw client-id                  string
         |  +--rw (authentication)?
+        |     +--:(http)
+        |     |  +--rw http-auth-client
+        |     |     +--rw user-id    leafref
+        |     +--:(https)
+        |        +--rw https-auth-client
+        |           +--rw user-id    leafref
         +--rw role* [role-name]
         |  +--rw role-name    role-name
-        |  +--rw client* [client-id]
-        |     +--rw client-id
-        |             -> /alto/alto-server/auth-client/client-id
+        |  +--rw client*
+        |          -> /alto/alto-server/auth-client/client-id
         +--rw data-source* [source-id]
         |  +--rw source-id                    string
         |  +--rw source-type                  identityref
@@ -164,7 +169,7 @@ across HTTP layer, TLS layer and TCP layer.
 ~~~
   grouping alto-server-grouping:
     +-- base-uri?   inet:uri
-  grouping alto-server-listen-stack-grouping
+  grouping alto-server-listen-stack-grouping:
     +-- (transport)
        +--:(http) {http-listen}?
        |  +-- http
@@ -173,15 +178,17 @@ across HTTP layer, TLS layer and TCP layer.
        |     +-- http-server-parameters
        |     |  +---u http:http-server-grouping
        |     +-- alto-server-parameters
+       |        +---u alto-server-grouping
        +--:(https)
           +-- https
              +-- tcp-server-parameters
-                +---u tcp:tcp-server-grouping
-                +-- tls-server-parameters
-                |  +---u tls:tls-server-grouping
-                +-- http-server-parameters
-                |  +---u http:http-server-grouping
-                +-- alto-server-parameters
+             |  +---u tcp:tcp-server-grouping
+             +-- tls-server-parameters
+             |  +---u tls:tls-server-grouping
+             +-- http-server-parameters
+             |  +---u http:http-server-grouping
+             +-- alto-server-parameters
+                +---u alto-server-grouping
 ~~~
 
 #### ALTO Server Discovery Setup
@@ -450,22 +457,28 @@ module: ietf-alto
      +--rw alto-server
         ...
         +--rw auth-client* [client-id]
-        |  +--rw client-id    string
+        |  +--rw client-id                  string
         |  +--rw (authentication)?
+        |     +--:(http)
+        |     |  +--rw http-auth-client
+        |     |     +--rw user-id    leafref
+        |     +--:(https)
+        |        +--rw https-auth-client
+        |           +--rw user-id    leafref
         +--rw role* [role-name]
         |  +--rw role-name    role-name
-        |  +--rw client* [client-id]
-        |     +--rw client-id
-        |             -> /alto/alto-server/auth-client/client-id
+        |  +--rw client*
+        |          -> /alto/alto-server/auth-client/client-id
         ...
 ~~~
 
 It configures the role-based access control:
 
 - `auth-client` declares a list of ALTO clients that can be authenticated by
-  the internal or external authorization server. This basic model does not
-  define any authentication approach, but the operators or future documents can
-  augment the `authentication` choice for different authentication mechanisms.
+  the internal or external authorization server. This basic model only includes
+  authentication approach directly provided by the HTTP server, but the
+  operators or future documents can augment the `authentication` choice for
+  different authentication mechanisms.
 - `role` defines a list of roles for access control. Each role contains a list
   of authenticated ALTO clients. Each client can be assigned to multiple roles.
   The `role-name` can be referenced by the `accepted-role` list of a

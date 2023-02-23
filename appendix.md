@@ -153,21 +153,19 @@ module example-ietf-alto-server-discovery {
 
 ## Example Module for Extended Client Authentication Approaches {#example-client-auth}
 
-The base data model defined by ietf-alto.yang does not include any choice cases
-for specific client authentication approaches. The following example module
-demonstrates how additional client authentication approaches can be augmented
-into the base data model.
+The base data model defined by ietf-alto.yang only includes the client
+authentication approaches directly provided by the HTTP server. However, a real
+implementation may authenticate clients in different ways, e.g., it may
+delegate the authentication to a third-party OAuth 2.0 server. The following
+example module demonstrates how additional client authentication approaches can
+be augmented into the base data model.
 
-The case `http-basic` includes the `username` and `password` which are required
-by the ALTO server to authenticate an ALTO client using the HTTP basic
-authentication.
-
-The case `oauth2` includes the URI to a third-party OAuth 2.0 based
-authorization server that the ALTO server can redirect to for the client
+In this example, the case `oauth2` includes the URI to a third-party OAuth 2.0
+based authorization server that the ALTO server can redirect to for the client
 authentication.
 
 ~~~
-module example-ietf-alto-alg {
+module example-ietf-alto-auth {
   yang-version 1.1;
 
   namespace "urn:example:ietf-alto-auth";
@@ -223,26 +221,6 @@ module example-ietf-alto-alg {
         + "/alto:authentication" {
     description
       "Example of extended ALTO client authentication approaches.";
-    case http-basic {
-      description
-        "Example of the HTTP basic authentication.";
-      container basic-auth {
-        description
-          "Parameters for the HTTP basic authentication.";
-        leaf username {
-          type string;
-          mandatory true;
-          description
-            "username of the HTTP basic authentication.";
-        }
-        leaf password {
-          type string;
-          mandatory true;
-          description
-            "password of the HTTP basic authentication.";
-        }
-      }
-    }
     case oauth2 {
       description
         "Example of authentication by a third-party OAuth 2.0
@@ -561,7 +539,6 @@ module example-ietf-alto-alg {
     }
   }
 }
-
 ~~~
 
 <!-- End of sections -->
