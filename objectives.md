@@ -1,6 +1,6 @@
 # Design Scope and Requirements {#sec-req}
 
-## Scope of Data Model for ALTO O&M
+## Scope of Data Model for ALTO O&M {#scope}
 
 Generally, the following items are in the scope of this document:
 
@@ -37,18 +37,18 @@ data model provided by this document satisfies basic requirements listed in
 | R7: The data model should provide performance monitoring for ALTO-specific metrics.                 | Section 16.2.5 of {{RFC7285}}, Section 3.4 of {{RFC7971}} |
 {: #TableReq title="Basic Requirements of Data Model for ALTO O&M."}
 
-## Additional Requirements for Extensibility
+## Additional Requirements for Extensibility {#extra-req}
 
 R8: As the ALTO protocol is extensible, the data model for ALTO O&M should
 allow for augmentation to support potential future extensions.
 
 ## Overview of ALTO O&M Data Model for Reference ALTO Architecture
 
-[](#alto-ref-arch) shows a reference architecture for ALTO server
-implementation and YANG modules that server components implement. The server
-manager, information resource manager and data source listeners need to
-implement `ietf-alto.yang` (see [](#alto-model)). The performance monitor and
-logging and fault manager need to implement `ietf-alto-stats.yang` (see
+[](#alto-ref-arch) shows a reference architecture for the ALTO server
+implementation and YANG modules that these server components need to implement.
+The server manager, information resource manager and data source listeners need
+to implement `ietf-alto.yang` (see [](#alto-model)). The performance monitor
+and logging and fault manager need to implement `ietf-alto-stats.yang` (see
 [](#alto-stats-model)).
 
 The data broker and algorithm plugins are not in the scope of the data model

@@ -208,13 +208,14 @@ The `server-discovery` node provides configuration for ALTO server discovery
 using different mechanisms. The initial module only defines the `reverse-dns`
 case that is used to configure DNS NAPTR records for ALTO server discovery,
 which is sugested by {{RFC7286}} and {{RFC8686}}. It configures a set of
-endpoints in the scope of the network domain serving this ALTO server. The node
+endpoints that can be served by this ALTO server. The node
 contains two leaf lists. The `static` list contains a list of manual configured
 endpoints. The `dynamic` list points to a list of data sources to retrieve the
 endpoints dynamically. As suggested by {{RFC7286}} and {{RFC8686}}, the IP
-prefixes in the scope will be translated into DNS NAPTR resource records for
-server discovery. The `server-discovery-manner` choice can be augmented by the
-future modules to support other mechanisms.
+prefixes of the endpoints configured by both `static` and `dynamic` lists will
+be translated into DNS NAPTR resource records for server discovery. The
+`server-discovery-manner` choice can be augmented by the future modules to
+support other mechanisms.
 
 ### Data Model for Logging Management
 
@@ -366,10 +367,10 @@ sources subscribed by the `data-source` entries (See [](#data-source)). An
 example of extending the `algorithm` node for a specific type of `resource` is
 included in [](#example-alg).
 
-The developer cannot customize the creation algorithm of the `ird` resource. The
-default `ird` resource will be created automatically based on all the added
-`resource` entries. The delegated `ird` resource will be created as a static
-ALTO information resource (See Section 9.2.4 of {{RFC7285}}).
+The developer does not have to customize the creation algorithm of the `ird`
+resource. The default `ird` resource will be created automatically based on all
+the added `resource` entries. The delegated `ird` resource will be created as a
+static ALTO information resource (See Section 9.2.4 of {{RFC7285}}).
 
 ~~~
 module: ietf-alto
@@ -527,24 +528,29 @@ To satisfy R7 in [](#requirements), the YANG data module defined in this
 document also contains statistics for ALTO-specific performance metrics.
 
 More specifically, this data model contains the following measurement
-information suggested by {{RFC7971}}:
+information of "system and service performance" suggested by {{RFC7285}} and
+{{RFC7971}}:
 
-- Measurement of impact
-    - Total amount and distribution of traffic
-    - Application performance
-- System and service performance
-    - Requests and responses for each information resource
-    - CPU and memory utilization
-    - ALTO map updates
-    - Number of PIDs
-    - ALTO map sizes
+- Requests and responses for each information resource
+- CPU and memory utilization
+- ALTO map updates
+- Number of PIDs
+- ALTO map sizes
 
-Besides the measurement information suggested by {{RFC7971}}, this data model
-also contains useful measurement information for other ALTO extensions:
+Besides the above measurement information suggested by {{RFC7285}} and {{RFC7971}},
+this data model also contains useful measurement information for other ALTO
+extensions:
 
 - `num-map-entry` and `num-base-obj` provides measurement for number of generic
   ALTO entities (for {{RFC9240}} and {{RFC9241}})
 - `num-upd-sess` and `num-event-*` provides statistics for update sessions and
   events (for {{RFC8189}})
+
+This data model only focuses on the performance metrics that can be directly
+measured at the ALTO server. The following metrics for "measurement of the
+impact" suggested by {{RFC7971}} are not contained by this data model:
+
+- Total amount and distribution of traffic
+- Application performance
 
 <!-- End of sections -->

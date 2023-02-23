@@ -112,9 +112,9 @@ informative:
 
 This document defines a YANG data model for Operations, Administration, and
 Maintenance (OAM) & Management of Application-Layer Traffic Optimization (ALTO)
-Protocol. The operator can use the data model to create, update and remove ALTO
-information resources, manage the access control, configure server discovery,
-and collect statistical data.
+Protocol. The operator can use the data model to setup the ALTO server, create,
+update and remove ALTO information resources, manage the access control,
+configure server discovery, and collect statistical data.
 
 --- middle
 
@@ -139,14 +139,14 @@ See details: https://github.com/cabo/kramdown-rfc/issues/106
 ~~~ yang
 {::include yang/ietf-alto.yang}
 ~~~
-{: sourcecode-markers="true" sourcecode-name="ietf-alto@2022-07-11.yang"}
+{: sourcecode-markers="true" sourcecode-name="ietf-alto@2023-02-10.yang"}
 
 ## The ietf-alto-stats Module
 
 ~~~ yang
 {::include yang/ietf-alto-stats.yang}
 ~~~
-{: sourcecode-markers="true" sourcecode-name="ietf-alto-stats@2022-07-11.yang"}
+{: sourcecode-markers="true" sourcecode-name="ietf-alto-stats@2023-02-10.yang"}
 
 {::include others.md}
 
