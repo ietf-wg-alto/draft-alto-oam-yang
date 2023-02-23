@@ -2,12 +2,12 @@
 
 ## Scope of Data Model for ALTO O&M {#scope}
 
-Generally, the following items are in the scope of this document:
+The following items are in the scope of the data models specified in this document:
 
-- Data model for deploying an ALTO server/client.
-- Data model for operating and managing a running ALTO server/client.
-- Data model for functionality/capability configuration of ALTO services.
-- Data model for monitoring ALTO-related performance metrics.
+- Deploying an ALTO server/client.
+- Operating and managing an ALTO server/client.
+- Functionality/capability configuration of ALTO services.
+- Monitoring ALTO-related performance metrics.
 
 This document does not define any data model related to specific
 implementation, including:
