@@ -1,13 +1,13 @@
 ---
 docname: draft-ietf-alto-oam-yang-latest
-title: A Yang Data Model for OAM and Management of ALTO Protocol
+title: YANG Data Models for the Application-Layer Traffic Optimization (ALTO) Protocol
 abbrev: ALTO O&M YANG
 category: std
 
 ipr: trust200902
 area: Networks
 workgroup: ALTO WG
-keyword: ALTO, Internet-Draft
+keyword: Automation, Service Provisioning, Control, Operation
 
 stand_alone: yes
 pi:
@@ -110,9 +110,9 @@ informative:
 
 --- abstract
 
-This document defines a YANG data model for Operations, Administration, and
+This document defines YANG data models for Operations, Administration, and
 Maintenance (OAM) & Management of Application-Layer Traffic Optimization (ALTO)
-Protocol. The operator can use the data model to set up the ALTO server, create,
+Protocol. The operator can use these data models to set up an ALTO server, create,
 update and remove ALTO information resources, manage the access control,
 configure server discovery, and collect statistical data.
 
@@ -132,16 +132,16 @@ Simply put the YANG module section here and wait for a future update.
 See details: https://github.com/cabo/kramdown-rfc/issues/106
 -->
 
-# ALTO OAM YANG Module
+# ALTO OAM YANG Modules
 
-## The ietf-alto Module
+## The "ietf-alto" YANG Module
 
 ~~~ yang
 {::include yang/ietf-alto.yang}
 ~~~
 {: sourcecode-markers="true" sourcecode-name="ietf-alto@2023-02-23.yang"}
 
-## The ietf-alto-stats Module
+## The "ietf-alto-stats" YANG Module
 
 ~~~ yang
 {::include yang/ietf-alto-stats.yang}
