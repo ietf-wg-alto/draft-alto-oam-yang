@@ -1,8 +1,8 @@
-module example-ietf-alto-alg {
+module example-vendor-alto-alg {
   yang-version 1.1;
 
-  namespace "urn:example:ietf-alto-alg";
-  prefix "alto-alg";
+  namespace "https://example.com/ns/vendor-alto-alg";
+  prefix vendor-alto-alg;
 
   import ietf-alto {
     prefix alto;
@@ -17,42 +17,29 @@ module example-ietf-alto-alg {
       "RFC8342: Network Management Datastore Architecture (NMDA)";
   }
 
-  import example-ietf-alto-data-source {
-    prefix "alto-ds";
+  import example-vendor-alto-data-source {
+    prefix alto-ds;
   }
 
   organization
-    "IETF ALTO Working Group";
+    "Example, Inc.";
 
   contact
-    "WG Web:   <https://datatracker.ietf.org/wg/alto/about/>
-     WG List:  <alto@ietf.org>";
+    "Example, Inc.
+     Customer Service
+
+     E-mail: alto-oam-yang@example.com";
 
   description
-    "This YANG module defines an example of the extended ALTO
-     information resource creation algorithm for translating an L3
-     unicast topology of I2RS to an ALTO network map.
+    "This module contains a collection of vendor-specific cases of
+     information resource creation algorithms for ALTO.";
 
-     Copyright (c) 2022 IETF Trust and the persons identified as
-     authors of the code.  All rights reserved.
-
-     Redistribution and use in source and binary forms, with or
-     without modification, is permitted pursuant to, and subject to
-     the license terms contained in, the Revised BSD License set
-     forth in Section 4.c of the IETF Trust's Legal Provisions
-     Relating to IETF Documents
-     (https://trustee.ietf.org/license-info).
-
-     This version of this YANG module is part of RFC XXXX
-     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-     for full legal notices.";
-
-  revision "2023-02-10" {
+  revision 2023-02-28 {
     description
-      "Initial Version.";
+      "Version 1.0";
     reference
-      "RFC XXXX: A YANG Data Model for Operations, Administration,
-       and Maintenance of ALTO Protocol.";
+      "Vendor ALTO Information Resource Creation Algorithms: ALTO O&M
+       YANG Model.";
   }
 
   augment "/alto:alto/alto:alto-server/alto:resource"

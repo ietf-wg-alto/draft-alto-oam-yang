@@ -1,0 +1,62 @@
+module example-vendor-alto-auth {
+  yang-version 1.1;
+
+  namespace "https://example.com/ns/vendor-alto-auth";
+  prefix vendor-alto-auth;
+
+  import ietf-inet-types {
+    prefix inet;
+    reference
+      "RFC 6991: Common YANG Data Types";
+  }
+
+  import ietf-alto {
+    prefix alto;
+    reference
+      "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
+       Protocol.";
+  }
+
+  organization
+    "Example, Inc.";
+
+  contact
+    "Example, Inc.
+     Customer Service
+
+     E-mail: alto-oam-yang@example.com";
+
+  description
+    "This module contains a collection of vendor-specific cases of
+     client authentication approaches for ALTO.";
+
+  revision 2023-02-28 {
+    description
+      "Version 1.0";
+    reference
+      "Vendor ALTO Client Authentication Approaches: ALTO O&M YANG
+       Model.";
+  }
+
+  augment "/alto:alto/alto:alto-server/alto:auth-client"
+        + "/alto:authentication" {
+    description
+      "Example of extended ALTO client authentication approaches.";
+    case oauth2 {
+      description
+        "Example of authentication by a third-party OAuth 2.0
+         server.";
+      container oauth2 {
+        description
+          "Parameters for authentication by a third-party OAuth 2.0
+           server.";
+        leaf oauth2-server {
+          type inet:uri;
+          description
+            "The URI to the authorization server.";
+        }
+      }
+    }
+  }
+}
+

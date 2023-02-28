@@ -1,15 +1,13 @@
 module ietf-alto-stats {
   yang-version 1.1;
-  namespace
-    "urn:ietf:params:xml:ns:yang:ietf-alto-stats";
-  prefix "alto-stats";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-alto-stats";
+  prefix alto-stats;
 
   import ietf-yang-types {
-    prefix "yang";
+    prefix yang;
     reference
       "RFC 6991: Common YANG Data Types";
   }
-
   import ietf-alto {
     prefix alto;
     reference
@@ -19,11 +17,9 @@ module ietf-alto-stats {
 
   organization
     "IETF ALTO Working Group";
-
   contact
     "WG Web:   <https://datatracker.ietf.org/wg/alto/about/>
      WG List:  <alto@ietf.org>";
-
   description
     "This YANG module defines all the statistics of the administrated
      ALTO server instance.
@@ -42,7 +38,7 @@ module ietf-alto-stats {
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
      for full legal notices.";
 
-  revision "2023-02-23" {
+  revision 2023-02-23 {
     description
       "Initial Version.";
     reference

@@ -1,27 +1,23 @@
 module ietf-alto {
   yang-version 1.1;
-  namespace
-    "urn:ietf:params:xml:ns:yang:ietf-alto";
-  prefix "alto";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-alto";
+  prefix alto;
 
   import ietf-inet-types {
-    prefix "inet";
+    prefix inet;
     reference
       "RFC 6991: Common YANG Data Types";
   }
-
   import ietf-tcp-server {
     prefix tcp;
     reference
       "RFC DDDD: YANG Groupings for TCP Clients and TCP Servers";
   }
-
   import ietf-tls-server {
     prefix tls;
     reference
       "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
   }
-
   import ietf-http-server {
     prefix http;
     reference
@@ -30,11 +26,9 @@ module ietf-alto {
 
   organization
     "IETF ALTO Working Group";
-
   contact
     "WG Web:   <https://datatracker.ietf.org/wg/alto/about/>
      WG List:  <alto@ietf.org>";
-
   description
     "This YANG module defines all the configured and operational
      parameters of the administrated ALTO server instance.
@@ -59,7 +53,7 @@ module ietf-alto {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision "2023-02-23" {
+  revision 2023-02-23 {
     description
       "Initial Version.";
     reference
@@ -67,21 +61,78 @@ module ietf-alto {
        Protocol.";
   }
 
-  typedef resource-id {
-    type string {
-      length "1..64";
-      pattern "[0-9a-zA-Z\\-:@_]*";
-    }
+  // Features
+
+  feature http-listen {
     description
-      "Format of Resource ID";
+      "The 'http-listen' feature is only used for test deployment.
+       According to Sec 8.3.5 of RFC 7285, it shouldn't be used in
+       the production deployment.";
     reference
-      "Section 9.1.1 of RFC 7285.";
+      "Section 8.3.5 of RFC 7285.";
   }
 
-  typedef role-name {
-    type string;
+  feature xdom-disc {
     description
-      "Name of a role for role-based access control.";
+      "Support cross-domain server discovery.";
+    reference
+      "RFC 8686: Application-Layer Traffic Optimization (ALTO)
+       Cross-Domain Server Discovery";
+  }
+
+  feature multi-cost {
+    description
+      "Support multi-cost extension.";
+    reference
+      "RFC 8189: Multi-Cost Application-Layer Traffic Optimization
+       (ALTO)";
+  }
+
+  feature incr-update {
+    description
+      "Support incremental update extension.";
+    reference
+      "RFC 8895: Application-Layer Traffic Optimization (ALTO)
+       Incremental Updates Using Server-Sent Events (SSE)";
+  }
+
+  feature cost-calendar {
+    description
+      "Support cost calendar extension.";
+    reference
+      "RFC 8896: Application-Layer Traffic Optimization (ALTO) Cost
+       Calendar";
+  }
+
+  feature propmap {
+    description
+      "Support entity property map extension.";
+    reference
+      "RFC 9240: An ALTO Extension: Entity Property Maps";
+  }
+
+  feature cdni {
+    description
+      "Support CDNi extension.";
+    reference
+      "RFC 9241: Content Delivery Network Interconnection (CDNI)
+       Request Routing: CDNI Footprint and Capabilities
+       Advertisement using ALTO";
+  }
+
+  feature path-vector {
+    description
+      "Support path vector extension.";
+    reference
+      "RFC 9275: An Extension for Application-Layer Traffic
+       Optimization (ALTO): Path Vector";
+  }
+
+  feature performance-metrics {
+    description
+      "Support performance metrics extension.";
+    reference
+      "RFC YYYY: ALTO Performance Cost Metrics";
   }
 
   // Base identities
@@ -306,78 +357,21 @@ module ietf-alto {
       "Section 3.1 of RFC YYYY";
   }
 
-  // Features
-
-  feature http-listen {
+  typedef resource-id {
+    type string {
+      length "1..64";
+      pattern '[0-9a-zA-Z\-:@_]*';
+    }
     description
-      "The 'http-listen' feature is only used for test deployment.
-       According to Sec 8.3.5 of RFC 7285, it shouldn't be used in
-       the production deployment.";
+      "Format of Resource ID";
     reference
-      "Section 8.3.5 of RFC 7285.";
+      "Section 9.1.1 of RFC 7285.";
   }
 
-  feature xdom-disc {
+  typedef role-name {
+    type string;
     description
-      "Support cross-domain server discovery.";
-    reference
-      "RFC 8686: Application-Layer Traffic Optimization (ALTO)
-       Cross-Domain Server Discovery";
-  }
-
-  feature multi-cost {
-    description
-      "Support multi-cost extension.";
-    reference
-      "RFC 8189: Multi-Cost Application-Layer Traffic Optimization
-       (ALTO)";
-  }
-
-  feature incr-update {
-    description
-      "Support incremental update extension.";
-    reference
-      "RFC 8895: Application-Layer Traffic Optimization (ALTO)
-       Incremental Updates Using Server-Sent Events (SSE)";
-  }
-
-  feature cost-calendar {
-    description
-      "Support cost calendar extension.";
-    reference
-      "RFC 8896: Application-Layer Traffic Optimization (ALTO) Cost
-       Calendar";
-  }
-
-  feature propmap {
-    description
-      "Support entity property map extension.";
-    reference
-      "RFC 9240: An ALTO Extension: Entity Property Maps";
-  }
-
-  feature cdni {
-    description
-      "Support CDNi extension.";
-    reference
-      "RFC 9241: Content Delivery Network Interconnection (CDNI)
-       Request Routing: CDNI Footprint and Capabilities
-       Advertisement using ALTO";
-  }
-
-  feature path-vector {
-    description
-      "Support path vector extension.";
-    reference
-      "RFC 9275: An Extension for Application-Layer Traffic
-       Optimization (ALTO): Path Vector";
-  }
-
-  feature performance-metrics {
-    description
-      "Support performance metrics extension.";
-    reference
-      "RFC YYYY: ALTO Performance Cost Metrics";
+      "Name of a role for role-based access control.";
   }
 
   // Groupings
@@ -405,7 +399,7 @@ module ietf-alto {
     leaf max-cost-types {
       if-feature "multi-cost";
       type uint32;
-      default 0;
+      default "0";
       description
         "If present with value N greater than 0, this resource
          understands the multi-cost extensions in this document and
@@ -422,6 +416,10 @@ module ietf-alto {
     }
     container calendar-attributes {
       if-feature "cost-calendar";
+      description
+        "Configuration for CalendarAttributes.";
+      reference
+        "Section 4.1 of RFC 8896.";
       leaf-list cost-type-names {
         type string;
         min-elements 1;
@@ -449,32 +447,28 @@ module ietf-alto {
            indicates the number of values of the Cost Calendar
            array.";
       }
-      description
-        "Configuration for CalendarAttributes.";
-      reference
-        "Section 4.1 of RFC 8896.";
     }
   }
 
   grouping endpoint-cost-cap {
-    uses filter-costmap-cap;
     description
       "This grouping defines EndpointCostCapabilities as the same as
        FilteredCostMapCapabilities defined by the grouping
        filter-costmap-cap.";
     reference
       "Section 11.5.1.4 of RFC 7285";
+    uses filter-costmap-cap;
   }
 
   grouping algorithm {
+    description
+      "This grouping defines the base data model for information
+       resource creation algorithm.";
     choice algorithm {
       mandatory true;
       description
         "Information resource creation algorithm to be augmented.";
     }
-    description
-      "This grouping defines the base data model for information
-       resource creation algorithm.";
   }
 
   grouping alto-server-grouping {
@@ -582,10 +576,13 @@ module ietf-alto {
       description
         "Selects among available server discovery manners";
       case reverse-dns {
-        if-feature xdom-disc;
+        if-feature "xdom-disc";
         description
           "Configure DNS NAPTR records for cross-domain ALTO server
            discovery using reverse DNS lookup.";
+        reference
+          "RFC 8686: Application-Layer Traffic Optimization (ALTO)
+           Cross-Domain Server Discovery.";
         container rdns-naptr-records {
           description
             "Configuration parameters for DNS NAPTR records.";
@@ -603,9 +600,6 @@ module ietf-alto {
               "Dynamic IP prefixes collected from data sources.";
           }
         }
-        reference
-          "RFC 8686: Application-Layer Traffic Optimization (ALTO)
-           Cross-Domain Server Discovery.";
       }
     }
   }
@@ -618,7 +612,7 @@ module ietf-alto {
       description
         "Selects among available server discovery manners.";
       case reverse-dns {
-        if-feature xdom-disc;
+        if-feature "xdom-disc";
         description
           "Use reverse DNS lookup to discover an ALTO server.";
         reference
@@ -654,7 +648,7 @@ module ietf-alto {
             type inet:uri {
               pattern 'file:.*';
             }
-            default 'file:/etc/syslog.conf';
+            default "file:/etc/syslog.conf";
             description
               "The file location of the syslog configuration.";
           }
@@ -670,7 +664,9 @@ module ietf-alto {
     description
       "Parameters for the ALTO client and server.";
     list alto-client {
-      key client-id;
+      key "client-id";
+      description
+        "The ALTO client configuration.";
       leaf client-id {
         type string;
         description
@@ -679,12 +675,10 @@ module ietf-alto {
            other ALTO servers.";
       }
       container server-discovery-client {
-        uses alto-server-discovery-client-grouping;
         description
           "Configuration of how to discover another ALTO server.";
+        uses alto-server-discovery-client-grouping;
       }
-      description
-        "The ALTO client configuration.";
     }
     container alto-server {
       description
@@ -707,6 +701,8 @@ module ietf-alto {
       }
       list cost-type {
         key "cost-type-name";
+        description
+          "Mapping between name and referenced cost type";
         leaf cost-type-name {
           type string;
           description
@@ -736,6 +732,8 @@ module ietf-alto {
         }
         container cost-context {
           if-feature "performance-metrics";
+          description
+            "Context of how the metric is obtained.";
           leaf cost-source {
             type identityref {
               base cost-source;
@@ -745,22 +743,22 @@ module ietf-alto {
               "The referenced cost source";
           }
           container parameters {
+            description
+              "Additional computation parameters for the cost
+               source.";
             choice parameters {
               description
                 "Cases of parameters to be augmented.";
             }
-            description
-              "Additional computation parameters for the cost
-               source.";
           }
-          description
-            "Context of how the metric is obtained.";
         }
-        description
-          "Mapping between name and referenced cost type";
       }
       list meta {
         key "meta-key";
+        description
+          "Mapping of custom meta information";
+        reference
+          "Section 8.4.1 of RFC 7285.";
         leaf meta-key {
           type string;
           description
@@ -772,13 +770,11 @@ module ietf-alto {
           description
             "Custom meta value";
         }
-        description
-          "Mapping of custom meta information";
-        reference
-          "Section 8.4.1 of RFC 7285.";
       }
       list auth-client {
         key "client-id";
+        description
+          "List of authenticated ALTO clients.";
         leaf client-id {
           type string;
           description
@@ -834,11 +830,11 @@ module ietf-alto {
             }
           }
         }
-        description
-          "List of authenticated ALTO clients.";
       }
       list role {
         key "role-name";
+        description
+          "List of roles for access control.";
         leaf role-name {
           type role-name;
           description
@@ -852,11 +848,11 @@ module ietf-alto {
           description
             "List of authenticated ALTO clients assigned to the role.";
         }
-        description
-          "List of roles for access control.";
       }
       list data-source {
         key "source-id";
+        description
+          "List of subscribed data sources.";
         leaf source-id {
           type string;
           description
@@ -873,6 +869,8 @@ module ietf-alto {
         }
         choice update-policy {
           mandatory true;
+          description
+            "Policy to get updates from data sources.";
           case reactive {
             description
               "Configuration for the data source listener to
@@ -918,18 +916,16 @@ module ietf-alto {
                 "Polling interval in seconds for proactive mode.";
             }
           }
-          description
-            "Policy to get updates from data sources.";
         }
         choice source-params {
           description
             "Data source specific configuration.";
         }
-        description
-          "List of subscribed data sources.";
       }
       list resource {
         key "resource-id";
+        description
+          "ALTO information resources to be defined";
         leaf resource-id {
           type resource-id;
           description
@@ -970,14 +966,14 @@ module ietf-alto {
           case ird {
             when 'derived-from-or-self(resource-type, "alto:ird")';
             container alto-ird-params {
+              description
+                "IRD-specific configuration.";
               leaf delegation {
                 type inet:uri;
                 mandatory true;
                 description
                   "Upstream IRD to be delegated.";
               }
-              description
-                "IRD-specific configuration.";
             }
           }
           case networkmap {
@@ -995,7 +991,7 @@ module ietf-alto {
               }
               leaf filtered {
                 type boolean;
-                default false;
+                default "false";
                 description
                   "Configure whether filtered network map is
                    supported.";
@@ -1054,19 +1050,19 @@ module ietf-alto {
                + '"alto:property-map")';
             if-feature "propmap";
             container alto-propmap-params {
-              uses algorithm;
               description
                 "(Filtered) Entity Property Map specific
                  configuration.";
+              uses algorithm;
             }
           }
           case cdni {
             when 'derived-from-or-self(resource-type, "alto:cdni")';
             if-feature "cdni";
             container alto-cdni-params {
-              uses algorithm;
               description
                 "CDNi specific configuration";
+              uses algorithm;
             }
           }
           case update {
@@ -1074,14 +1070,12 @@ module ietf-alto {
                + '"alto:update")';
             if-feature "incr-update";
             container alto-update-params {
-              uses algorithm;
               description
                 "Incremental Updates specific configuration";
+              uses algorithm;
             }
           }
         }
-        description
-          "ALTO information resources to be defined";
       }
     }
   }

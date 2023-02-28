@@ -22,11 +22,11 @@ The case `peeringdb` allows the ALTO server to update the server URI to the org
 object of the organization record in PeeringDB.
 
 ~~~
-module example-ietf-alto-server-discovery {
+module example-vendor-alto-server-discovery {
   yang-version 1.1;
 
-  namespace "urn:example:ietf-alto-server-discovery";
-  prefix "alto-disc";
+  namespace "https://example.com/ns/vendor-alto-server-discovery";
+  prefix vendor-alto-disc;
 
   import ietf-alto {
     prefix alto;
@@ -36,42 +36,29 @@ module example-ietf-alto-server-discovery {
   }
 
   import ietf-inet-types {
-    prefix "inet";
+    prefix inet;
     reference
       "RFC 6991: Common YANG Data Types";
   }
 
   organization
-    "IETF ALTO Working Group";
+    "Example, Inc.";
 
   contact
-    "WG Web:   <https://datatracker.ietf.org/wg/alto/about/>
-     WG List:  <alto@ietf.org>";
+    "Example, Inc.
+     Customer Service
+
+     E-mail: alto-oam-yang@example.com";
 
   description
-    "This YANG module defines an example of the extended ALTO server
-     discovery manners for IRR and PeeringDB.
+    "This module contains a collection of vendor-specific cases of
+     server discovery mechanisms for ALTO.";
 
-     Copyright (c) 2022 IETF Trust and the persons identified as
-     authors of the code.  All rights reserved.
-
-     Redistribution and use in source and binary forms, with or
-     without modification, is permitted pursuant to, and subject to
-     the license terms contained in, the Revised BSD License set
-     forth in Section 4.c of the IETF Trust's Legal Provisions
-     Relating to IETF Documents
-     (https://trustee.ietf.org/license-info).
-
-     This version of this YANG module is part of RFC XXXX
-     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-     for full legal notices.";
-
-  revision "2023-02-10" {
+  revision 2023-02-28 {
     description
-      "Initial Version.";
+      "Version 1.0";
     reference
-      "RFC XXXX: A YANG Data Model for Operations, Administration,
-       and Maintenance of ALTO Protocol.";
+      "Vendor ALTO Server Discovery Mechanisms: ALTO O&M YANG Model.";
   }
 
   augment "/alto:alto/alto:alto-server/alto:server-discovery"
@@ -165,14 +152,14 @@ based authorization server that the ALTO server can redirect to for the client
 authentication.
 
 ~~~
-module example-ietf-alto-auth {
+module example-vendor-alto-auth {
   yang-version 1.1;
 
-  namespace "urn:example:ietf-alto-auth";
-  prefix "alto-auth";
+  namespace "https://example.com/ns/vendor-alto-auth";
+  prefix vendor-alto-auth;
 
   import ietf-inet-types {
-    prefix "inet";
+    prefix inet;
     reference
       "RFC 6991: Common YANG Data Types";
   }
@@ -185,36 +172,24 @@ module example-ietf-alto-auth {
   }
 
   organization
-    "IETF ALTO Working Group";
+    "Example, Inc.";
 
   contact
-    "WG Web:   <https://datatracker.ietf.org/wg/alto/about/>
-     WG List:  <alto@ietf.org>";
+    "Example, Inc.
+     Customer Service
+
+     E-mail: alto-oam-yang@example.com";
 
   description
-    "This YANG module defines an example of the extended ALTO client
-     authentication approaches for the role-based access control.
+    "This module contains a collection of vendor-specific cases of
+     client authentication approaches for ALTO.";
 
-     Copyright (c) 2022 IETF Trust and the persons identified as
-     authors of the code.  All rights reserved.
-
-     Redistribution and use in source and binary forms, with or
-     without modification, is permitted pursuant to, and subject to
-     the license terms contained in, the Revised BSD License set
-     forth in Section 4.c of the IETF Trust's Legal Provisions
-     Relating to IETF Documents
-     (https://trustee.ietf.org/license-info).
-
-     This version of this YANG module is part of RFC XXXX
-     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-     for full legal notices.";
-
-  revision "2023-02-10" {
+  revision 2023-02-28 {
     description
-      "Initial Version.";
+      "Version 1.0";
     reference
-      "RFC XXXX: A YANG Data Model for Operations, Administration,
-       and Maintenance of ALTO Protocol.";
+      "Vendor ALTO Client Authentication Approaches: ALTO O&M YANG
+       Model.";
   }
 
   augment "/alto:alto/alto:alto-server/alto:auth-client"
@@ -255,11 +230,11 @@ model-driven datastore. It includes:
   `restconf` or `netconf` can be used.
 
 ~~~
-module example-ietf-alto-data-source {
+module example-vendor-alto-data-source {
   yang-version 1.1;
 
-  namespace "urn:example:ietf-alto-data-source";
-  prefix "alto-ds";
+  namespace "https://example.com/ns/vendor-alto-data-source";
+  prefix vendor-alto-ds;
 
   import ietf-alto {
     prefix alto;
@@ -295,36 +270,23 @@ module example-ietf-alto-data-source {
   }
 
   organization
-    "IETF ALTO Working Group";
+    "Example, Inc.";
 
   contact
-    "WG Web:   <https://datatracker.ietf.org/wg/alto/about/>
-     WG List:  <alto@ietf.org>";
+    "Example, Inc.
+     Customer Service
+
+     E-mail: alto-oam-yang@example.com";
 
   description
-    "This YANG module defines an example of the extended ALTO data
-     source for YANG-based datastore.
+    "This module contains a collection of vendor-specific cases of
+     data sources for ALTO.";
 
-     Copyright (c) 2022 IETF Trust and the persons identified as
-     authors of the code.  All rights reserved.
-
-     Redistribution and use in source and binary forms, with or
-     without modification, is permitted pursuant to, and subject to
-     the license terms contained in, the Revised BSD License set
-     forth in Section 4.c of the IETF Trust's Legal Provisions
-     Relating to IETF Documents
-     (https://trustee.ietf.org/license-info).
-
-     This version of this YANG module is part of RFC XXXX
-     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-     for full legal notices.";
-
-  revision "2023-02-10" {
+  revision 2023-02-28 {
     description
-      "Initial Version.";
+      "Version 1.0";
     reference
-      "RFC XXXX: A YANG Data Model for Operations, Administration,
-       and Maintenance of ALTO Protocol.";
+      "Vendor ALTO Data Sources: ALTO O&M YANG Model.";
   }
 
   identity yang-datastore {
@@ -355,7 +317,7 @@ module example-ietf-alto-data-source {
     description
       "Example of data source for YANG datastore.";
     case yang-datastore {
-      when 'derived-from-or-self(source-type, "alto-ds:yang-datastore")';
+      when 'derived-from-or-self(source-type, "yang-datastore")';
       description
         "Example data source for local and/or remote YANG datastore.";
       container yang-datastore-source-params {
@@ -416,7 +378,7 @@ the parameters of a network map creation algorithm that translates an IETF
 layer 3 unicast topology into a network map.
 
 ~~~
-module: example-ietf-alto-alg
+module: example-vendor-alto-alg
 
   augment /alto:alto/alto:alto-server/alto:resource
             /alto:resource-params/alto:networkmap
@@ -449,11 +411,11 @@ The update of the reference data source depends on the used `update-policy` (See
 [](#data-source)).
 
 ~~~
-module example-ietf-alto-alg {
+module example-vendor-alto-alg {
   yang-version 1.1;
 
-  namespace "urn:example:ietf-alto-alg";
-  prefix "alto-alg";
+  namespace "https://example.com/ns/vendor-alto-alg";
+  prefix vendor-alto-alg;
 
   import ietf-alto {
     prefix alto;
@@ -468,42 +430,29 @@ module example-ietf-alto-alg {
       "RFC8342: Network Management Datastore Architecture (NMDA)";
   }
 
-  import example-ietf-alto-data-source {
-    prefix "alto-ds";
+  import example-vendor-alto-data-source {
+    prefix alto-ds;
   }
 
   organization
-    "IETF ALTO Working Group";
+    "Example, Inc.";
 
   contact
-    "WG Web:   <https://datatracker.ietf.org/wg/alto/about/>
-     WG List:  <alto@ietf.org>";
+    "Example, Inc.
+     Customer Service
+
+     E-mail: alto-oam-yang@example.com";
 
   description
-    "This YANG module defines an example of the extended ALTO
-     information resource creation algorithm for translating an L3
-     unicast topology of I2RS to an ALTO network map.
+    "This module contains a collection of vendor-specific cases of
+     information resource creation algorithms for ALTO.";
 
-     Copyright (c) 2022 IETF Trust and the persons identified as
-     authors of the code.  All rights reserved.
-
-     Redistribution and use in source and binary forms, with or
-     without modification, is permitted pursuant to, and subject to
-     the license terms contained in, the Revised BSD License set
-     forth in Section 4.c of the IETF Trust's Legal Provisions
-     Relating to IETF Documents
-     (https://trustee.ietf.org/license-info).
-
-     This version of this YANG module is part of RFC XXXX
-     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-     for full legal notices.";
-
-  revision "2023-02-10" {
+  revision 2023-02-28 {
     description
-      "Initial Version.";
+      "Version 1.0";
     reference
-      "RFC XXXX: A YANG Data Model for Operations, Administration,
-       and Maintenance of ALTO Protocol.";
+      "Vendor ALTO Information Resource Creation Algorithms: ALTO O&M
+       YANG Model.";
   }
 
   augment "/alto:alto/alto:alto-server/alto:resource"
