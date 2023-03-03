@@ -36,7 +36,7 @@ module: ietf-alto
 
 ## Data Model for ALTO Client Operation and Management
 
-As shown in {{tree-alto-client }}, the 'alto-client' list contains a list of client-side configurations.
+As shown in {{tree-alto-client}}, the 'alto-client' list contains a list of client-side configurations.
 'server-discovery-client' is used to configure how an ALTO client discovers
 an ALTO server.
 
