@@ -433,8 +433,8 @@ module ietf-alto {
         type decimal64 {
           fraction-digits 4;
         }
-        mandatory true;
         units "seconds";
+        mandatory true;        
         description
           "The duration of an ALTO Calendar time interval.";
       }
