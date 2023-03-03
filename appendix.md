@@ -1,6 +1,6 @@
-# Example: Extending the ALTO O&M Data Model {#alto-ext-model}
+# Examples of Extending the ALTO O&M Data Model {#alto-ext-model}
 
-Developers and operators can also extend this ALTO O&M data model to align
+Developers and operators can also extend the ALTO O&M data model to align
 with their own implementations. Specifically, the following nodes of the data
 model can be augmented:
 
@@ -9,7 +9,7 @@ model can be augmented:
 - The `data-source` choice.
 - The `algorithm` choice of the `resource-params` of each `resource`.
 
-## Example Module for Extended Server Discovery Manners {#example-server-disc}
+## An Example Module for Extended Server Discovery Manners {#example-server-disc}
 
 The base data model defined by ietf-alto.yang only includes a reverse DNS based
 server discovery manner. The following example module demonstrates how
@@ -31,8 +31,8 @@ module example-vendor-alto-server-discovery {
   import ietf-alto {
     prefix alto;
     reference
-      "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
-       Protocol.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   import ietf-inet-types {
@@ -70,7 +70,7 @@ module example-vendor-alto-server-discovery {
       description
         "Update descr attributes of a aut-num class in a Internet
          Routing Registry (IRR) database for ALTO server discovery
-         using RPSL.";
+         using Routing Policy Specification Language (RPSL).";
       reference
         "RFC 2622: Routing Policy Specification Language (RPSL).";
       container irr-params {
@@ -79,7 +79,7 @@ module example-vendor-alto-server-discovery {
         leaf aut-num {
           type inet:as-number;
           description
-            "The autonomous system (AS) to be updated.";
+            "The Autonomous System (AS) number to be updated.";
         }
       }
     }
@@ -103,7 +103,7 @@ module example-vendor-alto-server-discovery {
   augment "/alto:alto/alto:alto-client/alto:server-discovery-client"
         + "/alto:server-discovery-client-manner" {
     description
-      "Examples of server discovery mechanisms used by the ALTO
+      "Examples of server discovery mechanisms used by an ALTO
        client.";
     case internet-routing-registry {
       description
@@ -117,7 +117,7 @@ module example-vendor-alto-server-discovery {
         leaf whois-server {
           type inet:host;
           description
-            "Whois server for IRR query using RPSL.";
+            "Whois server for an IRR query using RPSL.";
         }
       }
     }
@@ -126,7 +126,7 @@ module example-vendor-alto-server-discovery {
         "Use PeeringDB to discover an ALTO server.";
       container peeringdb-params {
         description
-          "Configuration for PeeringDB query";
+          "Configuration for PeeringDB queries.";
         leaf peeringdb-endpoint {
           type inet:uri;
           description
@@ -138,16 +138,16 @@ module example-vendor-alto-server-discovery {
 }
 ~~~
 
-## Example Module for Extended Client Authentication Approaches {#example-client-auth}
+## An Example Module for Extended Client Authentication Approaches {#example-client-auth}
 
-The base data model defined by ietf-alto.yang only includes the client
-authentication approaches directly provided by the HTTP server. However, a real
-implementation may authenticate clients in different ways, e.g., it may
+The base data model "ietf-alto" only includes the client
+authentication approaches directly provided by the HTTP server. However, an
+implementation may authenticate clients in different ways. For example, an implementation may
 delegate the authentication to a third-party OAuth 2.0 server. The following
 example module demonstrates how additional client authentication approaches can
-be augmented into the base data model.
+enrich the base data model.
 
-In this example, the case `oauth2` includes the URI to a third-party OAuth 2.0
+In this example, the `oauth2` case includes the URI to a third-party OAuth 2.0
 based authorization server that the ALTO server can redirect to for the client
 authentication.
 
@@ -167,8 +167,8 @@ module example-vendor-alto-auth {
   import ietf-alto {
     prefix alto;
     reference
-      "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
-       Protocol.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   organization
@@ -252,8 +252,8 @@ module example-vendor-alto-data-source {
   import ietf-yang-push {
     prefix yp;
     reference
-      "RFC8641: Subscription to YANG Notifications for Datastore
-       Updates";
+      "RFC 8641: Subscription to YANG Notifications for Datastore
+                Updates";
   }
 
   import ietf-netconf-client {
@@ -266,7 +266,7 @@ module example-vendor-alto-data-source {
     prefix rcc;
     reference
       "RFC IIII: YANG Groupings for RESTCONF Clients and RESTCONF
-       Servers";
+                 Servers";
   }
 
   organization
@@ -368,11 +368,11 @@ module example-vendor-alto-data-source {
 }
 ~~~
 
-## Example Module for Information Resource Creation Algorithm {#example-alg}
+## An Example Module for Information Resource Creation Algorithm {#example-alg}
 
-The base data model defined by ietf-alto.yang does not include any choice cases
+The base data model "ietf-alto" does not include any choices cases
 for information resource creation algorithms. But developers may augment the
-ietf-alto.yang data model with definitions for any custom creation algorithms
+"ietf-alto" module with definitions for custom creation algorithms
 for different information resources. The following example module demonstrates
 the parameters of a network map creation algorithm that translates an IETF
 layer 3 unicast topology into a network map.
@@ -392,7 +392,7 @@ module: example-vendor-alto-alg
 This example defines a creation algorithm called `l3-unicast-cluster-algorithm`
 for the network map resource. It takes two algorithm-specific parameters:
 
-l3-unicast-topo
+'l3-unicast-topo':
 : This parameter refers to the target path name of an operational
   `yang-datastore` data source node (See [](#example-data-source)) subscribed
   in the `data-source` list (See [](#data-source)). The referenced target path
@@ -400,7 +400,7 @@ l3-unicast-topo
   layer 3 unicast topology defined in {{RFC8346}}. The algorithm uses the
   topology data from this data source to compute the ALTO network map resource.
 
-depth
+'depth':
 : This optional parameter sets the depth of the clustering algorithm. For
   example, if the depth sets to 1, the algorithm will generate PID for every
   l3-node in the topology.
@@ -420,8 +420,8 @@ module example-vendor-alto-alg {
   import ietf-alto {
     prefix alto;
     reference
-      "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
-       Protocol.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   import ietf-datastores {
