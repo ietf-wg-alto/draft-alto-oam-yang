@@ -105,15 +105,15 @@ module ietf-alto-stats {
     }
     leaf res-mem-size {
       type yang:counter32;
-      config false;
       units "bytes";
+      config false;
       description
         "Memory size utilized by the information resource.";
     }
     leaf res-enc-size {
       type yang:counter32;
-      config false;
       units "bytes";
+      config false;
       description
         "Size of JSON encoded data of the information resource.";
     }
@@ -216,8 +216,8 @@ module ietf-alto-stats {
       type yang:counter32;
       config false;
       description
-        "The average number of update events sent to the connected
-         clients.";
+        "The average number of update events sent by the ALTO server 
+         to the connected clients.";
     }
   }
 }
