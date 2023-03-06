@@ -20,8 +20,8 @@ module example-vendor-alto-data-source {
   import ietf-yang-push {
     prefix yp;
     reference
-      "RFC8641: Subscription to YANG Notifications for Datastore
-       Updates";
+      "RFC 8641: Subscription to YANG Notifications for Datastore
+                Updates";
   }
 
   import ietf-netconf-client {
@@ -34,7 +34,7 @@ module example-vendor-alto-data-source {
     prefix rcc;
     reference
       "RFC IIII: YANG Groupings for RESTCONF Clients and RESTCONF
-       Servers";
+                 Servers";
   }
 
   organization

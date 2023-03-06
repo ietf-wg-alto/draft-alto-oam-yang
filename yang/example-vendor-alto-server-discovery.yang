@@ -7,8 +7,8 @@ module example-vendor-alto-server-discovery {
   import ietf-alto {
     prefix alto;
     reference
-      "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
-       Protocol.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   import ietf-inet-types {
@@ -46,7 +46,7 @@ module example-vendor-alto-server-discovery {
       description
         "Update descr attributes of a aut-num class in a Internet
          Routing Registry (IRR) database for ALTO server discovery
-         using RPSL.";
+         using Routing Policy Specification Language (RPSL).";
       reference
         "RFC 2622: Routing Policy Specification Language (RPSL).";
       container irr-params {
@@ -55,7 +55,7 @@ module example-vendor-alto-server-discovery {
         leaf aut-num {
           type inet:as-number;
           description
-            "The autonomous system (AS) to be updated.";
+            "The Autonomous System (AS) number to be updated.";
         }
       }
     }
@@ -79,7 +79,7 @@ module example-vendor-alto-server-discovery {
   augment "/alto:alto/alto:alto-client/alto:server-discovery-client"
         + "/alto:server-discovery-client-manner" {
     description
-      "Examples of server discovery mechanisms used by the ALTO
+      "Examples of server discovery mechanisms used by an ALTO
        client.";
     case internet-routing-registry {
       description
@@ -93,7 +93,7 @@ module example-vendor-alto-server-discovery {
         leaf whois-server {
           type inet:host;
           description
-            "Whois server for IRR query using RPSL.";
+            "Whois server for an IRR query using RPSL.";
         }
       }
     }
@@ -102,7 +102,7 @@ module example-vendor-alto-server-discovery {
         "Use PeeringDB to discover an ALTO server.";
       container peeringdb-params {
         description
-          "Configuration for PeeringDB query";
+          "Configuration for PeeringDB queries.";
         leaf peeringdb-endpoint {
           type inet:uri;
           description

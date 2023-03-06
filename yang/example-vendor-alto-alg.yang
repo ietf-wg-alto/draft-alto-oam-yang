@@ -7,8 +7,8 @@ module example-vendor-alto-alg {
   import ietf-alto {
     prefix alto;
     reference
-      "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
-       Protocol.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   import ietf-datastores {
