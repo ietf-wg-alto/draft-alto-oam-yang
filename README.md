@@ -1,9 +1,8 @@
-# A Yang Data Model for OAM and Management of ALTO Protocol
+# YANG Data Models for the Application-Layer Traffic Optimization (ALTO) Protocol
 
 [![Action Status](https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/actions/workflows/ghpages.yml/badge.svg)](https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/actions/workflows/ghpages.yml)
 
-This is the working area for the Working Group Internet-Draft, "A Yang Data
-Model for OAM and Management of ALTO Protocol", to meet the
+This is the working area for the Working Group Internet-Draft, "YANG Data Models for the Application-Layer Traffic Optimization (ALTO) Protocol", to meet the
 [ALTO WG Charter](https://datatracker.ietf.org/doc/charter-ietf-alto/).
 
 * [Editor's Copy](https://ietf-wg-alto.github.io/draft-ietf-alto-oam-yang/#go.draft-ietf-alto-oam-yang.html)
