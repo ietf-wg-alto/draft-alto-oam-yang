@@ -11,8 +11,8 @@ module ietf-alto-stats {
   import ietf-alto {
     prefix alto;
     reference
-      "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
-       Protocol.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   organization
@@ -21,10 +21,10 @@ module ietf-alto-stats {
     "WG Web:   <https://datatracker.ietf.org/wg/alto/about/>
      WG List:  <alto@ietf.org>";
   description
-    "This YANG module defines all the statistics of the administrated
-     ALTO server instance.
+    "This YANG module defines a set of statistics of an ALTO
+     server instance.
 
-     Copyright (c) 2022 IETF Trust and the persons identified as
+     Copyright (c) 2023 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -53,42 +53,42 @@ module ietf-alto-stats {
       type yang:counter32;
       config false;
       description
-        "The total number of ALTO requests received by this ALTO
+        "The total number of ALTO requests received by the ALTO
          server.";
     }
     leaf num-total-succ {
       type yang:counter32;
       config false;
       description
-        "The total number of successful responses sent by this ALTO
+        "The total number of successful responses sent by the ALTO
          server.";
     }
     leaf num-total-fail {
       type yang:counter32;
       config false;
       description
-        "The total number of failed responses sent by this ALTO
+        "The total number of failed responses sent by the ALTO
          server.";
     }
     leaf num-total-last-req {
       type yang:counter32;
       config false;
       description
-        "The total number of ALTO requests received within the last
-         5 minutes.";
+        "The total number of ALTO requests received by the server 
+         within the last 5 minutes.";
     }
     leaf num-total-last-succ {
       type yang:counter32;
       config false;
       description
-        "The total number of successful responses sent by this ALTO
+        "The total number of successful responses sent by the ALTO
          server within the last 5 minutes.";
     }
     leaf num-total-last-fail {
       type yang:counter32;
       config false;
       description
-        "The total number of failed responses sent by this ALTO
+        "The total number of failed responses sent by the ALTO
          server within the last 5 minutes.";
     }
   }
@@ -105,16 +105,17 @@ module ietf-alto-stats {
     }
     leaf res-mem-size {
       type yang:counter32;
+      units "bytes";
       config false;
       description
-        "Memory size (Bytes) utilized by the information resource.";
+        "Memory size utilized by the information resource.";
     }
     leaf res-enc-size {
       type yang:counter32;
+      units "bytes";
       config false;
       description
-        "Size (Bytes) of JSON encoded data of the information
-         resource.";
+        "Size of JSON encoded data of the information resource.";
     }
     leaf num-res-req {
       type yang:counter32;
@@ -215,8 +216,8 @@ module ietf-alto-stats {
       type yang:counter32;
       config false;
       description
-        "The average number of update events sent to the connected
-         clients.";
+        "The average number of update events sent by the ALTO server 
+         to the connected clients.";
     }
   }
 }
