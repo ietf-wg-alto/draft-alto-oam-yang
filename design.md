@@ -430,36 +430,38 @@ statistics at the ALTO server and information resource level ({{tree-stat}}).
 ~~~
 module: ietf-alto-stats
 
-  augment /alto:alto-server:
-    +--ro num-total-req?         yang:counter32
-    +--ro num-total-succ?        yang:counter32
-    +--ro num-total-fail?        yang:counter32
-    +--ro num-total-last-req?    yang:counter32
-    +--ro num-total-last-succ?   yang:counter32
-    +--ro num-total-last-fail?   yang:counter32
-  augment /alto:alto-server/alto:resource:
-    +--ro num-res-upd?    yang:counter32
-    +--ro res-mem-size?   yang:counter32
-    +--ro res-enc-size?   yang:counter32
-    +--ro num-res-req?    yang:counter32
-    +--ro num-res-succ?   yang:counter32
-    +--ro num-res-fail?   yang:counter32
-  augment /alto:alto-server/alto:resource/alto:resource-params
-            /alto:networkmap/alto:alto-networkmap-params:
-    +--ro num-map-pid?   yang:counter32
-  augment /alto:alto-server/alto:resource/alto:resource-params
-            /alto:propmap/alto:alto-propmap-params:
-    +--ro num-map-entry?   yang:counter32
-  augment /alto:alto-server/alto:resource/alto:resource-params
-            /alto:cdni/alto:alto-cdni-params:
-    +--ro num-base-obj?   yang:counter32
-  augment /alto:alto-server/alto:resource/alto:resource-params
-            /alto:update/alto:alto-update-params:
-    +--ro num-upd-sess?      yang:counter32
-    +--ro num-event-total?   yang:counter32
-    +--ro num-event-max?     yang:counter32
-    +--ro num-event-min?     yang:counter32
-    +--ro num-event-avg?     yang:counter32
+  augment /alto:alto/alto:alto-server:
+    +--ro num-total-req?         yang:counter64
+    +--ro num-total-succ?        yang:counter64
+    +--ro num-total-fail?        yang:counter64
+    +--ro num-total-last-req?    yang:counter64
+    +--ro num-total-last-succ?   yang:counter64
+    +--ro num-total-last-fail?   yang:counter64
+  augment /alto:alto/alto:alto-server/alto:resource:
+    +--ro num-res-upd?    yang:counter64
+    +--ro res-mem-size?   yang:counter64
+    +--ro res-enc-size?   yang:counter64
+    +--ro num-res-req?    yang:counter64
+    +--ro num-res-succ?   yang:counter64
+    +--ro num-res-fail?   yang:counter64
+  augment /alto:alto/alto:alto-server/alto:resource
+            /alto:resource-params/alto:networkmap
+            /alto:alto-networkmap-params:
+    +--ro num-map-pid?   yang:counter64
+  augment /alto:alto/alto:alto-server/alto:resource
+            /alto:resource-params/alto:propmap
+            /alto:alto-propmap-params:
+    +--ro num-map-entry?   yang:counter64
+  augment /alto:alto/alto:alto-server/alto:resource
+            /alto:resource-params/alto:cdni/alto:alto-cdni-params:
+    +--ro num-base-obj?   yang:counter64
+  augment /alto:alto/alto:alto-server/alto:resource
+            /alto:resource-params/alto:update/alto:alto-update-params:
+    +--ro num-upd-sess?      yang:counter64
+    +--ro num-event-total?   yang:counter64
+    +--ro num-event-max?     yang:counter64
+    +--ro num-event-min?     yang:counter64
+    +--ro num-event-avg?     yang:gauge64
 ~~~
 {: #tree-stat title='IETF ALTO Statistics Structure' artwork-align="center"}
 
