@@ -317,7 +317,8 @@ module example-vendor-alto-data-source {
     description
       "Example of data source for YANG datastore.";
     case yang-datastore {
-      when 'derived-from-or-self(source-type, "yang-datastore")';
+      when 'derived-from-or-self(alto:source-type,'
+         + '"yang-datastore")';
       description
         "Example data source for local and/or remote YANG datastore.";
       container yang-datastore-source-params {
@@ -385,7 +386,10 @@ module: example-vendor-alto-alg
             /alto:alto-networkmap-params/alto:algorithm:
     +--:(l3-unicast-cluster)
        +--rw l3-unicast-cluster-algorithm
-          +--rw l3-unicast-topo    leafref
+          +--rw l3-unicast-topo
+          |  +--rw source-datastore
+          |  |       -> /alto:alto/alto-server/data-source/source-id
+          |  +--rw topo-name?          leafref
           +--rw depth?             uint32
 ~~~
 
@@ -425,7 +429,7 @@ module example-vendor-alto-alg {
   }
 
   import ietf-datastores {
-    prefix ds;
+    prefix ietf-datastores;
     reference
       "RFC8342: Network Management Datastore Architecture (NMDA)";
   }
@@ -467,17 +471,35 @@ module example-vendor-alto-alg {
       container l3-unicast-cluster-algorithm {
         description
           "Parameters for l3-unicast-cluster algorithm";
-        leaf l3-unicast-topo {
-          type leafref {
-            path "/alto:alto/alto:alto-server/alto:data-source"
-               + "/alto-ds:yang-datastore-source-params"
-               + "/alto-ds:target-paths/alto-ds:name";
+        container l3-unicast-topo {
+          leaf source-datastore {
+            type leafref {
+              path '/alto:alto/alto:alto-server/alto:data-source'
+                 + '/alto:source-id';
+            }
+            must 'deref(.)/../alto-ds:yang-datastore-source-params'
+               + '/alto-ds:datastore = "ietf-datastores:operational"'
+               {
+              error-message
+                "The referenced YANG datastore MUST be operational";
+            }
+            mandatory true;
+            description
+              "The data source to YANG datastore.";
           }
-          must 'deref(.)/../..'
-             + '/alto-ds:datastore = "ds:operational"';
-          mandatory true;
+          leaf topo-name {
+            type leafref {
+              path '/alto:alto/alto:alto-server/alto:data-source'
+                 + '[alto:source-id = current()/../source-datastore]'
+                 + '/alto-ds:yang-datastore-source-params'
+                 + '/alto-ds:target-paths/alto-ds:name';
+            }
+            description
+              "The name of the IETF layer 3 unicast topology.";
+          }
           description
-            "The data source to an IETF layer 3 unicast topology.";
+            "The data source info to an IETF layer 3 unicast
+             topology.";
         }
         leaf depth {
           type uint32;
@@ -486,6 +508,139 @@ module example-vendor-alto-alg {
         }
       }
     }
+  }
+}
+~~~
+
+## Example Usage
+
+This section presents a complete example showing how the base data model and
+all the vendor extended models above are used to set up an ALTO server and
+configure corresponding components (e.g., data source listener, information
+resource, access control).
+
+~~~
+{
+  "ietf-alto:alto": {
+    "alto-server": {
+      "listen": {
+        "https": {
+          "tcp-server-parameters": {
+            "local-address": "0.0.0.0"
+          },
+          "alto-server-parameters": {},
+          "http-server-parameters": {
+            "server-name": "alto.example.com",
+            "client-authentication": {
+              "users": {
+                "user": [
+                  {
+                    "user-id": "alice",
+                    "basic": {
+                      "user-id": "alice",
+                      "password": "$0$p8ssw0rd"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "tls-server-parameters": {
+            "server-identity": {}
+          }
+        }
+      },
+      "server-discovery": {
+        "example-vendor-alto-server-discovery:irr-params": {
+          "aut-num": 64496
+        }
+      },
+      "auth-client": [
+        {
+          "client-id": "alice",
+          "https-auth-client": {
+            "user-id": "alice"
+          }
+        },
+        {
+          "client-id": "bob",
+          "example-vendor-alto-auth:oauth2": {
+            "oauth2-server": "https://auth.example.com/login"
+          }
+        }
+      ],
+      "role": [
+        {
+          "role-name": "group0",
+          "client": [
+            "alice",
+            "bob"
+          ]
+        }
+      ],
+      "data-source": [
+        {
+  "source-id": "test-yang-ds",
+  "source-type": "example-vendor-alto-data-source:yang-datastore",
+  "feed-interval": 30,
+  "example-vendor-alto-data-source:yang-datastore-source-params": {
+    "datastore": "ietf-datastores:operational",
+    "target-paths": [
+      {
+        "name": "network-topology",
+        "datastore-xpath-filter": "/network-topology:network-topology
+/topology[topology-id=bgp-example-ipv4-topology]"
+      }
+    ],
+    "protocol": "restconf",
+    "restconf": {
+      "listen": {
+        "endpoint": [
+          {
+            "name": "example restconf server",
+            "https": {
+              "tcp-server-parameters": {
+                "local-address": "172.17.0.2"
+              },
+              "http-client-parameters": {
+                "client-identity": {
+                  "basic": {
+                    "user-id": "carol",
+                    "cleartext-password": "secret"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+        }
+      ],
+      "resource": [
+        {
+          "resource-id": "default-network-map",
+          "resource-type": "network-map",
+          "accepted-role": [
+            "group0"
+          ],
+          "alto-networkmap-params": {
+            "is-default": true,
+            "example-vendor-alto-alg:l3-unicast-cluster-algorithm": {
+              "l3-unicast-topo": {
+                "source-datastore": "test-yang-ds",
+                "topo-name": "network-topology"
+              },
+              "depth": 2
+            }
+          }
+        }
+      ]
+    }
+  },
+  "ietf-key-chain:key-chains": {
+      "key-chain": []
   }
 }
 ~~~

@@ -1,34 +1,122 @@
 {
-    "ietf-alto:alto-server": {
-        "data-source": [
-            {
-                "source-id": "test-prometheus",
-                "source-type": "prometheus",
-                "reactive": true,
-                "prometheus-source-params": {
-                    "query-data": "",
-                    "source-uri": "https://prometheus/"
-                }
-            }
-        ],
-        "listen": {
-            "https": {
-                "tcp-server-parameters": {
-                    "alto-server-parameters": {},
-                    "http-server-parameters": {},
-                    "local-address": "127.0.0.1",
-                    "tls-server-parameters": {
-                        "server-identity": {}
+  "ietf-alto:alto": {
+    "alto-server": {
+      "listen": {
+        "https": {
+          "tcp-server-parameters": {
+            "local-address": "0.0.0.0"
+          },
+          "alto-server-parameters": {},
+          "http-server-parameters": {
+            "server-name": "alto.example.com",
+            "client-authentication": {
+              "users": {
+                "user": [
+                  {
+                    "user-id": "alice",
+                    "basic": {
+                      "user-id": "alice",
+                      "password": "$0$p8ssw0rd"
                     }
-                }
+                  }
+                ]
+              }
             }
-        },
-        "scope": {
-            "dynamic": [],
-            "static": []
+          },
+          "tls-server-parameters": {
+            "server-identity": {}
+          }
         }
-    },
-    "ietf-key-chain:key-chains": {
-        "key-chain": []
+      },
+      "server-discovery": {
+        "example-vendor-alto-server-discovery:irr-params": {
+          "aut-num": 64496
+        }
+      },
+      "auth-client": [
+        {
+          "client-id": "alice",
+          "https-auth-client": {
+            "user-id": "alice"
+          }
+        },
+        {
+          "client-id": "bob",
+          "example-vendor-alto-auth:oauth2": {
+            "oauth2-server": "https://auth.example.com/login"
+          }
+        }
+      ],
+      "role": [
+        {
+          "role-name": "group0",
+          "client": [
+            "alice",
+            "bob"
+          ]
+        }
+      ],
+      "data-source": [
+        {
+          "source-id": "test-yang-ds",
+          "source-type": "example-vendor-alto-data-source:yang-datastore",
+          "feed-interval": 30,
+          "example-vendor-alto-data-source:yang-datastore-source-params": {
+            "datastore": "ietf-datastores:operational",
+            "target-paths": [
+              {
+                "name": "network-topology",
+                "datastore-xpath-filter": "/network-topology:network-topology/topology[topology-id=bgp-example-ipv4-topology]"
+              }
+            ],
+            "protocol": "restconf",
+            "restconf": {
+              "listen": {
+                "endpoint": [
+                  {
+                    "name": "example restconf server",
+                    "https": {
+                      "tcp-server-parameters": {
+                        "local-address": "172.17.0.2"
+                      },
+                      "http-client-parameters": {
+                        "client-identity": {
+                          "basic": {
+                            "user-id": "carol",
+                            "cleartext-password": "secret"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "resource": [
+        {
+          "resource-id": "default-network-map",
+          "resource-type": "network-map",
+          "accepted-role": [
+            "group0"
+          ],
+          "alto-networkmap-params": {
+            "is-default": true,
+            "example-vendor-alto-alg:l3-unicast-cluster-algorithm": {
+              "l3-unicast-topo": {
+                "source-datastore": "test-yang-ds",
+                "topo-name": "network-topology"
+              },
+              "depth": 2
+            }
+          }
+        }
+      ]
     }
+  },
+  "ietf-key-chain:key-chains": {
+      "key-chain": []
+  }
 }

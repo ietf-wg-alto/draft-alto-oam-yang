@@ -85,7 +85,8 @@ module example-vendor-alto-data-source {
     description
       "Example of data source for YANG datastore.";
     case yang-datastore {
-      when 'derived-from-or-self(source-type, "yang-datastore")';
+      when 'derived-from-or-self(alto:source-type,'
+         + '"yang-datastore")';
       description
         "Example data source for local and/or remote YANG datastore.";
       container yang-datastore-source-params {

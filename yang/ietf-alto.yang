@@ -60,7 +60,7 @@ module ietf-alto {
   feature http-listen {
     description
       "The 'http-listen' feature is only used for test deployment.
-       This feature shouldn't be used in the production 
+       This feature shouldn't be used in the production
        deployment.";
     reference
       "Section 8.3.5 of RFC 7285";
@@ -143,17 +143,17 @@ module ietf-alto {
       "Base identity for type of data source. A data source indicates
       the origin from which the ALTO information resources is derived.";
   }
-  
+
   identity cost-metric {
     description
       "The cost metric indicates what the cost represents.";
     reference
       "Section 6.1.1 of RFC 7285";
   }
-  
+
   identity cost-mode {
     description
-      "The cost mode indicates how costs should be interpreted. 
+      "The cost mode indicates how costs should be interpreted.
        Specifically, the cost mode attribute indicates whether
        indicated costs should be interpreted as numerical
        values or ordinal rankings.";
@@ -434,7 +434,7 @@ module ietf-alto {
           fraction-digits 4;
         }
         units "seconds";
-        mandatory true;        
+        mandatory true;
         description
           "The duration of an ALTO Calendar time interval.";
       }
@@ -671,8 +671,8 @@ module ietf-alto {
       leaf client-id {
         type string;
         description
-          "A unique identifier of a client that can be referenced by a 
-           data source or a resource creation algorithm to communicate 
+          "A unique identifier of a client that can be referenced by a
+           data source or a resource creation algorithm to communicate
            with other ALTO servers.";
       }
       container server-discovery-client {

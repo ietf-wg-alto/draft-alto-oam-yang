@@ -12,7 +12,7 @@ module example-vendor-alto-alg {
   }
 
   import ietf-datastores {
-    prefix ds;
+    prefix ietf-datastores;
     reference
       "RFC8342: Network Management Datastore Architecture (NMDA)";
   }
@@ -54,17 +54,35 @@ module example-vendor-alto-alg {
       container l3-unicast-cluster-algorithm {
         description
           "Parameters for l3-unicast-cluster algorithm";
-        leaf l3-unicast-topo {
-          type leafref {
-            path "/alto:alto/alto:alto-server/alto:data-source"
-               + "/alto-ds:yang-datastore-source-params"
-               + "/alto-ds:target-paths/alto-ds:name";
+        container l3-unicast-topo {
+          leaf source-datastore {
+            type leafref {
+              path '/alto:alto/alto:alto-server/alto:data-source'
+                 + '/alto:source-id';
+            }
+            must 'deref(.)/../alto-ds:yang-datastore-source-params'
+               + '/alto-ds:datastore = "ietf-datastores:operational"'
+               {
+              error-message
+                "The referenced YANG datastore MUST be operational";
+            }
+            mandatory true;
+            description
+              "The data source to YANG datastore.";
           }
-          must 'deref(.)/../..'
-             + '/alto-ds:datastore = "ds:operational"';
-          mandatory true;
+          leaf topo-name {
+            type leafref {
+              path '/alto:alto/alto:alto-server/alto:data-source'
+                 + '[alto:source-id = current()/../source-datastore]'
+                 + '/alto-ds:yang-datastore-source-params'
+                 + '/alto-ds:target-paths/alto-ds:name';
+            }
+            description
+              "The name of the IETF layer 3 unicast topology.";
+          }
           description
-            "The data source to an IETF layer 3 unicast topology.";
+            "The data source info to an IETF layer 3 unicast
+             topology.";
         }
         leaf depth {
           type uint32;
