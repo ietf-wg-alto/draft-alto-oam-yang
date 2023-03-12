@@ -397,12 +397,15 @@ This example defines a creation algorithm called `l3-unicast-cluster-algorithm`
 for the network map resource. It takes two algorithm-specific parameters:
 
 'l3-unicast-topo':
-: This parameter refers to the target path name of an operational
-  `yang-datastore` data source node (See [](#example-data-source)) subscribed
-  in the `data-source` list (See [](#data-source)). The referenced target path
-  in the corresponding `yang-datastore` data source is assumed for an IETF
-  layer 3 unicast topology defined in {{RFC8346}}. The algorithm uses the
-  topology data from this data source to compute the ALTO network map resource.
+: This parameter contains information referring to the target path name of an
+  operational `yang-datastore` data source node (See [](#example-data-source))
+  subscribed in the `data-source` list (See [](#data-source)). The referenced
+  target path in the corresponding `yang-datastore` data source is assumed for
+  an IETF layer 3 unicast topology defined in {{RFC8346}}. The algorithm uses
+  the topology data from this data source to compute the ALTO network map
+  resource. 'source-datastore' refers to the 'source-id' of the operational
+  `yang-datastore` data source node, and 'topo-name' refers to the 'name' of
+  the target path in the source datastore.
 
 'depth':
 : This optional parameter sets the depth of the clustering algorithm. For
@@ -638,9 +641,6 @@ resource, access control).
         }
       ]
     }
-  },
-  "ietf-key-chain:key-chains": {
-      "key-chain": []
   }
 }
 ~~~
