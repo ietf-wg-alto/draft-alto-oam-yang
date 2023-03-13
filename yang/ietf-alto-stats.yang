@@ -71,21 +71,21 @@ module ietf-alto-stats {
          server.";
     }
     leaf num-total-last-req {
-      type yang:counter64;
+      type yang:gauge64;
       config false;
       description
         "The total number of ALTO requests received by the server
          within the last 5 minutes.";
     }
     leaf num-total-last-succ {
-      type yang:counter64;
+      type yang:gauge64;
       config false;
       description
         "The total number of successful responses sent by the ALTO
          server within the last 5 minutes.";
     }
     leaf num-total-last-fail {
-      type yang:counter64;
+      type yang:gauge64;
       config false;
       description
         "The total number of failed responses sent by the ALTO
@@ -104,14 +104,14 @@ module ietf-alto-stats {
          was created.";
     }
     leaf res-mem-size {
-      type yang:counter64;
+      type yang:gauge64;
       units "bytes";
       config false;
       description
         "Memory size utilized by the information resource.";
     }
     leaf res-enc-size {
-      type yang:counter64;
+      type yang:gauge64;
       units "bytes";
       config false;
       description
@@ -145,7 +145,7 @@ module ietf-alto-stats {
     description
       "Augmented statistics for network maps only.";
     leaf num-map-pid {
-      type yang:counter64;
+      type yang:gauge64;
       config false;
       description
         "Number of PIDs contained by the network map.";
@@ -158,7 +158,7 @@ module ietf-alto-stats {
     description
       "Augmented statistics for property maps only.";
     leaf num-map-entry {
-      type yang:counter64;
+      type yang:gauge64;
       config false;
       description
         "Number of ALTO entities contained by the property map.";
@@ -171,7 +171,7 @@ module ietf-alto-stats {
     description
       "Augmented statistics for CDNi resources only.";
     leaf num-base-obj {
-      type yang:counter64;
+      type yang:gauge64;
       config false;
       description
         "Number of base CDNi advertisement objects contained by the
@@ -185,28 +185,28 @@ module ietf-alto-stats {
     description
       "Augmented statistics for incremental updates only.";
     leaf num-upd-sess {
-      type yang:counter64;
+      type yang:gauge64;
       config false;
       description
         "Number of sessions connected to the incremental update
          service.";
     }
     leaf num-event-total {
-      type yang:counter64;
+      type yang:gauge64;
       config false;
       description
         "Total number of update events sent to all the connected
          clients.";
     }
     leaf num-event-max {
-      type yang:counter64;
+      type yang:gauge64;
       config false;
       description
         "The maximum number of update events sent to the connected
          clients.";
     }
     leaf num-event-min {
-      type yang:counter64;
+      type yang:gauge64;
       config false;
       description
         "The minimum number of update events sent to the connected
