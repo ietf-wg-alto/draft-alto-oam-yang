@@ -59,7 +59,7 @@ author:
     name: Roland Schott
     organization: Deutsche Telekom
     email: Roland.Schott@telekom.de
-    street: Heinrich-Hertz-Strasse 3-7
+    street: Ida-Rhodes-Straße 2
     city: Darmstadt
     code: 64295
     country: Germany
