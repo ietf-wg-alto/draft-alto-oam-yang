@@ -38,22 +38,22 @@ module example-vendor-alto-alg {
     description
       "Version 1.0";
     reference
-      "Vendor ALTO Information Resource Creation Algorithms: ALTO O&M
-       YANG Model.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   augment "/alto:alto/alto:alto-server/alto:resource"
         + "/alto:resource-params/alto:networkmap"
         + "/alto:alto-networkmap-params/alto:algorithm" {
     description
-      "Example of network map creation algorithm.";
+      "Example of a network map creation algorithm.";
     case l3-unicast-cluster {
       description
-        "Example algorithm translating an L3 unicast topology of I2RS
-         to an ALTO network map";
+        "Example algorithm translating a Layer 3 unicast topology of 
+         Interface to the Routing System (I2RS) to an ALTO network map.";
       container l3-unicast-cluster-algorithm {
         description
-          "Parameters for l3-unicast-cluster algorithm";
+          "Parameters for l3-unicast-cluster algorithm.";
         container l3-unicast-topo {
           leaf source-datastore {
             type leafref {
@@ -78,10 +78,10 @@ module example-vendor-alto-alg {
                  + '/alto-ds:target-paths/alto-ds:name';
             }
             description
-              "The name of the IETF layer 3 unicast topology.";
+              "The name of the IETF Layer 3 unicast topology.";
           }
           description
-            "The data source info to an IETF layer 3 unicast
+            "The data source info to an IETF Layer 3 unicast
              topology.";
         }
         leaf depth {
