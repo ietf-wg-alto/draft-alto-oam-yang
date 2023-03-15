@@ -34,8 +34,8 @@ module example-vendor-alto-auth {
     description
       "Version 1.0";
     reference
-      "Vendor ALTO Client Authentication Approaches: ALTO O&M YANG
-       Model.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   augment "/alto:alto/alto:alto-server/alto:auth-client"
