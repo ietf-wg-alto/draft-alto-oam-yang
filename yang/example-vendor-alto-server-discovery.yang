@@ -34,7 +34,8 @@ module example-vendor-alto-server-discovery {
     description
       "Version 1.0";
     reference
-      "Vendor ALTO Server Discovery Mechanisms: ALTO O&M YANG Model.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   augment "/alto:alto/alto:alto-server/alto:server-discovery"
@@ -44,7 +45,7 @@ module example-vendor-alto-server-discovery {
        server.";
     case internet-routing-registry {
       description
-        "Update descr attributes of a aut-num class in a Internet
+        "Update descr attributes of an aut-num class in an Internet
          Routing Registry (IRR) database for ALTO server discovery
          using Routing Policy Specification Language (RPSL).";
       reference
@@ -69,8 +70,8 @@ module example-vendor-alto-server-discovery {
         leaf org-id {
           type uint32;
           description
-            "The ID referring to the org object of the
-             organization record in PeeringDB.";
+            "Specifies an identifier that refers to the org object 
+             of the organization record in PeeringDB.";
         }
       }
     }
@@ -83,8 +84,7 @@ module example-vendor-alto-server-discovery {
        client.";
     case internet-routing-registry {
       description
-        "Use Internet Routing Registry (IRR) to discover an ALTO
-         server.";
+        "Use IRR to discover an ALTO server.";
       reference
         "RFC 2622: Routing Policy Specification Language (RPSL).";
       container irr-params {
