@@ -7,8 +7,8 @@ module example-vendor-alto-data-source {
   import ietf-alto {
     prefix alto;
     reference
-      "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
-       Protocol.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   import ietf-datastores {
@@ -21,7 +21,7 @@ module example-vendor-alto-data-source {
     prefix yp;
     reference
       "RFC 8641: Subscription to YANG Notifications for Datastore
-                Updates";
+                 Updates";
   }
 
   import ietf-netconf-client {
@@ -54,7 +54,8 @@ module example-vendor-alto-data-source {
     description
       "Version 1.0";
     reference
-      "Vendor ALTO Data Sources: ALTO O&M YANG Model.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   identity yang-datastore {
@@ -88,7 +89,7 @@ module example-vendor-alto-data-source {
       when 'derived-from-or-self(alto:source-type,'
          + '"yang-datastore")';
       description
-        "Example data source for local and/or remote YANG datastore.";
+        "Example data source for local or remote YANG datastore.";
       container yang-datastore-source-params {
         description
           "YANG datastore specific configuration.";
@@ -96,17 +97,17 @@ module example-vendor-alto-data-source {
           type ds:datastore-ref;
           mandatory true;
           description
-            "Identity reference of the datastore from which to get
-             data.";
+            "Reference of the datastore from which to get data.";
         }
         list target-paths {
           key name;
           description
-            "XPath to subscribed YANG datastore node or subtree.";
+            "XML Path Language (XPath) to subscribed YANG datastore node
+             or subtree.";
           leaf name {
             type string;
             description
-              "Identifier of the supported xpath or subtree filters.";
+              "Name of the supported XPath or subtree filters.";
           }
           uses yp:selection-filter-types;
         }
@@ -115,21 +116,22 @@ module example-vendor-alto-data-source {
             base protocol-type;
           }
           description
-            "Protocol used to access the YANG datastore.";
+            "Indicates the protocol that is used to access the YANG
+             datastore.";
         }
         container restconf {
           uses rcc:restconf-client-app-grouping {
             when 'derived-from-or-self(../protocol, "restconf")';
           }
           description
-            "Parameters for restconf endpoint of the YANG datastore.";
+            "Parameters for the RESTCONF endpoint of the YANG datastore.";
         }
         container netconf {
           uses ncc:netconf-client-app-grouping {
             when 'derived-from-or-self(../protocol, "netconf")';
           }
           description
-            "Parameters for netconf endpoint of the YANG datastore.";
+            "Parameters for the NETCONF endpoint of the YANG datastore.";
         }
       }
     }
