@@ -42,8 +42,8 @@ module ietf-alto-stats {
     description
       "Initial Version.";
     reference
-      "RFC XXXX: A YANG Data Model for Operations, Administration,
-       and Maintenance of ALTO Protocol.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   augment "/alto:alto/alto:alto-server" {
@@ -175,7 +175,7 @@ module ietf-alto-stats {
       config false;
       description
         "Number of base CDNi advertisement objects contained by the
-         CDNi resource.";
+         CDNI resource.";
     }
   }
 
