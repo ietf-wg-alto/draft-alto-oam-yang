@@ -58,7 +58,8 @@ module example-vendor-alto-server-discovery {
     description
       "Version 1.0";
     reference
-      "Vendor ALTO Server Discovery Mechanisms: ALTO O&M YANG Model.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   augment "/alto:alto/alto:alto-server/alto:server-discovery"
@@ -68,7 +69,7 @@ module example-vendor-alto-server-discovery {
        server.";
     case internet-routing-registry {
       description
-        "Update descr attributes of a aut-num class in a Internet
+        "Update descr attributes of an aut-num class in an Internet
          Routing Registry (IRR) database for ALTO server discovery
          using Routing Policy Specification Language (RPSL).";
       reference
@@ -93,8 +94,8 @@ module example-vendor-alto-server-discovery {
         leaf org-id {
           type uint32;
           description
-            "The ID referring to the org object of the
-             organization record in PeeringDB.";
+            "Specifies an identifier that refers to the org object
+             of the organization record in PeeringDB.";
         }
       }
     }
@@ -107,8 +108,7 @@ module example-vendor-alto-server-discovery {
        client.";
     case internet-routing-registry {
       description
-        "Use Internet Routing Registry (IRR) to discover an ALTO
-         server.";
+        "Use IRR to discover an ALTO server.";
       reference
         "RFC 2622: Routing Policy Specification Language (RPSL).";
       container irr-params {
@@ -188,8 +188,8 @@ module example-vendor-alto-auth {
     description
       "Version 1.0";
     reference
-      "Vendor ALTO Client Authentication Approaches: ALTO O&M YANG
-       Model.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   augment "/alto:alto/alto:alto-server/alto:auth-client"
@@ -239,8 +239,8 @@ module example-vendor-alto-data-source {
   import ietf-alto {
     prefix alto;
     reference
-      "RFC XXXX: A YANG Data Model for OAM and Management of ALTO
-       Protocol.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   import ietf-datastores {
@@ -253,7 +253,7 @@ module example-vendor-alto-data-source {
     prefix yp;
     reference
       "RFC 8641: Subscription to YANG Notifications for Datastore
-                Updates";
+                 Updates";
   }
 
   import ietf-netconf-client {
@@ -286,7 +286,8 @@ module example-vendor-alto-data-source {
     description
       "Version 1.0";
     reference
-      "Vendor ALTO Data Sources: ALTO O&M YANG Model.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   identity yang-datastore {
@@ -320,7 +321,7 @@ module example-vendor-alto-data-source {
       when 'derived-from-or-self(alto:source-type,'
          + '"yang-datastore")';
       description
-        "Example data source for local and/or remote YANG datastore.";
+        "Example data source for local or remote YANG datastore.";
       container yang-datastore-source-params {
         description
           "YANG datastore specific configuration.";
@@ -328,17 +329,17 @@ module example-vendor-alto-data-source {
           type ds:datastore-ref;
           mandatory true;
           description
-            "Identity reference of the datastore from which to get
-             data.";
+            "Reference of the datastore from which to get data.";
         }
         list target-paths {
           key name;
           description
-            "XPath to subscribed YANG datastore node or subtree.";
+            "XML Path Language (XPath) to subscribed YANG datastore node
+             or subtree.";
           leaf name {
             type string;
             description
-              "Identifier of the supported xpath or subtree filters.";
+              "Name of the supported XPath or subtree filters.";
           }
           uses yp:selection-filter-types;
         }
@@ -347,21 +348,22 @@ module example-vendor-alto-data-source {
             base protocol-type;
           }
           description
-            "Protocol used to access the YANG datastore.";
+            "Indicates the protocol that is used to access the YANG
+             datastore.";
         }
         container restconf {
           uses rcc:restconf-client-app-grouping {
             when 'derived-from-or-self(../protocol, "restconf")';
           }
           description
-            "Parameters for restconf endpoint of the YANG datastore.";
+            "Parameters for the RESTCONF endpoint of the YANG datastore.";
         }
         container netconf {
           uses ncc:netconf-client-app-grouping {
             when 'derived-from-or-self(../protocol, "netconf")';
           }
           description
-            "Parameters for netconf endpoint of the YANG datastore.";
+            "Parameters for the NETCONF endpoint of the YANG datastore.";
         }
       }
     }
@@ -458,22 +460,22 @@ module example-vendor-alto-alg {
     description
       "Version 1.0";
     reference
-      "Vendor ALTO Information Resource Creation Algorithms: ALTO O&M
-       YANG Model.";
+      "RFC XXXX: YANG Data Models for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   augment "/alto:alto/alto:alto-server/alto:resource"
         + "/alto:resource-params/alto:networkmap"
         + "/alto:alto-networkmap-params/alto:algorithm" {
     description
-      "Example of network map creation algorithm.";
+      "Example of a network map creation algorithm.";
     case l3-unicast-cluster {
       description
-        "Example algorithm translating an L3 unicast topology of I2RS
-         to an ALTO network map";
+        "Example algorithm translating a Layer 3 unicast topology of
+         Interface to the Routing System (I2RS) to an ALTO network map.";
       container l3-unicast-cluster-algorithm {
         description
-          "Parameters for l3-unicast-cluster algorithm";
+          "Parameters for l3-unicast-cluster algorithm.";
         container l3-unicast-topo {
           leaf source-datastore {
             type leafref {
@@ -498,10 +500,10 @@ module example-vendor-alto-alg {
                  + '/alto-ds:target-paths/alto-ds:name';
             }
             description
-              "The name of the IETF layer 3 unicast topology.";
+              "The name of the IETF Layer 3 unicast topology.";
           }
           description
-            "The data source info to an IETF layer 3 unicast
+            "The data source info to an IETF Layer 3 unicast
              topology.";
         }
         leaf depth {

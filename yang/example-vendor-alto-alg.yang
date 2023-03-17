@@ -49,7 +49,7 @@ module example-vendor-alto-alg {
       "Example of a network map creation algorithm.";
     case l3-unicast-cluster {
       description
-        "Example algorithm translating a Layer 3 unicast topology of 
+        "Example algorithm translating a Layer 3 unicast topology of
          Interface to the Routing System (I2RS) to an ALTO network map.";
       container l3-unicast-cluster-algorithm {
         description

@@ -70,7 +70,7 @@ module example-vendor-alto-server-discovery {
         leaf org-id {
           type uint32;
           description
-            "Specifies an identifier that refers to the org object 
+            "Specifies an identifier that refers to the org object
              of the organization record in PeeringDB.";
         }
       }
