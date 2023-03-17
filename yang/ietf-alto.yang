@@ -158,7 +158,7 @@ module ietf-alto {
        indicated costs should be interpreted as numerical
        values or ordinal rankings.";
     reference
-      "Section 6.1.2 of RFC 7285";
+      "Section 6.1.2 of RFC 7285 and RFC 9274";
   }
 
   identity cost-source {
@@ -175,6 +175,8 @@ module ietf-alto {
     base resource-type;
     description
       "Identity for information resource directory.";
+    reference
+      "Section 9 of RFC 7285";
   }
 
   identity network-map {
@@ -193,6 +195,14 @@ module ietf-alto {
       "Section 6 of RFC 7285";
   }
 
+  identity endpoint-prop {
+    base resource-type;
+    description
+      "Identity for endpoint property service.";
+    reference
+      "Section 11.4.1 of RFC 7285";
+  }
+
   identity endpoint-cost {
     base resource-type;
     description
@@ -201,16 +211,12 @@ module ietf-alto {
       "Section 11.5.1 of RFC 7285";
   }
 
-  identity endpoint-prop {
-    base resource-type;
-    description
-      "Identity for endpoint property service.";
-  }
-
   identity property-map {
     base resource-type;
     description
       "Identity for property map.";
+    reference
+      "RFC 9240: An ALTO Extension: Entity Property Maps";
   }
 
   identity cdni {
@@ -218,12 +224,19 @@ module ietf-alto {
     description
       "Identity for Content Delivery Network Interconnection (CDNI)
        advertisement service.";
+    reference
+      "RFC 9241: Content Delivery Network Interconnection (CDNI)
+                 Request Routing: CDNI Footprint and Capabilities
+                 Advertisement using ALTO";
   }
 
   identity update {
     base resource-type;
     description
       "Identity for update stream service.";
+    reference
+      "RFC 8895: Application-Layer Traffic Optimization (ALTO)
+                 Incremental Updates Using Server-Sent Events (SSE)";
   }
 
   // Identities for cost mode
@@ -233,6 +246,8 @@ module ietf-alto {
     description
       "This mode indicates that it is safe to perform numerical
        operations";
+    reference
+      "Section 6.1.2.1 of RFC 7285";
   }
 
   identity ordinal {
@@ -240,6 +255,8 @@ module ietf-alto {
     description
       "This mode indicates that the cost values in a cost map
        represent ranking";
+    reference
+      "Section 6.1.2.2 of RFC 7285";
   }
 
   identity array {
@@ -249,6 +266,8 @@ module ietf-alto {
       "This mode indicates that every cost value in the response body
        of a (Filtered) Cost Map or an Endpoint Cost Service is
        interpreted as a JSON array.";
+    reference
+      "Section 6.5.2 of RFC 9275";
   }
 
   // Identities for cost metrics
@@ -258,6 +277,8 @@ module ietf-alto {
     description
       "This metric conveys a generic measure for the cost of routing
        traffic from a source to a destination.";
+    reference
+      "Section 6.1.1.1 of RFC 7285";
   }
 
   identity ane-path {
@@ -268,6 +289,8 @@ module ietf-alto {
        conveys an array of Abstract Network Element (ANE) names,
        where each ANE name uniquely represents an ANE traversed by
        traffic from a source to a destination.";
+    reference
+      "Section 6.5.1 of RFC 9275";
   }
 
   identity delay-ow {
