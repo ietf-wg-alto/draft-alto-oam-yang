@@ -51,10 +51,30 @@ to implement `ietf-alto.yang` (see [](#alto-model)). The performance monitor
 and logging and fault manager need to implement `ietf-alto-stats.yang` (see
 [](#alto-stats-model)).
 
+In practice, an ALTO server may not follow this architecture exactly. But to
+implement the YANG modules defined by this document, it should contain all the
+server components above as a minimal implementation.
+
 The data broker and algorithm plugins are not in the scope of the data models
 defined in this document. But user-specified YANG modules can be applied to
 different algorithm plugins by augmenting the data model defined in this
 document (see [](#alto-ext-model)).
+
+Generally, these server components of an ALTO server have the following
+interactions with each others:
+
+- Both the server manager and information resource manager will report
+  statistics data to performance monitor and logging and fault manager.
+- The algorithm plugins will register callbacks to the corresponding ALTO
+  information resources upon the configuration; Once an ALTO information
+  resource is requested, the registered callback algorithm will be invoked.
+- A data source listener will fetch data from the configured data source using
+  the corresponding southbound API in either proactive mode (polling) or
+  reactive mode (subscription/publication).
+- A data source listener will update the preprocessed data to an optional data
+  broker.
+- An algorithm plugin may read data from an optional data broker to calculate
+  the ALTO information resource.
 
 ~~~
   +----------------------+      +-----------------+
