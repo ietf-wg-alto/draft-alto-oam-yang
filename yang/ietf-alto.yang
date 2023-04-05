@@ -57,6 +57,23 @@ module ietf-alto {
 
   // Features
 
+  feature alto-client {
+    description
+      "Indicates that the device implements a library for starting
+       ALTO clients.";
+    reference
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol";
+  }
+
+  feature alto-server {
+    description
+      "Indicates that the device implements an ALTO server instance.";
+    reference
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol";
+  }
+
   feature http-listen {
     description
       "The 'http-listen' feature is only used for test deployment.
@@ -382,21 +399,100 @@ module ietf-alto {
       "Section 3.1 of RFC YYYY";
   }
 
+  // Typedefs
+
   typedef resource-id {
     type string {
       length "1..64";
       pattern '[0-9a-zA-Z\-:@_]*';
     }
     description
-      "Format of Resource ID";
+      "Type for a resource ID that are used to reference an ALTO
+       information resource.";
     reference
       "Section 9.1.1 of RFC 7285";
   }
 
-  typedef role-name {
-    type string;
+  typedef cost-type-name {
+    type string {
+      length "1..max";
+    }
     description
-      "Name of a role for role-based access control.";
+      "Type for the name of a single CostType that can be referenced
+       by other ALTO information resources.";
+    reference
+      "Section 9.2.2 of RFC 7285";
+  }
+
+  typedef meta-key {
+    type string {
+      length "1..max";
+    }
+    description
+      "Type for a custom meta key of an ALTO server.";
+    reference
+      "Section 8.4.1 of RFC 7285";
+  }
+
+  typedef endpoint-property {
+    type union {
+      type resource-specific-endpoint-property;
+      type global-endpoint-property;
+    }
+    description
+      "Type for an endpoint property.";
+    reference
+      "Section 10.8 of RFC 7285";
+  }
+
+  typedef resource-specific-endpoint-property {
+    type string {
+      length "1..97";
+      pattern '[0-9a-zA-Z\-:@_]*\.[0-9a-zA-Z\-:_]*';
+    }
+    description
+      "Type for a resource-specific endpoint property.";
+    reference
+      "Section 10.8.1 of RFC 7285";
+  }
+
+  typedef global-endpoint-property {
+    type string {
+      length "1..32";
+      pattern '[0-9a-zA-Z\-:_]*';
+    }
+    description
+      "Type for a global endpoint property.";
+    reference
+      "Section 10.8.2 of RFC 7285";
+  }
+
+  typedef source-id {
+    type string {
+      length "1..max";
+      pattern '[0-9a-zA-Z\-:@_]*';
+    }
+    description
+      "Type for a data source ID that are used to reference a data
+       source.";
+  }
+
+  typedef role-name {
+    type string {
+      length "1..max";
+      pattern '[0-9a-zA-Z\-:@_]*';
+    }
+    description
+      "Type for a name of a role for role-based access control.";
+  }
+
+  typedef data-source-ref {
+    type leafref {
+      path "/alto:alto/alto:alto-server/alto:data-source"
+         + "/alto:source-id";
+    }
+    description
+      "Type for a leafref of a data source ID.";
   }
 
   // Groupings
@@ -407,8 +503,11 @@ module ietf-alto {
        FilteredCostMapCapabilities.";
     reference
       "Section 11.3.2.4 of RFC 7285";
-    leaf-list cost-type-names {
-      type string;
+    leaf-list cost-type-name {
+      type leafref {
+        path "/alto:alto/alto:alto-server/alto:cost-type"
+           + "/alto:cost-type-name";
+      }
       min-elements 1;
       description
         "Supported cost types.";
@@ -431,9 +530,12 @@ module ietf-alto {
          multi-cost map with any combination of N or
          fewer cost types in the 'cost-type-names' list.";
     }
-    leaf-list testable-cost-type-names {
+    leaf-list testable-cost-type-name {
       if-feature "multi-cost";
-      type string;
+      type leafref {
+        path "/alto:alto/alto:alto-server/alto:cost-type"
+           + "/alto:cost-type-name";
+      }
       description
         "If present, the resource allows constraint tests, but only
          on the cost type names in this array.";
@@ -493,6 +595,8 @@ module ietf-alto {
       description
         "Information resource creation algorithm to be augmented.";
     }
+    reference
+      "Section 5.4.2 of RFC XXXX";
   }
 
   grouping alto-server-grouping {
@@ -672,7 +776,6 @@ module ietf-alto {
             type inet:uri {
               pattern 'file:.*';
             }
-            default "file:/etc/syslog.conf";
             description
               "The file location of the syslog configuration.";
           }
@@ -686,8 +789,11 @@ module ietf-alto {
   container alto {
     presence "The ALTO service is enabled";
     description
-      "Indicates a set of parameters for both ALTO clients and servers.";
+      "Indicates a set of parameters for both ALTO clients and
+       servers. A single device can implement either alto-client or
+       alto-server. No need to implement both.";
     list alto-client {
+      if-feature alto-client;
       key "client-id";
       description
         "The ALTO client configuration.";
@@ -705,6 +811,7 @@ module ietf-alto {
       }
     }
     container alto-server {
+      if-feature alto-server;
       description
         "The ALTO server instance configuration.";
       container listen {
@@ -728,7 +835,7 @@ module ietf-alto {
         description
           "Mapping between name and referenced cost type.";
         leaf cost-type-name {
-          type string;
+          type cost-type-name;
           description
             "The name to reference a cost type.";
         }
@@ -784,15 +891,16 @@ module ietf-alto {
         reference
           "Section 8.4.1 of RFC 7285.";
         leaf meta-key {
-          type string;
+          type meta-key;
           description
             "Custom meta key";
         }
         leaf meta-value {
-          type string;
+          type binary;
           mandatory true;
           description
-            "Custom meta value";
+            "Custom meta value encoded with the base64 encoding
+             schema. The encoded value MUST be a valid JSON value.";
         }
       }
       list auth-client {
@@ -807,7 +915,8 @@ module ietf-alto {
         choice authentication {
           description
             "Choice of authentication methods to identify this
-             ALTO client.";
+             ALTO client. If no authentication method is configured,
+             the client MUST be ignored.";
           case http {
             description
               "The client is authenticated by the HTTP server.";
@@ -878,7 +987,7 @@ module ietf-alto {
         description
           "List of subscribed data sources.";
         leaf source-id {
-          type string;
+          type source-id;
           description
             "Data source id that can be referenced by information
              resource creation algorithms.";
@@ -921,10 +1030,13 @@ module ietf-alto {
                    publish an update.";
                 leaf feed-interval {
                   type uint32;
+                  units "seconds";
                   mandatory true;
                   description
                     "Duration of time that should occur between
-                     periodic push updates, in units of seconds.";
+                     periodic push updates, in units of seconds. If it
+                     is set to zero, it is equivalent to the on-change
+                     mode.";
                 }
               }
             }
@@ -935,15 +1047,23 @@ module ietf-alto {
                proactively pull data from the data source.";
             leaf poll-interval {
               type uint32;
+              units "seconds";
               mandatory true;
               description
-                "Polling interval in seconds for proactive mode.";
+                "Polling interval in seconds for proactive mode. If it
+                 is set to zero, the data source listener will never
+                 pull data periodically. The data can still be pulled
+                 when an algorithm plugin of an information resource
+                 calls this data source listener. This can be useful
+                 for some on-demand settings.";
             }
           }
         }
         choice source-params {
           description
             "Data source specific configuration.";
+          reference
+            "Section 5.4.1 of RFC XXXX";
         }
       }
       list resource {
@@ -1061,7 +1181,7 @@ module ietf-alto {
               reference
                 "Section 11.5 of RFC 7285";
               leaf-list prop-types {
-                type string;
+                type endpoint-property;
                 min-elements 1;
                 description
                   "Supported endpoint properties.";
