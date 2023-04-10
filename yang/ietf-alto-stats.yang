@@ -46,188 +46,216 @@ module ietf-alto-stats {
                  Traffic Optimization (ALTO) Protocol";
   }
 
-  augment "/alto:alto/alto:alto-server" {
-    description
-      "Includes statistics and configuration parameters for
-       server-level monitoring.";
-    container server-level-monitor {
-      description
-        "Top-level statistics for the whole ALTO server.";
-      leaf num-total-req {
-        type yang:counter64;
-        config false;
-        description
-          "The total number of ALTO requests received by the ALTO
-           server.";
-      }
-      leaf num-total-succ {
-        type yang:counter64;
-        config false;
-        description
-          "The total number of successful responses sent by the ALTO
-           server.";
-      }
-      leaf num-total-fail {
-        type yang:counter64;
-        config false;
-        description
-          "The total number of failed responses sent by the ALTO
-           server.";
-      }
-      leaf num-total-last-req {
-        type yang:gauge64;
-        config false;
-        description
-          "The total number of ALTO requests received by the server
-           within the last 5 minutes.";
-      }
-      leaf num-total-last-succ {
-        type yang:gauge64;
-        config false;
-        description
-          "The total number of successful responses sent by the ALTO
-           server within the last 5 minutes.";
-      }
-      leaf num-total-last-fail {
-        type yang:gauge64;
-        config false;
-        description
-          "The total number of failed responses sent by the ALTO
-           server within the last 5 minutes.";
-      }
-    }
-  }
+  // Groupings
 
-  augment "/alto:alto/alto:alto-server/alto:resource" {
+  grouping server-level-stats {
     description
-      "Includes statistics and configuration parameters for
-       resource-level monitoring.";
-    container resource-level-monitor {
+      "This grouping defines statistics for server-level monitoring";
+    leaf discontinuity-time {
+      type yang:timestamp;
       description
-        "Common statistics for each information resource.";
-      leaf num-res-upd {
-        type yang:counter64;
-        config false;
-        description
-          "The number of version updates since the information resource
-           was created.";
-      }
-      leaf res-mem-size {
-        type uint64;
-        units "bytes";
-        config false;
-        description
-          "Memory size utilized by the information resource.";
-      }
-      leaf res-enc-size {
-        type uint64;
-        units "bytes";
-        config false;
-        description
-          "Size of JSON encoded data of the information resource.";
-      }
-      leaf num-res-req {
-        type yang:counter64;
-        config false;
-        description
-          "The number of ALTO requests to this information resource.";
-      }
-      leaf num-res-succ {
-        type yang:counter64;
-        config false;
-        description
-          "The number of successful responses for requests to this
-           information resource.";
-      }
-      leaf num-res-fail {
-        type yang:counter64;
-        config false;
-        description
-          "The total number of failed responses for requests to this
-           information resource.";
-      }
+        "The time on the most recent occasion at which the ALTO
+         server suffered a discontinuity. This must be initialized
+         when the ALTO server is configured or rebooted.";
     }
-  }
-
-  augment "/alto:alto/alto:alto-server/alto:resource"
-        + "/alto:resource-params/alto:networkmap"
-        + "/alto:alto-networkmap-params" {
-    description
-      "Augmented statistics for network maps only.";
-    leaf num-map-pid {
+    leaf last-report-time {
+      type yang:timestamp;
+      description
+        "The time on the most recent occasion at which the statistics
+         are reported.";
+    }
+    leaf num-total-req {
+      type yang:counter64;
+      description
+        "The total number of ALTO requests received by the ALTO
+         server.";
+    }
+    leaf num-total-succ {
+      type yang:counter64;
+      description
+        "The total number of successful responses sent by the ALTO
+         server.";
+    }
+    leaf num-total-fail {
+      type yang:counter64;
+      description
+        "The total number of failed responses sent by the ALTO
+         server.";
+    }
+    leaf num-total-last-req {
       type yang:gauge64;
-      config false;
+      description
+        "The total number of ALTO requests received by the server
+         within the last time window.";
+    }
+    leaf num-total-last-succ {
+      type yang:gauge64;
+      description
+        "The total number of successful responses sent by the ALTO
+         server within the last time window.";
+    }
+    leaf num-total-last-fail {
+      type yang:gauge64;
+      description
+        "The total number of failed responses sent by the ALTO
+         server within the last time window.";
+    }
+  }
+
+  grouping resource-level-stats {
+    description
+      "This grouping defines statistics for resource-level monitoring";
+    leaf discontinuity-time {
+      type yang:timestamp;
+      description
+        "The time on the most recent occasion at which the ALTO
+         service providing the information resource suffered a
+         discontinuity. This must be initialized when the ALTO
+         information resource is configured or the ALTO server is
+         rebooted.";
+    }
+    leaf last-report-time {
+      type yang:timestamp;
+      description
+        "The time on the most recent occasion at which the statistics
+         are reported.";
+    }
+    leaf num-res-upd {
+      type yang:counter64;
+      description
+        "The number of version updates since the information resource
+         was created.";
+    }
+    leaf res-mem-size {
+      type uint64;
+      units "bytes";
+      description
+        "Memory size utilized by the information resource.";
+    }
+    leaf res-enc-size {
+      type uint64;
+      units "bytes";
+      description
+        "Size of JSON encoded data of the information resource.";
+    }
+    leaf num-res-req {
+      type yang:counter64;
+      description
+        "The number of ALTO requests to this information resource.";
+    }
+    leaf num-res-succ {
+      type yang:counter64;
+      description
+        "The number of successful responses for requests to this
+         information resource.";
+    }
+    leaf num-res-fail {
+      type yang:counter64;
+      description
+        "The total number of failed responses for requests to this
+         information resource.";
+    }
+    leaf num-map-pid {
+      when 'derived-from-or-self(../alto:resource-type,'
+         + '"alto:network-map")';
+      type yang:gauge64;
       description
         "Number of PIDs contained by the network map.";
     }
-  }
-
-  augment "/alto:alto/alto:alto-server/alto:resource"
-        + "/alto:resource-params/alto:propmap"
-        + "/alto:alto-propmap-params" {
-    description
-      "Augmented statistics for property maps only.";
     leaf num-map-entry {
+      when 'derived-from-or-self(../alto:resource-type,'
+         + '"alto:endpoint-prop") or '
+         + 'derived-from-or-self(../alto:resource-type,'
+         + '"alto:property-map")';
       type yang:gauge64;
-      config false;
       description
         "Number of ALTO entities contained by the property map.";
     }
-  }
-
-  augment "/alto:alto/alto:alto-server/alto:resource"
-        + "/alto:resource-params/alto:cdni"
-        + "/alto:alto-cdni-params" {
-    description
-      "Augmented statistics for CDNi resources only.";
     leaf num-base-obj {
+      when 'derived-from-or-self(../alto:resource-type,'
+         + '"alto:cdni")';
       type yang:gauge64;
-      config false;
       description
         "Number of base CDNi advertisement objects contained by the
          CDNI resource.";
     }
-  }
-
-  augment "/alto:alto/alto:alto-server/alto:resource"
-        + "/alto:resource-params/alto:update"
-        + "/alto:alto-update-params" {
-    description
-      "Augmented statistics for incremental updates only.";
     leaf num-upd-sess {
+      when 'derived-from-or-self(../alto:resource-type,'
+         + '"alto:update")';
       type yang:gauge64;
-      config false;
       description
         "Number of sessions connected to the incremental update
          service.";
     }
     leaf num-event-total {
+      when 'derived-from-or-self(../alto:resource-type,'
+         + '"alto:update")';
       type yang:gauge64;
-      config false;
       description
         "Total number of update events sent to all the connected
          clients.";
     }
     leaf num-event-max {
+      when 'derived-from-or-self(../alto:resource-type,'
+         + '"alto:update")';
       type yang:gauge64;
-      config false;
       description
         "The maximum number of update events sent to the connected
          clients.";
     }
     leaf num-event-min {
+      when 'derived-from-or-self(../alto:resource-type,'
+         + '"alto:update")';
       type yang:gauge64;
-      config false;
       description
         "The minimum number of update events sent to the connected
          clients.";
     }
     leaf num-event-avg {
+      when 'derived-from-or-self(../alto:resource-type,'
+         + '"alto:update")';
       type yang:gauge64;
-      config false;
       description
         "The average number of update events sent by the ALTO server
          to the connected clients.";
+    }
+  }
+
+  // Augment modules to add statistics
+
+  augment "/alto:alto/alto:alto-server" {
+    description
+      "Augmenting statistics and configuration parameters for
+       server-level monitoring.";
+    container server-level-monitor-config {
+      description
+        "Configuration parameters for server-level monitoring.";
+      leaf time-window-size {
+        type uint32;
+        units "seconds";
+        default "300";
+        description
+          "Duration of the time window within that the statistics are
+           reported.";
+      }
+    }
+    container server-level-stats {
+      config false;
+      description
+        "Top-level statistics for the whole ALTO server.";
+      uses server-level-stats;
+    }
+  }
+
+  augment "/alto:alto/alto:alto-server/alto:resource" {
+    description
+      "Augmenting statistics and configuration parameters for
+       resource-level monitoring.";
+    container resource-level-stats {
+      config false;
+      description
+        "Common statistics for each information resource.";
+      uses resource-level-stats;
     }
   }
 }
