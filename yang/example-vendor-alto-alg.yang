@@ -43,7 +43,6 @@ module example-vendor-alto-alg {
   }
 
   augment "/alto:alto/alto:alto-server/alto:resource"
-        + "/alto:resource-params/alto:networkmap"
         + "/alto:alto-networkmap-params/alto:algorithm" {
     description
       "Example of a network map creation algorithm.";

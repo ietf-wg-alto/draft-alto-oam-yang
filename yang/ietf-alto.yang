@@ -535,7 +535,7 @@ module ietf-alto {
        FilteredCostMapCapabilities.";
     reference
       "RFC 7285: Application-Layer Traffic Optimization (ALTO)
-                 Protocol, Section Section 11.3.2.4";
+                 Protocol, Section 11.3.2.4";
     leaf-list cost-type-name {
       type cost-type-ref;
       min-elements 1;
@@ -610,7 +610,7 @@ module ietf-alto {
        filter-costmap-cap.";
     reference
       "RFC 7285: Application-Layer Traffic Optimization (ALTO)
-                 Protocol, Section Section 11.5.1.4";
+                 Protocol, Section 11.5.1.4";
     uses filter-costmap-cap;
   }
 
@@ -1132,125 +1132,105 @@ module ietf-alto {
           description
             "A list of dependent information resources.";
         }
-        choice resource-params {
+        container alto-ird-params {
+          when 'derived-from-or-self(../resource-type, "alto:ird")';
           description
-            "Resource-specific configuration.";
-          case ird {
-            when 'derived-from-or-self(resource-type, "alto:ird")';
-            container alto-ird-params {
-              description
-                "IRD-specific configuration.";
-              leaf delegation {
-                type inet:uri;
-                mandatory true;
-                description
-                  "Upstream IRD to be delegated.";
-              }
-            }
+            "IRD-specific configuration.";
+          leaf delegation {
+            type inet:uri;
+            mandatory true;
+            description
+              "Upstream IRD to be delegated.";
           }
-          case networkmap {
-            when 'derived-from-or-self(resource-type,'
-               + '"alto:network-map")';
-            container alto-networkmap-params {
-              description
-                "(Filtered) Network Map specific configuration.";
-              reference
-                "RFC 7285: Application-Layer Traffic Optimization
-                           (ALTO) Protocol, Sections 11.2.1 and Section 11.3.1";
-              leaf is-default {
-                type boolean;
-                description
-                  "Set whether this is the default network map.";
-              }
-              leaf filtered {
-                type boolean;
-                default false;
-                description
-                  "Configure whether filtered network map is
-                   supported.";
-              }
-              uses algorithm;
-            }
+        }
+        container alto-networkmap-params {
+          when 'derived-from-or-self(../resource-type,'
+             + '"alto:network-map")';
+          description
+            "(Filtered) Network Map specific configuration.";
+          reference
+            "RFC 7285: Application-Layer Traffic Optimization
+                       (ALTO) Protocol, Sections 11.2.1 and Section 11.3.1";
+          leaf is-default {
+            type boolean;
+            description
+              "Set whether this is the default network map.";
           }
-          case costmap {
-            when 'derived-from-or-self(resource-type,'
-               + '"alto:cost-map")';
-            container alto-costmap-params {
-              description
-                "Filtered Cost Map specific configuration.";
-              reference
-                "RFC 7285: Application-Layer Traffic Optimization
-                           (ALTO) Protocol, Sections 11.2.2 and 11.3.2";
-              leaf filtered {
-                type boolean;
-                description
-                  "Configure whether filtered cost map is supported.";
-              }
-              uses filter-costmap-cap;
-              uses algorithm;
-            }
+          leaf filtered {
+            type boolean;
+            default false;
+            description
+              "Configure whether filtered network map is
+               supported.";
           }
-          case endpointcost {
-            when 'derived-from-or-self(resource-type,'
-               + '"alto:endpoint-cost")';
-            container alto-endpointcost-params {
-              description
-                "Endpoint Cost Service specific configuration.";
-              reference
-                "RFC 7285: Application-Layer Traffic Optimization
-                           (ALTO) Protocol, Section 11.5";
-              uses endpoint-cost-cap;
-              uses algorithm;
-            }
+          uses algorithm;
+        }
+        container alto-costmap-params {
+          when 'derived-from-or-self(../resource-type,'
+             + '"alto:cost-map")';
+          description
+            "Filtered Cost Map specific configuration.";
+          reference
+            "RFC 7285: Application-Layer Traffic Optimization
+                       (ALTO) Protocol, Sections 11.2.2 and 11.3.2";
+          leaf filtered {
+            type boolean;
+            description
+              "Configure whether filtered cost map is supported.";
           }
-          case endpointprop {
-            when 'derived-from-or-self(resource-type,'
-               + '"alto:endpoint-prop")';
-            container alto-endpointprop-params {
-              description
-                "Endpoint Cost Service specific configuration.";
-              reference
-                "RFC 7285: Application-Layer Traffic Optimization
-                           (ALTO) Protocol, Section 11.5";
-              leaf-list prop-type {
-                type endpoint-property;
-                min-elements 1;
-                description
-                  "Supported endpoint properties.";
-              }
-              uses algorithm;
-            }
+          uses filter-costmap-cap;
+          uses algorithm;
+        }
+        container alto-endpointcost-params {
+          when 'derived-from-or-self(../resource-type,'
+             + '"alto:endpoint-cost")';
+          description
+            "Endpoint Cost Service specific configuration.";
+          reference
+            "RFC 7285: Application-Layer Traffic Optimization
+                       (ALTO) Protocol, Section 11.5";
+          uses endpoint-cost-cap;
+          uses algorithm;
+        }
+        container alto-endpointprop-params {
+          when 'derived-from-or-self(../resource-type,'
+             + '"alto:endpoint-prop")';
+          description
+            "Endpoint Cost Service specific configuration.";
+          reference
+            "RFC 7285: Application-Layer Traffic Optimization
+                       (ALTO) Protocol, Section 11.5";
+          leaf-list prop-type {
+            type endpoint-property;
+            min-elements 1;
+            description
+              "Supported endpoint properties.";
           }
-          case propmap {
-            when 'derived-from-or-self(resource-type,'
-               + '"alto:property-map")';
-            if-feature "propmap";
-            container alto-propmap-params {
-              description
-                "(Filtered) Entity Property Map specific
-                 configuration.";
-              uses algorithm;
-            }
-          }
-          case cdni {
-            when 'derived-from-or-self(resource-type, "alto:cdni")';
-            if-feature "cdni";
-            container alto-cdni-params {
-              description
-                "CDNi specific configuration.";
-              uses algorithm;
-            }
-          }
-          case update {
-            when 'derived-from-or-self(resource-type,'
-               + '"alto:update")';
-            if-feature "incr-update";
-            container alto-update-params {
-              description
-                "Incremental Updates specific configuration.";
-              uses algorithm;
-            }
-          }
+          uses algorithm;
+        }
+        container alto-propmap-params {
+          when 'derived-from-or-self(../resource-type,'
+             + '"alto:property-map")';
+          if-feature "propmap";
+          description
+            "(Filtered) Entity Property Map specific
+             configuration.";
+          uses algorithm;
+        }
+        container alto-cdni-params {
+          when 'derived-from-or-self(../resource-type, "alto:cdni")';
+          if-feature "cdni";
+          description
+            "CDNi specific configuration.";
+          uses algorithm;
+        }
+        container alto-update-params {
+          when 'derived-from-or-self(../resource-type,'
+             + '"alto:update")';
+          if-feature "incr-update";
+          description
+            "Incremental Updates specific configuration.";
+          uses algorithm;
         }
       }
     }
