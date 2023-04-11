@@ -156,23 +156,23 @@ module ietf-alto-stats {
          information resource.";
     }
     leaf num-map-pid {
-      when 'derived-from-or-self(../alto:resource-type,'
+      when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:network-map")';
       type yang:gauge64;
       description
         "Number of PIDs contained by the network map.";
     }
     leaf num-map-entry {
-      when 'derived-from-or-self(../alto:resource-type,'
+      when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:endpoint-prop") or '
-         + 'derived-from-or-self(../alto:resource-type,'
+         + 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:property-map")';
       type yang:gauge64;
       description
         "Number of ALTO entities contained by the property map.";
     }
     leaf num-base-obj {
-      when 'derived-from-or-self(../alto:resource-type,'
+      when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:cdni")';
       type yang:gauge64;
       description
@@ -180,7 +180,7 @@ module ietf-alto-stats {
          CDNI resource.";
     }
     leaf num-upd-sess {
-      when 'derived-from-or-self(../alto:resource-type,'
+      when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:update")';
       type yang:gauge64;
       description
@@ -188,7 +188,7 @@ module ietf-alto-stats {
          service.";
     }
     leaf num-event-total {
-      when 'derived-from-or-self(../alto:resource-type,'
+      when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:update")';
       type yang:gauge64;
       description
@@ -196,7 +196,7 @@ module ietf-alto-stats {
          clients.";
     }
     leaf num-event-max {
-      when 'derived-from-or-self(../alto:resource-type,'
+      when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:update")';
       type yang:gauge64;
       description
@@ -204,7 +204,7 @@ module ietf-alto-stats {
          clients.";
     }
     leaf num-event-min {
-      when 'derived-from-or-self(../alto:resource-type,'
+      when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:update")';
       type yang:gauge64;
       description
@@ -212,7 +212,7 @@ module ietf-alto-stats {
          clients.";
     }
     leaf num-event-avg {
-      when 'derived-from-or-self(../alto:resource-type,'
+      when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:update")';
       type yang:gauge64;
       description

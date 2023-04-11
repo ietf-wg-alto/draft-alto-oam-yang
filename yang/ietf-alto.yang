@@ -546,7 +546,7 @@ module ietf-alto {
         "Configuration for CalendarAttributes.";
       reference
         "Section 4.1 of RFC 8896";
-      leaf-list cost-type-names {
+      leaf-list cost-type-name {
         type string;
         min-elements 1;
         description
@@ -1180,7 +1180,7 @@ module ietf-alto {
                 "Endpoint Cost Service specific configuration.";
               reference
                 "Section 11.5 of RFC 7285";
-              leaf-list prop-types {
+              leaf-list prop-type {
                 type endpoint-property;
                 min-elements 1;
                 description
