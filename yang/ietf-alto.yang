@@ -486,6 +486,15 @@ module ietf-alto {
       "Type for a name of a role for role-based access control.";
   }
 
+  typedef cost-type-ref {
+    type leafref {
+      path "/alto:alto/alto:alto-server/alto:cost-type"
+         + "/alto:cost-type-name";
+    }
+    description
+      "Type for a leafref of a cost type name.";
+  }
+
   typedef data-source-ref {
     type leafref {
       path "/alto:alto/alto:alto-server/alto:data-source"
@@ -504,10 +513,7 @@ module ietf-alto {
     reference
       "Section 11.3.2.4 of RFC 7285";
     leaf-list cost-type-name {
-      type leafref {
-        path "/alto:alto/alto:alto-server/alto:cost-type"
-           + "/alto:cost-type-name";
-      }
+      type cost-type-ref;
       min-elements 1;
       description
         "Supported cost types.";
@@ -532,10 +538,7 @@ module ietf-alto {
     }
     leaf-list testable-cost-type-name {
       if-feature "multi-cost";
-      type leafref {
-        path "/alto:alto/alto:alto-server/alto:cost-type"
-           + "/alto:cost-type-name";
-      }
+      type cost-type-ref;
       description
         "If present, the resource allows constraint tests, but only
          on the cost type names in this array.";
@@ -547,7 +550,7 @@ module ietf-alto {
       reference
         "Section 4.1 of RFC 8896";
       leaf-list cost-type-name {
-        type string;
+        type cost-type-ref;
         min-elements 1;
         description
           "An array of one or more elements indicating the cost type
