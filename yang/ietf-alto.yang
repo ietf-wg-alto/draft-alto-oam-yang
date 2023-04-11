@@ -6,7 +6,7 @@ module ietf-alto {
   import ietf-inet-types {
     prefix inet;
     reference
-      "RFC 6991: Common YANG Data Types";
+      "RFC 6991: Common YANG Data Types, Section 4";
   }
   import ietf-tcp-server {
     prefix tcp;
@@ -30,8 +30,8 @@ module ietf-alto {
     "WG Web:   <https://datatracker.ietf.org/wg/alto/about/>
      WG List:  <alto@ietf.org>";
   description
-    "This YANG module defines all the configured and operational
-     parameters of the administrated ALTO server instance.
+    "This YANG module defines a set of configured and operational
+     parameters of an administrated ALTO server instance.
 
      Copyright (c) 2023 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -59,8 +59,8 @@ module ietf-alto {
 
   feature alto-client {
     description
-      "Indicates that the device implements a library for starting
-       ALTO clients.";
+      "Indicates that the implementation embeds an ALTO client
+       instance.";
     reference
       "RFC 7285: Application-Layer Traffic Optimization (ALTO)
                  Protocol";
@@ -68,7 +68,8 @@ module ietf-alto {
 
   feature alto-server {
     description
-      "Indicates that the device implements an ALTO server instance.";
+      "Indicates that the implementation embeds an ALTO server
+       instance.";
     reference
       "RFC 7285: Application-Layer Traffic Optimization (ALTO)
                  Protocol";
@@ -80,7 +81,8 @@ module ietf-alto {
        This feature shouldn't be used in the production
        deployment.";
     reference
-      "Section 8.3.5 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 8.3.5 ";
   }
 
   feature xdom-disc {
@@ -152,20 +154,22 @@ module ietf-alto {
     description
       "Base identity for type of information resource.";
     reference
-      "Section 8.1 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 8.1 ";
   }
 
   identity source-type {
     description
       "Base identity for type of data source. A data source indicates
-      the origin from which the ALTO information resources is derived.";
+       the origin from which the ALTO information resources are derived.";
   }
 
   identity cost-metric {
     description
       "The cost metric indicates what the cost represents.";
     reference
-      "Section 6.1.1 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 6.1.1";
   }
 
   identity cost-mode {
@@ -175,7 +179,10 @@ module ietf-alto {
        indicated costs should be interpreted as numerical
        values or ordinal rankings.";
     reference
-      "Section 6.1.2 of RFC 7285 and RFC 9274";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 6.1.2
+       RFC 9274: A Cost Mode Registry for the Application-Layer
+                 Traffic Optimization (ALTO) Protocol";
   }
 
   identity cost-source {
@@ -193,7 +200,8 @@ module ietf-alto {
     description
       "Identity for information resource directory.";
     reference
-      "Section 9 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 9";
   }
 
   identity network-map {
@@ -201,7 +209,8 @@ module ietf-alto {
     description
       "Identity for network map.";
     reference
-      "Section 5 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 5";
   }
 
   identity cost-map {
@@ -209,7 +218,8 @@ module ietf-alto {
     description
       "Identity for cost map.";
     reference
-      "Section 6 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 6";
   }
 
   identity endpoint-prop {
@@ -217,7 +227,8 @@ module ietf-alto {
     description
       "Identity for endpoint property service.";
     reference
-      "Section 11.4.1 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 11.4.1";
   }
 
   identity endpoint-cost {
@@ -225,7 +236,8 @@ module ietf-alto {
     description
       "Identity for endpoint cost service.";
     reference
-      "Section 11.5.1 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 11.5.1";
   }
 
   identity property-map {
@@ -264,7 +276,8 @@ module ietf-alto {
       "This mode indicates that it is safe to perform numerical
        operations";
     reference
-      "Section 6.1.2.1 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 6.1.2.1";
   }
 
   identity ordinal {
@@ -273,7 +286,8 @@ module ietf-alto {
       "This mode indicates that the cost values in a cost map
        represent ranking";
     reference
-      "Section 6.1.2.2 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 6.1.2.2";
   }
 
   identity array {
@@ -284,7 +298,8 @@ module ietf-alto {
        of a (Filtered) Cost Map or an Endpoint Cost Service is
        interpreted as a JSON array.";
     reference
-      "Section 6.5.2 of RFC 9275";
+      "RFC 9275: An Extension for Application-Layer Traffic Optimization
+                 (ALTO): Path Vector, Section 6.5.2";
   }
 
   // Identities for cost metrics
@@ -295,7 +310,8 @@ module ietf-alto {
       "This metric conveys a generic measure for the cost of routing
        traffic from a source to a destination.";
     reference
-      "Section 6.1.1.1 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 6.1.1.1";
   }
 
   identity ane-path {
@@ -307,7 +323,8 @@ module ietf-alto {
        where each ANE name uniquely represents an ANE traversed by
        traffic from a source to a destination.";
     reference
-      "Section 6.5.1 of RFC 9275";
+      "RFC 9275: An Extension for Application-Layer Traffic Optimization
+                 (ALTO): Path Vector, Section 6.5.1";
   }
 
   identity delay-ow {
@@ -410,7 +427,8 @@ module ietf-alto {
       "Type for a resource ID that are used to reference an ALTO
        information resource.";
     reference
-      "Section 9.1.1 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 9.1.1";
   }
 
   typedef cost-type-name {
@@ -421,7 +439,8 @@ module ietf-alto {
       "Type for the name of a single CostType that can be referenced
        by other ALTO information resources.";
     reference
-      "Section 9.2.2 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 9.2.2";
   }
 
   typedef meta-key {
@@ -431,7 +450,8 @@ module ietf-alto {
     description
       "Type for a custom meta key of an ALTO server.";
     reference
-      "Section 8.4.1 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 8.4.1";
   }
 
   typedef endpoint-property {
@@ -442,7 +462,8 @@ module ietf-alto {
     description
       "Type for an endpoint property.";
     reference
-      "Section 10.8 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 10.8";
   }
 
   typedef resource-specific-endpoint-property {
@@ -453,7 +474,8 @@ module ietf-alto {
     description
       "Type for a resource-specific endpoint property.";
     reference
-      "Section 10.8.1 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 10.8.1";
   }
 
   typedef global-endpoint-property {
@@ -464,7 +486,8 @@ module ietf-alto {
     description
       "Type for a global endpoint property.";
     reference
-      "Section 10.8.2 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 10.8.2";
   }
 
   typedef source-id {
@@ -501,7 +524,7 @@ module ietf-alto {
          + "/alto:source-id";
     }
     description
-      "Type for a leafref of a data source ID.";
+      "Type to referebce a data source identifier.";
   }
 
   // Groupings
@@ -511,7 +534,8 @@ module ietf-alto {
       "This grouping defines a data model for
        FilteredCostMapCapabilities.";
     reference
-      "Section 11.3.2.4 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section Section 11.3.2.4";
     leaf-list cost-type-name {
       type cost-type-ref;
       min-elements 1;
@@ -585,7 +609,8 @@ module ietf-alto {
        FilteredCostMapCapabilities defined by the grouping
        filter-costmap-cap.";
     reference
-      "Section 11.5.1.4 of RFC 7285";
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section Section 11.5.1.4";
     uses filter-costmap-cap;
   }
 
@@ -1130,7 +1155,8 @@ module ietf-alto {
               description
                 "(Filtered) Network Map specific configuration.";
               reference
-                "Section 11.2.1 and Section 11.3.1 of RFC 7285.";
+                "RFC 7285: Application-Layer Traffic Optimization
+                           (ALTO) Protocol, Sections 11.2.1 and Section 11.3.1";
               leaf is-default {
                 type boolean;
                 description
@@ -1151,9 +1177,10 @@ module ietf-alto {
                + '"alto:cost-map")';
             container alto-costmap-params {
               description
-                "(Filtered) Cost Map specific configuration.";
+                "Filtered Cost Map specific configuration.";
               reference
-                "Sections 11.2.2 and 11.3.2 of RFC 7285.";
+                "RFC 7285: Application-Layer Traffic Optimization
+                           (ALTO) Protocol, Sections 11.2.2 and 11.3.2";
               leaf filtered {
                 type boolean;
                 description
@@ -1170,7 +1197,8 @@ module ietf-alto {
               description
                 "Endpoint Cost Service specific configuration.";
               reference
-                "Section 11.5 of RFC 7285";
+                "RFC 7285: Application-Layer Traffic Optimization
+                           (ALTO) Protocol, Section 11.5";
               uses endpoint-cost-cap;
               uses algorithm;
             }
@@ -1182,7 +1210,8 @@ module ietf-alto {
               description
                 "Endpoint Cost Service specific configuration.";
               reference
-                "Section 11.5 of RFC 7285";
+                "RFC 7285: Application-Layer Traffic Optimization
+                           (ALTO) Protocol, Section 11.5";
               leaf-list prop-type {
                 type endpoint-property;
                 min-elements 1;
