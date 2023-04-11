@@ -193,31 +193,76 @@ module ietf-alto-stats {
       type yang:gauge64;
       description
         "Total number of update events sent to all the connected
-         clients.";
+         sessions.";
     }
     leaf num-event-max {
       when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:update")';
       type yang:gauge64;
       description
-        "The maximum number of update events sent to the connected
-         clients.";
+        "The maximum value over the total number of update events sent
+         to each connected session. Assume there are 3 connected
+         sessions A, B, and C with 4, 3, and 2 update events sent to
+         them respectively, the value of this metric is 4. After a
+         while, if there is no new update event sent to any session,
+         but the session A is disconnected, then the value of this
+         metric is updated to 3.";
     }
     leaf num-event-min {
       when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:update")';
       type yang:gauge64;
       description
-        "The minimum number of update events sent to the connected
-         clients.";
+        "The minimum value over the total number of update events sent
+         to each connected session. The procedure is similar to
+         num-event-max.";
     }
     leaf num-event-avg {
       when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:update")';
       type yang:gauge64;
       description
-        "The average number of update events sent by the ALTO server
-         to the connected clients.";
+        "The average value over the total number of update events sent
+         to each connected session. The procedure is similar to
+         num-event-max.";
+    }
+    leaf num-event-total-last {
+      when 'derived-from-or-self(../../alto:resource-type,'
+         + '"alto:update")';
+      type yang:gauge64;
+      description
+        "Total number of update events sent to all the connected
+         sessions within the last time window.";
+    }
+    leaf num-event-max-last {
+      when 'derived-from-or-self(../../alto:resource-type,'
+         + '"alto:update")';
+      type yang:gauge64;
+      description
+        "The maximum value over the number of update events sent
+         to each connected session within the last time window. The
+         procedure is similar to num-event-max, but only count the
+         update events within the last time window.";
+    }
+    leaf num-event-min-last {
+      when 'derived-from-or-self(../../alto:resource-type,'
+         + '"alto:update")';
+      type yang:gauge64;
+      description
+        "The minimal value over the number of update events sent
+         to each connected session within the last time window. The
+         procedure is similar to num-event-max, but only count the
+         update events within the last time window.";
+    }
+    leaf num-event-avg-last {
+      when 'derived-from-or-self(../../alto:resource-type,'
+         + '"alto:update")';
+      type yang:gauge64;
+      description
+        "The average value over the number of update events sent
+         to each connected session within the last time window. The
+         procedure is similar to num-event-max, but only count the
+         update events within the last time window.";
     }
   }
 
