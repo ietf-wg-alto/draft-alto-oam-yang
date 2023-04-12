@@ -509,13 +509,15 @@ module ietf-alto {
       "Type for a name of a role for role-based access control.";
   }
 
+  // Typedefs for referencing purposes
+   
   typedef cost-type-ref {
     type leafref {
       path "/alto:alto/alto:alto-server/alto:cost-type"
          + "/alto:cost-type-name";
     }
     description
-      "Type for a leafref of a cost type name.";
+      "Type to reference a cost type name.";
   }
 
   typedef data-source-ref {
@@ -524,7 +526,54 @@ module ietf-alto {
          + "/alto:source-id";
     }
     description
-      "Type to referebce a data source identifier.";
+      "Type to reference a data source identifier.";
+  }
+
+  typedef user-id-ref {
+    type leafref {
+      path "/alto:alto/alto:alto-server/alto:listen"
+         + "/alto:http/alto:http-server-parameters"
+         + "/alto:client-authentication/alto:users"
+         + "/alto:user/alto:user-id";
+    }
+    description
+      "Type to reference a user id.";
+  }
+
+  typedef dependency-ref {
+    type leafref {
+      path "/alto:alto/alto:alto-server/alto:resource"
+         + "/alto:resource-id";
+    }
+    description
+      "Type to reference a dependency.";
+  }
+
+  typedef role-ref {
+    type leafref {
+      path "/alto:alto/alto:alto-server/alto:role"
+         + "/alto:role-name";
+    }
+    description
+      "Type to reference a role.";
+  }
+
+  typedef source-ref {
+    type leafref {
+      path "/alto:alto/alto:alto-server/alto:data-source"
+          + "/alto:source-id";
+    }
+    description
+      "Type to reference a source.";
+  }
+
+  typedef client-ref {
+    type leafref {
+      path "/alto:alto/alto:alto-server/alto:auth-client"
+         + "/alto:client-id";
+    }
+    description
+      "Type to reference an authenticated client.";
   }
 
   // Groupings
@@ -748,10 +797,7 @@ module ietf-alto {
               "Specifies a list of static IP prefixes.";
           }
           leaf-list dynamic-prefix-source {
-            type leafref {
-              path "/alto:alto/alto:alto-server/alto:data-source"
-                 + "/alto:source-id";
-            }
+            type source-ref;
             description
               "Dynamic IP prefixes collected from data sources.";
           }
@@ -955,12 +1001,7 @@ module ietf-alto {
               description
                 "Parameters of the authenticated HTTP client.";
               leaf user-id {
-                type leafref {
-                  path "/alto:alto/alto:alto-server/alto:listen"
-                     + "/alto:http/alto:http-server-parameters"
-                     + "/alto:client-authentication/alto:users"
-                     + "/alto:user/alto:user-id";
-                }
+                type user-id-ref;
                 mandatory true;
                 description
                   "Reference of the user-id for the authenticated
@@ -977,12 +1018,7 @@ module ietf-alto {
               description
                 "Parameters of the authenticated HTTPS client.";
               leaf user-id {
-                type leafref {
-                  path "/alto:alto/alto:alto-server/alto:listen"
-                     + "/alto:https/alto:http-server-parameters"
-                     + "/alto:client-authentication/alto:users"
-                     + "/alto:user/alto:user-id";
-                }
+                type user-id-ref;
                 mandatory true;
                 description
                   "Reference of the user-id for the authenticated
@@ -1002,10 +1038,7 @@ module ietf-alto {
             "Name of a role for access control.";
         }
         leaf-list client {
-          type leafref {
-            path "/alto:alto/alto:alto-server/alto:auth-client"
-               + "/alto:client-id";
-          }
+          type client-ref;
           description
             "List of authenticated ALTO clients assigned to the role.";
         }
@@ -1117,18 +1150,12 @@ module ietf-alto {
             "The optional description for this information resource.";
         }
         leaf-list accepted-role {
-          type leafref {
-            path "/alto:alto/alto:alto-server/alto:role"
-               + "/alto:role-name";
-          }
+          type role-ref;
           description
             "Roles allowed to access this information resource.";
         }
         leaf-list dependency {
-          type leafref {
-            path "/alto:alto/alto:alto-server/alto:resource"
-               + "/alto:resource-id";
-          }
+          type dependency-ref;
           description
             "A list of dependent information resources.";
         }
