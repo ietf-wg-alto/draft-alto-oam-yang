@@ -6,7 +6,7 @@ module ietf-alto-stats {
   import ietf-yang-types {
     prefix yang;
     reference
-      "RFC 6991: Common YANG Data Types";
+      "RFC 6991: Common YANG Data Types, Section 3";
   }
   import ietf-alto {
     prefix alto;
@@ -50,7 +50,7 @@ module ietf-alto-stats {
 
   grouping server-level-stats {
     description
-      "This grouping defines statistics for server-level monitoring";
+      "This grouping defines statistics for server-level monitoring.";
     leaf discontinuity-time {
       type yang:timestamp;
       description
@@ -62,7 +62,7 @@ module ietf-alto-stats {
       type yang:timestamp;
       description
         "The time on the most recent occasion at which the statistics
-         are reported.";
+         were reported.";
     }
     leaf num-total-req {
       type yang:counter64;
@@ -85,8 +85,8 @@ module ietf-alto-stats {
     leaf num-total-last-req {
       type yang:gauge64;
       description
-        "The total number of ALTO requests received by the server
-         within the last time window.";
+        "The total number of ALTO requests received by the ALTO 
+         server within the last time window.";
     }
     leaf num-total-last-succ {
       type yang:gauge64;
@@ -104,7 +104,7 @@ module ietf-alto-stats {
 
   grouping resource-level-stats {
     description
-      "This grouping defines statistics for resource-level monitoring";
+      "This grouping defines statistics for resource-level monitoring.";
     leaf discontinuity-time {
       type yang:timestamp;
       description
@@ -160,7 +160,7 @@ module ietf-alto-stats {
          + '"alto:network-map")';
       type yang:gauge64;
       description
-        "Number of PIDs contained by the network map.";
+        "Number of PIDs contained in the network map.";
     }
     leaf num-map-entry {
       when 'derived-from-or-self(../../alto:resource-type,'
@@ -169,14 +169,14 @@ module ietf-alto-stats {
          + '"alto:property-map")';
       type yang:gauge64;
       description
-        "Number of ALTO entities contained by the property map.";
+        "Number of ALTO entities contained in the property map.";
     }
     leaf num-base-obj {
       when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:cdni")';
       type yang:gauge64;
       description
-        "Number of base CDNi advertisement objects contained by the
+        "Number of base CDNi advertisement objects contained in the
          CDNI resource.";
     }
     leaf num-upd-sess {
