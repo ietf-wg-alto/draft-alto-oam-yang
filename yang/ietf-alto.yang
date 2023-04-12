@@ -627,7 +627,7 @@ module ietf-alto {
       "Section 5.4.2 of RFC XXXX";
   }
 
-  grouping alto-server-grouping {
+  grouping alto-server {
     description
       "A reuseable grouping for configuring an ALTO server without
        any consideration for how underlying transport sessions are
@@ -639,7 +639,7 @@ module ietf-alto {
     }
   }
 
-  grouping alto-server-listen-stack-grouping {
+  grouping alto-server-listen-stack {
     description
       "A reuseable grouping for configuring an ALTO server
        'listen' protocol stack for a single connection.";
@@ -677,7 +677,7 @@ module ietf-alto {
             description
               "A wrapper around the ALTO server parameters
                to avoid name collisiions.";
-            uses alto-server-grouping;
+            uses alto-server;
           }
         }
       }
@@ -716,14 +716,14 @@ module ietf-alto {
             description
               "A wrapper around the ALTO server parameters
                to avoid name collisions.";
-            uses alto-server-grouping;
+            uses alto-server;
           }
         }
       }
     }
   }
 
-  grouping alto-server-discovery-grouping {
+  grouping alto-server-discovery {
     description
       "Grouping for the configuration of how to set up server
        discovery for clients or other ALTO servers to discovery the
@@ -760,7 +760,7 @@ module ietf-alto {
     }
   }
 
-  grouping alto-server-discovery-client-grouping {
+  grouping alto-server-discovery-client {
     description
       "Grouping for configuration of how a client can discover another
        ALTO server.";
@@ -787,7 +787,7 @@ module ietf-alto {
     }
   }
 
-  grouping alto-logging-system-grouping {
+  grouping alto-logging-system {
     description
       "Grouping for configuration of logging system used by the ALTO
        server.";
@@ -835,7 +835,7 @@ module ietf-alto {
       container server-discovery-client {
         description
           "Configuration of how to discover an ALTO server.";
-        uses alto-server-discovery-client-grouping;
+        uses alto-server-discovery-client;
       }
     }
     container alto-server {
@@ -845,18 +845,18 @@ module ietf-alto {
       container listen {
         description
           "Configure the ALTO server to listen for ALTO clients.";
-        uses alto-server-listen-stack-grouping;
+        uses alto-server-listen-stack;
       }
       container server-discovery {
         description
           "Configure how the ALTO server to be discovered by others.";
-        uses alto-server-discovery-grouping;
+        uses alto-server-discovery;
       }
       container logging-system {
         description
           "Configure logging system to capture log messages generated
            by the ALTO server.";
-        uses alto-logging-system-grouping;
+        uses alto-logging-system;
       }
       list cost-type {
         key "cost-type-name";
@@ -1049,7 +1049,7 @@ module ietf-alto {
                   type empty;
                   mandatory true;
                   description
-                    "Indicate an on-change subscription.";
+                    "Indicates an on-change subscription.";
                 }
               }
               case periodic {
@@ -1061,10 +1061,10 @@ module ietf-alto {
                   units "seconds";
                   mandatory true;
                   description
-                    "Duration of time that should occur between
-                     periodic push updates, in units of seconds. If it
-                     is set to zero, it is equivalent to the on-change
-                     mode.";
+                    "Specifies the duration of time that should occur 
+                     between periodic push updates, in units of seconds. 
+                     If it is set to zero, it is equivalent to the 
+                     on-change mode.";
                 }
               }
             }
@@ -1147,20 +1147,20 @@ module ietf-alto {
           when 'derived-from-or-self(../resource-type,'
              + '"alto:network-map")';
           description
-            "(Filtered) Network Map specific configuration.";
+            "Filtered Network Map specific configuration.";
           reference
             "RFC 7285: Application-Layer Traffic Optimization
-                       (ALTO) Protocol, Sections 11.2.1 and Section 11.3.1";
+                       (ALTO) Protocol, Sections 11.2.1 and 11.3.1";
           leaf is-default {
             type boolean;
             description
-              "Set whether this is the default network map.";
+              "Sets whether this is the default network map.";
           }
           leaf filtered {
             type boolean;
             default false;
             description
-              "Configure whether filtered network map is
+              "Configures whether filtered network map is
                supported.";
           }
           uses algorithm;
@@ -1176,7 +1176,7 @@ module ietf-alto {
           leaf filtered {
             type boolean;
             description
-              "Configure whether filtered cost map is supported.";
+              "Configures whether filtered cost map is supported.";
           }
           uses filter-costmap-cap;
           uses algorithm;
