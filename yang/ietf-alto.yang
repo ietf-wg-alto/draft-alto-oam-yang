@@ -187,10 +187,10 @@ module ietf-alto {
 
   identity cost-source {
     description
-      "Theh cost source indicates the high-level type of the
+      "The cost source indicates the high-level type of the
        data source.";
     reference
-      "Section 3.1 of RFC YYYY";
+      "RFC YYYY: ALTO Performance Cost Metrics, Section 3.1";
   }
 
   // Identities for ALTO information resources
@@ -331,56 +331,56 @@ module ietf-alto {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 4.1 of RFC YYYY";
+      "RFC YYYY: ALTO Performance Cost Metrics, Section 4.1";
   }
 
   identity delay-rt {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 4.2 of RFC YYYY";
+      "RFC YYYY: ALTO Performance Cost Metrics, Section 4.2";
   }
 
   identity delay-variation {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 4.3 of RFC YYYY";
+      "RFC YYYY: ALTO Performance Cost Metrics, Section 4.3";
   }
 
   identity lossrate {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 4.4 of RFC YYYY";
+      "RFC YYYY: ALTO Performance Cost Metrics, Section 4.4";
   }
 
   identity hopcount {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 4.5 of RFC YYYY";
+      "RFC YYYY: ALTO Performance Cost Metrics, Section 4.5";
   }
 
   identity tput {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 5.1 of RFC YYYY";
+      "RFC YYYY: ALTO Performance Cost Metrics, Section 5.1";
   }
 
   identity bw-residual {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 5.2 of RFC YYYY";
+      "RFC YYYY: ALTO Performance Cost Metrics, Section 5.2";
   }
 
   identity bw-available {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Section 5.3 of RFC YYYY";
+      "RFC YYYY: ALTO Performance Cost Metrics, Section 5.3";
   }
 
   // Identities for cost sources
@@ -392,7 +392,7 @@ module ietf-alto {
       "The 'nominal' category indicates that the metric value is
        statically configured by the underlying devices.";
     reference
-      "Section 3.1 of RFC YYYY";
+      "RFC YYYY: ALTO Performance Cost Metrics, Section 3.1";
   }
 
   identity sla {
@@ -403,7 +403,7 @@ module ietf-alto {
        from some commitment which this document refers to as
        service-level agreement (SLA).";
     reference
-      "Section 3.1 of RFC YYYY";
+      "RFC YYYY: ALTO Performance Cost Metrics, Section 3.1";
   }
 
   identity estimation {
@@ -413,7 +413,7 @@ module ietf-alto {
       "The 'estimation' category indicates that the metric value is
        computed through an estimation process.";
     reference
-      "Section 3.1 of RFC YYYY";
+      "RFC YYYY: ALTO Performance Cost Metrics, Section 3.1";
   }
 
   // Typedefs
@@ -621,7 +621,8 @@ module ietf-alto {
       description
         "Configuration for CalendarAttributes.";
       reference
-        "Section 4.1 of RFC 8896";
+        "RFC 8896: Application-Layer Traffic Optimization (ALTO) 
+                   Cost Calendar, Section 4.1";
       leaf-list cost-type-name {
         type cost-type-ref;
         min-elements 1;
@@ -673,7 +674,8 @@ module ietf-alto {
         "Information resource creation algorithm to be augmented.";
     }
     reference
-      "Section 5.4.2 of RFC XXXX";
+      "RFC XXXX: YANG Data Models for the Application-Layer Traffic
+                 Optimization (ALTO) Protocol, Section 5.4.2";
   }
 
   grouping alto-server {
@@ -963,7 +965,8 @@ module ietf-alto {
         description
           "Mapping of custom meta information";
         reference
-          "Section 8.4.1 of RFC 7285.";
+          "RFC 7285: Application-Layer Traffic Optimization
+                     (ALTO) Protocol, Section 8.4.1";
         leaf meta-key {
           type meta-key;
           description
@@ -974,7 +977,7 @@ module ietf-alto {
           mandatory true;
           description
             "Custom meta value encoded with the base64 encoding
-             schema. The encoded value MUST be a valid JSON value.";
+             schema. The encoded value must be a valid JSON value.";
         }
       }
       list auth-client {
@@ -990,7 +993,7 @@ module ietf-alto {
           description
             "Choice of authentication methods to identify this
              ALTO client. If no authentication method is configured,
-             the client MUST be ignored.";
+             the client must be ignored.";
           case http {
             description
               "The client is authenticated by the HTTP server.";
