@@ -17,16 +17,15 @@ data of an administrated ALTO server instance.
 ~~~
 module: ietf-alto
   +--rw alto!
-     +--rw alto-client* [client-id]
+     +--rw alto-client* [client-id] {alto-client}?
      |  ...
-     +--rw alto-server
+     +--rw alto-server {alto-server}?
         +...
         +--rw auth-client* [client-id]
         |  ...
         +--rw role* [role-name]
         |  +--rw role-name    role-name
-        |  +--rw client*
-        |          -> /alto/alto-server/auth-client/client-id
+        |  +--rw client*      client-ref
         +--rw data-source* [source-id]
         |  ...
         +--rw resource* [resource-id]
@@ -43,10 +42,10 @@ an ALTO server.
 ~~~
 module: ietf-alto
   +--rw alto!
-     +--rw alto-client* [client-id]
+     +--rw alto-client* [client-id] {alto-client}?
      |  +--rw client-id                  string
      |  +--rw server-discovery-client
-     |     +---u alto-server-discovery-client-grouping
+     |     +---u alto-server-discovery-client
      ...
 ~~~
 {: #tree-alto-client title='IETF ALTO Client Subtree Structure' artwork-align="center"}
@@ -59,15 +58,15 @@ The ALTO server instance contains a set of data nodes server-level operation and
 module: ietf-alto
   +--rw alto!
      ...
-     +--rw alto-server
+     +--rw alto-server {alto-server}?
         +--rw listen
-        |  +---u alto-server-listen-stack-grouping
+        |  +---u alto-server-listen-stack
         +--rw server-discovery
-        |  +---u alto-server-discovery-grouping
+        |  +---u alto-server-discovery
         +--rw logging-system
-        |  +---u alto-logging-system-grouping
+        |  +---u alto-logging-system
         +--rw cost-type* [cost-type-name]
-        |  +--rw cost-type-name    string
+        |  +--rw cost-type-name    cost-type-name
         |  +--rw cost-mode         identityref
         |  +--rw cost-metric       identityref
         |  +--rw description?      string
@@ -76,8 +75,8 @@ module: ietf-alto
         |     +--rw parameters
         |        +--rw (parameters)?
         +--rw meta* [meta-key]
-        |  +--rw meta-key      string
-        |  +--rw meta-value    string
+        |  +--rw meta-key      meta-key
+        |  +--rw meta-value    binary
         ...
 ~~~
 {: #tree-alto-server-level title='IETF ALTO Server Level Subtree Structure' artwork-align="center"}
@@ -93,9 +92,9 @@ The 'listen' contains all the data nodes for the whole server listen stack
 across HTTP, TLS, and TCP layers ({{tree-alto-gp}}).
 
 ~~~
-  grouping alto-server-grouping:
+  grouping alto-server:
     +-- base-uri?   inet:uri
-  grouping alto-server-listen-stack-grouping:
+  grouping alto-server-listen-stack:
     +-- (transport)
        +--:(http) {http-listen}?
        |  +-- http
@@ -104,7 +103,7 @@ across HTTP, TLS, and TCP layers ({{tree-alto-gp}}).
        |     +-- http-server-parameters
        |     |  +---u http:http-server-grouping
        |     +-- alto-server-parameters
-       |        +---u alto-server-grouping
+       |        +---u alto-server
        +--:(https)
           +-- https
              +-- tcp-server-parameters
@@ -114,7 +113,7 @@ across HTTP, TLS, and TCP layers ({{tree-alto-gp}}).
              +-- http-server-parameters
              |  +---u http:http-server-grouping
              +-- alto-server-parameters
-                +---u alto-server-grouping
+                +---u alto-server
 ~~~
 {: #tree-alto-gp title='IETF ALTO Server Groupings Structure' artwork-align="center"}
 
@@ -129,13 +128,12 @@ configuration for how an ALTO server can be discovered by another ALTO server on
 demand ({{tree-alto-disc-gp}}).
 
 ~~~
-  grouping alto-server-discovery-grouping:
+  grouping alto-server-discovery:
     +-- (server-discovery-manner)?
-       +--:(reverse-dns)
+       +--:(reverse-dns) {xdom-disc}?
           +-- rdns-naptr-records
              +-- static-prefix*           inet:ip-prefix
-             +-- dynamic-prefix-source*
-                     -> /alto-server/data-source/source-id
+             +-- dynamic-prefix-source*   data-source-ref
 ~~~
 {: #tree-alto-disc-gp title='IETF ALTO Server Discovery Grouping Structure' artwork-align="center"}
 
@@ -154,7 +152,7 @@ support other mechanisms.
 
 ### Data Model for Logging Management
 
-To satisfy R2 in [](#requirements), the ALTO server instance contains the 
+To satisfy R2 in [](#requirements), the ALTO server instance contains the
 the logging data nodes shonw in {{tree-alto-log-gp}}.
 
 The 'logging-system' data node provides configuration to select a logging system to
@@ -165,7 +163,7 @@ By default, 'syslog' is the only supported logging system. When selecting
 the syslog server.
 
 ~~~
-  grouping alto-logging-system-grouping:
+  grouping alto-logging-system:
     +-- (logging-system)?
        +--:(syslog)
           +-- syslog-params
@@ -206,10 +204,10 @@ information resources are derived (Section 16.2.4 of {{RFC7285}}).
 module: ietf-alto
   +--rw alto!
      ...
-     +--rw alto-server
+     +--rw alto-server {alto-server}?
         ...
         +--rw data-source* [source-id]
-        |  +--rw source-id                    string
+        |  +--rw source-id                    source-id
         |  +--rw source-type                  identityref
         |  +--rw (update-policy)
         |  |  +--:(reactive)
@@ -281,59 +279,46 @@ ALTO information resource.
 module: ietf-alto
   +--rw alto!
      ...
-     +--rw alto-server
+     +--rw alto-server {alto-server}?
         ...
         +--rw resource* [resource-id]
-           +--rw resource-id                       resource-id
-           +--rw resource-type                     identityref
-           +--rw description?                      string
-           +--rw accepted-role*
-           |       -> /alto/alto-server/role/role-name
-           +--rw dependency*
-           |       -> /alto/alto-server/resource/resource-id
-           +--rw (resource-params)?
-              +--:(ird)
-              |  +--rw alto-ird-params
-              |     +--rw delegation    inet:uri
-              +--:(networkmap)
-              |  +--rw alto-networkmap-params
-              |     +--rw is-default?   boolean
-              |     +--rw filtered?     boolean
-              |     +---u algorithm
-              +--:(costmap)
-              |  +--rw alto-costmap-params
-              |     +--rw filtered?             boolean
-              |     +---u filter-costmap-cap
-              |     +---u algorithm
-              +--:(endpointcost)
-              |  +--rw alto-endpointcost-params
-              |     +---u endpoint-cost-cap
-              |     +---u algorithm
-              +--:(endpointprop)
-              |  +--rw alto-endpointprop-params
-              |     +--rw prop-types*   string
-              |     +---u algorithm
-              +--:(propmap) {propmap}?
-              |  +--rw alto-propmap-params
-              |     +---u algorithm
-              +--:(cdni) {cdni}?
-              |  +--rw alto-cdni-params
-              |     +---u algorithm
-              +--:(update) {incr-update}?
-                 +--rw alto-update-params
-                    +---u algorithm
+           +--rw resource-id                 resource-id
+           +--rw resource-type               identityref
+           +--rw description?                string
+           +--rw accepted-role*              role-ref
+           +--rw dependency*                 dependency-ref
+           +--rw alto-ird-params
+           |  +--rw delegation    inet:uri
+           +--rw alto-networkmap-params
+           |  +--rw is-default?   boolean
+           |  +--rw filtered?     boolean
+           |  +---u algorithm
+           +--rw alto-costmap-params
+           |  +--rw filtered?             boolean
+           |  +---u filter-costmap-cap
+           |  +---u algorithm
+           +--rw alto-endpointcost-params
+           |  +---u filter-costmap-cap
+           |  +---u algorithm
+           +--rw alto-endpointprop-params
+           |  +--rw prop-type*   endpoint-property
+           |  +---u algorithm
+           +--rw alto-propmap-params {propmap}?
+           |  +---u algorithm
+           +--rw alto-cdni-params {cdni}?
+           |  +---u algorithm
+           +--rw alto-update-params {incr-update}?
+              +---u algorithm
 
   grouping filter-costmap-cap:
-    +-- cost-type-names*            string
-    +-- cost-constraints?           boolean
-    +-- max-cost-types?             uint32 {multi-cost}?
-    +-- testable-cost-type-names*   string {multi-cost}?
+    +-- cost-type-name*            cost-type-ref
+    +-- cost-constraints?          boolean
+    +-- max-cost-types?            uint32 {multi-cost}?
+    +-- testable-cost-type-name*   cost-type-ref {multi-cost}?
     +-- calendar-attributes {cost-calendar}?
-       +-- cost-type-names*       string
+       +-- cost-type-name*        cost-type-ref
        +-- time-interval-size     decimal64
        +-- number-of-intervals    uint32
-  grouping endpoint-cost-cap:
-    +---u filter-costmap-cap
   grouping algorithm:
     +-- (algorithm)
 ~~~
@@ -385,7 +370,7 @@ The information resource access control is supported using the structure shown i
 module: ietf-alto
   +--rw alto!
      ...
-     +--rw alto-server
+     +--rw alto-server {alto-server}?
         ...
         +--rw auth-client* [client-id]
         |  +--rw client-id                  string
@@ -394,16 +379,15 @@ module: ietf-alto
         |     |  +--rw http-auth-client
         |     |          {http-listen,http:client-auth-supported,
         |     |           http:local-users-supported}?
-        |     |     +--rw user-id    leafref
+        |     |     +--rw user-id    user-id-ref
         |     +--:(https)
         |        +--rw https-auth-client
         |                {http:client-auth-supported,
         |                 http:local-users-supported}?
-        |           +--rw user-id    leafref
+        |           +--rw user-id    user-id-ref
         +--rw role* [role-name]
         |  +--rw role-name    role-name
-        |  +--rw client*
-        |          -> /alto/alto-server/auth-client/client-id
+        |  +--rw client*      client-ref
         ...
 ~~~
 {: #tree-auth title='IETF ALTO Client Authentication Subtree Structure' artwork-align="center"}
@@ -431,37 +415,44 @@ statistics at the ALTO server and information resource level ({{tree-stat}}).
 module: ietf-alto-stats
 
   augment /alto:alto/alto:alto-server:
-    +--ro num-total-req?         yang:counter64
-    +--ro num-total-succ?        yang:counter64
-    +--ro num-total-fail?        yang:counter64
-    +--ro num-total-last-req?    yang:gauge64
-    +--ro num-total-last-succ?   yang:gauge64
-    +--ro num-total-last-fail?   yang:gauge64
+    +--rw server-level-monitor-config
+    |  +--rw time-window-size?   uint32
+    +--ro server-level-stats
+       +---u server-level-stats
   augment /alto:alto/alto:alto-server/alto:resource:
-    +--ro num-res-upd?    yang:counter64
-    +--ro res-mem-size?   yang:gauge64
-    +--ro res-enc-size?   yang:gauge64
-    +--ro num-res-req?    yang:counter64
-    +--ro num-res-succ?   yang:counter64
-    +--ro num-res-fail?   yang:counter64
-  augment /alto:alto/alto:alto-server/alto:resource
-            /alto:resource-params/alto:networkmap
-            /alto:alto-networkmap-params:
-    +--ro num-map-pid?   yang:gauge64
-  augment /alto:alto/alto:alto-server/alto:resource
-            /alto:resource-params/alto:propmap
-            /alto:alto-propmap-params:
-    +--ro num-map-entry?   yang:gauge64
-  augment /alto:alto/alto:alto-server/alto:resource
-            /alto:resource-params/alto:cdni/alto:alto-cdni-params:
-    +--ro num-base-obj?   yang:gauge64
-  augment /alto:alto/alto:alto-server/alto:resource
-            /alto:resource-params/alto:update/alto:alto-update-params:
-    +--ro num-upd-sess?      yang:gauge64
-    +--ro num-event-total?   yang:gauge64
-    +--ro num-event-max?     yang:gauge64
-    +--ro num-event-min?     yang:gauge64
-    +--ro num-event-avg?     yang:gauge64
+    +--ro resource-level-stats
+       +---u resource-level-stats
+
+  grouping server-level-stats:
+    +-- discontinuity-time?    yang:timestamp
+    +-- last-report-time?      yang:timestamp
+    +-- num-total-req?         yang:counter64
+    +-- num-total-succ?        yang:counter64
+    +-- num-total-fail?        yang:counter64
+    +-- num-total-last-req?    yang:gauge64
+    +-- num-total-last-succ?   yang:gauge64
+    +-- num-total-last-fail?   yang:gauge64
+  grouping resource-level-stats:
+    +-- discontinuity-time?     yang:timestamp
+    +-- last-report-time?       yang:timestamp
+    +-- num-res-upd?            yang:counter64
+    +-- res-mem-size?           uint64
+    +-- res-enc-size?           uint64
+    +-- num-res-req?            yang:counter64
+    +-- num-res-succ?           yang:counter64
+    +-- num-res-fail?           yang:counter64
+    +-- num-map-pid?            yang:gauge64
+    +-- num-map-entry?          yang:gauge64
+    +-- num-base-obj?           yang:gauge64
+    +-- num-upd-sess?           yang:gauge64
+    +-- num-event-total?        yang:gauge64
+    +-- num-event-max?          yang:gauge64
+    +-- num-event-min?          yang:gauge64
+    +-- num-event-avg?          yang:gauge64
+    +-- num-event-total-last?   yang:gauge64
+    +-- num-event-max-last?     yang:gauge64
+    +-- num-event-min-last?     yang:gauge64
+    +-- num-event-avg-last?     yang:gauge64
 ~~~
 {: #tree-stat title='IETF ALTO Statistics Structure' artwork-align="center"}
 

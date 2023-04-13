@@ -4,7 +4,7 @@ STDYANGDIR ?= tools/yang
 $(STDYANGDIR):
 	git clone --depth 10 -b main https://github.com/YangModels/yang $@
 
-OPTIONS=--tree-print-groupings --tree-no-expand-uses -f tree --tree-line-length=70
+OPTIONS=--tree-print-groupings --tree-no-expand-uses -f tree --tree-line-length=67
 ifeq ($(OS), Windows_NT)
 YANG_PATH="$(YANGDIR);$(STDYANGDIR)/standard/ietf/RFC/;$(STDYANGDIR)/experimental/ietf-extracted-YANG-modules"
 else
