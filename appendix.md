@@ -478,10 +478,7 @@ module example-vendor-alto-alg {
           "Parameters for l3-unicast-cluster algorithm.";
         container l3-unicast-topo {
           leaf source-datastore {
-            type leafref {
-              path '/alto:alto/alto:alto-server/alto:data-source'
-                 + '/alto:source-id';
-            }
+            type alto:data-source-ref;
             must 'deref(.)/../alto-ds:yang-datastore-source-params'
                + '/alto-ds:datastore = "ietf-datastores:operational"'
                {
