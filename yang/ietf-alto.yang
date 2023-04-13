@@ -558,15 +558,6 @@ module ietf-alto {
       "Type to reference a role.";
   }
 
-  typedef source-ref {
-    type leafref {
-      path "/alto:alto/alto:alto-server/alto:data-source"
-          + "/alto:source-id";
-    }
-    description
-      "Type to reference a source.";
-  }
-
   typedef client-ref {
     type leafref {
       path "/alto:alto/alto:alto-server/alto:auth-client"
@@ -788,7 +779,7 @@ module ietf-alto {
               "Specifies a list of static IP prefixes.";
           }
           leaf-list dynamic-prefix-source {
-            type source-ref;
+            type data-source-ref;
             description
               "Dynamic IP prefixes collected from data sources.";
           }
