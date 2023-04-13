@@ -50,7 +50,8 @@ module ietf-alto-stats {
 
   grouping server-level-stats {
     description
-      "This grouping defines statistics for server-level monitoring.";
+      "This grouping defines statistics for server-level
+       monitoring.";
     leaf discontinuity-time {
       type yang:timestamp;
       description
@@ -61,8 +62,8 @@ module ietf-alto-stats {
     leaf last-report-time {
       type yang:timestamp;
       description
-        "The time on the most recent occasion at which the statistics
-         were reported.";
+        "The time on the most recent occasion at which the
+         statistics were reported.";
     }
     leaf num-total-req {
       type yang:counter64;
@@ -85,7 +86,7 @@ module ietf-alto-stats {
     leaf num-total-last-req {
       type yang:gauge64;
       description
-        "The total number of ALTO requests received by the ALTO 
+        "The total number of ALTO requests received by the ALTO
          server within the last time window.";
     }
     leaf num-total-last-succ {
@@ -104,7 +105,8 @@ module ietf-alto-stats {
 
   grouping resource-level-stats {
     description
-      "This grouping defines statistics for resource-level monitoring.";
+      "This grouping defines statistics for resource-level
+       monitoring.";
     leaf discontinuity-time {
       type yang:timestamp;
       description
@@ -117,14 +119,14 @@ module ietf-alto-stats {
     leaf last-report-time {
       type yang:timestamp;
       description
-        "The time on the most recent occasion at which the statistics
-         are reported.";
+        "The time on the most recent occasion at which the
+         statistics are reported.";
     }
     leaf num-res-upd {
       type yang:counter64;
       description
-        "The number of version updates since the information resource
-         was created.";
+        "The number of version updates since the information
+         resource was created.";
     }
     leaf res-mem-size {
       type uint64;
@@ -141,7 +143,8 @@ module ietf-alto-stats {
     leaf num-res-req {
       type yang:counter64;
       description
-        "The number of ALTO requests to this information resource.";
+        "The number of ALTO requests to this information
+         resource.";
     }
     leaf num-res-succ {
       type yang:counter64;
@@ -200,31 +203,31 @@ module ietf-alto-stats {
          + '"alto:update")';
       type yang:gauge64;
       description
-        "The maximum value over the total number of update events sent
-         to each connected session. Assume there are 3 connected
-         sessions A, B, and C with 4, 3, and 2 update events sent to
-         them respectively, the value of this metric is 4. After a
-         while, if there is no new update event sent to any session,
-         but the session A is disconnected, then the value of this
-         metric is updated to 3.";
+        "The maximum value over the total number of update events
+         sent to each connected session. Assume there are 3
+         connected sessions A, B, and C with 4, 3, and 2 update
+         events sent to them respectively, the value of this metric
+         is 4. After a while, if there is no new update event sent
+         to any session, but the session A is disconnected, then
+         the value of this metric is updated to 3.";
     }
     leaf num-event-min {
       when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:update")';
       type yang:gauge64;
       description
-        "The minimum value over the total number of update events sent
-         to each connected session. The procedure is similar to
-         num-event-max.";
+        "The minimum value over the total number of update events
+         sent to each connected session. The procedure is similar
+         to num-event-max.";
     }
     leaf num-event-avg {
       when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:update")';
       type yang:gauge64;
       description
-        "The average value over the total number of update events sent
-         to each connected session. The procedure is similar to
-         num-event-max.";
+        "The average value over the total number of update events
+         sent to each connected session. The procedure is similar
+         to num-event-max.";
     }
     leaf num-event-total-last {
       when 'derived-from-or-self(../../alto:resource-type,'
@@ -280,8 +283,8 @@ module ietf-alto-stats {
         units "seconds";
         default "300";
         description
-          "Duration of the time window within that the statistics are
-           reported.";
+          "Duration of the time window within that the statistics
+           are reported.";
       }
     }
     container server-level-stats {

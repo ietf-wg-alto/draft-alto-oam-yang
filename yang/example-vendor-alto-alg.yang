@@ -48,8 +48,9 @@ module example-vendor-alto-alg {
       "Example of a network map creation algorithm.";
     case l3-unicast-cluster {
       description
-        "Example algorithm translating a Layer 3 unicast topology of
-         Interface to the Routing System (I2RS) to an ALTO network map.";
+        "Example algorithm translating a Layer 3 unicast topology
+         of Interface to the Routing System (I2RS) to an ALTO
+         network map.";
       container l3-unicast-cluster-algorithm {
         description
           "Parameters for l3-unicast-cluster algorithm.";
@@ -57,10 +58,12 @@ module example-vendor-alto-alg {
           leaf source-datastore {
             type alto:data-source-ref;
             must 'deref(.)/../alto-ds:yang-datastore-source-params'
-               + '/alto-ds:datastore = "ietf-datastores:operational"'
+               + '/alto-ds:datastore '
+               + '= "ietf-datastores:operational"'
                {
               error-message
-                "The referenced YANG datastore MUST be operational";
+                "The referenced YANG datastore MUST be
+                 operational";
             }
             mandatory true;
             description
@@ -69,7 +72,8 @@ module example-vendor-alto-alg {
           leaf topo-name {
             type leafref {
               path '/alto:alto/alto:alto-server/alto:data-source'
-                 + '[alto:source-id = current()/../source-datastore]'
+                 + '[alto:source-id'
+                 + ' = current()/../source-datastore]'
                  + '/alto-ds:yang-datastore-source-params'
                  + '/alto-ds:target-paths/alto-ds:name';
             }
@@ -89,4 +93,3 @@ module example-vendor-alto-alg {
     }
   }
 }
-

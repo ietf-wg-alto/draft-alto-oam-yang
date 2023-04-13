@@ -14,7 +14,7 @@ module example-vendor-alto-data-source {
   import ietf-datastores {
     prefix ds;
     reference
-      "RFC8342: Network Management Datastore Architecture (NMDA)";
+      "RFC 8342: Network Management Datastore Architecture (NMDA)";
   }
 
   import ietf-yang-push {
@@ -102,8 +102,8 @@ module example-vendor-alto-data-source {
         list target-paths {
           key name;
           description
-            "XML Path Language (XPath) to subscribed YANG datastore node
-             or subtree.";
+            "XML Path Language (XPath) to subscribed YANG datastore
+             node or subtree.";
           leaf name {
             type string;
             description
@@ -124,14 +124,16 @@ module example-vendor-alto-data-source {
             when 'derived-from-or-self(../protocol, "restconf")';
           }
           description
-            "Parameters for the RESTCONF endpoint of the YANG datastore.";
+            "Parameters for the RESTCONF endpoint of the YANG
+             datastore.";
         }
         container netconf {
           uses ncc:netconf-client-app-grouping {
             when 'derived-from-or-self(../protocol, "netconf")';
           }
           description
-            "Parameters for the NETCONF endpoint of the YANG datastore.";
+            "Parameters for the NETCONF endpoint of the YANG
+             datastore.";
         }
       }
     }

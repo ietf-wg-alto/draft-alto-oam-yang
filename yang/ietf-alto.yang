@@ -106,7 +106,8 @@ module ietf-alto {
       "Indicates support of incremental update extension.";
     reference
       "RFC 8895: Application-Layer Traffic Optimization (ALTO)
-                 Incremental Updates Using Server-Sent Events (SSE)";
+                 Incremental Updates Using Server-Sent Events
+                 (SSE)";
   }
 
   feature cost-calendar {
@@ -160,8 +161,9 @@ module ietf-alto {
 
   identity source-type {
     description
-      "Base identity for type of data source. A data source indicates
-       the origin from which the ALTO information resources are derived.";
+      "Base identity for type of data source. A data source
+       indicates the origin from which the ALTO information
+       resources are derived.";
   }
 
   identity cost-metric {
@@ -265,7 +267,8 @@ module ietf-alto {
       "Identity for update stream service.";
     reference
       "RFC 8895: Application-Layer Traffic Optimization (ALTO)
-                 Incremental Updates Using Server-Sent Events (SSE)";
+                 Incremental Updates Using Server-Sent Events
+                 (SSE)";
   }
 
   // Identities for cost mode
@@ -294,12 +297,12 @@ module ietf-alto {
     if-feature "path-vector";
     base cost-mode;
     description
-      "This mode indicates that every cost value in the response body
-       of a (Filtered) Cost Map or an Endpoint Cost Service is
+      "This mode indicates that every cost value in the response
+       body of a (Filtered) Cost Map or an Endpoint Cost Service is
        interpreted as a JSON array.";
     reference
-      "RFC 9275: An Extension for Application-Layer Traffic Optimization
-                 (ALTO): Path Vector, Section 6.5.2";
+      "RFC 9275: An Extension for Application-Layer Traffic
+                 Optimization (ALTO): Path Vector, Section 6.5.2";
   }
 
   // Identities for cost metrics
@@ -307,8 +310,8 @@ module ietf-alto {
   identity routingcost {
     base cost-metric;
     description
-      "This metric conveys a generic measure for the cost of routing
-       traffic from a source to a destination.";
+      "This metric conveys a generic measure for the cost of
+       routing traffic from a source to a destination.";
     reference
       "RFC 7285: Application-Layer Traffic Optimization (ALTO)
                  Protocol, Section 6.1.1.1";
@@ -323,8 +326,8 @@ module ietf-alto {
        where each ANE name uniquely represents an ANE traversed by
        traffic from a source to a destination.";
     reference
-      "RFC 9275: An Extension for Application-Layer Traffic Optimization
-                 (ALTO): Path Vector, Section 6.5.1";
+      "RFC 9275: An Extension for Application-Layer Traffic
+                 Optimization (ALTO): Path Vector, Section 6.5.1";
   }
 
   identity delay-ow {
@@ -399,9 +402,9 @@ module ietf-alto {
     if-feature "performance-metrics";
     base cost-source;
     description
-      "The 'sla' category indicates that the metric value is derived
-       from some commitment which this document refers to as
-       service-level agreement (SLA).";
+      "The 'sla' category indicates that the metric value is
+       derived from some commitment which this document refers to
+       as service-level agreement (SLA).";
     reference
       "RFC YYYY: ALTO Performance Cost Metrics, Section 3.1";
   }
@@ -436,8 +439,8 @@ module ietf-alto {
       length "1..max";
     }
     description
-      "Type for the name of a single CostType that can be referenced
-       by other ALTO information resources.";
+      "Type for the name of a single CostType that can be
+       referenced by other ALTO information resources.";
     reference
       "RFC 7285: Application-Layer Traffic Optimization (ALTO)
                  Protocol, Section 9.2.2";
@@ -510,7 +513,7 @@ module ietf-alto {
   }
 
   // Typedefs for referencing purposes
-   
+
   typedef cost-type-ref {
     type leafref {
       path "/alto:alto/alto:alto-server/alto:cost-type"
@@ -612,14 +615,14 @@ module ietf-alto {
       description
         "Configuration for CalendarAttributes.";
       reference
-        "RFC 8896: Application-Layer Traffic Optimization (ALTO) 
+        "RFC 8896: Application-Layer Traffic Optimization (ALTO)
                    Cost Calendar, Section 4.1";
       leaf-list cost-type-name {
         type cost-type-ref;
         min-elements 1;
         description
-          "An array of one or more elements indicating the cost type
-           names in the IRD entry to which the values of
+          "An array of one or more elements indicating the cost
+           type names in the IRD entry to which the values of
            'time-interval-size' and 'number-of-intervals' apply.";
       }
       leaf time-interval-size {
@@ -790,8 +793,8 @@ module ietf-alto {
 
   grouping alto-server-discovery-client {
     description
-      "Grouping for configuration of how a client can discover another
-       ALTO server.";
+      "Grouping for configuration of how a client can discover
+       another ALTO server.";
     choice server-discovery-client-manner {
       description
         "Selects among available server discovery manners.";
@@ -817,8 +820,8 @@ module ietf-alto {
 
   grouping alto-logging-system {
     description
-      "Grouping for configuration of logging system used by the ALTO
-       server.";
+      "Grouping for configuration of logging system used by the
+       ALTO server.";
     choice logging-system {
       description
         "Selects among available logging systems.";
@@ -856,9 +859,9 @@ module ietf-alto {
       leaf client-id {
         type string;
         description
-          "A unique identifier of a client that can be referenced by a
-           data source or a resource creation algorithm to communicate
-           with other ALTO servers.";
+          "A unique identifier of a client that can be referenced
+           by a data source or a resource creation algorithm to
+           communicate with other ALTO servers.";
       }
       container server-discovery-client {
         description
@@ -877,13 +880,14 @@ module ietf-alto {
       }
       container server-discovery {
         description
-          "Configure how the ALTO server to be discovered by others.";
+          "Configure how the ALTO server to be discovered by
+           others.";
         uses alto-server-discovery;
       }
       container logging-system {
         description
-          "Configure logging system to capture log messages generated
-           by the ALTO server.";
+          "Configure logging system to capture log messages
+           generated by the ALTO server.";
         uses alto-logging-system;
       }
       list cost-type {
@@ -957,7 +961,8 @@ module ietf-alto {
           mandatory true;
           description
             "Custom meta value encoded with the base64 encoding
-             schema. The encoded value must be a valid JSON value.";
+             schema. The encoded value must be a valid JSON
+             value.";
         }
       }
       list auth-client {
@@ -972,8 +977,8 @@ module ietf-alto {
         choice authentication {
           description
             "Choice of authentication methods to identify this
-             ALTO client. If no authentication method is configured,
-             the client must be ignored.";
+             ALTO client. If no authentication method is
+             configured, the client must be ignored.";
           case http {
             description
               "The client is authenticated by the HTTP server.";
@@ -1023,7 +1028,8 @@ module ietf-alto {
         leaf-list client {
           type client-ref;
           description
-            "List of authenticated ALTO clients assigned to the role.";
+            "List of authenticated ALTO clients assigned to the
+             role.";
         }
       }
       list data-source {
@@ -1059,8 +1065,8 @@ module ietf-alto {
                  update.";
               case on-change {
                 description
-                  "The data source is requested to publish an update
-                   once the data has a change.";
+                  "The data source is requested to publish an
+                   update once the data has a change.";
                 leaf on-change {
                   type empty;
                   mandatory true;
@@ -1077,10 +1083,10 @@ module ietf-alto {
                   units "seconds";
                   mandatory true;
                   description
-                    "Specifies the duration of time that should occur 
-                     between periodic push updates, in units of seconds. 
-                     If it is set to zero, it is equivalent to the 
-                     on-change mode.";
+                    "Specifies the duration of time that should
+                     occur between periodic push updates, in units
+                     of seconds. If it is set to zero, it is
+                     equivalent to the on-change mode.";
                 }
               }
             }
@@ -1094,12 +1100,13 @@ module ietf-alto {
               units "seconds";
               mandatory true;
               description
-                "Polling interval in seconds for proactive mode. If it
-                 is set to zero, the data source listener will never
-                 pull data periodically. The data can still be pulled
-                 when an algorithm plugin of an information resource
-                 calls this data source listener. This can be useful
-                 for some on-demand settings.";
+                "Polling interval in seconds for proactive mode. If
+                 it is set to zero, the data source listener will
+                 never pull data periodically. The data can still
+                 be pulled when an algorithm plugin of an
+                 information resource calls this data source
+                 listener. This can be useful for some on-demand
+                 settings.";
             }
           }
         }
@@ -1130,7 +1137,8 @@ module ietf-alto {
         leaf description {
           type string;
           description
-            "The optional description for this information resource.";
+            "The optional description for this information
+             resource.";
         }
         leaf-list accepted-role {
           type role-ref;
@@ -1143,7 +1151,8 @@ module ietf-alto {
             "A list of dependent information resources.";
         }
         container alto-ird-params {
-          when 'derived-from-or-self(../resource-type, "alto:ird")';
+          when 'derived-from-or-self(../resource-type,'
+             + '"alto:ird")';
           description
             "IRD-specific configuration.";
           leaf delegation {
@@ -1160,7 +1169,8 @@ module ietf-alto {
             "Filtered Network Map specific configuration.";
           reference
             "RFC 7285: Application-Layer Traffic Optimization
-                       (ALTO) Protocol, Sections 11.2.1 and 11.3.1";
+                       (ALTO) Protocol, Sections 11.2.1 and
+                       11.3.1";
           leaf is-default {
             type boolean;
             description
@@ -1182,7 +1192,8 @@ module ietf-alto {
             "Filtered Cost Map specific configuration.";
           reference
             "RFC 7285: Application-Layer Traffic Optimization
-                       (ALTO) Protocol, Sections 11.2.2 and 11.3.2";
+                       (ALTO) Protocol, Sections 11.2.2 and
+                       11.3.2";
           leaf filtered {
             type boolean;
             description
@@ -1228,7 +1239,8 @@ module ietf-alto {
           uses algorithm;
         }
         container alto-cdni-params {
-          when 'derived-from-or-self(../resource-type, "alto:cdni")';
+          when 'derived-from-or-self(../resource-type,'
+             + '"alto:cdni")';
           if-feature "cdni";
           description
             "CDNi specific configuration.";

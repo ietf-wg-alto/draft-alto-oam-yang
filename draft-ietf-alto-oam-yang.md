@@ -82,7 +82,6 @@ normative:
   RFC7285:
   RFC7286:
   RFC8174:
-  RFC8177:
   RFC8189:
   RFC8340:
   RFC8686:
@@ -153,6 +152,6 @@ See details: https://github.com/cabo/kramdown-rfc/issues/106
 
 --- back
 
-{::include appendix.md}
+{::include-nested appendix.md}
 
 {::include ack.md}
