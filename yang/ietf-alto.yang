@@ -653,17 +653,6 @@ module ietf-alto {
     }
   }
 
-  grouping endpoint-cost-cap {
-    description
-      "This grouping defines EndpointCostCapabilities as the same as
-       FilteredCostMapCapabilities defined by the grouping
-       filter-costmap-cap.";
-    reference
-      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
-                 Protocol, Section 11.5.1.4";
-    uses filter-costmap-cap;
-  }
-
   grouping algorithm {
     description
       "This grouping defines the base data model for information
@@ -1219,7 +1208,7 @@ module ietf-alto {
           reference
             "RFC 7285: Application-Layer Traffic Optimization
                        (ALTO) Protocol, Section 11.5";
-          uses endpoint-cost-cap;
+          uses filter-costmap-cap;
           uses algorithm;
         }
         container alto-endpointprop-params {
