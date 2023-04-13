@@ -45,22 +45,21 @@ allow for augmentation to support potential future extensions.
 ## Overview of ALTO O&M Data Model for Reference ALTO Architecture
 
 [](#alto-ref-arch) shows a reference architecture for the ALTO server
-implementation and YANG modules that these server components need to implement.
-The server manager, information resource manager and data source listeners need
-to implement `ietf-alto.yang` (see [](#alto-model)). The performance monitor
-and logging and fault manager need to implement `ietf-alto-stats.yang` (see
-[](#alto-stats-model)).
+implementation. It also indicates the YANG modules that these server components need to implement.
+The server manager, information resource manager, and data source listeners need
+to implement `ietf-alto.yang` ([](#alto-model)). The performance monitor
+and logging and fault manager need to implement `ietf-alto-stats.yang` ([](#alto-stats-model)).
 
-In practice, an ALTO server may not follow this architecture exactly. But to
-implement the YANG modules defined by this document, it should contain all the
+In practice, an ALTO server may not follow this architecture exactly. However, to
+implement the YANG modules defined in this document, an ALTO server implementation should contain all the
 server components above as a minimal implementation.
 
 The data broker and algorithm plugins are not in the scope of the data models
-defined in this document. But user-specified YANG modules can be applied to
+defined in this document. User-specified YANG modules can be applied to
 different algorithm plugins by augmenting the data model defined in this
-document (see [](#alto-ext-model)).
+document ([](#alto-ext-model)).
 
-Generally, these server components of an ALTO server have the following
+Generally, the ALTO server components shown in [](#alto-ref-arch) have the following
 interactions with each others:
 
 - Both the server manager and information resource manager will report
@@ -69,7 +68,7 @@ interactions with each others:
   information resources upon the configuration; Once an ALTO information
   resource is requested, the registered callback algorithm will be invoked.
 - A data source listener will fetch data from the configured data source using
-  the corresponding southbound API in either proactive mode (polling) or
+  the corresponding data source API in either proactive mode (polling) or
   reactive mode (subscription/publication).
 - A data source listener will update the preprocessed data to an optional data
   broker.
@@ -96,7 +95,7 @@ interactions with each others:
     ...............         ..............................
            ^
            | write
-  +----------------+  Southbound  ++=============++
+  +----------------+  Data Source  ++=============++
   | Data Source    |     API      ||             ||
   | Listener:      | <==========> || Data Source ||
   | ietf-alto.yang |              ||             ||
