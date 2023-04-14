@@ -70,14 +70,15 @@ the parameters of a network map creation algorithm that translates an IETF
 layer 3 unicast topology into a network map.
 
 ~~~
-module: example-ietf-alto-alg
+module: example-vendor-alto-alg
 
   augment /alto:alto/alto:alto-server/alto:resource
-            /alto:resource-params/alto:networkmap
             /alto:alto-networkmap-params/alto:algorithm:
     +--:(l3-unicast-cluster)
        +--rw l3-unicast-cluster-algorithm
-          +--rw l3-unicast-topo    leafref
+          +--rw l3-unicast-topo
+          |  +--rw source-datastore    alto:data-source-ref
+          |  +--rw topo-name?          leafref
           +--rw depth?             uint32
 ~~~
 
