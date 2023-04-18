@@ -103,6 +103,129 @@ module ietf-alto-stats {
     }
   }
 
+  grouping network-map-stats {
+    description
+      "This grouping defines resource-specific statstics for the
+       network map service only.";
+    leaf num-map-pid {
+      type yang:gauge64;
+      description
+        "Number of PIDs contained in the network map.";
+    }
+    reference
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 5";
+  }
+
+  grouping prop-map-stats {
+    description
+      "This grouping defines resource-specific statstics for the
+       endpoint property or property map service only.";
+    leaf num-map-entry {
+      type yang:gauge64;
+      description
+        "Number of ALTO entities contained in the property map.";
+    }
+    reference
+      "RFC 7285: Application-Layer Traffic Optimization (ALTO)
+                 Protocol, Section 11.4.1
+       RFC 9240: An ALTO Extension: Entity Property Maps";
+  }
+
+  grouping cdni-stats {
+    description
+      "This grouping defines resource-specific statstics for the
+       CDNI advertisement service only.";
+    leaf num-base-obj {
+      type yang:gauge64;
+      description
+        "Number of base CDNi advertisement objects contained in the
+         CDNI resource.";
+    }
+    reference
+      "RFC 9241: Content Delivery Network Interconnection (CDNI)
+                 Request Routing: CDNI Footprint and Capabilities
+                 Advertisement using ALTO";
+  }
+
+  grouping upd-stream-stats {
+    description
+      "This grouping defines resource-specific statstics for the
+       update stream service only.";
+    leaf num-upd-stream {
+      type yang:gauge64;
+      description
+        "Number of active update streams connected to the update
+         stream service.";
+    }
+    leaf num-upd-msg-total {
+      type yang:gauge64;
+      description
+        "Total number of update messages sent to all the active
+         update streams.";
+    }
+    leaf num-upd-msg-max {
+      type yang:gauge64;
+      description
+        "The maximum value over the total number of update messages
+         sent to each active update stream. Assume there are 3
+         active update streams A, B, and C with 4, 3, and 2 update
+         messages sent to them respectively, the value of this
+         metric is 4. After a while, if there is no new update
+         message sent to any update stream, but the update stream A
+         is closed, then the value of this metric is updated to
+         3.";
+    }
+    leaf num-upd-msg-min {
+      type yang:gauge64;
+      description
+        "The minimum value over the total number of update messages
+         sent to each active update stream. The procedure is similar
+         to num-msg-max.";
+    }
+    leaf num-upd-msg-avg {
+      type yang:gauge64;
+      description
+        "The average value over the total number of update messages
+         sent to each active update stream. The procedure is similar
+         to num-msg-max.";
+    }
+    leaf num-upd-msg-total-last {
+      type yang:gauge64;
+      description
+        "Total number of update messages sent to all the active
+         update streams within the last time window.";
+    }
+    leaf num-upd-msg-max-last {
+      type yang:gauge64;
+      description
+        "The maximum value over the number of update messages sent
+         to each active update stream within the last time window.
+         The procedure is similar to num-msg-max, but only count
+         the update messages within the last time window.";
+    }
+    leaf num-upd-msg-min-last {
+      type yang:gauge64;
+      description
+        "The minimal value over the number of update messages sent
+         to each active update stream within the last time window.
+         The procedure is similar to num-msg-max, but only count
+         the update messages within the last time window.";
+    }
+    leaf num-upd-msg-avg-last {
+      type yang:gauge64;
+      description
+        "The average value over the number of update messages sent
+         to each active update stream within the last time window.
+         The procedure is similar to num-msg-max, but only count
+         the update messages within the last time window.";
+    }
+    reference
+      "RFC 8895: Application-Layer Traffic Optimization (ALTO)
+                 Incremental Updates Using Server-Sent Events
+                 (SSE)";
+  }
+
   grouping resource-level-stats {
     description
       "This grouping defines statistics for resource-level
@@ -158,114 +281,45 @@ module ietf-alto-stats {
         "The total number of failed responses for requests to this
          information resource.";
     }
-    leaf num-map-pid {
+    container network-map-stats {
       when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:network-map")';
-      type yang:gauge64;
       description
-        "Number of PIDs contained in the network map.";
+        "Resource-specific statistics for network map
+         service only.";
+      uses network-map-stats;
     }
-    leaf num-map-entry {
+    container endpoint-prop-stats {
       when 'derived-from-or-self(../../alto:resource-type,'
-         + '"alto:endpoint-prop") or '
-         + 'derived-from-or-self(../../alto:resource-type,'
-         + '"alto:property-map")';
-      type yang:gauge64;
+         + '"alto:endpoint-prop")';
       description
-        "Number of ALTO entities contained in the property map.";
+        "Resource-specific statistics for endpoint property
+         service only.";
+      uses prop-map-stats;
     }
-    leaf num-base-obj {
+    container property-map-stats {
+      when 'derived-from-or-self(../../alto:resource-type,'
+         + '"alto:property-map")';
+      description
+        "Resource-specific statistics for entity property map
+         service only.";
+      uses prop-map-stats;
+    }
+    container cdni-stats {
       when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:cdni")';
-      type yang:gauge64;
       description
-        "Number of base CDNi advertisement objects contained in the
-         CDNI resource.";
+        "Resource-specific statistics for CDNI advertisement
+         service only.";
+      uses cdni-stats;
     }
-    leaf num-upd-sess {
+    container upd-stream-stats {
       when 'derived-from-or-self(../../alto:resource-type,'
          + '"alto:update")';
-      type yang:gauge64;
       description
-        "Number of sessions connected to the incremental update
-         service.";
-    }
-    leaf num-event-total {
-      when 'derived-from-or-self(../../alto:resource-type,'
-         + '"alto:update")';
-      type yang:gauge64;
-      description
-        "Total number of update events sent to all the connected
-         sessions.";
-    }
-    leaf num-event-max {
-      when 'derived-from-or-self(../../alto:resource-type,'
-         + '"alto:update")';
-      type yang:gauge64;
-      description
-        "The maximum value over the total number of update events
-         sent to each connected session. Assume there are 3
-         connected sessions A, B, and C with 4, 3, and 2 update
-         events sent to them respectively, the value of this metric
-         is 4. After a while, if there is no new update event sent
-         to any session, but the session A is disconnected, then
-         the value of this metric is updated to 3.";
-    }
-    leaf num-event-min {
-      when 'derived-from-or-self(../../alto:resource-type,'
-         + '"alto:update")';
-      type yang:gauge64;
-      description
-        "The minimum value over the total number of update events
-         sent to each connected session. The procedure is similar
-         to num-event-max.";
-    }
-    leaf num-event-avg {
-      when 'derived-from-or-self(../../alto:resource-type,'
-         + '"alto:update")';
-      type yang:gauge64;
-      description
-        "The average value over the total number of update events
-         sent to each connected session. The procedure is similar
-         to num-event-max.";
-    }
-    leaf num-event-total-last {
-      when 'derived-from-or-self(../../alto:resource-type,'
-         + '"alto:update")';
-      type yang:gauge64;
-      description
-        "Total number of update events sent to all the connected
-         sessions within the last time window.";
-    }
-    leaf num-event-max-last {
-      when 'derived-from-or-self(../../alto:resource-type,'
-         + '"alto:update")';
-      type yang:gauge64;
-      description
-        "The maximum value over the number of update events sent
-         to each connected session within the last time window. The
-         procedure is similar to num-event-max, but only count the
-         update events within the last time window.";
-    }
-    leaf num-event-min-last {
-      when 'derived-from-or-self(../../alto:resource-type,'
-         + '"alto:update")';
-      type yang:gauge64;
-      description
-        "The minimal value over the number of update events sent
-         to each connected session within the last time window. The
-         procedure is similar to num-event-max, but only count the
-         update events within the last time window.";
-    }
-    leaf num-event-avg-last {
-      when 'derived-from-or-self(../../alto:resource-type,'
-         + '"alto:update")';
-      type yang:gauge64;
-      description
-        "The average value over the number of update events sent
-         to each connected session within the last time window. The
-         procedure is similar to num-event-max, but only count the
-         update events within the last time window.";
+        "Resource-specific statistics for update stream service
+         only.";
+      uses upd-stream-stats;
     }
   }
 

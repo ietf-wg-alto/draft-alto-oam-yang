@@ -432,27 +432,40 @@ module: ietf-alto-stats
     +-- num-total-last-req?    yang:gauge64
     +-- num-total-last-succ?   yang:gauge64
     +-- num-total-last-fail?   yang:gauge64
+  grouping network-map-stats:
+    +-- num-map-pid?   yang:gauge64
+  grouping prop-map-stats:
+    +-- num-map-entry?   yang:gauge64
+  grouping cdni-stats:
+    +-- num-base-obj?   yang:gauge64
+  grouping upd-stream-stats:
+    +-- num-upd-stream?           yang:gauge64
+    +-- num-upd-msg-total?        yang:gauge64
+    +-- num-upd-msg-max?          yang:gauge64
+    +-- num-upd-msg-min?          yang:gauge64
+    +-- num-upd-msg-avg?          yang:gauge64
+    +-- num-upd-msg-total-last?   yang:gauge64
+    +-- num-upd-msg-max-last?     yang:gauge64
+    +-- num-upd-msg-min-last?     yang:gauge64
+    +-- num-upd-msg-avg-last?     yang:gauge64
   grouping resource-level-stats:
-    +-- discontinuity-time?     yang:timestamp
-    +-- last-report-time?       yang:timestamp
-    +-- num-res-upd?            yang:counter64
-    +-- res-mem-size?           uint64
-    +-- res-enc-size?           uint64
-    +-- num-res-req?            yang:counter64
-    +-- num-res-succ?           yang:counter64
-    +-- num-res-fail?           yang:counter64
-    +-- num-map-pid?            yang:gauge64
-    +-- num-map-entry?          yang:gauge64
-    +-- num-base-obj?           yang:gauge64
-    +-- num-upd-sess?           yang:gauge64
-    +-- num-event-total?        yang:gauge64
-    +-- num-event-max?          yang:gauge64
-    +-- num-event-min?          yang:gauge64
-    +-- num-event-avg?          yang:gauge64
-    +-- num-event-total-last?   yang:gauge64
-    +-- num-event-max-last?     yang:gauge64
-    +-- num-event-min-last?     yang:gauge64
-    +-- num-event-avg-last?     yang:gauge64
+    +-- discontinuity-time?    yang:timestamp
+    +-- last-report-time?      yang:timestamp
+    +-- num-res-upd?           yang:counter64
+    +-- res-mem-size?          uint64
+    +-- res-enc-size?          uint64
+    +-- num-res-req?           yang:counter64
+    +-- num-res-succ?          yang:counter64
+    +-- num-res-fail?          yang:counter64
+    +-- network-map-stats
+    |  +---u network-map-stats
+    +-- endpoint-prop-stats
+    |  +---u prop-map-stats
+    +-- property-map-stats
+    |  +---u prop-map-stats
+    +-- cdni-stats
+    |  +---u cdni-stats
+    +-- upd-stream-stats
 ~~~
 {: #tree-stat title='IETF ALTO Statistics Structure' artwork-align="center"}
 
@@ -485,8 +498,8 @@ extensions:
 
 - `num-map-entry` and `num-base-obj` provides measurement for number of generic
   ALTO entities (for {{RFC9240}} and {{RFC9241}})
-- `num-upd-sess` and `num-event-*` provides statistics for update sessions and
-  events (for {{RFC8189}})
+- `num-upd-stream` and `num-upd-msg-*` provides statistics for update streams and
+  messages (for {{RFC8189}})
 
 The "ietf-alto-stats" module only focuses on the performance metrics that can be directly
 measured at the ALTO server. The following metrics for "measurement of the

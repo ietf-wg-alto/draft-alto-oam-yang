@@ -1114,7 +1114,9 @@ module ietf-alto {
           description
             "Data source specific configuration.";
           reference
-            "Section 5.4.1 of RFC XXXX";
+            "RFC XXXX: YANG Data Models for the Application-Layer
+                       Traffic Optimization (ALTO) Protocol,
+                       Section 5.4.1";
         }
       }
       list resource {
@@ -1236,6 +1238,8 @@ module ietf-alto {
           description
             "(Filtered) Entity Property Map specific
              configuration.";
+          reference
+            "RFC 9240: An ALTO Extension: Entity Property Maps";
           uses algorithm;
         }
         container alto-cdni-params {
@@ -1244,6 +1248,10 @@ module ietf-alto {
           if-feature "cdni";
           description
             "CDNi specific configuration.";
+          reference
+            "RFC 9241: Content Delivery Network Interconnection
+                       (CDNI) Request Routing: CDNI Footprint and
+                       Capabilities Advertisement using ALTO";
           uses algorithm;
         }
         container alto-update-params {
@@ -1252,6 +1260,10 @@ module ietf-alto {
           if-feature "incr-update";
           description
             "Incremental Updates specific configuration.";
+          reference
+            "RFC 8895: Application-Layer Traffic Optimization
+                       (ALTO) Incremental Updates Using Server-Sent
+                       Events (SSE)";
           uses algorithm;
         }
       }
