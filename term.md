@@ -2,11 +2,50 @@
 
 This document uses the following acronyms:
 
+ALTO:
+  : Application-Layer Traffic Optimization
+
+CPU:
+  : Central Processing Unit
+
+DNS:
+  : Domain Name System
+
+HTTP:
+  : Hypertext Transfer Protocol
+
+IP:
+  : Internet Protocol
+
+IRR:
+  : Internet Routing Registry
+
+NAPTR:
+  : Naming Authority Pointer
+
 OAM:
   : Operations, Administration, and Maintenance (Section 3 of {{?RFC6291}})
 
 O&M:
   : OAM and Management (Section 3 of {{?RFC6291}})
+
+OAuth:
+  : Open Authorization
+
+PID:
+  : Provider-defined Identifier in ALTO
+
+TCP:
+  : Transmission Control Protocol
+
+TLS:
+  : Transport Layer Security
+
+URI:
+  : Uniform Resource Identifier
+
+YANG:
+  : Yet Another Next Generation
 
 ## Tree Diagrams
 
