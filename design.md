@@ -119,13 +119,16 @@ across HTTP, TLS, and TCP layers ({{tree-alto-gp}}).
 
 #### ALTO Server Discovery Setup
 
-In practice, multiple ALTO servers can be deployed for scalability. That may
-require communication among different ALTO servers.
+In practice, for a large-scale network consisting of multiple administrative
+domains, the information about the network may be partitioned and distributed
+over multiple ALTO servers. That may require discovery and communication among
+different ALTO servers.
 
-The "ietf-alto" module does not contain any configuration for
-the communication between peer ALTO servers. Instead, it provides the
-configuration for how an ALTO server can be discovered by another ALTO server on
-demand ({{tree-alto-disc-gp}}).
+The "ietf-alto" module provides the configuration for how an ALTO server can be
+discovered by another ALTO server or client on demand ({{tree-alto-disc-gp}}).
+But it does not contain any configuration for the communication among ALTO
+servers because the related solution has not become a standard. Future
+documents may extend it to fully support multi-domain scenarios.
 
 ~~~
   grouping alto-server-discovery:
