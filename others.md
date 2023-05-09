@@ -9,13 +9,23 @@ The Network Access Control Model (NACM) {{RFC8341}} provides the means to
 restrict access for particular users to a pre-configured subset of all
 available protocol operations and content.
 
-None of the readable data nodes in these YANG module are considered sensitive or
+None of the readable data nodes in these YANG modules are considered sensitive or
 vulnerable in network environments. The NACM "default-deny-all" extension has
 not been set for any data nodes defined in these module.
 
 None of the writable data nodes in these YANG modules are considered sensitive or
 vulnerable in network environments. The NACM "default-deny-write" extension has
 not been set for any data nodes defined in these modules.
+
+Please be aware that these modules include choice nodes that can be augmented
+by other extended modules. The augmented data nodes may be considered sensitive
+or vulnerable in some network environments. For instance, an augmented case of
+the "source-params" choice in "data-source" may include authentication
+information about how to access a data source including private network
+information. The "yang-datastore" case in [](#example-data-source) is such an
+example. The "restconf" and "netconf" nodes in it may reveal the access to a
+private YANG datastore. Thus, those extended modules may have the NACM
+extension "default-deny-all" set.
 
 These modules use groupings defined in other RFCs that
 define data nodes that do set the NACM "default-deny-all" and
