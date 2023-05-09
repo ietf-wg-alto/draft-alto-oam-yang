@@ -460,6 +460,9 @@ module: ietf-alto-stats
     +-- num-res-req?           yang:counter64
     +-- num-res-succ?          yang:counter64
     +-- num-res-fail?          yang:counter64
+    +-- num-res-last-req?      yang:gauge64
+    +-- num-res-last-succ?     yang:gauge64
+    +-- num-res-last-fail?     yang:gauge64
     +-- network-map-stats
     |  +---u network-map-stats
     +-- endpoint-prop-stats
@@ -478,8 +481,8 @@ module: ietf-alto-stats
 To satisfy R6 in [](#requirements), the "ietf-alto-stats" module contains statistics that indicates server failures ({{tree-stat}}).
 
 More specifically, `num-total-*` and `num-total-last-*` provides server-level
-failure counters; `num-res-*` provides information resource-level failure
-counters.
+failure counters; `num-res-*` and `num-res-last-*` provides information
+resource-level failure counters.
 
 ## Model for ALTO-specific Performance Monitoring
 

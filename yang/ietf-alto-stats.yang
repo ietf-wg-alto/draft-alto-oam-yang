@@ -87,19 +87,22 @@ module ietf-alto-stats {
       type yang:gauge64;
       description
         "The total number of ALTO requests received by the ALTO
-         server within the last time window.";
+         server within the last time window. The duration of the
+         time window is configured by time-window-size parameter.";
     }
     leaf num-total-last-succ {
       type yang:gauge64;
       description
         "The total number of successful responses sent by the ALTO
-         server within the last time window.";
+         server within the last time window. The duration of the
+         time window is configured by time-window-size parameter.";
     }
     leaf num-total-last-fail {
       type yang:gauge64;
       description
         "The total number of failed responses sent by the ALTO
-         server within the last time window.";
+         server within the last time window. The duration of the
+         time window is configured by time-window-size parameter.";
     }
   }
 
@@ -194,7 +197,8 @@ module ietf-alto-stats {
       type yang:gauge64;
       description
         "Total number of update messages sent to all the active
-         update streams within the last time window.";
+         update streams within the last time window. The duration of the
+         time window is configured by time-window-size parameter.";
     }
     leaf num-upd-msg-max-last {
       type yang:gauge64;
@@ -202,7 +206,9 @@ module ietf-alto-stats {
         "The maximum value over the number of update messages sent
          to each active update stream within the last time window.
          The procedure is similar to num-msg-max, but only count
-         the update messages within the last time window.";
+         the update messages within the last time window. The
+         duration of the time window is configured by
+         time-window-size parameter.";
     }
     leaf num-upd-msg-min-last {
       type yang:gauge64;
@@ -210,7 +216,9 @@ module ietf-alto-stats {
         "The minimal value over the number of update messages sent
          to each active update stream within the last time window.
          The procedure is similar to num-msg-max, but only count
-         the update messages within the last time window.";
+         the update messages within the last time window. The
+         duration of the time window is configured by
+         time-window-size parameter.";
     }
     leaf num-upd-msg-avg-last {
       type yang:gauge64;
@@ -218,7 +226,9 @@ module ietf-alto-stats {
         "The average value over the number of update messages sent
          to each active update stream within the last time window.
          The procedure is similar to num-msg-max, but only count
-         the update messages within the last time window.";
+         the update messages within the last time window. The
+         duration of the time window is configured by
+         time-window-size parameter.";
     }
     reference
       "RFC 8895: Application-Layer Traffic Optimization (ALTO)
@@ -266,20 +276,43 @@ module ietf-alto-stats {
     leaf num-res-req {
       type yang:counter64;
       description
-        "The number of ALTO requests to this information
+        "The total number of ALTO requests to this information
          resource.";
     }
     leaf num-res-succ {
       type yang:counter64;
       description
-        "The number of successful responses for requests to this
-         information resource.";
+        "The total number of successful responses for requests to
+         this information resource.";
     }
     leaf num-res-fail {
       type yang:counter64;
       description
         "The total number of failed responses for requests to this
          information resource.";
+    }
+    leaf num-res-last-req {
+      type yang:gauge64;
+      description
+        "The number of ALTO requests to this information resource
+         within the last time window. The duration of the time
+         window is configured by time-window-size parameter.";
+    }
+    leaf num-res-last-succ {
+      type yang:gauge64;
+      description
+        "The number of successful responses for requests to this
+         information resource within the last time window. The
+         duration of the time window is configured by
+         time-window-size parameter.";
+    }
+    leaf num-res-last-fail {
+      type yang:gauge64;
+      description
+        "The number of failed responses for requests to this
+         information resource within the last time window. The
+         duration of the time window is configured by
+         time-window-size parameter.";
     }
     container network-map-stats {
       when 'derived-from-or-self(../../alto:resource-type,'
