@@ -678,7 +678,6 @@ module ietf-alto {
       "A reuseable grouping for configuring an ALTO server
        'listen' protocol stack for a single connection.";
     choice transport {
-      mandatory true;
       default "https";
       description
         "Selects between available transports.";
