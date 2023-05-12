@@ -14,14 +14,8 @@ DNS:
 HTTP:
   : Hypertext Transfer Protocol
 
-IP:
-  : Internet Protocol
-
 IRR:
   : Internet Routing Registry
-
-NAPTR:
-  : Naming Authority Pointer
 
 OAM:
   : Operations, Administration, and Maintenance (Section 3 of {{?RFC6291}})
@@ -43,9 +37,6 @@ TLS:
 
 URI:
   : Uniform Resource Identifier
-
-YANG:
-  : Yet Another Next Generation
 
 ## Tree Diagrams
 
