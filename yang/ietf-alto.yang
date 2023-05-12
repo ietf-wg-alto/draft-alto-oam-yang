@@ -679,6 +679,7 @@ module ietf-alto {
        'listen' protocol stack for a single connection.";
     choice transport {
       mandatory true;
+      default "https";
       description
         "Selects between available transports.";
       case http {
