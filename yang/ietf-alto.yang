@@ -794,24 +794,25 @@ module ietf-alto {
   grouping alto-server-discovery-client {
     description
       "Grouping for configuration of how a client can discover
-       another ALTO server.";
-    choice server-discovery-client-manner {
+       an ALTO server.";
+    choice method {
       description
-        "Selects among available server discovery manners.";
+        "Selects among available server discovery methods.";
       case reverse-dns {
         if-feature "xdom-disc";
         description
-          "Use reverse DNS lookup to discover an ALTO server.";
+          "Uses reverse DNS lookup to discover an ALTO server.";
         reference
           "RFC 8686: Application-Layer Traffic Optimization (ALTO)
                      Cross-Domain Server Discovery.";
         container rdns-params {
           description
-            "Configuration for reverse DNS lookups.";
+            "Defines a set of parameters for reverse DNS 
+             lookups.";
           leaf-list dns-server {
             type inet:host;
             description
-              "DNS server list for reverse DNS lookup.";
+              "Provides a DNS server list for reverse DNS lookup.";
           }
         }
       }
@@ -830,13 +831,14 @@ module ietf-alto {
           "Specifies syslog as the logging system.";
         container syslog-params {
           description
-            "Configuration parameters for syslog.";
+            "Provides a set of syslog parameters.";
           leaf config-file {
             type inet:uri {
               pattern 'file:.*';
             }
             description
-              "The file location of the syslog configuration.";
+              "Indicates the file location of the syslog 
+               configuration.";
           }
         }
       }
