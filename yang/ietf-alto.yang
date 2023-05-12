@@ -865,9 +865,9 @@ module ietf-alto {
            by a data source or a resource creation algorithm to
            communicate with other ALTO servers.";
       }
-      container server-discovery-client {
+      container server-discovery {
         description
-          "Configuration of how to discover an ALTO server.";
+          "Specifies a set of parameters for ALTO server discovery.";
         uses alto-server-discovery-client;
       }
     }
@@ -882,7 +882,7 @@ module ietf-alto {
       }
       container server-discovery {
         description
-          "Configure how the ALTO server to be discovered by
+          "Configures how the ALTO server to be discovered by
            others.";
         uses alto-server-discovery;
       }
