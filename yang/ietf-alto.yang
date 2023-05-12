@@ -762,13 +762,13 @@ module ietf-alto {
       "Grouping for the configuration of how to set up server
        discovery for clients or other ALTO servers to discovery the
        URI of this ALTO server.";
-    choice server-discovery-manner {
+    choice method {
       description
-        "Selects among available server discovery manners.";
+        "Selects among available server discovery methods.";
       case reverse-dns {
         if-feature "xdom-disc";
         description
-          "Configure DNS NAPTR records for cross-domain ALTO server
+          "Configures DNS NAPTR records for cross-domain ALTO server
            discovery using reverse DNS lookup.";
         reference
           "RFC 8686: Application-Layer Traffic Optimization (ALTO)
