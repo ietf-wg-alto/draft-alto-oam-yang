@@ -78,8 +78,7 @@ module example-vendor-alto-server-discovery {
   }
 
   augment "/alto:alto/alto:alto-client"
-        + "/alto:server-discovery"
-        + "/alto:method" {
+        + "/alto:server-discovery/alto:method" {
     description
       "Examples of server discovery mechanisms used by an ALTO
        client.";
