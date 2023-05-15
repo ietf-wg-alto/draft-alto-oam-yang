@@ -17,9 +17,10 @@ None of the writable data nodes in these YANG modules are considered sensitive o
 vulnerable in network environments. The NACM "default-deny-write" extension has
 not been set for any data nodes defined in these modules.
 
-The "ietf-alto" supports an HTTP listen mode to cover cases where the ALTO server stack
-does not handle the TLS termination itself, but is handled by a separate component. Special care should be considered when such mode is enabled.
-Note that the default listen mode is "https".
+The "ietf-alto" supports an HTTP listen mode to cover cases where the ALTO
+server stack does not handle the TLS termination itself, but is handled by a
+separate component. Special care should be considered when such mode is
+enabled. Note that the default listen mode is "https".
 
 Please be aware that these modules include choice nodes that can be augmented
 by other extended modules. The augmented data nodes may be considered sensitive

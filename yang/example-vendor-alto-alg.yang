@@ -14,7 +14,7 @@ module example-vendor-alto-alg {
   import ietf-datastores {
     prefix ietf-datastores;
     reference
-      "RFC8342: Network Management Datastore Architecture (NMDA)";
+      "RFC 8342: Network Management Datastore Architecture (NMDA)";
   }
 
   import example-vendor-alto-data-source {

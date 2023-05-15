@@ -197,8 +197,9 @@ module ietf-alto-stats {
       type yang:gauge64;
       description
         "Total number of update messages sent to all the active
-         update streams within the last time window. The duration of the
-         time window is configured by time-window-size parameter.";
+         update streams within the last time window. The duration
+         of the time window is configured by time-window-size
+         parameter.";
     }
     leaf num-upd-msg-max-last {
       type yang:gauge64;

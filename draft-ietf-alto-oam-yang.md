@@ -78,30 +78,27 @@ normative:
   RFC2119:
   RFC3688:
   RFC6020:
+  RFC6241:
   RFC6991:
   RFC7285:
   RFC7286:
+  RFC8040:
   RFC8174:
   RFC8189:
   RFC8340:
+  RFC8341:
   RFC8686:
   RFC8895:
   RFC8896:
-  RFC6241:
-  RFC8040:
-  RFC8341:
   I-D.ietf-netconf-tcp-client-server:
   I-D.ietf-netconf-tls-client-server:
   I-D.ietf-netconf-http-client-server:
   I-D.ietf-netconf-netconf-client-server:
   I-D.ietf-netconf-restconf-client-server:
 informative:
-  RFC2622:
   RFC7921:
   RFC7971:
-  RFC8342:
   RFC8346:
-  RFC8641:
   RFC9240:
   RFC9241:
   RFC9275:
