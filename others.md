@@ -13,16 +13,31 @@ None of the readable data nodes in these YANG modules are considered sensitive o
 vulnerable in network environments. The NACM "default-deny-all" extension has
 not been set for any data nodes defined in these module.
 
-None of the writable data nodes in these YANG modules are considered sensitive or
-vulnerable in network environments. The NACM "default-deny-write" extension has
-not been set for any data nodes defined in these modules.
+None of the writable data nodes in these YANG modules are considered sensitive
+in network environments. The NACM "default-deny-write" extension has not been
+set for any data nodes defined in these modules.
+
+However, there are a number of writable data nodes defined in these YANG
+modules that are considered vulnerable in network environments. Write
+operations to these data nodes without proper protection can have a negative
+effect. These are the data nodes and their vulnerable:
+
+feed-interval:
+  : A malicious client could attempt to set a very low/large value to this
+  node. Setting a very low value could attack the data source. And setting a
+  very large value would lead to maintaining stale data in the ALTO server.
+
+poll-interval:
+  : A malicious client could attempt to set a very low/large value to this
+  node. Setting a very low value could attack the data source. And setting a
+  very large value would lead to maintaining stale data in the ALTO server.
 
 The "ietf-alto" supports an HTTP listen mode to cover cases where the ALTO
 server stack does not handle the TLS termination itself, but is handled by a
 separate component. Special care should be considered when such mode is
 enabled. Note that the default listen mode is "https".
 
-Please be aware that these modules include choice nodes that can be augmented
+Also, please be aware that these modules include choice nodes that can be augmented
 by other extended modules. The augmented data nodes may be considered sensitive
 or vulnerable in some network environments. For instance, an augmented case of
 the "source-params" choice in "data-source" may include authentication
