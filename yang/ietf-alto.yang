@@ -543,13 +543,13 @@ module ietf-alto {
       "Type to reference a user id.";
   }
 
-  typedef dependency-ref {
+  typedef resource-ref {
     type leafref {
       path "/alto:alto/alto:alto-server/alto:resource"
          + "/alto:resource-id";
     }
     description
-      "Type to reference a dependency.";
+      "Type to reference a resource identifier.";
   }
 
   typedef role-ref {
@@ -807,7 +807,7 @@ module ietf-alto {
                      Cross-Domain Server Discovery.";
         container rdns-params {
           description
-            "Defines a set of parameters for reverse DNS 
+            "Defines a set of parameters for reverse DNS
              lookups.";
           leaf-list dns-server {
             type inet:host;
@@ -837,7 +837,7 @@ module ietf-alto {
               pattern 'file:.*';
             }
             description
-              "Indicates the file location of the syslog 
+              "Indicates the file location of the syslog
                configuration.";
           }
         }
@@ -1150,7 +1150,7 @@ module ietf-alto {
             "Roles allowed to access this information resource.";
         }
         leaf-list dependency {
-          type dependency-ref;
+          type resource-ref;
           description
             "A list of dependent information resources.";
         }
@@ -1268,7 +1268,58 @@ module ietf-alto {
                        Events (SSE)";
           uses algorithm;
         }
+        container resource-limits {
+          description
+            "Sets resource limits.";
+          leaf notify-res-mem-limit {
+            type uint64;
+            units "bytes";
+            description
+              "Notification of resource memory usage.
+
+               Notification must be generated when the defined
+               threshold is reached.";
+          }
+          leaf notify-upd-stream-limit {
+            when 'derived-from-or-self(../../resource-type,'
+               + '"alto:update")';
+            if-feature "incr-update";
+            type uint64;
+            description
+              "Notification of number of active update streams.
+
+               Notification must be generated when the defined
+               threshold is reached.";
+          }
+        }
       }
+    }
+  }
+
+  // Notifications
+
+  notification alto-resource-event {
+    if-feature alto-server;
+    description
+      "Notifications must be generated when notify-res-mem-limit
+       and/or notify-upd-stream-limit thresholds are reached.";
+    leaf resource-id {
+      type resource-ref;
+      mandatory true;
+      description
+        "Resource identifier.";
+    }
+    leaf notify-res-mem-threshold {
+      type uint64;
+      units "bytes";
+      description
+        "The notify-res-mem-limit threshold has been fired.";
+    }
+    leaf notify-upd-stream-threshold {
+      if-feature "incr-update";
+      type uint64;
+      description
+        "The notify-upd-stream-limit threshold has been fired.";
     }
   }
 }

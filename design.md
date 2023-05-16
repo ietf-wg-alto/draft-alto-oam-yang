@@ -289,7 +289,7 @@ module: ietf-alto
            +--rw resource-type               identityref
            +--rw description?                string
            +--rw accepted-role*              role-ref
-           +--rw dependency*                 dependency-ref
+           +--rw dependency*                 resource-ref
            +--rw alto-ird-params
            |  +--rw delegation    inet:uri
            +--rw alto-networkmap-params
@@ -311,7 +311,17 @@ module: ietf-alto
            +--rw alto-cdni-params {cdni}?
            |  +---u algorithm
            +--rw alto-update-params {incr-update}?
-              +---u algorithm
+           |  +---u algorithm
+           +--rw resource-limits
+              +--rw notify-res-mem-limit?      uint64
+              +--rw notify-upd-stream-limit?   uint64
+                      {incr-update}?
+
+  notifications:
+    +---n alto-resource-event {alto-server}?
+       +--ro resource-id                    resource-ref
+       +--ro notify-res-mem-threshold?      uint64
+       +--ro notify-upd-stream-threshold?   uint64 {incr-update}?
 
   grouping filter-costmap-cap:
     +-- cost-type-name*            cost-type-ref
@@ -358,6 +368,17 @@ The developer does not have to customize the creation algorithm of the `ird`
 resource. The default `ird` resource will be created automatically based on all
 the added `resource` entries. The delegated `ird` resource will be created as a
 static ALTO information resource (Section 9.2.4 of {{RFC7285}}).
+
+Each `resource` entry may also set thresholds of memory usage and active update
+streams (if "incr-update" feature is enabled). [](#TableThreshold) describes
+limits that, once exceeded, will trigger notifications to be generated:
+
+
+| Notification Threshold  | Description                                                                                                                                                                                    |
+| ----------------------  | -----------                                                                                                                                                                                    |
+| notify-res-mem-limit    | Used to notify high memory utilization of the resource configured to an ALTO server instance. When exceeded, an alto-resource-event will be generated.                                |
+| notify-upd-stream-limit | Used to notify a high number of active update streams that are serviced by an update resource configured to an ALTO server instance. When exceeded, an alto-resource-event will be generated. |
+{: #TableThreshold title="Notification Thresholds."}
 
 
 ### ALTO Information Resource Access Control Management {#alto-rbac}
