@@ -403,12 +403,12 @@ module: ietf-alto
         |     |  +--rw http-auth-client
         |     |          {http-listen,http:client-auth-supported,
         |     |           http:local-users-supported}?
-        |     |     +--rw user-id    user-id-ref
+        |     |     +--rw user-id    http-user-id-ref
         |     +--:(https)
         |        +--rw https-auth-client
         |                {http:client-auth-supported,
         |                 http:local-users-supported}?
-        |           +--rw user-id    user-id-ref
+        |     |     +--rw user-id    https-user-id-ref
         +--rw role* [role-name]
         |  +--rw role-name    role-name
         |  +--rw client*      client-ref
