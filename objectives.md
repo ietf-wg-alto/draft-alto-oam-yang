@@ -89,17 +89,17 @@ interactions with each others:
                                          ^|
                                          || callback
                                          |v
-     .............          ..............................
-    /             \ ------> . Algorithm Plugin:          .
-    . Data Broker .  read   . example-ietf-alto-alg.yang .
-    ...............         ..............................
+     .............          ................................
+    /             \ ------> . Algorithm Plugin:            .
+    . Data Broker .  read   . example-vendor-alto-alg.yang .
+    ...............         ................................
            ^
            | write
   +----------------+  Data Source  ++=============++
-  | Data Source    |     API      ||             ||
-  | Listener:      | <==========> || Data Source ||
-  | ietf-alto.yang |              ||             ||
-  +----------------+              ++=============++
+  | Data Source    |      API      ||             ||
+  | Listener:      | <=====-=====> || Data Source ||
+  | ietf-alto.yang |               ||             ||
+  +----------------+               ++=============++
 ~~~
 {: #alto-ref-arch title="A Reference ALTO Server Architecture and YANG Modules"}
 
