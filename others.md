@@ -48,7 +48,7 @@ nodes in "ietf-alto" YANG module and their sensitivity/vulnerability:
   /alto/alto-server/data-source/poll-interval:
   : This leaf specifies a period for an ALTO server to proactively poll updates
   from a data source. A malicious client could attempt to set a very low (or large)
-  value to this node. Setting a very low value could attack the data source. And
+  value to this node. Setting a very low value could attack the data source.
   setting a very large value would lead to maintaining stale data in the ALTO server.
 
 The "ietf-alto" supports an HTTP listen mode to cover cases where the ALTO
