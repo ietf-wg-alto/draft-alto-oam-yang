@@ -16,7 +16,7 @@ Write operations (e.g., edit-config) to these data nodes without proper protecti
 can have a negative effect on network operations. These are the subtrees and data
 nodes in "ietf-alto" YANG module and their sensitivity/vulnerability:
 
-  /alto:alto/alto:alto-client/alto:server-discovery:
+  /alto/alto-client/server-discovery:
   : This subtree specifies a set of parameters for an ALTO client to discover ALTO server.
   Unauthorized access to it could cause intruders to modify the ALTO discovery
   parameters(e.g., dns-server) so as to expose an ALTO client to fake ALTO servers.
