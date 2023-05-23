@@ -19,7 +19,7 @@ nodes in "ietf-alto" YANG module and their sensitivity/vulnerability:
   /alto/alto-client/server-discovery:
   : This subtree specifies a set of parameters for an ALTO client to discover ALTO servers.
   Unauthorized access to it could cause intruders to modify the ALTO discovery
-  parameters(e.g., dns-server) so as to expose an ALTO client to fake ALTO servers.
+  parameters (e.g., "dns-server") in order to expose an ALTO client to fake ALTO servers. Likewise, this data node can be manipulated to prevent an ALTO client from discovering a reachable ALTO server.
 
   /alto:alto/alto:alto-server/logging-system:
   : This subtree provides configuration to select a logging system to capture log
