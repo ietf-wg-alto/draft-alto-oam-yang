@@ -17,7 +17,7 @@ can have a negative effect on network operations. These are the subtrees and dat
 nodes in "ietf-alto" YANG module and their sensitivity/vulnerability:
 
   /alto/alto-client/server-discovery:
-  : This subtree specifies a set of parameters for an ALTO client to discover ALTO server.
+  : This subtree specifies a set of parameters for an ALTO client to discover ALTO servers.
   Unauthorized access to it could cause intruders to modify the ALTO discovery
   parameters(e.g., dns-server) so as to expose an ALTO client to fake ALTO servers.
 
