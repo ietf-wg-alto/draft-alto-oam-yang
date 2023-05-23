@@ -35,7 +35,7 @@ nodes in "ietf-alto" YANG module and their sensitivity/vulnerability:
 
   /alto/alto-server/role:
   : This list specifies roles which authenticated ALTO clients were assigned to for
-  access control. Unauthorized write access to this list can allow intruders to
+  access control. Unauthorized write access to this list allow intruders to
   modify the entries so as to permit access that should not be permitted, or deny
   access that should be permitted.
 
