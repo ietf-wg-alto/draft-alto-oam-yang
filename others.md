@@ -42,7 +42,7 @@ nodes in "ietf-alto" YANG module and their sensitivity/vulnerability:
   /alto:alto/alto:alto-server/data-source/feed-interval:
   : This leaf specifies a period for an ALTO server to wait for updates published
   by the data source. A malicious client could attempt to set a very low/large
-  value to this node. Setting a very low value could attack the data source. And
+  value to this node. Setting a very low value could attack the data source.
   Setting a very large value would lead to maintaining stale data in the ALTO server.
 
   /alto/alto-server/data-source/poll-interval:
