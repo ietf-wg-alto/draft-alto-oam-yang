@@ -31,7 +31,7 @@ nodes in "ietf-alto" YANG module and their sensitivity/vulnerability:
   : This list specifies all the authenticated ALTO clients on an ALTO server.
   Unauthorized write access to this list can allow intruders to modify the entries
   so as to add a client that have not been authenticated yet or delete a client
-  that has already been authenticated.
+  that has already been authenticated. Likewise, this data node can be manipulated to prevent access of legitimate ALTO clients.
 
   /alto:alto/alto:alto-server/role:
   : This list specifies roles which authenticated ALTO clients assigned to for
