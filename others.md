@@ -39,7 +39,7 @@ nodes in "ietf-alto" YANG module and their sensitivity/vulnerability:
   modify the entries so as to permit access that should not be permitted, or deny
   access that should be permitted.
 
-  /alto:alto/alto:alto-server/data-source/feed-interval:
+  /alto/alto-server/data-source/feed-interval:
   : This leaf specifies a period for an ALTO server to wait for updates published
   by the data source. A malicious client could attempt to set a very low/large
   value to this node. Setting a very low value could attack the data source.
