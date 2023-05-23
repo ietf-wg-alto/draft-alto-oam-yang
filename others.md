@@ -27,7 +27,7 @@ nodes in "ietf-alto" YANG module and their sensitivity/vulnerability:
   can allow intruders to access logging information, which could be used to craft
   an attack the server.
 
-  /alto:alto/alto:alto-server/auth-client:
+  /alto/alto-server/auth-client:
   : This list specifies all the authenticated ALTO clients on an ALTO server.
   Unauthorized write access to this list can allow intruders to modify the entries
   so as to add a client that have not been authenticated yet or delete a client
