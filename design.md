@@ -510,8 +510,8 @@ module: ietf-alto-stats
 
 To satisfy R6 in [](#requirements), the "ietf-alto-stats" module contains statistics that indicate server failures ({{tree-stat}}).
 
-More specifically, ```'num-total-*'``` and ```'num-total-last-*'``` provide server-level
-failure counters; ```'num-res-*'``` and ```'num-res-last-*'``` provide information
+More specifically, 'num-total-\*' and 'num-total-last-\*' provide server-level
+failure counters; 'num-res-\*' and 'num-res-last-\*' provide information
 resource-level failure counters.
 
 ## Model for ALTO-specific Performance Monitoring
