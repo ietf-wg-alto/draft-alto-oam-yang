@@ -77,6 +77,7 @@ author:
 normative:
   RFC2119:
   RFC3688:
+  RFC5424:
   RFC6020:
   RFC6241:
   RFC6991:
@@ -98,7 +99,9 @@ normative:
 informative:
   RFC7921:
   RFC7971:
+  RFC8342:
   RFC8346:
+  RFC8641:
   RFC9240:
   RFC9241:
   RFC9275:
@@ -107,11 +110,14 @@ informative:
 
 --- abstract
 
-This document defines YANG data models for Operations, Administration, and
+This document defines a YANG data model for Operations, Administration, and
 Maintenance (OAM) & Management of Application-Layer Traffic Optimization (ALTO)
-Protocol. The operator can use these data models to set up an ALTO server, create,
-update and remove ALTO information resources, manage the access control,
-configure server discovery, and collect statistical data.
+Protocol. The operator of an ALTO server can use this data model to (1) set
+up the ALTO server, (2) configure server discovery, (3) create, update and
+remove ALTO information resources, (4) manage the access control of each ALTO
+information resource, and (5) collect statistical data of the ALTO server. The
+application provider can also use this data model to configure ALTO clients
+to communicate with known ALTO servers.
 
 --- middle
 

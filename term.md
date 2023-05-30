@@ -45,19 +45,24 @@ The meaning of the symbols in the tree diagrams is defined in
 
 ## Prefixes in Data Node Names
 
-In this document, names of data nodes and other data model objects are often
-used without a prefix, as long as it is clear from the context in which YANG
-module each name is defined. Otherwise, names are prefixed using the standard
-prefix associated with the corresponding YANG module, as shown in [](#tbl-yang-prefixes).
+The complete name of a data node or data model object includes a prefix, which
+indicates the YANG module in which the name is defined. In this document, the
+prefix is omitted when the YANG module is clear from the context; otherwise,
+the prefix is included. The prefixes indicating the corresponding YANG modules
+are shown in [](#tbl-yang-prefixes).
 
 |---
 | Prefix | YANG module | Reference
 |:-|:-|:-
 | yang | ietf-yang-types | {{RFC6991}}
 | inet | ietf-inet-types | {{RFC6991}}
+| ds | ietf-datastores | {{RFC8342}}
+| yp | ietf-yang-push | {{RFC8641}}
 | tcp | ietf-tcp-server | {{I-D.ietf-netconf-tcp-client-server}}
 | tls | ietf-tls-server | {{I-D.ietf-netconf-tls-client-server}}
 | http | ietf-http-server | {{I-D.ietf-netconf-http-client-server}}
+| ncc | ietf-netconf-client | {{I-D.ietf-netconf-netconf-client-server}}
+| rcc | ietf-restconf-client | {{I-D.ietf-netconf-restconf-client-server}}
 {: #tbl-yang-prefixes title="Prefixes and corresponding YANG modules"}
 
 ## Placeholders in Reference Statements

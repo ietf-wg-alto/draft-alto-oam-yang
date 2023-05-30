@@ -98,7 +98,7 @@ for the network map resource. It takes two algorithm-specific parameters:
 
 'depth':
 : This optional parameter sets the depth of the clustering algorithm. For
-  example, if the depth sets to 1, the algorithm will generate PID for every
+  example, if the depth is set to 1, the algorithm will generate PID for every
   l3-node in the topology.
 
 The creation algorithm can be reactively called once the referenced data source
