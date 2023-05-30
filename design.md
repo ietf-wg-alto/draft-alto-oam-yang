@@ -2,12 +2,12 @@
 
 ## Overview of ALTO O&M Data Model
 
-The "ietf-alto" module defined in this document is designed to fit all the requirements listed in [](#sec-req).
+The "ietf-alto" module is designed to fit all the requirements listed in [](#sec-req).
 
 As shown in {{tree-str}}, the top-level container 'alto' in the "ietf-alto" module contains a single
 'alto-server' and a list 'alto-client'.
 
-The list 'alto-client' defines a list of configurations for other applications
+'alto-client' defines a list of configurations for other applications
 to bootstrap an ALTO client. These data nodes can also be used by data sources and information
 resource creation algorithms that are configured by an ALTO server instance.
 
@@ -35,9 +35,9 @@ module: ietf-alto
 
 ## Data Model for ALTO Client Operation and Management
 
-As shown in {{tree-alto-client}}, the 'alto-client' list contains a list of
+As shown in {{tree-alto-client}}, the 'alto-client' contains a list of
 client-side configurations. Each 'alto-client' entry contains the following
-configurations:
+data nodes:
 
 'client-id':
   : A unique identifier that can be referenced by other applications.
@@ -274,12 +274,12 @@ included in [](#example-data-source).
 ### ALTO Information Resources Configuration Management
 
 To satisfy R5-2 and R-3, the ALTO server instance contains a list of 'resource'
-entries ({{tree-alto-server-rsc}}). Each 'resource' entry contains the configurations of an ALTO
+entries ({{tree-alto-server-rsc}}). Each 'resource' entry contains the data nodes of an ALTO
 information resource (See Section 8.1 of {{RFC7285}}). The operator of the ALTO
 server can use this model to create, update, and remove the ALTO information
 resources.
 
-Each 'resource' entry provides configurations defining how to create or update
+Each 'resource' entry provides data nodes defining how to create or update
 an ALTO information resource. Adding a new 'resource' entry notifies the ALTO
 server to create a new ALTO information resource. Updating an existing
 'resource' entry notifies the ALTO server to update the generation parameters
@@ -425,7 +425,7 @@ module: ietf-alto
 ~~~
 {: #tree-auth title='IETF ALTO Client Authentication Subtree Structure' artwork-align="center"}
 
-The above structure can be used to configure the role-based access control:
+The structure shown in {{tree-auth}} can be used to configure the role-based access control:
 
 - 'auth-client' declares a list of ALTO clients that can be authenticated by
   the internal or external authorization server. This basic model only includes
@@ -534,7 +534,7 @@ extensions:
 
 - 'num-map-entry' and 'num-base-obj' provide measurement for number of generic
   ALTO entities (for {{RFC9240}} and {{RFC9241}})
-- 'num-upd-stream' and 'num-upd-msg-*' provide statistics for update streams and
+- 'num-upd-stream' and 'num-upd-msg-\*' provide statistics for update streams and
   messages (for {{RFC8189}})
 
 The "ietf-alto-stats" module only focuses on the performance metrics that can be directly
