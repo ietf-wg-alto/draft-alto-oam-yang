@@ -84,6 +84,7 @@ normative:
   RFC7285:
   RFC7286:
   RFC8040:
+  RFC8342:
   RFC8174:
   RFC8189:
   RFC8340:
@@ -99,7 +100,6 @@ normative:
 informative:
   RFC7921:
   RFC7971:
-  RFC8342:
   RFC8346:
   RFC8641:
   RFC9240:
