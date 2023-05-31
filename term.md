@@ -41,7 +41,7 @@ URI:
 ## Tree Diagrams
 
 The meaning of the symbols in the tree diagrams is defined in
-{{RFC8340}}.
+{{?RFC8340}}.
 
 ## Prefixes in Data Node Names
 
