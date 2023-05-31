@@ -86,7 +86,6 @@ normative:
   RFC8040:
   RFC8174:
   RFC8189:
-  RFC8340:
   RFC8341:
   RFC8686:
   RFC8895:
