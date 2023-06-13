@@ -273,7 +273,7 @@ included in [](#example-data-source).
 
 ### ALTO Information Resources Configuration Management
 
-To satisfy R5-2 and R-3, the ALTO server instance contains a list of 'resource'
+To satisfy R5-2 and R-3 in [](#requirements), the ALTO server instance contains a list of 'resource'
 entries ({{tree-alto-server-rsc}}). Each 'resource' entry contains the data nodes of an ALTO
 information resource (See Section 8.1 of {{RFC7285}}). The operator of the ALTO
 server can use this model to create, update, and remove the ALTO information
@@ -357,7 +357,7 @@ For some 'resource-type', the 'resource' entry may also include a
 resources (Section 9.1.5 of {{RFC7285}}).
 
 For each type of ALTO information resource, the 'resource' entry may also need
-type-specific parameters. These type-specific parameters include two categories:
+type-specific parameters. These type-specific parameters can be split into two categories:
 
 1. One category of the type-specific parameters is common for the same type
    of ALTO information resource. They declare the Capabilities of the ALTO
@@ -392,7 +392,7 @@ limits that, once exceeded, will trigger notifications to be generated:
 
 ### ALTO Information Resource Access Control Management {#alto-rbac}
 
-As per Section 15.5.2 of {{RFC7285}}, the "ietf-alto" module also defines
+To satisfy R-3 in [](#requirements) and as per Section 15.5.2 of {{RFC7285}}, the "ietf-alto" module also defines
 authentication and authorization related configuration to employ access control
 at the information resource level. The ALTO server returns the IRD to the ALTO
 client based on its authentication information.
@@ -435,9 +435,9 @@ The structure shown in {{tree-auth}} can be used to configure the role-based acc
 - 'role' defines a list of roles for access control. Each role contains a list
   of authenticated ALTO clients. Each client can be assigned to multiple roles.
   The 'role-name' can be referenced by the 'accepted-role' list of a
-  'resource'. For a given authenticated ALTO client, if one of the roles
-  containing it is allowed to access a resource, this client is allowed to
-  access the resource.
+  'resource'. If an authenticated ALTO client is included in any roles with
+  access permission to a resource, the client is granted access to that
+  resource.
 
 # Design of ALTO O&M Statistics Data Model {#alto-stats-model}
 
