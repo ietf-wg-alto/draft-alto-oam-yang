@@ -91,6 +91,10 @@ normative:
   RFC8686:
   RFC8895:
   RFC8896:
+  RFC9240:
+  RFC9241:
+  RFC9275:
+  I-D.ietf-alto-performance-metrics:
   I-D.ietf-netconf-tcp-client-server:
   I-D.ietf-netconf-tls-client-server:
   I-D.ietf-netconf-http-client-server:
@@ -101,10 +105,6 @@ informative:
   RFC7971:
   RFC8346:
   RFC8641:
-  RFC9240:
-  RFC9241:
-  RFC9275:
-  I-D.ietf-alto-performance-metrics:
 
 
 --- abstract
