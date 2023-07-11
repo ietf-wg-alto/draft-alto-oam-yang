@@ -16,25 +16,20 @@ The operator of an ALTO server can use this data model to:
 The application provider can also use this data model to configure ALTO clients
 to communicate with known ALTO servers.
 
-This document only focuses on the common and implementation-agnostic data model
-for purposes including deploying an ALTO server/client, operating and managing
-a running ALTO server/client, functionality/capability configuration of ALTO
-services, and monitoring ALTO-related performance metrics. Any
-implementation-specific information is not in the scope of this document.
-[](#scope) illustrates more details about what is and is not in the scope.
+[](#scope) describes what is and is not in scope.
 [](#requirements) and [](#extra-req) define more concrete requirements for the
 data model.
 
 The basic structure of this YANG data model is guided by Section 16 of
 {{RFC7285}} and {{RFC7971}}. Although the scope of the YANG data model in this
 document mainly focuses on the support of the base ALTO protocol {{RFC7285}} and
-the existing ALTO standard extensions (including {{RFC8189}}, {{RFC8895}},
-{{RFC8896}}, {{RFC9240}}, {{RFC9241}}, and {{RFC9275}}), future standard extensions (e.g.,
-{{I-D.ietf-alto-performance-metrics}}) are also considered.
+the existing ALTO standard extensions: {{RFC8189}}, {{RFC8895}},
+{{RFC8896}}, {{RFC9240}}, {{RFC9241}}, {{RFC9275}}, and
+{{I-D.ietf-alto-performance-metrics}}.
 
 The detailed design of the data model is illustrated in [](#alto-model) and
 [](#alto-stats-model). Some examples of how to extend this data model for
-the specific ALTO server implementations are shown in [](#alto-ext-model).
+specific ALTO server implementations are shown in [](#alto-ext-model).
 
 # Requirements Language
 
