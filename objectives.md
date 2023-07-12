@@ -18,7 +18,7 @@ implementation, including:
   (e.g., database schema to store topology collected from an Interface to the
   Routing System (I2RS) client {{RFC7921}})
 
-However, examples of these are provided in the Appendices.
+For convenience, examples of how related extensions can be defined are provided in the Appendices.
 
 ## Basic Requirements {#requirements}
 
