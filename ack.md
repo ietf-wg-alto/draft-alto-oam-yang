@@ -11,3 +11,5 @@ reviews, shepherding, and valuable feedback.
 Thanks to Dan Romascanu for the opsdir review, Andy Bierman for the yangdoctors
 review, and Spencer Dawkins for the tsvart review.
 
+Thanks to Martin Duke for the careful AD review.
+
