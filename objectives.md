@@ -42,12 +42,16 @@ data models provided by this document satisfy basic requirements listed in
 R8: As the ALTO protocol is extensible, the data models for ALTO O&M should
 allow for augmentation to support potential future extensions.
 
-## Overview of ALTO O&M Data Models for Reference ALTO Architecture
+## Overview of ALTO O&M Data Models for ALTO Servers
 
-[](#alto-ref-arch) shows a reference architecture for an ALTO server
+[](#alto-ref-arch) shows a sample architecture for an ALTO server
 implementation. It indicates the major server components that an ALTO server
 usually needs to include and the YANG modules that these server components
 need to implement.
+
+> This section does not intend to impose an internal structure of server
+> implementations, but is provided to exemplify how the various data model
+> components can be used, including having provisions for future augmentations.
 
 The following server components need to implement the 'ietf-alto' module ([](#alto-model)):
 
@@ -135,6 +139,6 @@ interactions with each other:
   |  "ietf-alto"   |               ||             ||
   +----------------+               ++=============++
 ~~~
-{: #alto-ref-arch title="A Reference ALTO Server Architecture and ALTO YANG Modules"}
+{: #alto-ref-arch title="A Sample ALTO Server Architecture and ALTO YANG Modules"}
 
 <!-- End of sections -->
