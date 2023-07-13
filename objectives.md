@@ -32,7 +32,7 @@ data models provided by this document satisfy basic requirements listed in
 | R2: The data model should provide logging management.                                               | Section 16.2.1 of {{RFC7285}}                             |
 | R3: The data model should provide ALTO-related management information.                              | Section 16.2.2 of {{RFC7285}}                             |
 | R4: The data model should support configuration for security policy management.                     | Section 16.2.6 of {{RFC7285}}                             |
-| R5-1: The data model should support configuration for different data sources.                       | Section 16.2.4 of {{RFC7285}}, Section 3.2 of {{RFC7971}} |
+| R5-1: The data model should support basic configuration to receive data from different data sources.| Section 16.2.4 of {{RFC7285}}, Section 3.2 of {{RFC7971}} |
 | R5-2: The data model should support configuration for information resource generation algorithms.   | Section 16.2.4 of {{RFC7285}}                             |
 | R5-3: The data model should support configuration for access control at information resource level. | Section 16.2.4 of {{RFC7285}}                             |
 | R6: The data model should provide metrics for server failures.                                      | Section 16.2.3 of {{RFC7285}}, Section 3.3 of {{RFC7971}} |
