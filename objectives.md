@@ -9,7 +9,7 @@ The following items are in the scope of the data models specified in this docume
 - Configuring functionality/capability configuration of ALTO services.
 - Monitoring ALTO-related performance metrics.
 
-This document does not define any data model related to specific
+This document does not normatively define any data model related to a specific
 implementation, including:
 
 - Data structures for how to store/deliver ALTO information resources (e.g.,
@@ -18,9 +18,11 @@ implementation, including:
   (e.g., database schema to store topology collected from an Interface to the
   Routing System (I2RS) client {{RFC7921}})
 
+For convenience, examples of how related extensions can be defined are provided in the Appendices.
+
 ## Basic Requirements {#requirements}
 
-Based on the discussions and recommendations in {{RFC7285}} and {{RFC7971}}, the
+Based on recommendations in {{RFC7285}} and {{RFC7971}}, the
 data models provided by this document satisfy basic requirements listed in
 [](#TableReq).
 
@@ -54,7 +56,7 @@ The following server components need to implement the 'ietf-alto' module ([](#al
 Server manager:
   : Provides the functionality and configuration of the server-level
   management, including server listen stack setup, server discovery setup,
-  logging system configuration, global meta data, and server-level security
+  logging system configuration, global metadata, and server-level security
   configuration.
 
 Information resource manager:

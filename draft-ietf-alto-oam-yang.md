@@ -110,11 +110,11 @@ informative:
 --- abstract
 
 This document defines a YANG data model for Operations, Administration, and
-Maintenance (OAM) & Management of Application-Layer Traffic Optimization (ALTO)
+Maintenance (OAM) & Management of the Application-Layer Traffic Optimization (ALTO)
 Protocol. The operator of an ALTO server can use this data model to (1) set
 up the ALTO server, (2) configure server discovery, (3) create, update and
 remove ALTO information resources, (4) manage the access control of each ALTO
-information resource, and (5) collect statistical data of the ALTO server. The
+information resource, and (5) collect statistical data from the ALTO server. The
 application provider can also use this data model to configure ALTO clients
 to communicate with known ALTO servers.
 
