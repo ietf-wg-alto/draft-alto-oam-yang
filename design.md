@@ -238,35 +238,14 @@ As shown in {{tree-data-src}}, a 'data-source' list entry includes:
 
 - A unique 'source-id' for resource creation algorithms to reference.
 - The 'source-type' attribute to declare the type of the data source.
-- The 'update-policy' to specify how to get the data update from the data
-  source.
 - The 'source-params' to specify where and how to query the data.
 
-The update policy can be either reactive or proactive. For the reactive update,
-the ALTO server reactively waits for the data source to push updates. For the
-proactive update, the ALTO server proactively fetches the data source
-periodically.
-
-Two publish modes are available to support reactive updates:
-
-- If the 'on-change' attribute is present, the data source is expected to push
-  the update as soon as the data source changes.
-- Otherwise, if the 'feed-interval' attribute is present, the data source is
-  expected to push the updates periodically. The value of 'feed-interval'
-  specifies the interval of pushing the data change updates in milliseconds.
-  If 'feed-interval' is zero, the data source is expected to work in the
-  'on-change' mode.
-
-To use the proactive update, the 'poll-interval' attribute MUST be present. The
-value of 'poll-interval' specifies the interval of fetching the data in
-milliseconds. If 'poll-interval' is zero, the data source listener will not
-automatically fetch the data source periodically. In this case, a algorithm
-plugin can still call the data source listener to fetch the data at runtime.
-
 The 'data-source/source-params' node can be augmented for different types of
-data sources.
+data sources. Note that the purpose of this node is not to fully set up the
+communication mechanisms for specific data sources, but to maintain how data
+sources are configured and expose them to the ALTO server.
 
-This data model only includes common configuration parameters for an ALTO server
+This data model only includes a basic structure for an ALTO server
 to correctly interact with a data source. The implementation-specific parameters
 of any certain data source can be augmented in another module. An example is
 included in [](#example-data-source).
