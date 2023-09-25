@@ -1,8 +1,8 @@
-module example-vendor-alto-data-source {
+module example-alto-data-source {
   yang-version 1.1;
 
-  namespace "https://example.com/ns/vendor-alto-data-source";
-  prefix vendor-alto-ds;
+  namespace "https://example.com/ns/example-alto-data-source";
+  prefix example-alto-ds;
 
   import ietf-alto {
     prefix alto;
