@@ -220,15 +220,6 @@ module: ietf-alto
         +--rw data-source* [source-id]
         |  +--rw source-id                    source-id
         |  +--rw source-type                  identityref
-        |  +--rw (update-policy)
-        |  |  +--:(reactive)
-        |  |  |  +--rw (publish-mode)?
-        |  |  |     +--:(on-change)
-        |  |  |     |  +--rw on-change        empty
-        |  |  |     +--:(periodic)
-        |  |  |        +--rw feed-interval    uint32
-        |  |  +--:(proactive)
-        |  |     +--rw poll-interval          uint32
         |  +--rw (source-params)?
         ...
 ~~~
