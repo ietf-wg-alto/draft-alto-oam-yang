@@ -1,8 +1,8 @@
-module example-vendor-alto-alg {
+module example-alto-alg {
   yang-version 1.1;
 
-  namespace "https://example.com/ns/vendor-alto-alg";
-  prefix vendor-alto-alg;
+  namespace "https://example.com/ns/example-alto-alg";
+  prefix example-alto-alg;
 
   import ietf-alto {
     prefix alto;
@@ -17,8 +17,8 @@ module example-vendor-alto-alg {
       "RFC 8342: Network Management Datastore Architecture (NMDA)";
   }
 
-  import example-vendor-alto-data-source {
-    prefix alto-ds;
+  import example-alto-data-source {
+    prefix example-alto-ds;
   }
 
   organization
@@ -57,8 +57,8 @@ module example-vendor-alto-alg {
         container l3-unicast-topo {
           leaf source-datastore {
             type alto:data-source-ref;
-            must 'deref(.)/../alto-ds:yang-datastore-source-params'
-               + '/alto-ds:datastore '
+            must 'deref(.)/../example-alto-ds:yang-datastore-source-params'
+               + '/example-alto-ds:datastore '
                + '= "ietf-datastores:operational"'
                {
               error-message
@@ -74,8 +74,8 @@ module example-vendor-alto-alg {
               path '/alto:alto/alto:alto-server/alto:data-source'
                  + '[alto:source-id'
                  + ' = current()/../source-datastore]'
-                 + '/alto-ds:yang-datastore-source-params'
-                 + '/alto-ds:target-paths/alto-ds:name';
+                 + '/example-alto-ds:yang-datastore-source-params'
+                 + '/example-alto-ds:target-paths/example-alto-ds:name';
             }
             description
               "The name of the IETF Layer 3 unicast topology.";

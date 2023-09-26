@@ -22,7 +22,7 @@ The case `peeringdb` allows the ALTO server to update the server URI to the org
 object of the organization record in PeeringDB.
 
 ~~~
-{::include yang/example-vendor-alto-server-discovery.yang}
+{::include yang/example-alto-server-discovery.yang}
 ~~~
 
 ## An Example Module for Extended Client Authentication Approaches {#example-client-auth}
@@ -39,7 +39,7 @@ based authorization server that the ALTO server can redirect to for the client
 authentication.
 
 ~~~
-{::include yang/example-vendor-alto-auth.yang}
+{::include yang/example-alto-auth.yang}
 ~~~
 
 ## Example Module for Extended Data Sources {#example-data-source}
@@ -57,7 +57,7 @@ model-driven datastore. It includes:
   `restconf` or `netconf` can be used.
 
 ~~~
-{::include yang/example-vendor-alto-data-source.yang}
+{::include yang/example-alto-data-source.yang}
 ~~~
 
 ## An Example Module for Information Resource Creation Algorithm {#example-alg}
@@ -70,7 +70,7 @@ the parameters of a network map creation algorithm that translates an IETF
 layer 3 unicast topology into a network map.
 
 ~~~
-module: example-vendor-alto-alg
+module: example-alto-alg
 
   augment /alto:alto/alto:alto-server/alto:resource
             /alto:alto-networkmap-params/alto:algorithm:
@@ -105,13 +105,13 @@ The creation algorithm can be reactively called once the referenced data source
 updates. Therefore, the ALTO network map resource can be updated dynamically.
 
 ~~~
-{::include yang/example-vendor-alto-alg.yang}
+{::include yang/example-alto-alg.yang}
 ~~~
 
 ## Example Usage
 
 This section presents a complete example showing how the base data model and
-all the vendor extended models above are used to set up an ALTO server and
+all the extended models above are used to set up an ALTO server and
 configure corresponding components (e.g., data source listener, information
 resource, access control).
 
@@ -206,7 +206,7 @@ interactions with each other:
                                          |v
      .............          ................................
     /             \ <------ . Algorithm Plugin:            .
-    . Data Broker .  read   .   "example-vendor-alto-alg"  .
+    . Data Broker .  read   .   "example-alto-alg"  .
     ...............         ................................
            ^
            | write
