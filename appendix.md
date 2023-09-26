@@ -11,9 +11,9 @@ model can be augmented:
 
 ## An Example Module for Extended Server Discovery Manners {#example-server-disc}
 
-The base data model defined by ietf-alto.yang only includes a reverse DNS based
+The base module "ietf-alto" only includes a reverse DNS based
 server discovery manner. The following example module demonstrates how
-additional server discovery manners can be augmented into the base data model.
+additional server discovery methods can be augmented into the base data model.
 
 The case `internet-routing-registry` allows the ALTO server to update the
 server URI to the attribute of the corresponding aut-num class in IRR.
@@ -27,7 +27,7 @@ object of the organization record in PeeringDB.
 
 ## An Example Module for Extended Client Authentication Approaches {#example-client-auth}
 
-The base data model "ietf-alto" only includes the client
+The base module "ietf-alto" only includes the client
 authentication approaches directly provided by the HTTP server. However, an
 implementation may authenticate clients in different ways. For example, an implementation may
 delegate the authentication to a third-party OAuth 2.0 server. The following
@@ -44,7 +44,7 @@ authentication.
 
 ## Example Module for Extended Data Sources {#example-data-source}
 
-The base data model defined by ietf-alto.yang does not include any choice cases
+The base module "ietf-alto" does not include any choice cases
 for specific data sources. The following example module demonstrates how a
 implementation-specific data source can be augmented into the base data model.
 
@@ -62,12 +62,12 @@ model-driven datastore. It includes:
 
 ## An Example Module for Information Resource Creation Algorithm {#example-alg}
 
-The base data model "ietf-alto" does not include any choices cases
+The base module "ietf-alto" does not include any choices cases
 for information resource creation algorithms. But developers may augment the
 "ietf-alto" module with definitions for custom creation algorithms
 for different information resources. The following example module demonstrates
 the parameters of a network map creation algorithm that translates an IETF
-layer 3 unicast topology into a network map.
+Layer 3 unicast topology into a network map.
 
 ~~~
 module: example-alto-alg
@@ -110,10 +110,10 @@ updates. Therefore, the ALTO network map resource can be updated dynamically.
 
 ## Example Usage
 
-This section presents a complete example showing how the base data model and
+This section presents an example showing how the base data model and
 all the extended models above are used to set up an ALTO server and
 configure corresponding components (e.g., data source listener, information
-resource, access control).
+resource, and access control).
 
 ~~~
 {::include-fold examples/full-model-usage.json}
