@@ -59,9 +59,9 @@
       "data-source": [
         {
           "source-id": "test-yang-ds",
-          "source-type": "example-vendor-alto-data-source:yang-datastore",
+          "source-type": "example-alto-data-source:yang-datastore",
           "feed-interval": 30,
-          "example-vendor-alto-data-source:yang-datastore-source-params": {
+          "example-alto-data-source:yang-datastore-source-params": {
             "datastore": "ietf-datastores:operational",
             "target-paths": [
               {
@@ -77,7 +77,7 @@
                     "name": "example restconf server",
                     "https": {
                       "tcp-server-parameters": {
-                        "local-address": "172.17.0.2"
+                        "local-address": "192.0.0.2"
                       },
                       "http-client-parameters": {
                         "client-identity": {
@@ -104,7 +104,7 @@
           ],
           "alto-networkmap-params": {
             "is-default": true,
-            "example-vendor-alto-alg:l3-unicast-cluster-algorithm": {
+            "example-alto-alg:l3-unicast-cluster-algorithm": {
               "l3-unicast-topo": {
                 "source-datastore": "test-yang-ds",
                 "topo-name": "network-topology"
