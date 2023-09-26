@@ -103,8 +103,6 @@ for the network map resource. It takes two algorithm-specific parameters:
 
 The creation algorithm can be reactively called once the referenced data source
 updates. Therefore, the ALTO network map resource can be updated dynamically.
-The update of the reference data source depends on the used `update-policy` (See
-[](#data-source)).
 
 ~~~
 {::include yang/example-vendor-alto-alg.yang}
