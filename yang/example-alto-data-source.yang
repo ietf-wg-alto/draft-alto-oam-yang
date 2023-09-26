@@ -83,58 +83,54 @@ module example-alto-data-source {
 
   augment "/alto:alto/alto:alto-server/alto:data-source"
         + "/alto:source-params" {
+    when 'derived-from-or-self(../alto:source-type,'
+       + '"yang-datastore")';
     description
-      "Example of data source for YANG datastore.";
-    case yang-datastore {
-      when 'derived-from-or-self(alto:source-type,'
-         + '"yang-datastore")';
+      "Example data source for local or remote YANG datastore.";
+    container yang-datastore-source-params {
       description
-        "Example data source for local or remote YANG datastore.";
-      container yang-datastore-source-params {
+        "YANG datastore specific configuration.";
+      leaf datastore {
+        type ds:datastore-ref;
+        mandatory true;
         description
-          "YANG datastore specific configuration.";
-        leaf datastore {
-          type ds:datastore-ref;
-          mandatory true;
+          "Reference of the datastore from which to get data.";
+      }
+      list target-paths {
+        key name;
+        description
+          "XML Path Language (XPath) to subscribed YANG datastore
+           node or subtree.";
+        leaf name {
+          type string;
           description
-            "Reference of the datastore from which to get data.";
+            "Name of the supported XPath or subtree filters.";
         }
-        list target-paths {
-          key name;
-          description
-            "XML Path Language (XPath) to subscribed YANG datastore
-             node or subtree.";
-          leaf name {
-            type string;
-            description
-              "Name of the supported XPath or subtree filters.";
-          }
-          uses yp:selection-filter-types;
+        uses yp:selection-filter-types;
+      }
+      leaf protocol {
+        type identityref {
+          base protocol-type;
         }
-        leaf protocol {
-          type identityref {
-            base protocol-type;
-          }
-          description
-            "Indicates the protocol that is used to access the YANG
-             datastore.";
+        description
+          "Indicates the protocol that is used to access the YANG
+           datastore.";
+      }
+      container restconf {
+        uses rcc:restconf-client-app-grouping {
+          when 'derived-from-or-self(../protocol, "restconf")';
         }
-        container restconf {
-          uses rcc:restconf-client-app-grouping {
-            when 'derived-from-or-self(../protocol, "restconf")';
-          }
-          description
-            "Parameters for the RESTCONF endpoint of the YANG
-             datastore.";
+        description
+          "Parameters for the RESTCONF endpoint of the YANG
+           datastore.";
+      }
+      container netconf {
+        uses ncc:netconf-client-app-grouping {
+          when 'derived-from-or-self(../protocol, "netconf")';
         }
-        container netconf {
-          uses ncc:netconf-client-app-grouping {
-            when 'derived-from-or-self(../protocol, "netconf")';
-          }
-          description
-            "Parameters for the NETCONF endpoint of the YANG
-             datastore.";
-        }
+        description
+          "Parameters for the NETCONF endpoint of the YANG
+           datastore.";
       }
     }
   }

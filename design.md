@@ -220,7 +220,7 @@ module: ietf-alto
         +--rw data-source* [source-id]
         |  +--rw source-id                    source-id
         |  +--rw source-type                  identityref
-        |  +--rw (source-params)?
+        |  +--rw source-params?
         ...
 ~~~
 {: #tree-data-src title='IETF ALTO Server Data Source Subtree Structure' artwork-align="center"}
