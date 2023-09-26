@@ -94,7 +94,7 @@ normative:
   RFC9240:
   RFC9241:
   RFC9275:
-  I-D.ietf-alto-performance-metrics:
+  RFC9439:
   I-D.ietf-netconf-tcp-client-server:
   I-D.ietf-netconf-tls-client-server:
   I-D.ietf-netconf-http-client-server:

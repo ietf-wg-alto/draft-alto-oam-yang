@@ -82,6 +82,5 @@ Please apply the following replacements:
 - HHHH --> the assigned RFC number for {{I-D.ietf-netconf-netconf-client-server}}
 - IIII --> the assigned RFC number for {{I-D.ietf-netconf-restconf-client-server}}
 - XXXX --> the assigned RFC number for this draft
-- YYYY --> the assigned RFC number for {{I-D.ietf-alto-performance-metrics}}
 
 <!-- End of sections -->
