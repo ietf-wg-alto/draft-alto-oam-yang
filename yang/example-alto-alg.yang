@@ -74,6 +74,7 @@ module example-alto-alg {
               path '/alto:alto/alto:alto-server/alto:data-source'
                  + '[alto:source-id'
                  + ' = current()/../source-datastore]'
+                 + '/alto:source-params'
                  + '/example-alto-ds:yang-datastore-source-params'
                  + '/example-alto-ds:target-paths/example-alto-ds:name';
             }

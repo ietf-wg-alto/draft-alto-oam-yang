@@ -6,7 +6,7 @@ model can be augmented:
 
 - The `server-discovery-manner` choice of the `server-discovery`.
 - The `authentication` choice of each `auth-client`.
-- The `data-source` choice.
+- The `data-source` node.
 - The `algorithm` choice of the `resource-params` of each `resource`.
 
 ## An Example Module for Extended Server Discovery Manners {#example-server-disc}

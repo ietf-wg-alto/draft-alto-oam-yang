@@ -1061,7 +1061,7 @@ module ietf-alto {
           description
             "Identify the type of the data source.";
         }
-        choice source-params {
+        container source-params {
           description
             "Data source specific configuration.";
           reference
