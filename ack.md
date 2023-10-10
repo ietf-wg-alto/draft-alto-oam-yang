@@ -8,8 +8,9 @@ and Adrian Farrel, Dong Guo, Jordi Ros Giralt, Luis M. Contreras, Mahdi
 Soleimani, Qiao Xiang, Shenshen Chen, and Y. Richard Yang for their thorough
 reviews, shepherding, and valuable feedback.
 
-Thanks to Dan Romascanu for the opsdir review, Andy Bierman for the yangdoctors
-review, and Spencer Dawkins for the tsvart review.
+Thanks to Dan Romascanu for the opsdir and genart reviews, Andy Bierman for the
+yangdoctors review, Spencer Dawkins for the tsvart review, Scott Rose for the
+dnsdir review, and Rich Salz for the secdir review.
 
 Thanks to Martin Duke for the careful AD review.
 
