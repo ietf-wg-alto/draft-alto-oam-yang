@@ -1,20 +1,26 @@
 # Security Considerations
 
-The "ietf-alto" and "ietf-alto-stats" YANG modules define data nodes that are designed to be accessed
-via YANG based management protocols, such as NETCONF {{RFC6241}} and RESTCONF
-{{RFC8040}}. Both of these protocols have mandatory-to-implement secure
-transport layers (e.g., SSH, TLS) with mutual authentication.
+The "ietf-alto" and "ietf-alto-stats" YANG modules specified in this document define a schema for data
+that is designed to be accessed via network management protocols such
+as NETCONF {{!RFC6241}} or RESTCONF {{!RFC8040}}.  The lowest NETCONF layer
+is the secure transport layer, and the mandatory-to-implement secure
+transport is Secure Shell (SSH) {{!RFC6242}}.  The lowest RESTCONF layer
+is HTTPS, and the mandatory-to-implement secure transport is TLS
+{{!RFC8446}}.
 
-The Network Access Control Model (NACM) {{RFC8341}} provides the means to
-restrict access for particular users to a pre-configured subset of all
-available protocol operations and content.
+The Network Configuration Access Control Model (NACM) {{!RFC8341}}
+provides the means to restrict access for particular NETCONF or
+RESTCONF users to a preconfigured subset of all available NETCONF or
+RESTCONF protocol operations and content.
 
 There are a number of data nodes defined in these two YANG modules that are
-writable/creatable/deletable (i.e., config true, which is the default).
-These data nodes may be considered sensitive or vulnerable in some network environments.
-Write operations (e.g., edit-config) to these data nodes without proper protection
-can have a negative effect on network operations. These are the subtrees and data
-nodes in "ietf-alto" YANG module and their sensitivity/vulnerability:
+writable/creatable/deletable (i.e., config true, which is the
+default).  These data nodes may be considered sensitive or vulnerable
+in some network environments.  Write operations (e.g., edit-config)
+and delete operations to these data nodes without proper protection
+or authentication can have a negative effect on network operations.
+These are the subtrees and data nodes and their sensitivity/
+vulnerability:
 
   '/alto/alto-client/server-discovery':
   : This subtree specifies a set of parameters for an ALTO client to discover ALTO servers.
@@ -45,7 +51,7 @@ nodes in "ietf-alto" YANG module and their sensitivity/vulnerability:
   value to this node. Setting a very low value could attack the data source.
    Setting a very large value would lead to maintaining stale data in the ALTO server.
 
-Some of the readable data nodes in "ietf-alto" YANG module may be considered
+Some of the readable data nodes in the "ietf-alto" YANG module may be considered
 sensitive or vulnerable in some network environments. It is thus important to
 control read access (e.g., via get, get-config, or notification) to these data
 nodes. These are the subtrees and data nodes and their sensitivity/vulnerability:
