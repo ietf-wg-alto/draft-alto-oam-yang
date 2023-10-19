@@ -206,7 +206,7 @@ interactions with each other:
                                          |v
      .............          ................................
     /             \ <------ . Algorithm Plugin:            .
-    . Data Broker .  read   .   "example-alto-alg"  .
+    . Data Broker .  read   .   "example-alto-alg"         .
     ...............         ................................
            ^
            | write
