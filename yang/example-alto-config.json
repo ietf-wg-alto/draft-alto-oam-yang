@@ -29,7 +29,7 @@
         }
       },
       "server-discovery": {
-        "example-vendor-alto-server-discovery:irr-params": {
+        "example-alto-server-discovery:irr-params": {
           "aut-num": 64496
         }
       },
@@ -42,7 +42,7 @@
         },
         {
           "client-id": "bob",
-          "example-vendor-alto-auth:oauth2": {
+          "example-alto-auth:oauth2": {
             "oauth2-server": "https://auth.example.com/login"
           }
         }
@@ -59,9 +59,9 @@
       "data-source": [
         {
           "source-id": "test-yang-ds",
-          "source-type": "example-vendor-alto-data-source:yang-datastore",
+          "source-type": "example-alto-data-source:yang-datastore",
           "feed-interval": 30,
-          "example-vendor-alto-data-source:yang-datastore-source-params": {
+          "example-alto-data-source:yang-datastore-source-params": {
             "datastore": "ietf-datastores:operational",
             "target-paths": [
               {
@@ -104,7 +104,7 @@
           ],
           "alto-networkmap-params": {
             "is-default": true,
-            "example-vendor-alto-alg:l3-unicast-cluster-algorithm": {
+            "example-alto-alg:l3-unicast-cluster-algorithm": {
               "l3-unicast-topo": {
                 "source-datastore": "test-yang-ds",
                 "topo-name": "network-topology"
