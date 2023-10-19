@@ -60,36 +60,37 @@
         {
           "source-id": "test-yang-ds",
           "source-type": "example-alto-data-source:yang-datastore",
-          "feed-interval": 30,
-          "example-alto-data-source:yang-datastore-source-params": {
-            "datastore": "ietf-datastores:operational",
-            "target-paths": [
-              {
-                "name": "network-topology",
-                "datastore-xpath-filter": "/network-topology:network-topology/topology[topology-id=bgp-example-ipv4-topology]"
-              }
-            ],
-            "protocol": "restconf",
-            "restconf": {
-              "listen": {
-                "endpoint": [
-                  {
-                    "name": "example restconf server",
-                    "https": {
-                      "tcp-server-parameters": {
-                        "local-address": "172.17.0.2"
-                      },
-                      "http-client-parameters": {
-                        "client-identity": {
-                          "basic": {
-                            "user-id": "carol",
-                            "cleartext-password": "secret"
+          "source-params": {
+            "example-alto-data-source:yang-datastore-source-params": {
+              "datastore": "ietf-datastores:operational",
+              "target-paths": [
+                {
+                  "name": "network-topology",
+                  "datastore-xpath-filter": "/network-topology:network-topology/topology[topology-id=bgp-example-ipv4-topology]"
+                }
+              ],
+              "protocol": "restconf",
+              "restconf": {
+                "listen": {
+                  "endpoint": [
+                    {
+                      "name": "example restconf server",
+                      "https": {
+                        "tcp-server-parameters": {
+                          "local-address": "172.17.0.2"
+                        },
+                        "http-client-parameters": {
+                          "client-identity": {
+                            "basic": {
+                              "user-id": "carol",
+                              "cleartext-password": "secret"
+                            }
                           }
                         }
                       }
                     }
-                  }
-                ]
+                  ]
+                }
               }
             }
           }
