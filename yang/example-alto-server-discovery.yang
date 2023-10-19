@@ -2,7 +2,7 @@ module example-alto-server-discovery {
   yang-version 1.1;
 
   namespace "https://example.com/ns/example-alto-server-discovery";
-  prefix example-alto-disc;
+  prefix ex-alto-disc;
 
   import ietf-alto {
     prefix alto;

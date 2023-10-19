@@ -2,7 +2,7 @@ module example-alto-auth {
   yang-version 1.1;
 
   namespace "https://example.com/ns/example-alto-auth";
-  prefix example-alto-auth;
+  prefix ex-alto-auth;
 
   import ietf-inet-types {
     prefix inet;
