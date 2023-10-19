@@ -57,7 +57,8 @@ module example-alto-alg {
         container l3-unicast-topo {
           leaf source-datastore {
             type alto:data-source-ref;
-            must 'deref(.)/../ex-alto-ds:yang-datastore-source-params'
+            must 'deref(.)/../alto:source-params'
+               + '/ex-alto-ds:yang-datastore-source-params'
                + '/ex-alto-ds:datastore '
                + '= "ietf-datastores:operational"'
                {
