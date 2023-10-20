@@ -151,7 +151,7 @@ documents may extend it to fully support multi-domain scenarios.
 The 'server-discovery' node provides configuration for the discovery of ALTO servers
 using a variety of mechanisms. The initial version of the "ietf-alto" module only defines the 'reverse-dns'
 case that is used to configure DNS NAPTR records for ALTO server discovery
-as sugested by {{RFC7286}} and {{RFC8686}}. It configures a set of
+as suggested by {{RFC7286}} and {{RFC8686}}. It configures a set of
 endpoints that can be served by this ALTO server. The node
 contains two leaf lists. The 'static' list contains a list of manually configured
 endpoints. The 'dynamic' list points to a list of data sources to retrieve the
