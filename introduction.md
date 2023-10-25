@@ -31,6 +31,8 @@ The detailed design of the data model is illustrated in [](#alto-model) and
 [](#alto-stats-model). Some examples of how to extend this data model for
 specific ALTO server implementations are shown in [](#alto-ext-model).
 
+The YANG data models in this document conform to the Network Management Datastore Architecture (NMDA) defined in {{!RFC8342}}.
+
 # Requirements Language
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
