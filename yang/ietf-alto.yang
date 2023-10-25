@@ -334,7 +334,7 @@ module ietf-alto {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "One-way delay."
+      "One-way delay.";
     reference
       "RFC 9439: ALTO Performance Cost Metrics, Section 4.1";
   }
@@ -343,7 +343,7 @@ module ietf-alto {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Round-trip delay."
+      "Round-trip delay.";
     reference
       "RFC 9439: ALTO Performance Cost Metrics, Section 4.2";
   }
@@ -352,7 +352,7 @@ module ietf-alto {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Delay variation."
+      "Delay variation.";
     reference
       "RFC 9439: ALTO Performance Cost Metrics, Section 4.3";
   }
@@ -361,7 +361,7 @@ module ietf-alto {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Loss rate."
+      "Loss rate.";
     reference
       "RFC 9439: ALTO Performance Cost Metrics, Section 4.4";
   }
@@ -370,7 +370,7 @@ module ietf-alto {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Hop count."
+      "Hop count.";
     reference
       "RFC 9439: ALTO Performance Cost Metrics, Section 4.5";
   }
@@ -379,7 +379,7 @@ module ietf-alto {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "TCP throughput."
+      "TCP throughput.";
     reference
       "RFC 9439: ALTO Performance Cost Metrics, Section 5.1";
   }
@@ -388,7 +388,7 @@ module ietf-alto {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Residual bandwidth."
+      "Residual bandwidth.";
     reference
       "RFC 9439: ALTO Performance Cost Metrics, Section 5.2";
   }
@@ -397,7 +397,7 @@ module ietf-alto {
     if-feature "performance-metrics";
     base cost-metric;
     description
-      "Available bandwidth."
+      "Available bandwidth.";
     reference
       "RFC 9439: ALTO Performance Cost Metrics, Section 5.3";
   }
