@@ -24,7 +24,7 @@ The basic structure of this YANG data model is guided by Section 16 of
 {{RFC7285}} and {{RFC7971}}. Although the scope of the YANG data model in this
 document mainly focuses on the support of the base ALTO protocol {{RFC7285}} and
 the existing ALTO standard extensions: {{RFC8189}}, {{RFC8895}},
-{{RFC8896}}, {{RFC9240}}, {{RFC9241}}, {{RFC9275}}, and
+{{RFC8896}}, {{RFC9240}}, {{RFC9241}}, {{RFC9274}}, {{RFC9275}}, and
 {{RFC9439}}.
 
 The detailed design of the data model is illustrated in [](#alto-model) and

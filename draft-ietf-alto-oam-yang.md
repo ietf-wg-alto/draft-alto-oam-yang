@@ -93,6 +93,7 @@ normative:
   RFC8896:
   RFC9240:
   RFC9241:
+  RFC9274:
   RFC9275:
   RFC9439:
   I-D.ietf-netconf-tcp-client-server:
