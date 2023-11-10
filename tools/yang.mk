@@ -13,6 +13,7 @@ endif
 YANG=$(wildcard $(YANGDIR)/*.yang)
 STDYANG=$(wildcard $(YANGDIR)/ietf-*.yang)
 EXPYANG=$(wildcard $(YANGDIR)/example-*.yang)
+EXPJSON=$(wildcard $(YANGDIR)/example-*.json)
 TXT=$(patsubst $(YANGDIR)/%.yang,%-diagram.txt,$(YANG))
 
 .PHONY: yang-lint yang-gen-diagram yang-clean
@@ -29,8 +30,8 @@ yang-gen-diagram: yang-lint $(TXT)
 yang-clean:
 	rm -f $(TXT)
 
-yangson-validate:
-	yangson -p $(YANGDIR) -p $(YANGDIR):$(STDYANGDIR)/standard/ietf/RFC/:$(STDYANGDIR)/experimental/ietf-extracted-YANG-modules -v $(YANGDIR)/example-alto-config.json $(YANGDIR)/yang-library-ietf-alto.json
+yangson-validate: $(EXPJSON) $(STDYANGDIR)
+	yangson -p $(YANGDIR) -p $(YANGDIR):$(STDYANGDIR)/standard/ietf/RFC/:$(STDYANGDIR)/experimental/ietf-extracted-YANG-modules -v $(EXPJSON) $(YANGDIR)/yang-library-ietf-alto.json
 
 %-diagram.txt: $(YANGDIR)/%.yang
 	pyang $(OPTIONS) -p $(YANG_PATH) $< > $@
