@@ -29,6 +29,9 @@ yang-gen-diagram: yang-lint $(TXT)
 yang-clean:
 	rm -f $(TXT)
 
+yangson-validate:
+	yangson -p $(YANGDIR) -p $(YANGDIR):$(STDYANGDIR)/standard/ietf/RFC/:$(STDYANGDIR)/experimental/ietf-extracted-YANG-modules -v $(YANGDIR)/example-alto-config.json $(YANGDIR)/yang-library-ietf-alto.json
+
 %-diagram.txt: $(YANGDIR)/%.yang
 	pyang $(OPTIONS) -p $(YANG_PATH) $< > $@
 

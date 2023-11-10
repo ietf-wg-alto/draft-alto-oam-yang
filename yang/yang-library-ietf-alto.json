@@ -6,7 +6,10 @@
                 "name": "ietf-alto",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-alto",
                 "revision": "",
-                "conformance-type": "implement"
+                "conformance-type": "implement",
+                "feature": [
+                    "alto-server"
+                ]
             },
             {
                 "name": "ietf-alto-stats",
@@ -15,26 +18,26 @@
                 "conformance-type": "implement"
             },
             {
-                "name": "example-vendor-alto-server-discovery",
-                "namespace": "https://example.com/ns/vendor-alto-server-discovery",
+                "name": "example-alto-server-discovery",
+                "namespace": "https://example.com/ns/example-alto-server-discovery",
                 "revision": "",
                 "conformance-type": "implement"
             },
             {
-                "name": "example-vendor-alto-auth",
-                "namespace": "https://example.com/ns/vendor-alto-auth",
+                "name": "example-alto-auth",
+                "namespace": "https://example.com/ns/example-alto-auth",
                 "revision": "",
                 "conformance-type": "implement"
             },
             {
-                "name": "example-vendor-alto-data-source",
-                "namespace": "https://example.com/ns/vendor-alto-data-source",
+                "name": "example-alto-data-source",
+                "namespace": "https://example.com/ns/example-alto-data-source",
                 "revision": "",
                 "conformance-type": "implement"
             },
             {
-                "name": "example-vendor-alto-alg",
-                "namespace": "https://example.com/ns/vendor-alto-alg",
+                "name": "example-alto-alg",
+                "namespace": "https://example.com/ns/example-alto-alg",
                 "revision": "",
                 "conformance-type": "implement"
             },
@@ -122,25 +125,25 @@
             {
                 "name": "ietf-tcp-server",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-tcp-server",
-                "revision": "2022-12-12",
+                "revision": "2023-04-17",
                 "conformance-type": "import"
             },
             {
                 "name": "ietf-tcp-common",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-tcp-common",
-                "revision": "2022-12-12",
+                "revision": "2023-04-17",
                 "conformance-type": "import"
             },
             {
                 "name": "ietf-tls-server",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-tls-server",
-                "revision": "2022-12-12",
+                "revision": "2023-04-17",
                 "conformance-type": "import"
             },
             {
                 "name": "ietf-tls-common",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-tls-common",
-                "revision": "2022-12-12",
+                "revision": "2023-04-17",
                 "conformance-type": "import"
             },
             {
@@ -176,8 +179,11 @@
             {
                 "name": "ietf-crypto-types",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-crypto-types",
-                "revision": "2022-12-12",
-                "conformance-type": "import"
+                "revision": "2023-04-17",
+                "conformance-type": "import",
+                "feature": [
+                    "cleartext-passwords"
+                ]
             },
             {
                 "name": "iana-crypt-hash",
@@ -188,19 +194,19 @@
             {
                 "name": "ietf-truststore",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-truststore",
-                "revision": "2022-12-12",
+                "revision": "2023-04-17",
                 "conformance-type": "import"
             },
             {
                 "name": "ietf-keystore",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-keystore",
-                "revision": "2022-12-12",
+                "revision": "2023-04-17",
                 "conformance-type": "import"
             },
             {
                 "name": "ietf-http-server",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-http-server",
-                "revision": "2022-12-12",
+                "revision": "2023-04-17",
                 "conformance-type": "implement",
                 "feature": [
                   "client-auth-supported",
@@ -211,7 +217,7 @@
             {
                 "name": "ietf-restconf-client",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-restconf-client",
-                "revision": "2022-12-12",
+                "revision": "2023-04-17",
                 "conformance-type": "implement",
                 "feature": [
                     "http-listen",
@@ -221,37 +227,37 @@
             {
                 "name": "ietf-netconf-client",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-netconf-client",
-                "revision": "2022-12-12",
+                "revision": "2023-04-17",
                 "conformance-type": "import"
             },
             {
                 "name": "ietf-tcp-client",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-tcp-client",
-                "revision": "2022-12-12",
+                "revision": "2023-04-17",
                 "conformance-type": "import"
             },
             {
                 "name": "ietf-tls-client",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-tls-client",
-                "revision": "2022-12-12",
+                "revision": "2023-04-17",
                 "conformance-type": "import"
             },
             {
                 "name": "ietf-ssh-client",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-ssh-client",
-                "revision": "2022-12-12",
+                "revision": "2023-04-17",
                 "conformance-type": "import"
             },
             {
                 "name": "ietf-ssh-common",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-ssh-common",
-                "revision": "2022-12-12",
+                "revision": "2023-04-17",
                 "conformance-type": "import"
             },
             {
                 "name": "ietf-http-client",
                 "namespace": "urn:ietf:params:xml:ns:yang:ietf-http-client",
-                "revision": "2022-12-12",
+                "revision": "2023-04-17",
                 "conformance-type": "implement",
                 "feature": [
                     "basic-auth"
