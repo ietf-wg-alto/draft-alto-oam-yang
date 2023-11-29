@@ -385,9 +385,22 @@ module: ietf-alto
         |     |     +--rw user-id    http-user-id-ref
         |     +--:(https)
         |        +--rw https-auth-client
-        |                {http:client-auth-supported,
-        |                 http:local-users-supported}?
-        |     |     +--rw user-id    https-user-id-ref
+        |        |       {http:client-auth-supported,
+        |        |        http:local-users-supported}?
+        |        |  +--rw user-id?   https-user-id-ref
+        |        +--rw tls-auth-client
+        |                {http:client-auth-supported}?
+        |           +--rw ca-cert {tls:client-auth-x509-cert}?
+        |           |  +---u inline-or-truststore-ca-cert-ref
+        |           +--rw ee-cert {tls:client-auth-x509-cert}?
+        |           |  +---u inline-or-truststore-ee-cert-ref
+        |           +--rw raw-public-key
+        |           |       {tls:client-auth-raw-public-key}?
+        |           |  +---u inline-or-truststore-public-key-ref
+        |           +--rw tls12-psks?       empty
+        |           |       {tls:client-auth-tls12-psk}?
+        |           +--rw tls13-epsks?      empty
+        |                   {tls:client-auth-tls13-epsk}?
         +--rw role* [role-name]
         |  +--rw role-name    role-name
         |  +--rw client*      client-ref
@@ -399,7 +412,7 @@ The structure shown in {{tree-auth}} can be used to configure the role-based acc
 
 - 'auth-client' declares a list of ALTO clients that can be authenticated by
   the internal or external authorization server. This basic model only includes
-  authentication approach directly provided by the HTTP server, but the
+  authentication approach directly provided by the HTTP or TLS server, but the
   operators or future documents can augment the 'authentication' choice for
   different authentication mechanisms.
 - 'role' defines a list of roles for access control. Each role contains a list
