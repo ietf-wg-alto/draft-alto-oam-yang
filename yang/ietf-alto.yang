@@ -8,6 +8,11 @@ module ietf-alto {
     reference
       "RFC 6991: Common YANG Data Types, Section 4";
   }
+  import ietf-truststore {
+    prefix ts;
+    reference
+      "RFC BBBB: A YANG Data Model for a Truststore";
+  }
   import ietf-tcp-server {
     prefix tcp;
     reference
@@ -568,6 +573,60 @@ module ietf-alto {
       "Type to reference an HTTPS client user id.";
   }
 
+  typedef inline-ca-cert-ref {
+    type leafref {
+      path "/alto:alto/alto:alto-server/alto:listen"
+         + "/alto:https/alto:tls-server-parameters"
+         + "/alto:client-authentication/alto:ca-certs"
+         + "/alto:inline-definition/alto:certificate"
+         + "/alto:name";
+    }
+    description
+      "Type to reference a TLS CA certificate.";
+  }
+
+  typedef inline-ee-cert-ref {
+    type leafref {
+      path "/alto:alto/alto:alto-server/alto:listen"
+         + "/alto:https/alto:tls-server-parameters"
+         + "/alto:client-authentication/alto:ee-certs"
+         + "/alto:inline-definition/alto:certificate"
+         + "/alto:name";
+    }
+    description
+      "Type to reference a TLS EE certificate.";
+  }
+
+  typedef inline-raw-public-key-ref {
+    type leafref {
+      path "/alto:alto/alto:alto-server/alto:listen"
+         + "/alto:https/alto:tls-server-parameters"
+         + "/alto:client-authentication/alto:raw-public-keys"
+         + "/alto:inline-definition/alto:public-key"
+         + "/alto:name";
+    }
+    description
+      "Type to reference a raw pubic key.";
+  }
+
+  typedef public-key-ref {
+    // Override the leafref path of public-key-ref in the
+    // ietf-truststore module, as the original path uses a fixed
+    // prefix for the sibling 'public-key-bag' leaf which cannot be
+    // used in another module.
+    type leafref {
+      path "/ts:truststore/ts:public-key-bags/ts:public-key-bag"
+         + "[ts:name = current()/../public-key-bag]/"
+         + "ts:public-key/ts:name";
+    }
+    description
+      "This typedef defines a reference to a specific public key
+       in a public key bag in the truststore, when this module is
+       implemented.  This typedef requires that there exist a
+       sibling 'leaf' node called 'public-key-bag' that SHOULD
+       have the typedef 'public-key-bag-ref'.";
+  }
+
   typedef resource-ref {
     type leafref {
       path "/alto:alto/alto:alto-server/alto:resource"
@@ -870,6 +929,114 @@ module ietf-alto {
     }
   }
 
+  grouping truststore-public-key-ref {
+    description
+      "Grouping for the reference to a public key in a public key
+       bag in the truststore.";
+    leaf public-key-bag {
+      type ts:public-key-bag-ref;
+      description
+        "Reference of a public key bag in the truststore inlucding
+         the certificate to authenticate the TLS client.";
+    }
+    leaf public-key {
+      type public-key-ref;
+      description
+        "Reference of a public key to authenticate the TLS
+         client.";
+    }
+  }
+
+  grouping inline-or-truststore-ca-cert-ref {
+    description
+      "Grouping for the reference of a CA certificate to
+       authenticate the TLS client.";
+    choice inline-or-truststore {
+      description
+        "Selects between inline and truststore";
+      case inline {
+        if-feature "ts:inline-definitions-supported";
+        leaf inline {
+          type inline-ca-cert-ref;
+          description
+            "Reference to an inline CA certificate configured by
+             the TLS server.";
+        }
+        description
+          "Reference of an inline CA certificate to authenticate
+           the TLS client.";
+      }
+      case truststore {
+        if-feature "ts:central-truststore-supported";
+        if-feature "ts:certificates";
+        uses truststore-public-key-ref;
+        description
+          "Reference of a CA certificate in the truststore to
+           authenticate the TLS client.";
+      }
+    }
+  }
+
+  grouping inline-or-truststore-ee-cert-ref {
+    description
+      "Grouping for the reference of a EE certificate to
+       authenticate the TLS client.";
+    choice inline-or-truststore {
+      description
+        "Selects between inline and truststore";
+      case inline {
+        if-feature "ts:inline-definitions-supported";
+        leaf inline {
+          type inline-ee-cert-ref;
+          description
+            "Reference to an inline EE certificate configured by
+             the TLS server.";
+        }
+        description
+          "Reference of an inline EE certificate to authenticate
+           the TLS client.";
+      }
+      case truststore {
+        if-feature "ts:central-truststore-supported";
+        if-feature "ts:certificates";
+        uses truststore-public-key-ref;
+        description
+          "Reference of a EE certificate in the truststore to
+           authenticate the TLS client.";
+      }
+    }
+  }
+
+  grouping inline-or-truststore-public-key-ref {
+    description
+      "Grouping for the reference of a raw public key to
+       authenticate the TLS client.";
+    choice inline-or-truststore {
+      description
+        "Selects between inline and truststore";
+      case inline {
+        if-feature "ts:inline-definitions-supported";
+        leaf inline {
+          type inline-raw-public-key-ref;
+          description
+            "Reference to an inline public key configured by the
+             TLS server.";
+        }
+        description
+          "Reference of an inline public key to authenticate the
+           TLS client.";
+      }
+      case truststore {
+        if-feature "ts:central-truststore-supported";
+        if-feature "ts:public-keys";
+        uses truststore-public-key-ref;
+        description
+          "Reference of a raw public key in the truststore to
+           authenticate the TLS client.";
+      }
+    }
+  }
+
   // Top-level container
 
   container alto {
@@ -1031,13 +1198,56 @@ module ietf-alto {
               if-feature "http:client-auth-supported";
               if-feature "http:local-users-supported";
               description
-                "Parameters of the authenticated HTTPS client.";
+                "Parameters to identify an authenticated HTTPS
+                 client.";
               leaf user-id {
                 type https-user-id-ref;
-                mandatory true;
                 description
                   "Reference of the user-id for the authenticated
                    HTTPS client.";
+              }
+            }
+            container tls-auth-client {
+              if-feature "http:client-auth-supported";
+              description
+                "Parameters to identify na authenticated TLS
+                 client.";
+              container ca-cert {
+                if-feature "tls:client-auth-x509-cert";
+                description
+                  "Reference of the CA certificate to authenticate
+                   the TLS client.";
+                uses inline-or-truststore-ca-cert-ref;
+              }
+              container ee-cert {
+                if-feature "tls:client-auth-x509-cert";
+                description
+                  "Reference of the EE certificate to authenticate
+                   the TLS client.";
+                uses inline-or-truststore-ee-cert-ref;
+              }
+              container raw-public-key {
+                if-feature "tls:client-auth-raw-public-key";
+                description
+                  "Reference of the raw public key to authenticate
+                   the TLS client.";
+                uses inline-or-truststore-public-key-ref;
+              }
+              leaf tls12-psks {
+                if-feature "tls:client-auth-tls12-psk";
+                type empty;
+                description
+                  "Identicate that the client is authenticated by
+                   the TLS server using the configured PSKs
+                   (pre-shared or pairwise-symmetric keys).";
+              }
+              leaf tls13-epsks {
+                if-feature "tls:client-auth-tls13-epsk";
+                type empty;
+                description
+                  "Identicate that the client is authenticated by
+                   the TLS 1.3 server using the configured external
+                   PSKs (pre-shared keys).";
               }
             }
           }
