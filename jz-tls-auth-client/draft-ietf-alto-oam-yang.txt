@@ -5,14 +5,14 @@
 ALTO WG                                                         J. Zhang
 Internet-Draft                                         Tongji University
 Intended status: Standards Track                                D. Dhody
-Expires: 1 June 2024                                 Huawei Technologies
+Expires: 14 June 2024                                Huawei Technologies
                                                                   K. Gao
                                                       Sichuan University
                                                                R. Schott
                                                         Deutsche Telekom
                                                                    Q. Ma
                                                                   Huawei
-                                                        29 November 2023
+                                                        12 December 2023
 
 
  YANG Data Models for the Application-Layer Traffic Optimization (ALTO)
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 June 2024.
+   This Internet-Draft will expire on 14 June 2024.
 
 Copyright Notice
 
@@ -227,6 +227,9 @@ Table of Contents
     | yp     | ietf-yang- | [RFC8641]                                 |
     |        | push       |                                           |
     +--------+------------+-------------------------------------------+
+    | ts     | ietf-      | [I-D.ietf-netconf-trust-anchors]          |
+    |        | truststore |                                           |
+    +--------+------------+-------------------------------------------+
     | tcp    | ietf-tcp-  | [I-D.ietf-netconf-tcp-client-server]      |
     |        | server     |                                           |
     +--------+------------+-------------------------------------------+
@@ -258,6 +261,9 @@ Table of Contents
    Editor instructions are specified elsewhere in this document.
 
    Please apply the following replacements:
+
+   *  BBBB --> the assigned RFC number for
+      [I-D.ietf-netconf-trust-anchors]
 
    *  DDDD --> the assigned RFC number for
       [I-D.ietf-netconf-tcp-client-server]
@@ -2989,6 +2995,13 @@ Table of Contents
               netconf-tls-client-server-33, 17 April 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
               tls-client-server-33>.
+
+   [I-D.ietf-netconf-trust-anchors]
+              Watsen, K., "A YANG Data Model for a Truststore", Work in
+              Progress, Internet-Draft, draft-ietf-netconf-trust-
+              anchors-21, 17 April 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
+              trust-anchors-21>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,

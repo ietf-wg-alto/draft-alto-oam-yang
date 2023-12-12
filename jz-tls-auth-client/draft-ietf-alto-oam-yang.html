@@ -26,18 +26,18 @@ to communicate with known ALTO servers.
 <!-- Generator version information:
   xml2rfc 3.18.2
     Python 3.11.6
-    ConfigArgParse 1.5.3
+    ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 4.0.0
+    platformdirs 4.1.0
     pycountry 22.3.5
-    PyYAML 6.0
+    PyYAML 6.0.1
     requests 2.31.0
-    setuptools 67.7.2
+    setuptools 68.2.2
     six 1.16.0
-    wcwidth 0.2.10
+    wcwidth 0.2.12
 -->
 <link href="draft-ietf-alto-oam-yang.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1036,11 +1036,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">ALTO O&amp;M YANG</td>
-<td class="right">November 2023</td>
+<td class="right">December 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Zhang, et al.</td>
-<td class="center">Expires 1 June 2024</td>
+<td class="center">Expires 14 June 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1053,12 +1053,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-alto-oam-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-11-29" class="published">29 November 2023</time>
+<time datetime="2023-12-12" class="published">12 December 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-06-01">1 June 2024</time></dd>
+<dd class="expires"><time datetime="2024-06-14">14 June 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1126,7 +1126,7 @@ to communicate with known ALTO servers.<a href="#section-abstract-1" class="pilc
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 June 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 June 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1490,6 +1490,13 @@ are shown in <a href="#tbl-yang-prefixes" class="auto internal xref">Table 1</a>
 </td>
             </tr>
             <tr>
+              <td class="text-left" rowspan="1" colspan="1">ts</td>
+              <td class="text-left" rowspan="1" colspan="1">ietf-truststore</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#I-D.ietf-netconf-trust-anchors" class="cite xref">I-D.ietf-netconf-trust-anchors</a>]</span>
+</td>
+            </tr>
+            <tr>
               <td class="text-left" rowspan="1" colspan="1">tcp</td>
               <td class="text-left" rowspan="1" colspan="1">ietf-tcp-server</td>
               <td class="text-left" rowspan="1" colspan="1">
@@ -1542,22 +1549,25 @@ elsewhere in this document.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.3-3">Please apply the following replacements:<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.3-4.1">
-            <p id="section-3.3-4.1.1">DDDD --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-netconf-tcp-client-server" class="cite xref">I-D.ietf-netconf-tcp-client-server</a>]</span><a href="#section-3.3-4.1.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-4.1.1">BBBB --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-netconf-trust-anchors" class="cite xref">I-D.ietf-netconf-trust-anchors</a>]</span><a href="#section-3.3-4.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.3-4.2">
-            <p id="section-3.3-4.2.1">FFFF --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-netconf-tls-client-server" class="cite xref">I-D.ietf-netconf-tls-client-server</a>]</span><a href="#section-3.3-4.2.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-4.2.1">DDDD --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-netconf-tcp-client-server" class="cite xref">I-D.ietf-netconf-tcp-client-server</a>]</span><a href="#section-3.3-4.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.3-4.3">
-            <p id="section-3.3-4.3.1">GGGG --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-netconf-http-client-server" class="cite xref">I-D.ietf-netconf-http-client-server</a>]</span><a href="#section-3.3-4.3.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-4.3.1">FFFF --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-netconf-tls-client-server" class="cite xref">I-D.ietf-netconf-tls-client-server</a>]</span><a href="#section-3.3-4.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.3-4.4">
-            <p id="section-3.3-4.4.1">HHHH --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-netconf-netconf-client-server" class="cite xref">I-D.ietf-netconf-netconf-client-server</a>]</span><a href="#section-3.3-4.4.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-4.4.1">GGGG --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-netconf-http-client-server" class="cite xref">I-D.ietf-netconf-http-client-server</a>]</span><a href="#section-3.3-4.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.3-4.5">
-            <p id="section-3.3-4.5.1">IIII --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-netconf-restconf-client-server" class="cite xref">I-D.ietf-netconf-restconf-client-server</a>]</span><a href="#section-3.3-4.5.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-4.5.1">HHHH --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-netconf-netconf-client-server" class="cite xref">I-D.ietf-netconf-netconf-client-server</a>]</span><a href="#section-3.3-4.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.3-4.6">
-            <p id="section-3.3-4.6.1">XXXX --&gt; the assigned RFC number for this draft<a href="#section-3.3-4.6.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-4.6.1">IIII --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-netconf-restconf-client-server" class="cite xref">I-D.ietf-netconf-restconf-client-server</a>]</span><a href="#section-3.3-4.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.3-4.7">
+            <p id="section-3.3-4.7.1">XXXX --&gt; the assigned RFC number for this draft<a href="#section-3.3-4.7.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -4474,6 +4484,10 @@ define data nodes that do set the NACM "default-deny-all" and
 <dt id="I-D.ietf-netconf-tls-client-server">[I-D.ietf-netconf-tls-client-server]</dt>
         <dd>
 <span class="refAuthor">Watsen, K.</span>, <span class="refTitle">"YANG Groupings for TLS Clients and TLS Servers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-tls-client-server-33</span>, <time datetime="2023-04-17" class="refDate">17 April 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-tls-client-server-33">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-tls-client-server-33</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-netconf-trust-anchors">[I-D.ietf-netconf-trust-anchors]</dt>
+        <dd>
+<span class="refAuthor">Watsen, K.</span>, <span class="refTitle">"A YANG Data Model for a Truststore"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-trust-anchors-21</span>, <time datetime="2023-04-17" class="refDate">17 April 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-trust-anchors-21">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-trust-anchors-21</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
