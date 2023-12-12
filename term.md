@@ -58,6 +58,7 @@ are shown in [](#tbl-yang-prefixes).
 | inet | ietf-inet-types | {{RFC6991}}
 | ds | ietf-datastores | {{RFC8342}}
 | yp | ietf-yang-push | {{RFC8641}}
+| ts | ietf-truststore | {{I-D.ietf-netconf-trust-anchors}}
 | tcp | ietf-tcp-server | {{I-D.ietf-netconf-tcp-client-server}}
 | tls | ietf-tls-server | {{I-D.ietf-netconf-tls-client-server}}
 | http | ietf-http-server | {{I-D.ietf-netconf-http-client-server}}
@@ -76,6 +77,7 @@ elsewhere in this document.
 
 Please apply the following replacements:
 
+- BBBB --> the assigned RFC number for {{I-D.ietf-netconf-trust-anchors}}
 - DDDD --> the assigned RFC number for {{I-D.ietf-netconf-tcp-client-server}}
 - FFFF --> the assigned RFC number for {{I-D.ietf-netconf-tls-client-server}}
 - GGGG --> the assigned RFC number for {{I-D.ietf-netconf-http-client-server}}
