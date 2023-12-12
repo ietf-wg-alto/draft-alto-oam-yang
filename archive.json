@@ -1,0 +1,3433 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2023-12-12T01:07:48.648808+00:00",
+  "repo": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    },
+    {
+      "name": "ready_to_close?",
+      "description": "",
+      "color": "fef2c0"
+    },
+    {
+      "name": "WGLC",
+      "description": "comment received during WGLC",
+      "color": "b60205"
+    },
+    {
+      "name": "yangdoctors",
+      "description": "",
+      "color": "f9d0c4"
+    },
+    {
+      "name": "secdir",
+      "description": "",
+      "color": "CD9B67"
+    },
+    {
+      "name": "editorial",
+      "description": "",
+      "color": "bfdadc"
+    },
+    {
+      "name": "opsdir",
+      "description": "",
+      "color": "71D467"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOFlouSc5FRnJO",
+      "title": " draft-bw-alto-cost-mode: Change Typedef to Identity",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/1",
+      "state": "CLOSED",
+      "author": "dhruvdhody",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "fno2010"
+      ],
+      "labels": [],
+      "body": "Hi Jensen,\r\n\r\nIn light of  draft-bw-alto-cost-mode, we should change the typedef to identity to allow more cost modes to be defined in the future. I will raise an issue in github to track this as well \r\n\r\n     typedef cost-mode {\r\n       type enumeration {\r\n         enum numerical {\r\n           value 1;\r\n           description\r\n             \"This mode indicates that it is safe to perform numerical\r\n              operations\";\r\n         }\r\n         enum ordinal {\r\n           value 2;\r\n           description\r\n             \"This mode indicates that the cost values in a cost map\r\n              represent ranking\";\r\n         }\r\n       }\r\n       description\r\n         \"The cost mode attribute indicates how costs should be\r\n          interpreted. Specifically, the cost mode attribute indicates\r\n          whether returned costs should be interpreted as numerical\r\n          values or ordinal rankings.\";\r\n       reference\r\n         \"Section 6.1.2 of RFC 7285.\";\r\n     }\r\nThanks! \r\nDhruv",
+      "createdAt": "2022-03-08T05:42:59Z",
+      "updatedAt": "2023-03-06T07:22:11Z",
+      "closedAt": "2023-03-06T07:22:10Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "@dhruvdhody Do you think `identity` is better, or move `typedef` to an `iana-alto-types.yang` module is better? Just like what this YANG module does: https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/iana-routing-types%402018-10-29.yang",
+          "createdAt": "2022-03-22T02:19:43Z",
+          "updatedAt": "2022-03-22T02:19:43Z"
+        },
+        {
+          "author": "dhruvdhody",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi, I think it might be worth asking what is the current best practice here on when to create IANA-maintained models? Should we ask that to yang doctors perhaps? ",
+          "createdAt": "2022-03-22T03:48:18Z",
+          "updatedAt": "2022-03-22T03:48:18Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Make sense for me to ask YANG doctors. I just posted this question to YANG doctors: https://mailarchive.ietf.org/arch/msg/yang-doctors/rVflF_sVEv3fR4reZ6y93ikD2yE/",
+          "createdAt": "2022-03-22T07:33:58Z",
+          "updatedAt": "2022-03-22T07:33:58Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Identity is used in the module instead of enums. ",
+          "createdAt": "2023-03-06T07:22:10Z",
+          "updatedAt": "2023-03-06T07:22:10Z"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOFlouSc5I9d7c",
+      "title": "Statistic related to logging and fault management",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/2",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "fno2010"
+      ],
+      "labels": [
+        "ready_to_close?"
+      ],
+      "body": "We need to give a proposal for [Sec 6.1 of draft-ietf-alto-oam-yang-00](https://datatracker.ietf.org/doc/html/draft-ietf-alto-oam-yang-00#section-6.1) to meet R2 and R4 in [Sec 4.2](https://datatracker.ietf.org/doc/html/draft-ietf-alto-oam-yang-00#section-4.2).",
+      "createdAt": "2022-05-03T13:09:08Z",
+      "updatedAt": "2023-03-12T11:39:49Z",
+      "closedAt": "2023-03-12T11:39:49Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Just checked the statement in the LMAP YANG Model draft [RFC8194]:\r\n\r\n>    o  Logging Information: Some of the Logging Information, in\r\n      particular 'success/failure/warning messages in response to\r\n      information updates from the Controller', will be handled by the\r\n      protocol used to manipulate the LMAP-specific configuration.  The\r\n      LMAP data model defined in this document assumes that runtime\r\n      Logging Information will be communicated using protocols that do\r\n      not require a formal data model, e.g., the syslog protocol defined\r\n      in [RFC5424].\r\n\r\nMaybe ALTO should follow some similar principles to define the data model for logging and fault management.",
+          "createdAt": "2022-05-31T14:02:28Z",
+          "updatedAt": "2022-05-31T14:02:28Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Can we tag this one as closed as both R2/R4 are covered by the model?",
+          "createdAt": "2023-03-06T07:23:56Z",
+          "updatedAt": "2023-03-06T07:23:56Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOFlouSc5I9f0V",
+      "title": "Data model for ALTO client-side O&M",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/3",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "fno2010"
+      ],
+      "labels": [
+        "ready_to_close?"
+      ],
+      "body": "This item requires more discussion.",
+      "createdAt": "2022-05-03T13:16:34Z",
+      "updatedAt": "2023-05-12T14:19:19Z",
+      "closedAt": "2023-05-12T14:19:19Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "We do have several use cases which require O&M for ALTO clients. But I think the main concern is whether they require YANG techniques.",
+          "createdAt": "2022-06-14T13:07:09Z",
+          "updatedAt": "2022-06-14T13:07:09Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "The current client-side data model only includes server discovery config:\r\n\r\n```\r\n module: ietf-alto\r\n            +--rw alto!\r\n               +--rw alto-client* [client-id]\r\n               |  +--rw client-id                  string\r\n               |  +--rw server-discovery-client\r\n               |     +---u alto-server-discovery-client-grouping\r\n               ...\r\n```\r\n\r\nIt should be enough for some simple deployment. But more detailed configurations (e.g., `http-client-params`, periodical queries of interested information resources) are also good to be considered. Even if they are considered to be out of scope for the base module, maybe they are valuable for extended modules.\r\n\r\nSo I prefer to keep this issue open to track further discussions.",
+          "createdAt": "2023-03-12T11:40:07Z",
+          "updatedAt": "2023-03-12T11:40:07Z"
+        },
+        {
+          "author": "billwuqin",
+          "authorAssociation": "NONE",
+          "body": "Here is the snippetof alto client:\r\n\r\n~~~\r\n     +--rw alto-client* [client-id] {alto-client}?\r\n     |  +--rw client-id                  string\r\n     |  +--rw server-discovery-client\r\n     |     +--rw (server-discovery-client-manner)?\r\n     |        +--:(reverse-dns) {xdom-disc}?\r\n     |           +--rw rdns-params\r\n     |              +--rw dns-server*   inet:host\r\n~~~\r\n\r\nI think the naming of the node \"server-discovery-client\" is confusing, s/server-discovery-client/server-discovery.\r\nAlso I am wondering whether we should also support ALTO server discovery in P2P scenario (ALTO client is\r\nembedded in the resource consumer) described in RFC7286.\r\nI think we can add one case for server discovery described in RFC7286.",
+          "createdAt": "2023-04-11T11:58:40Z",
+          "updatedAt": "2023-04-11T12:03:47Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Can we close this one when merging #65?",
+          "createdAt": "2023-05-12T07:40:40Z",
+          "updatedAt": "2023-05-12T07:40:40Z"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOFlouSc5I9jrZ",
+      "title": "Configuration for server level management",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/4",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "fno2010"
+      ],
+      "labels": [
+        "ready_to_close?"
+      ],
+      "body": "This is required by [R1 in Sec 4.2](https://datatracker.ietf.org/doc/html/draft-ietf-alto-oam-yang-00#section-4.2).\r\n\r\nSome questions from WG need to be considered:\r\n\r\n- Question from Quifang Ma:  Should HTTP-server related configuration be in our scope(e.g., cache-control, Retry-After)?\r\n  - https://mailarchive.ietf.org/arch/msg/alto/ZLV1cQIaSjYLeQ3KPh3ykJ3YMq8/",
+      "createdAt": "2022-05-03T13:24:26Z",
+      "updatedAt": "2023-03-12T11:39:15Z",
+      "closedAt": "2023-03-12T11:39:15Z",
+      "comments": [
+        {
+          "author": "dhruvdhody",
+          "authorAssociation": "COLLABORATOR",
+          "body": "ONe reference to check out would be https://datatracker.ietf.org/doc/draft-ietf-netconf-http-client-server/ \r\nI cant find there, perhaps part of some groupings?\r\n\r\n",
+          "createdAt": "2022-05-03T13:46:36Z",
+          "updatedAt": "2022-05-03T13:46:36Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Nice reference. Also, it seems that https://datatracker.ietf.org/doc/html/draft-ietf-netconf-restconf-client-server-25#section-3.1.2.2 can be a good example of how to use those groupings.",
+          "createdAt": "2022-05-03T14:34:28Z",
+          "updatedAt": "2022-05-03T14:34:28Z"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOFlouSc5LTH6S",
+      "title": "Drive data model design using real implementation",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/5",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "fno2010"
+      ],
+      "labels": [
+        "documentation"
+      ],
+      "body": "We already have the reference architecture for the ALTO server: https://datatracker.ietf.org/doc/html/draft-ietf-alto-oam-yang-00#section-4.4\r\n\r\nTo make the data model design reasonable, I'll suggest we drive the data model design using some real ALTO implementation so that we can verify if we will suffer from any issues.\r\n\r\nOne candidate ALTO implementation is the OpenALTO, which we will demonstrate during the IETF 114 hackathon.\r\n\r\nWe will use this ticket to track if we will get any feedback from the OpenALTO development: https://github.com/openalto/ietf-hackathon/issues/48",
+      "createdAt": "2022-06-07T13:27:47Z",
+      "updatedAt": "2023-05-12T07:41:01Z",
+      "closedAt": "2023-05-12T07:41:01Z",
+      "comments": [
+        {
+          "author": "billwuqin",
+          "authorAssociation": "NONE",
+          "body": " who should we consult with? I believe we need to set deadline for this ticket,",
+          "createdAt": "2023-04-11T12:00:57Z",
+          "updatedAt": "2023-04-11T12:00:57Z"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOFlouSc5fMPIL",
+      "title": "Check that all JSON Examples comply with the YANG Modules",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/8",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "fno2010"
+      ],
+      "labels": [
+        "documentation"
+      ],
+      "body": "You may use https://github.com/CZ-NIC/yangson",
+      "createdAt": "2023-02-23T15:14:06Z",
+      "updatedAt": "2023-06-14T06:51:57Z",
+      "closedAt": "2023-06-14T06:51:57Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks, Med. We do plan to use yangson in the OpenALTO implementation. For the draft, do you think we should also add some JSON examples? I see many other YANG-related drafts provide NETCONF XML examples instead of JSON.",
+          "createdAt": "2023-02-24T00:52:36Z",
+          "updatedAt": "2023-02-24T00:52:36Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> For the draft, do you think we should also add some JSON examples?\r\n\r\nI think so. JSON is much more friendly for readers. Thanks. \r\n",
+          "createdAt": "2023-02-24T07:08:37Z",
+          "updatedAt": "2023-02-24T07:08:37Z"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOFlouSc5fQpCJ",
+      "title": "yang-canonical",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/11",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Please update your scripts to use the following commands:\r\n\r\n`pyang -f yang --yang-canonical`\r\n\r\nThere are some minor inconsistent uses in the modules (prefix with \"\" and without, etc.). The command will catch those.",
+      "createdAt": "2023-02-24T08:52:52Z",
+      "updatedAt": "2023-02-28T13:58:39Z",
+      "closedAt": "2023-02-28T13:56:21Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks, Med. The new patch should fix those inconsistent uses.",
+          "createdAt": "2023-02-28T13:58:39Z",
+          "updatedAt": "2023-02-28T13:58:39Z"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "I_kwDOFlouSc5f4PCu",
+      "title": "gauge/counter",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/15",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "ready_to_close?",
+        "WGLC",
+        "yangdoctors"
+      ],
+      "body": "Please check when it makes sense to use a gauge rather than a counter. For example:\r\n\r\n    +--ro num-event-avg?     yang:counter32",
+      "createdAt": "2023-03-03T12:51:11Z",
+      "updatedAt": "2023-05-12T06:36:42Z",
+      "closedAt": "2023-05-12T06:36:42Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Good point. `yang:gauge64` seems more reasonable.",
+          "createdAt": "2023-03-03T13:21:17Z",
+          "updatedAt": "2023-03-03T13:21:17Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks. \r\n\r\nBTW, is there any reason all the counters are 32? may be moved those to be 64.",
+          "createdAt": "2023-03-03T13:24:25Z",
+          "updatedAt": "2023-03-03T13:24:25Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Initially, we just thought 32 might be enough for the current deployment. But I agree. 64 will be better. I also think we should use 64.",
+          "createdAt": "2023-03-03T13:31:19Z",
+          "updatedAt": "2023-03-03T13:31:19Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Reopening as I think the type has to be reassessed for some other data nodes (e.g., res-mem-size). \r\n\r\nIf the value may increase/decrease, then gauge64 should be used. ",
+          "createdAt": "2023-03-13T06:32:18Z",
+          "updatedAt": "2023-03-13T06:32:18Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Yes, you are right. I will check all the statistics data nodes to fix their types.\r\n\r\nI think the following nodes should use gauge64 at least:\r\n\r\n- memory utilization\r\n- number of living connections\r\n- statistics in the last time window",
+          "createdAt": "2023-03-13T06:58:49Z",
+          "updatedAt": "2023-03-13T06:58:49Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Track suggestions from yangdoctors early review by Andy:\r\n\r\n### 5 minute counters\r\n\r\n- Should be type gauge64, not counter64 because the value can go down.\r\n\r\n  - num-total-last-req\r\n  - num-total-last-succ\r\n  - num-total-last-fail\r\n\r\n### size counters\r\n\r\n- Should be type uint64, not counter64 because the value is a size.\r\n\r\n  - res-mem-size\r\n  - res-enc-size\r\n\r\n### update event counters\r\n\r\n- It is not clear what the correct data type should be. Not counter64.\r\n\r\n  - num-event-max\r\n  - num-event-min\r\n\r\n- Are these leafs maintained over a 5 minute interval perhaps?\r\n  Then they should be gauge64.\r\n\r\n- The procedure to determine min and max should be specified or referenced.",
+          "createdAt": "2023-04-11T01:21:14Z",
+          "updatedAt": "2023-04-11T01:21:14Z"
+        },
+        {
+          "author": "billwuqin",
+          "authorAssociation": "NONE",
+          "body": "I suggest to set data type for num-event-max and num-even-min as uint32, we can find some example in RFC8532 and RFC8299.\r\nRegarding time interval, I am wondering whether  time-window-size is related to time interval?",
+          "createdAt": "2023-04-11T12:12:04Z",
+          "updatedAt": "2023-04-11T12:12:04Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "`uint` should always be safe. But maybe `gauge` provides more semantics? I think either work.\r\n\r\nAbout the time interval, yes, it is configured by `time-window-size`. But `num-event-*` shows the total value, not the value in a given time interval. We just added a collection of stats `num-event-*-last` to provide values in the last time interval.",
+          "createdAt": "2023-04-11T12:27:41Z",
+          "updatedAt": "2023-04-11T12:27:41Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Changed type of `num-total-last-*` to `gauge64`:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/5dea617f7e681a51666c173adab7c575bc1cbb23/yang/ietf-alto-stats.yang#L85-L102\r\n\r\nChanged type of `res-*-size` to `uint64`:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/5dea617f7e681a51666c173adab7c575bc1cbb23/yang/ietf-alto-stats.yang#L129-L140\r\n\r\nChanged type of `num-event-*` to `gauge64` (Qin suggests to simply using `uint32`) and updated the descriptions:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/5dea617f7e681a51666c173adab7c575bc1cbb23/yang/ietf-alto-stats.yang#L198-L228\r\n\r\n`num-event-*-last` are added to provide stats within the last time window:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/5dea617f7e681a51666c173adab7c575bc1cbb23/yang/ietf-alto-stats.yang#L229-L266",
+          "createdAt": "2023-04-11T12:39:33Z",
+          "updatedAt": "2023-04-11T12:39:33Z"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "I_kwDOFlouSc5f4YPa",
+      "title": "Notifications when some resource limits are reached",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/18",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "enhancement",
+        "ready_to_close?",
+        "WGLC"
+      ],
+      "body": "I wonder whether you considered having notifications in the module that are triggered when some thresholds are fired.",
+      "createdAt": "2023-03-03T13:16:29Z",
+      "updatedAt": "2023-06-14T06:51:42Z",
+      "closedAt": "2023-06-14T06:51:42Z",
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Any update about this one? Should we send notifications when  CPU and memory utilization exceed some thresholds? When a max clients are connected?\r\n\r\nYou may check Table 6 of RFC8512 as an example.\r\n\r\n\r\n",
+          "createdAt": "2023-05-12T07:17:49Z",
+          "updatedAt": "2023-05-12T07:17:49Z"
+        },
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I see it more complete if some notifications could be triggered when some value is crossing a secure threshold, but instead of defining the threshold-related parameters inside the YANG module, would it be better and simpler to state in the document that  alarm notification defined in RFC 8632 could be reused to receive alarms when metrics exceed or fall below some thresholds?",
+          "createdAt": "2023-05-16T03:11:06Z",
+          "updatedAt": "2023-05-16T03:11:06Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Interesting idea. If some notifications could be reused, it would be great. I am not familiar with RFC 8632. Just quickly checked it. It seems to be very complex. We may need to carefully check which parts can be reused. Do you have any suggestions?",
+          "createdAt": "2023-05-16T03:22:38Z",
+          "updatedAt": "2023-05-16T03:22:38Z"
+        },
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "If the related threshold and notification have already been defined, I believe we can go with that.\r\nI just don' think it a scalable way to define threshold configuration in each YANG module, but can achieve the goal, anyway.",
+          "createdAt": "2023-05-16T06:29:29Z",
+          "updatedAt": "2023-05-16T06:29:29Z"
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "I_kwDOFlouSc5f4Y1a",
+      "title": "configurable reporting interval vs/ fixed 5-min",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/19",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "enhancement",
+        "ready_to_close?",
+        "WGLC"
+      ],
+      "body": "The current stat module uses a fixed interval to report the stats. I would prefer having a configurable interval.",
+      "createdAt": "2023-03-03T13:17:46Z",
+      "updatedAt": "2023-04-11T14:27:53Z",
+      "closedAt": "2023-04-11T14:27:53Z",
+      "comments": [
+        {
+          "author": "billwuqin",
+          "authorAssociation": "NONE",
+          "body": "Agree, I am wondering how  time-window-size is related to this fixed 5 min time interval.\r\nCheck the latest version of YANG data model, I see three places use fixed 5 min:\r\n       leaf num-total-last-req {\r\n         type yang:counter64;\r\n         config false;\r\n         description\r\n           \"The total number of ALTO requests received by the server\r\n            within the last 5 minutes.\";\r\n       }\r\n       leaf num-total-last-succ {\r\n         type yang:counter64;\r\n         config false;\r\n         description\r\n           \"The total number of successful responses sent by the ALTO\r\n            server within the last 5 minutes.\";\r\n       }\r\n       leaf num-total-last-fail {\r\n         type yang:counter64;\r\n         config false;\r\n         description\r\n           \"The total number of failed responses sent by the ALTO\r\n            server within the last 5 minutes.\";\r\n       }",
+          "createdAt": "2023-04-11T12:27:55Z",
+          "updatedAt": "2023-04-11T12:27:55Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "I also agree. We have changed the fixed reporting interval to a configured parameter:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/5dea617f7e681a51666c173adab7c575bc1cbb23/yang/ietf-alto-stats.yang#L278-L285",
+          "createdAt": "2023-04-11T12:31:28Z",
+          "updatedAt": "2023-04-11T12:31:28Z"
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "I_kwDOFlouSc5g-_i2",
+      "title": "discontinuity-time for stats",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/25",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "ready_to_close?",
+        "WGLC"
+      ],
+      "body": "The stats data nodes do not refer to when the counters were initialized. I suggest you add a new data node to record that reference. A proposal is provided below:\r\n\r\n```\r\n leaf discontinuity-time {\r\n      type yang:date-and-time;\r\n      mandatory true;\r\n      description\r\n        \"The time on the most recent occasion at which the ALTO\r\n         server suffered a discontinuity. This must be  initialized when\r\n         the ALTO server is configured or rebooted.\";\r\n    }\r\n```\r\n\r\nA similar data node can b also added for stats related to resources.",
+      "createdAt": "2023-03-16T10:07:56Z",
+      "updatedAt": "2023-04-18T13:04:22Z",
+      "closedAt": "2023-04-18T13:04:22Z",
+      "comments": []
+    },
+    {
+      "number": 26,
+      "id": "I_kwDOFlouSc5g_BG6",
+      "title": "Update reference statement to also include  rfc9274",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/26",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/17687c25e8350292559a800d65a1f484a66aa20e/yang/ietf-alto.yang#L154",
+      "createdAt": "2023-03-16T10:10:38Z",
+      "updatedAt": "2023-03-17T02:02:24Z",
+      "closedAt": "2023-03-17T02:02:24Z",
+      "comments": []
+    },
+    {
+      "number": 27,
+      "id": "I_kwDOFlouSc5g_Bq8",
+      "title": "Add more discussion about the use of this feature",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/27",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/17687c25e8350292559a800d65a1f484a66aa20e/yang/ietf-alto.yang#L62",
+      "createdAt": "2023-03-16T10:11:37Z",
+      "updatedAt": "2023-05-12T14:17:38Z",
+      "closedAt": "2023-05-12T14:17:38Z",
+      "comments": [
+        {
+          "author": "billwuqin",
+          "authorAssociation": "NONE",
+          "body": "It looks like debug mode. I agree we need to pay special attention to this feature.",
+          "createdAt": "2023-04-11T12:31:44Z",
+          "updatedAt": "2023-04-11T12:31:44Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "I also thought this should be some debug mode. But after rechecking the [`ietf-restconf-server.yang` module][1], it seems that the `http-listen` feature in the restconf model is used when the TLS is not handled by the implementor of this data model but an external gateway.\r\n\r\n```\r\n      case http {\r\n        if-feature \"http-listen\";\r\n        container http {\r\n          description\r\n            \"Configures RESTCONF server stack assuming that\r\n             TLS-termination is handled externally.\";\r\n```\r\n\r\n[1]: https://github.com/YangModels/yang/blob/c49306baedc26bb49d4a683cedd23145e46bc9f9/experimental/ietf-extracted-YANG-modules/ietf-restconf-server%402022-12-12.yang#L181-L186",
+          "createdAt": "2023-04-11T13:04:16Z",
+          "updatedAt": "2023-04-11T13:04:16Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I see that the YANG has now: \r\n\r\n            \"... that\r\n             TLS-termination is handled externally.\";\r\n\r\nWe just need to add a mention to the security section about this. Will propose a PR for it.",
+          "createdAt": "2023-05-12T06:57:29Z",
+          "updatedAt": "2023-05-12T06:57:29Z"
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "id": "I_kwDOFlouSc5g_Cqq",
+      "title": "Add missing reference statement (IRD)",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/28",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/17687c25e8350292559a800d65a1f484a66aa20e/yang/ietf-alto.yang#L174",
+      "createdAt": "2023-03-16T10:13:24Z",
+      "updatedAt": "2023-03-17T02:08:28Z",
+      "closedAt": "2023-03-17T02:08:28Z",
+      "comments": []
+    },
+    {
+      "number": 29,
+      "id": "I_kwDOFlouSc5g_FFF",
+      "title": "disable http-listen by default",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/29",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "duplicate",
+        "WGLC"
+      ],
+      "body": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/17687c25e8350292559a800d65a1f484a66aa20e/yang/ietf-alto.yang#L495\r\n\r\nI wonder whether transport-type can defined with a default set to the secure https mode. The http-listen is not supposed to be  used for deployment. Having guards to avoid exposing that would be needed.",
+      "createdAt": "2023-03-16T10:17:38Z",
+      "updatedAt": "2023-05-12T07:42:12Z",
+      "closedAt": "2023-05-12T07:42:12Z",
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "#27 ",
+          "createdAt": "2023-05-12T07:42:12Z",
+          "updatedAt": "2023-05-12T07:42:12Z"
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "id": "I_kwDOFlouSc5hSJbW",
+      "title": "choice/case + when statements",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/30",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/2000bbb10681deda59581aaefeda26597eace813/yang/ietf-alto.yang#L991\r\n\r\nThe \"case\" statements can be replaced by having the \"when\" statements inside each container \"container alto-ird-params\". If you want to maintain the choice/case, then consider remove the \"when\" statements.",
+      "createdAt": "2023-03-20T13:43:59Z",
+      "updatedAt": "2023-04-11T13:22:02Z",
+      "closedAt": "2023-04-11T13:15:32Z",
+      "comments": [
+        {
+          "author": "billwuqin",
+          "authorAssociation": "NONE",
+          "body": "It is rare to see when and case statement are used at the same time. I agree this should be fixed.\r\nSee example as follows:\r\n\"\r\n          case update {\r\n            when 'derived-from-or-self(resource-type,'\r\n               + '\"alto:update\")';\r\n            if-feature \"incr-update\";\r\n            container alto-update-params {\r\n              description\r\n                \"Incremental Updates specific configuration.\";\r\n              uses algorithm;\r\n            }\r\n          }\r\n\"",
+          "createdAt": "2023-04-11T12:35:23Z",
+          "updatedAt": "2023-04-11T12:35:23Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "I agree. But the `when` statements cannot be removed. We need to check the `resource-type`. We have removed choice/case statements are removed and moved each `when` statement to each container inside.",
+          "createdAt": "2023-04-11T13:18:28Z",
+          "updatedAt": "2023-04-11T13:18:28Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks, @fno2010. No need to remove them as you removed choice/case. ",
+          "createdAt": "2023-04-11T13:22:01Z",
+          "updatedAt": "2023-04-11T13:22:01Z"
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "id": "I_kwDOFlouSc5hSKU_",
+      "title": "No need to have \"-grouping\" in the name of a grouping",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/31",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC",
+        "editorial"
+      ],
+      "body": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/2000bbb10681deda59581aaefeda26597eace813/yang/ietf-alto.yang#L510\r\n\r\nThis comment applies to all groupings in the module.",
+      "createdAt": "2023-03-20T13:45:47Z",
+      "updatedAt": "2023-04-12T05:53:47Z",
+      "closedAt": "2023-04-12T05:53:47Z",
+      "comments": []
+    },
+    {
+      "number": 32,
+      "id": "I_kwDOFlouSc5hSQaX",
+      "title": "Southbound API",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/32",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "ready_to_close?",
+        "WGLC",
+        "editorial"
+      ],
+      "body": "[Figure 1](https://ietf-wg-alto.github.io/draft-ietf-alto-oam-yang/draft-ietf-alto-oam-yang.html#figure-1) cites \"Southbound API\" without any mention in the main text. \r\n\r\nI would suggest to replace \"Southbound\" thing in favor of a more meaningful term + call what ever name you pick in the description of figure 1.",
+      "createdAt": "2023-03-20T14:00:11Z",
+      "updatedAt": "2023-04-13T12:15:15Z",
+      "closedAt": "2023-04-13T12:15:14Z",
+      "comments": []
+    },
+    {
+      "number": 33,
+      "id": "I_kwDOFlouSc5hSTsx",
+      "title": "Security Considerations",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/33",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "I'm afraid that the following text is to be revised:\r\n\r\n> None of the readable data nodes in these YANG module are considered sensitive or vulnerable in network environments. The NACM \"default-deny-all\" extension has not been set for any data nodes defined in these module.\r\n> \r\n> None of the writable data nodes in these YANG modules are considered sensitive or vulnerable in network environments. The NACM \"default-deny-write\" extension has not been set for any data nodes defined in these modules.\r\n\r\nThere are several sensitive data node that should be listed. Access to some data by non-authorized parties may reveal internal topologies/etc.\r\n\r\nThere should be also a note about the \"http-listen\" use. \r\n",
+      "createdAt": "2023-03-20T14:06:37Z",
+      "updatedAt": "2023-05-24T00:59:19Z",
+      "closedAt": "2023-05-24T00:59:19Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Hi Med,\n\nI am not aware of which data nodes are sensitive in this module. If you\nfind any, please point them out.\n\nBut I am aware that the extended modules (e.g., examples in the appendix)\nmay include sensitive data. Especially, the \"data-source\" node. So I added\na new paragraph [1] to clarify this. Do you think it is enough?\n\n[1]:\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/commit/5a2a40db5ebe45a3e16a836f8cae38891f4b5bce\n\nThanks,\nJensen\n\nOn Mon, Mar 20, 2023 at 10:06\u202fPM Med ***@***.***> wrote:\n\n> I'm afraid that the following text is to be revised:\n>\n> None of the readable data nodes in these YANG module are considered\n> sensitive or vulnerable in network environments. The NACM\n> \"default-deny-all\" extension has not been set for any data nodes defined in\n> these module.\n>\n> None of the writable data nodes in these YANG modules are considered\n> sensitive or vulnerable in network environments. The NACM\n> \"default-deny-write\" extension has not been set for any data nodes defined\n> in these modules.\n>\n> There are several sensitive data node that should be listed. Access to\n> some data by non-authorized parties may reveal internal topologies/etc.\n>\n> There should be also a note about the \"http-listen\" use.\n>\n> \u2014\n> Reply to this email directly, view it on GitHub\n> <https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/33>, or\n> unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/ABCCA5OI7SW6DOU4PSF52DTW5BP7TANCNFSM6AAAAAAWBELDRQ>\n> .\n> You are receiving this because you are subscribed to this thread.Message\n> ID: ***@***.***>\n>\n",
+          "createdAt": "2023-05-09T13:13:51Z",
+          "updatedAt": "2023-05-09T13:13:51Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Hi Jensen,\r\n\r\nThanks for drafting that text. I do still that some sensitive data nodes have to be listed. For example,\r\n\r\n\r\n  *   Access to all authentication-related data nodes should be protected; those that are inherited from other models have already \u201cnacm:default-deny-write\u201d statement, while there is no such protected from the data node that are added in the draft.\r\n  *   Consider the example of \u201cpoll-interval\u201d: a misbehaving node can set a very large value that would lead to maintaining stale data. Setting very low values can also be considered as a misbehavior.\r\n\r\nCheers,\r\nMed",
+          "createdAt": "2023-05-09T13:40:01Z",
+          "updatedAt": "2023-05-11T02:15:29Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Hi Med,\n\nSorry for the late reply.\n\nOn Tue, May 9, 2023 at 9:39\u202fPM ***@***.***> wrote:\n\n> Hi Jensen,\n>\n>\n>\n> Thanks for drafting that text. I do still that some sensitive data nodes\n> have to be listed. For example,\n>\n>\n>\n>    - Access to all authentication-related data nodes should be protected;\n>    those that are inherited from other models have already\n>    \u201cnacm:default-deny-write\u201d statement, while there is no such protected from\n>    the data node that are added in the draft.\n>\n>\nThanks for the suggestion. I agree. But I think the only\nauthentication-related data nodes explicitly added in the current document\nare \"http-auth-client/user-id\" and \"https-auth-client/user-id\" under\n\"auth-client\". The leaf nodes referenced by them have already been\nprotected. Shall the leafrefs themselves be also protected?\n\n\n>\n>    - Consider the example of \u201cpoll-interval\u201d: a misbehaving node can set\n>    a very large value that would lead to maintaining stale data. Setting very\n>    low values can also be considered as a misbehavior.\n>\n>\nIt is a very interesting point. I agree that the range of \"poll-interval\"\nshould be limited. But the accepted range may depend on the data sources\nand implementations. It is hard to define a fixed range in the module. Do\nyou have any suggestions about it? Or we just explain this consideration\nwithout any concrete solution?\n\nThanks,\nJensen\n",
+          "createdAt": "2023-05-11T02:14:52Z",
+          "updatedAt": "2023-05-11T02:14:52Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Hi Jensen,\r\n\r\nPlease see inline.\r\n\r\nCheers,\r\nMed\r\n\r\n> Hi Med,\r\n>\r\n> Sorry for the late reply.\r\n>\r\n> > Hi Jensen,\r\n> >\r\n> > Thanks for drafting that text. I do still that some sensitive data nodes have to be listed. For example,\r\n> >\r\n> > *   Access to all authentication-related data nodes should be protected; those that are inherited from other models have already \u201cnacm:default-deny-write\u201d statement, while there is no such protected from the data node that are added in the draft.\r\n>\r\n> Thanks for the suggestion. I agree. But I think the only authentication-related data nodes explicitly added in the current document are \"http-auth-client/user-id\" and \"https-auth-client/user-id\" under \"auth-client\". The leaf nodes referenced by them have already been protected. Shall the leafrefs themselves be also protected?\r\n>\r\n\r\n[Med] I think that is safe that the leafrefs themselves be protected. In addition, we need at least two other actions: (1) remind that imported authentication-related data are adequately protected as per my previous reply. (2) add a warning that given that no \u201cnacm:*\u201d statement is added in the top-level auth container, future augmentations should include those.\r\n\r\n>\r\n> >  *   Consider the example of \u201cpoll-interval\u201d: a misbehaving node can set a very large value that would lead to maintaining stale data. Setting very low values can also be considered as a misbehavior.\r\n> >\r\n> It is a very interesting point. I agree that the range of \"poll-interval\" should be limited. But the accepted range may depend on the data sources and implementations. It is hard to define a fixed range in the module. Do you have any suggestions about it? Or we just explain this consideration without any concrete solution?\r\n>\r\n\r\n[Med] We don\u2019t need to define random ranges for this or touch the YANG model. We only need to list the data node in the security considerations with the associated vulnerability. Thanks.\r\n\r\n> Thanks,\r\n> Jensen",
+          "createdAt": "2023-05-11T06:42:33Z",
+          "updatedAt": "2023-05-11T06:52:54Z"
+        },
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think there are more nodes that should be considered sensitive, I am trying to use the following text to replace security consideration on OAM draft(-07) starts from paragraph 3, see if that makes sense to you guys, feel free to amend:\r\n\r\nThere are a number of data nodes defined in these two YANG modules that are writable/creatable/deletable (i.e., config true, which is the default). These data nodes may be considered sensitive or vulnerable in some network environments.  Write operations (e.g., edit-config) to these data nodes without proper protection can have a negative effect on network operations.  These are the subtrees and data nodes in \"ietf-alto\" YANG module and their sensitivity/vulnerability:\r\n\r\n/alto:alto/alto:alto-client/alto:server-discovery: This subtree specifies a set of parameters for an ALTO client to discover ALTO server. Unauthorized access to it could cause intruders to modify the ALTO discovery parameters(e.g., dns-server) so as to expose an ALTO client to fake ALTO servers.\r\n\r\n/alto:alto/alto:alto-server/logging-system: This subtree provides configuration to select a logging system to capture log messages generated by an ALTO server. Unauthorized read access of this node can allow intruders to access logging information, which could be used to craft an attack the server. \r\n\r\n/alto:alto/alto:alto-server/auth-client: This list specifies all the authenticated ALTO clients on an ALTO server. Unauthorized write access to this list can allow intruders to modify the entries so as to add a client that have not been authenticated yet or delete a client that has already been authenticated.\r\n\r\n/alto:alto/alto:alto-server/role: This list specifies roles which authenticated ALTO clients assigned to for access control. Unauthorized write access to this list can allow intruders to modify the entries so as to permit access that should not be permitted, or deny access that should be permitted.\r\n\r\n/alto:alto/alto:alto-server/data-source/feed-interval: This leaf specifies a period for an ALTO server to wait for updates published by the data source. A malicious client could attempt to set a very low/large value to this node.  Setting a very low value could attack the data source.  And setting a very large value would lead to maintaining stale data in the ALTO server.\r\n\r\n/alto:alto/alto:alto-server/data-source/poll-interval:This leaf specifies a period for an ALTO server to proactively poll updates from a data source. A malicious client could attempt to set a very low/\r\n      large value to this node.  Setting a very low value could attack\r\n      the data source.  And setting a very large value would lead to\r\n      maintaining stale data in the ALTO server.\r\n\r\nPlease be aware that this module uses grouping from the \"ietf-tls-server\" module defined in\r\n   [I-D.ietf-netconf-tls-client-server].  All of the data nodes defined\r\n   in the grouping have the NACM extension \"default-deny-write\" set,\r\n   thus preventing unrestricted write-access to the data nodes defined\r\n   in those groupings.",
+          "createdAt": "2023-05-20T03:47:26Z",
+          "updatedAt": "2023-05-20T03:48:35Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> I think there are more nodes that should be considered sensitive, I am trying to use the following text to replace security consideration on OAM draft(-07) starts from paragraph 3, see if that makes sense to you guys, feel free to amend:\r\n\r\nCan you please propose this as a new PR so that we can review it easily? Thanks. ",
+          "createdAt": "2023-05-22T08:33:36Z",
+          "updatedAt": "2023-05-22T08:33:36Z"
+        },
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "see https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/68  ",
+          "createdAt": "2023-05-22T09:08:26Z",
+          "updatedAt": "2023-05-22T09:08:26Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks, Qiufang. I submitted my review to #68 right now. ",
+          "createdAt": "2023-05-22T10:58:14Z",
+          "updatedAt": "2023-05-22T10:58:25Z"
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "id": "I_kwDOFlouSc5iEB6B",
+      "title": "Assess if cost grouping structure is not too tight to ALTO ",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/34",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "keep in mind that some of the groupings can be used by others (e.g., cats)",
+      "createdAt": "2023-03-29T07:50:19Z",
+      "updatedAt": "2023-05-12T06:37:07Z",
+      "closedAt": "2023-05-12T06:37:07Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Hi Med,\r\n\r\nThis is a very interesting topic. I checked the chat history in zulip (https://zulip.ietf.org/#narrow/stream/cats). But I just wonder if this work should be done in YANG. In ALTO O&M YANG modules, only identities of cost modes and metrics are defined. Because these YANG modules are only used to configure how the ALTO information resources will generate the cost values, but not deliver actual cost values using YANG. That means we don't have any `typedef` for cost values.\r\n\r\nJensen",
+          "createdAt": "2023-03-30T01:02:00Z",
+          "updatedAt": "2023-03-30T01:02:00Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I'm not sure, either. An aspect that I wanted we check is to what extent related groupings in the alto module are reusable by others (cats, for example).\r\n",
+          "createdAt": "2023-03-30T23:29:09Z",
+          "updatedAt": "2023-03-30T23:29:09Z"
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "id": "I_kwDOFlouSc5iEKET",
+      "title": "Add energy and CO2 related metrics",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/35",
+      "state": "CLOSED",
+      "author": "janlindblad",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "wontfix"
+      ],
+      "body": "In the YANG module ietf-alto, there are about a dozen cost-metric based identities. None of them relate to the energy usage or co2-footprint. Many service providers consider these cost aspects important for the resource allocation in the delivered services today, and project that the importance should increase in the foreseeable future.\r\n\r\nIt appears easy to add these aspects into the existing architecture. Probably in form of additional identities, but possibly not limited to that.",
+      "createdAt": "2023-03-29T08:11:19Z",
+      "updatedAt": "2023-05-12T06:36:12Z",
+      "closedAt": "2023-05-12T06:36:12Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "@janlindblad The YANG module `ietf-alto` only includes cost metrics that have been already defined in RFCs. The costs related to energy usage or co2-footprint are very interesting. If they are proven to be beneficial and proposed to be standards later, the YANG module will definitely add them.\r\n\r\nAre you willing to post this discussion to the ALTO WG mailing list (alto@ietf.org)? I believe other ALTO experts from WG can give more feedback.",
+          "createdAt": "2023-03-29T13:09:01Z",
+          "updatedAt": "2023-03-29T13:09:01Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "There is a list of all the cost metrics registered to IANA: https://www.iana.org/assignments/alto-protocol/alto-protocol.xhtml#cost-metrics",
+          "createdAt": "2023-03-29T13:26:23Z",
+          "updatedAt": "2023-03-29T13:26:23Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This will be considered as an augmentation in future extensions.",
+          "createdAt": "2023-05-12T06:36:12Z",
+          "updatedAt": "2023-05-12T06:36:12Z"
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "id": "I_kwDOFlouSc5ijJEV",
+      "title": "Clarify arrows in the architecture figure",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/36",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "[Comment by Luis](https://mailarchive.ietf.org/arch/msg/alto/fTMsqzcn-PBGsy_b3ioomeiyCyc/):\r\n\r\n> Figure 1: it is not clear the direction of the arrows, specially where \"report\" is written, probably missing some \"+\" symbol. Please, review and clarify if needed.",
+      "createdAt": "2023-04-04T07:55:38Z",
+      "updatedAt": "2023-04-04T08:00:03Z",
+      "closedAt": "2023-04-04T08:00:03Z",
+      "comments": []
+    },
+    {
+      "number": 37,
+      "id": "I_kwDOFlouSc5jCiTb",
+      "title": "Clarify typedef of list keys",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/37",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "WGLC",
+        "yangdoctors"
+      ],
+      "body": "- there are 3 list keys that use unconstrained 'string'\r\n  as the data type\r\n\r\n  - /alto/alto-client/client-id\r\n  - /alto/alto-server/cost-type/cost-type-name\r\n  - /alto/alto-server/role/role-name\r\n  - /alto/alto-server/data-source/source-id\r\n\r\n\r\n- the 'resource-id' is done correctly, using a well-constrained\r\n  typedef to define the key leaf.\r\n\r\n- A similar typedef for each of these 3 types is needed.\r\n  The constraints do not have to be the same.\r\n  Machine-readable stmts are preferred but description\r\n  is just as normative as 'pattern'.\r\n\r\n- the typedef should clarify the following issues:\r\n\r\n  - semantics:\r\n\r\n    - it should be clear if the name has any\r\n      special meaning or derived from a field defined\r\n      in a document.\r\n    - Use 'reference' if possible to define the linkage.\r\n\r\n  - whitespace:\r\n    - leading or trailing whitespace allowed?\r\n    - whitespace within the key string value allowed?\r\n\r\n  - zero-length: if not allowed then a minimum length of 1\r\n    should be specified.\r\n\r\n  - max-length:\r\n    - it may be desirable to pick a maximum string length\r\n      - example with limit: range \"1 .. 64\";\r\n      - without limit: range \"1 .. max\";\r\n    - there are some engineering trade-offs to consider.\r\n      Details are out of scope here.\r\n\r\n  - allowed characters:\r\n    - use of plain string means the server is expected to\r\n      support the entire character set.  If this is not\r\n      what is desired then limit the character set with a\r\n      pattern or a description-stmt.",
+      "createdAt": "2023-04-11T00:58:04Z",
+      "updatedAt": "2023-05-19T01:37:15Z",
+      "closedAt": "2023-05-19T01:37:15Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "New typedefs have been added. But need to mention that there is no standard that can be referenced for `role-name` and `source-id`.\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/6f2c3226961268213f3a22793c83eefe6d732f8a/yang/ietf-alto.yang#L416-L496",
+          "createdAt": "2023-04-11T07:10:43Z",
+          "updatedAt": "2023-04-11T07:10:43Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "As I don't see any PR linked to this one, what is the current status of this one? Are all the typedefs refer to what is in the base spec with no additional constraint? Thanks.",
+          "createdAt": "2023-05-12T06:55:23Z",
+          "updatedAt": "2023-05-12T06:55:23Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "As I mentioned in the previous reply, there is no standard defining encoding of `role-name` and `source-id`. All the other typedefs have referred to what is in the base spec. ",
+          "createdAt": "2023-05-16T07:06:34Z",
+          "updatedAt": "2023-05-16T07:06:34Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Do we have some text to clarify the rationale for having \"pattern '[0-9a-zA-Z\\-:@_]*';\" for these two?",
+          "createdAt": "2023-05-16T08:30:46Z",
+          "updatedAt": "2023-05-16T08:30:46Z"
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "id": "I_kwDOFlouSc5jCix5",
+      "title": "Not clear when and where to implement `alto-client` and `alto-server`",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/38",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "ready_to_close?",
+        "WGLC",
+        "yangdoctors"
+      ],
+      "body": "`/alto/alto-client`\r\n\r\n- mentioned in sec 5, 5.1, 5.2\r\n- not clear if alto-client and alto-server would be implemented on the\r\n  same device or expected that a device will implement one container\r\n  or the other",
+      "createdAt": "2023-04-11T01:00:41Z",
+      "updatedAt": "2023-04-18T13:02:45Z",
+      "closedAt": "2023-04-18T13:02:45Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Two new features have been added to decide if `alto-client` or `alto-server` would be implemented:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/6f2c3226961268213f3a22793c83eefe6d732f8a/yang/ietf-alto.yang#L60-L75\r\n\r\nUpdated the description of the top-level `alto` container to clarify this:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/6f2c3226961268213f3a22793c83eefe6d732f8a/yang/ietf-alto.yang#L791-L794",
+          "createdAt": "2023-04-11T07:15:59Z",
+          "updatedAt": "2023-04-11T07:15:59Z"
+        }
+      ]
+    },
+    {
+      "number": 39,
+      "id": "I_kwDOFlouSc5jCjEX",
+      "title": "Don't set implementation or OS-specific default value",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/39",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "ready_to_close?",
+        "WGLC",
+        "yangdoctors"
+      ],
+      "body": "-  It is unusual to have an implementation or OS-specific\r\n   default value for this sort of parameter.\r\n\r\n        leaf config-file {\r\n          type inet:uri {\r\n            pattern 'file:.*';\r\n          }\r\n          default \"file:/etc/syslog.conf\";\r\n          description\r\n            \"The file location of the syslog configuration.\";\r\n        }",
+      "createdAt": "2023-04-11T01:02:18Z",
+      "updatedAt": "2023-04-18T13:02:58Z",
+      "closedAt": "2023-04-18T13:02:58Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "The default value has been removed:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/6f2c3226961268213f3a22793c83eefe6d732f8a/yang/ietf-alto.yang#L775-L780",
+          "createdAt": "2023-04-11T07:19:41Z",
+          "updatedAt": "2023-04-11T07:19:41Z"
+        }
+      ]
+    },
+    {
+      "number": 40,
+      "id": "I_kwDOFlouSc5jCjrw",
+      "title": "Not clear how arbitrary JSONValue is encoded in `meta-value`",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/40",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "ready_to_close?",
+        "WGLC",
+        "yangdoctors"
+      ],
+      "body": "`/alto/alto-server/meta`\r\n\r\n- The referenced RFC text is not sufficient to implement\r\n  this list.\r\n\r\n- It appears each list entry is a map entry and\r\n  the meta-key is a JSONString, and meta-value is\r\n  a JSONValue.\r\n\r\n-  Not clear how arbitrary JSON is encoded here\r\n\r\n\r\n       list meta {\r\n        key \"meta-key\";\r\n        description\r\n          \"Mapping of custom meta information\";\r\n        reference\r\n          \"Section 8.4.1 of RFC 7285.\";\r\n        leaf meta-key {\r\n          type string;\r\n          description\r\n            \"Custom meta key\";\r\n        }\r\n        leaf meta-value {\r\n          type string;\r\n          mandatory true;\r\n          description\r\n            \"Custom meta value\";\r\n        }\r\n       }\r\n\r\n- the entire referenced section\r\n\r\n      Meta information is encoded as a map object for flexibility.\r\n      Specifically, ResponseMeta is defined as:\r\n\r\n        object-map { JSONString -> JSONValue } ResponseMeta;",
+      "createdAt": "2023-04-11T01:05:00Z",
+      "updatedAt": "2023-05-12T14:22:48Z",
+      "closedAt": "2023-05-12T14:22:48Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Change the type of `meta-value` from `string` to `binary` to encode arbitrary JSONValue using base64.\r\n\r\nOne concern is that the value may not be a valid JSONValue.\r\n\r\nAnother solution would be to use `anydata` statement.\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/6f2c3226961268213f3a22793c83eefe6d732f8a/yang/ietf-alto.yang#L898-L904",
+          "createdAt": "2023-04-11T07:29:17Z",
+          "updatedAt": "2023-04-11T07:29:17Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> One concern is that the value may not be a valid JSONValue.\r\n\r\nIf a non valid JSONvalue for a given meta-key is presented to an implementation, it will be rejected anyway.\r\n\r\n> Another solution would be to use `anydata` statement.\r\n\r\nI guess you meant to model the full meta list as anydata, not the meta-value. No?\r\n\r\nPlease note that RFC 7950 says the following: \r\n\r\n>    Since the use of anydata limits the manipulation of the content, the\r\n>    \"anydata\" statement SHOULD NOT be used to define configuration data.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "createdAt": "2023-04-13T06:00:30Z",
+          "updatedAt": "2023-04-13T06:00:30Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I suggest we leave \"binary\" and close this issue. ",
+          "createdAt": "2023-05-12T06:52:34Z",
+          "updatedAt": "2023-05-12T06:52:34Z"
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "id": "I_kwDOFlouSc5jCkLI",
+      "title": "Ambiguity of no authentication choice",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/41",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "ready_to_close?",
+        "WGLC",
+        "yangdoctors"
+      ],
+      "body": "`/alto/alto-server/auth-client/authentication`\r\n\r\n- this choice is not mandatory and there is no default.\r\n- either add a mandatory-stmt, or a default-stmt, or explain\r\n  what should happen if no authentication method is configured.",
+      "createdAt": "2023-04-11T01:07:29Z",
+      "updatedAt": "2023-04-18T13:03:10Z",
+      "closedAt": "2023-04-18T13:03:10Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Updated the description to explain the server behavior if no authentication method is configured:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/6f2c3226961268213f3a22793c83eefe6d732f8a/yang/ietf-alto.yang#L915-L919",
+          "createdAt": "2023-04-11T07:39:55Z",
+          "updatedAt": "2023-04-11T07:39:55Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "s/MUST/must. \r\n\r\nPlease consider adding some text in the narrative design section to further insist on this. Thanks\r\n\r\n",
+          "createdAt": "2023-04-11T13:39:14Z",
+          "updatedAt": "2023-04-11T13:39:14Z"
+        }
+      ]
+    },
+    {
+      "number": 42,
+      "id": "I_kwDOFlouSc5jCkye",
+      "title": "Add guidance on the empty placeholders `source-params` and `algorithm`",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/42",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "ready_to_close?",
+        "WGLC",
+        "yangdoctors"
+      ],
+      "body": "`/alto/alto-server/data-source/source-params`\r\n\r\n- Not much guidance or description on this placeholder choice.\r\n  I understand you do not want to reference the 'example'\r\n  YANG modules that augment this choice.\r\n\r\n- Please add a reference or description mentioning the\r\n  section in this RFC that explains the source params\r\n  augmentation model.\r\n\r\n\r\n        choice source-params {\r\n          description\r\n            \"Data source specific configuration.\";\r\n        }\r\n\r\n- Same comment on grouping `algorithm` as `source-params`.\r\n- Provide reference or other guidance how this mandatory\r\n  empty choice is used.\r\n\r\n\r\n         grouping algorithm {\r\n          description\r\n            \"This grouping defines the base data model for information\r\n             resource creation algorithm.\";\r\n          choice algorithm {\r\n            mandatory true;\r\n            description\r\n              \"Information resource creation algorithm to be augmented.\";\r\n          }\r\n        }",
+      "createdAt": "2023-04-11T01:10:57Z",
+      "updatedAt": "2023-05-12T14:23:09Z",
+      "closedAt": "2023-05-12T14:23:09Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Added references for `source-params` and `algorithm`:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/6f2c3226961268213f3a22793c83eefe6d732f8a/yang/ietf-alto.yang#L1062-L1066\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/6f2c3226961268213f3a22793c83eefe6d732f8a/yang/ietf-alto.yang#L593-L599",
+          "createdAt": "2023-04-11T07:43:53Z",
+          "updatedAt": "2023-04-11T07:43:53Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Can we close this one?",
+          "createdAt": "2023-05-12T06:52:00Z",
+          "updatedAt": "2023-05-12T06:52:00Z"
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "id": "I_kwDOFlouSc5jClbV",
+      "title": "Add more details to configuration parameters",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/43",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "ready_to_close?",
+        "WGLC",
+        "yangdoctors"
+      ],
+      "body": "`/alto/alto-server/data-source/feed-interval`\r\n\r\n- Add a units statement\r\n- Is value zero allowed? If so what does it mean?\r\n  If not then use a range-stmt\r\n\r\n\r\n`/alto/alto-server/data-source/poll-interval`\r\n\r\n- Add a units statement\r\n- Is value zero allowed? If so what does it mean?\r\n  If not then use a range-stmt",
+      "createdAt": "2023-04-11T01:14:55Z",
+      "updatedAt": "2023-04-18T13:03:25Z",
+      "closedAt": "2023-04-18T13:03:25Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Added `units` statement and description about the server behavior for zero value:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/6f2c3226961268213f3a22793c83eefe6d732f8a/yang/ietf-alto.yang#L1031-L1039\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/6f2c3226961268213f3a22793c83eefe6d732f8a/yang/ietf-alto.yang#L1048-L1058",
+          "createdAt": "2023-04-11T07:47:21Z",
+          "updatedAt": "2023-04-11T07:47:21Z"
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "id": "I_kwDOFlouSc5jClp0",
+      "title": "Do not use a plural name for a leaf-list",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/44",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "ready_to_close?",
+        "WGLC",
+        "yangdoctors"
+      ],
+      "body": "`/alto/alto-server/resource/alto-costmap-params/cost-type-names`\r\n\r\n- Why is the type 'string' instead of a leafref\r\n  to /alto/alto-server/cost-type/cost-type-name?\r\n\r\n- Do not use a plural name for a leaf-list. (Use cost-type-name here)\r\n\r\n`/alto/alto-server/resource/alto-costmap-params/testable-cost-type-names`\r\n\r\n- Why is the type 'string' instead of a leafref\r\n  to /alto/alto-server/cost-type/cost-type-name?\r\n\r\n- Do not use a plural name for a leaf-list.\r\n\r\n`/alto/alto-server/resource/alto-endpointprop-params/prop-types`\r\n\r\n- Is there some other YANG data structure that this list\r\n  of property types references?\r\n\r\n- What are the allowed values for this string?\r\n  Add a reference or description.\r\n\r\n- Do not use a plural name for a leaf-list.\r\n\r\n\r\n              leaf-list prop-types {\r\n                type string;\r\n                min-elements 1;\r\n                description\r\n                  \"Supported endpoint properties.\";\r\n              }",
+      "createdAt": "2023-04-11T01:16:26Z",
+      "updatedAt": "2023-04-18T13:03:40Z",
+      "closedAt": "2023-04-18T13:03:40Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "All the plural names of leaf-lists have been removed.\r\n\r\nAdded a new typedef `cost-type-ref`:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/366004b2a5accd1aaacf510468a3ef0663248ea7/yang/ietf-alto.yang#L489-L496\r\n\r\nThe type of the following leaf-list nodes are changed to `cost-type-ref`:\r\n\r\n- `/alto/alto-server/resource/alto-costmap-params/cost-type-name`\r\n    https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/366004b2a5accd1aaacf510468a3ef0663248ea7/yang/ietf-alto.yang#L515-L516\r\n- `/alto/alto-server/resource/alto-costmap-params/testable-cost-type-name`\r\n    https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/366004b2a5accd1aaacf510468a3ef0663248ea7/yang/ietf-alto.yang#L539-L541\r\n- `/alto/alto-server/resource/alto-costmap-params/calendar-attributes/cost-type-name`\r\n    https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/366004b2a5accd1aaacf510468a3ef0663248ea7/yang/ietf-alto.yang#L552-L553\r\n\r\nAdded a new typedef `endpoint-property` for `prop-type`:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/366004b2a5accd1aaacf510468a3ef0663248ea7/yang/ietf-alto.yang#L437-L468",
+          "createdAt": "2023-04-11T08:18:26Z",
+          "updatedAt": "2023-04-11T08:18:26Z"
+        }
+      ]
+    },
+    {
+      "number": 45,
+      "id": "I_kwDOFlouSc5jCl6W",
+      "title": "Add container for statistics",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/45",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "ready_to_close?",
+        "WGLC",
+        "yangdoctors"
+      ],
+      "body": "- Suggest using a container (e.g., 'statistics') instead  of\r\n  adding this many counter leafs directly to a list entry.\r\n  This makes retrieval of all counters easier.\r\n\r\n  - augment \"/alto:alto/alto:alto-server\"\r\n  - augment \"/alto:alto/alto:alto-server/alto:resource\"",
+      "createdAt": "2023-04-11T01:18:17Z",
+      "updatedAt": "2023-04-18T13:04:51Z",
+      "closedAt": "2023-04-18T13:04:51Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Use groupings and containers to clean up the server-level and resource-level stats:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/366004b2a5accd1aaacf510468a3ef0663248ea7/yang/ietf-alto-stats.yang#L226-L260",
+          "createdAt": "2023-04-11T08:20:49Z",
+          "updatedAt": "2023-04-11T08:20:49Z"
+        }
+      ]
+    },
+    {
+      "number": 46,
+      "id": "I_kwDOFlouSc5jCm0i",
+      "title": "Add leafref typedefs to simplify extension modules",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/46",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "ready_to_close?",
+        "WGLC",
+        "yangdoctors"
+      ],
+      "body": "### Leafref Typedefs\r\n\r\n- There should be typedefs defined in ietf-alto to simplify\r\n  usage in an extension module.\r\n\r\n  - source-datastore\r\n  - top-name\r\n\r\n  - Example: source-datastore\r\n\r\n          leaf source-datastore {\r\n            type leafref {\r\n              path '/alto:alto/alto:alto-server/alto:data-source'\r\n                 + '/alto:source-id';\r\n            }\r\n\r\n  - Add a typedef to ietf-alto.yang\r\n\r\n          typedef data-source-ref {\r\n            type leafref {\r\n              path '/alto:alto/alto:alto-server/alto:data-source'\r\n                 + '/alto:source-id';\r\n            }\r\n          }\r\n\r\n  - Change the leaf to use the typedef\r\n\r\n          leaf source-datastore {\r\n            type alto:data-source-ref;\r\n          }\r\n\r\n- The topo-name leafref definition should be a typedef.\r\n  It is not clear which module should define the typedef.\r\n\r\n          leaf topo-name {\r\n            type leafref {\r\n              path '/alto:alto/alto:alto-server/alto:data-source'\r\n                 + '[alto:source-id = current()/../source-datastore]'\r\n                 + '/alto-ds:yang-datastore-source-params'\r\n                 + '/alto-ds:target-paths/alto-ds:name';\r\n            }\r\n            description\r\n              \"The name of the IETF layer 3 unicast topology.\";\r\n          }",
+      "createdAt": "2023-04-11T01:23:14Z",
+      "updatedAt": "2023-04-18T13:05:05Z",
+      "closedAt": "2023-04-18T13:05:05Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "I agree that a typedef for the leafref of `source-id` can be useful for other modules. It has been added:\r\n\r\nhttps://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/366004b2a5accd1aaacf510468a3ef0663248ea7/yang/ietf-alto.yang#L498-L502\r\n\r\nHowever, `topo-name` can only be used when the `when` condition of the `source-datastore` leaf is true. They are combined for the implementation-specific data source. I cannot imagine how it can be reused by other modules.",
+          "createdAt": "2023-04-11T08:32:52Z",
+          "updatedAt": "2023-04-11T08:32:52Z"
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "id": "I_kwDOFlouSc5jLGj9",
+      "title": "Update the subtrees to reflect the new structure",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/49",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC",
+        "editorial"
+      ],
+      "body": "",
+      "createdAt": "2023-04-12T05:48:32Z",
+      "updatedAt": "2023-04-13T13:59:46Z",
+      "closedAt": "2023-04-13T13:59:46Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "I guess you are talking about the YANG tree diagrams. Yes, I will update all the diagrams and related paragraphs after the changes to the YANG modules are confirmed.",
+          "createdAt": "2023-04-12T06:48:43Z",
+          "updatedAt": "2023-04-12T06:48:43Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Yes, thanks. ",
+          "createdAt": "2023-04-12T06:54:47Z",
+          "updatedAt": "2023-04-12T06:54:47Z"
+        }
+      ]
+    },
+    {
+      "number": 51,
+      "id": "I_kwDOFlouSc5jLP6g",
+      "title": "Do we really need endpoint-cost-cap grouping?",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/51",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/7b10751db38991a6e949f3ce5e854ad8de707c05/yang/ietf-alto.yang#L655\r\n\r\nThis grouping does only use another existing grouping!",
+      "createdAt": "2023-04-12T06:12:56Z",
+      "updatedAt": "2023-04-13T12:05:12Z",
+      "closedAt": "2023-04-13T12:00:07Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Yes, they are the same. I thought they could be augmented by extension modules separately. But it seems that groupings cannot be augmented. The augmentation should be added to containers.",
+          "createdAt": "2023-04-13T12:05:12Z",
+          "updatedAt": "2023-04-13T12:05:12Z"
+        }
+      ]
+    },
+    {
+      "number": 53,
+      "id": "I_kwDOFlouSc5jLb46",
+      "title": "connected session/last time window",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/53",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/1bf481984bd64732d8323cb164df47a8439ea384/yang/ietf-alto-stats.yang#L243\r\n\r\nAdd some words to define what is a \"connected session\" and what's param the \"last time window\" refer to.",
+      "createdAt": "2023-04-12T06:45:46Z",
+      "updatedAt": "2023-05-12T06:38:51Z",
+      "closedAt": "2023-05-12T06:38:51Z",
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Covered in [93b81a2](https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/commit/93b81a227faaff34810218b07b0724706dbce489)",
+          "createdAt": "2023-05-12T06:38:51Z",
+          "updatedAt": "2023-05-12T06:38:51Z"
+        }
+      ]
+    },
+    {
+      "number": 59,
+      "id": "I_kwDOFlouSc5jWGZ9",
+      "title": "example-ietf-alto-alg",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/59",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "> module: example-ietf-alto-alg\r\n> \r\n>   augment /alto:alto/alto:alto-server/alto:resource\r\n>             /alto:resource-params/alto:networkmap\r\n>             /alto:alto-networkmap-params/alto:algorithm:\r\n>     +--:(l3-unicast-cluster)\r\n>        +--rw l3-unicast-cluster-algorithm\r\n>           +--rw l3-unicast-topo    leafref\r\n>           +--rw depth?             uint32\r\n\r\nI guess this should example-vendor-alto-alg. No?\r\n\r\nIt seems that the tree is not update to date (source-datastore, topo-name) are not shown",
+      "createdAt": "2023-04-13T16:24:32Z",
+      "updatedAt": "2023-04-14T00:23:39Z",
+      "closedAt": "2023-04-14T00:23:39Z",
+      "comments": []
+    },
+    {
+      "number": 60,
+      "id": "I_kwDOFlouSc5kC8XQ",
+      "title": "Missing acronyms at first occurrence",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/60",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "WGLC",
+        "opsdir"
+      ],
+      "body": "There are many more acronyms not included in Section 3 or expanded at first occurrence. Maybe the respective acronyms sections in the ALTO documents should be mentioned/referred.",
+      "createdAt": "2023-04-21T13:04:29Z",
+      "updatedAt": "2023-04-25T06:36:38Z",
+      "closedAt": "2023-04-25T06:36:38Z",
+      "comments": []
+    },
+    {
+      "number": 61,
+      "id": "I_kwDOFlouSc5kC9hS",
+      "title": "How is the scalability requirement met?",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/61",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "WGLC",
+        "opsdir"
+      ],
+      "body": "In Section 5.3.1.2\r\n\r\n> In practice, multiple ALTO servers can be deployed for scalability.\r\n   That may require communication among different ALTO servers.\r\n>\r\n>  The \"ietf-alto\" module does not contain any configuration for the\r\n   communication between peer ALTO servers.  Instead, it provides the\r\n   configuration for how an ALTO server can be discovered by another\r\n   ALTO server on demand (Figure 6).\r\n\r\nI understand that the communication between ALTO servers is out of scope.\r\nHowever, I do not understand how is the scalability requirement met. Is there /\r\nWill there be another YANG module to define this data model? Something else\r\nthan YANG? Maybe this is described in another ALTO document that I did not find.\r\n\r\n-- by Dan Romascanu",
+      "createdAt": "2023-04-21T13:07:50Z",
+      "updatedAt": "2023-04-26T23:20:50Z",
+      "closedAt": "2023-04-26T23:20:50Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "The scalability requirement is not a mandatory requirement in this document (at least, we do not add it in Sec 4. It looks like a sub-requirement inside Req 1. I think we need to clarify this.\r\n\r\nThe comment by Dan may be addressed by adding some autoscaling config parameters (similar to https://www.ietf.org/id/draft-ietf-teas-actn-pm-telemetry-autonomics-10.html#name-autonomic-scaling-intent-me). But whether it should be in the scope of this document need to be discussed.",
+          "createdAt": "2023-04-25T07:35:40Z",
+          "updatedAt": "2023-04-25T07:35:40Z"
+        }
+      ]
+    },
+    {
+      "number": 67,
+      "id": "I_kwDOFlouSc5lwPC_",
+      "title": "IDNITS",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/67",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "\r\n  ** There are 9 instances of too long lines in the document, the longest one\r\n     being 4 characters in excess of 72.\r\n\r\n  == Unused Reference: 'RFC8177' is defined on line 2340, but no explicit\r\n     reference was found in the text\r\n\r\n  == Unused Reference: 'RFC2622' is defined on line 2384, but no explicit\r\n     reference was found in the text\r\n\r\n  == Unused Reference: 'RFC8342' is defined on line 2407, but no explicit\r\n     reference was found in the text\r\n\r\n  == Unused Reference: 'RFC8641' is defined on line 2417, but no explicit\r\n     reference was found in the text\r\n\r\n  == Unused Reference: 'RFC9275' is defined on line 2434, but no explicit\r\n     reference was found in the text\r\n",
+      "createdAt": "2023-05-12T07:55:47Z",
+      "updatedAt": "2023-05-15T15:39:43Z",
+      "closedAt": "2023-05-15T15:39:43Z",
+      "comments": []
+    },
+    {
+      "number": 69,
+      "id": "I_kwDOFlouSc5nPv5o",
+      "title": "Fix Formatting in Section 6.1",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/69",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC",
+        "editorial"
+      ],
+      "body": ">    More specifically, 'num-total-_' and 'num-total-last-_' provide\r\n>    server-level failure counters; 'num-res-_' and 'num-res-last-_'\r\n>    provide information resource-level failure counters.\r\n\r\nShould be \r\n\r\n>    More specifically, 'num-total-*' and 'num-total-last-*' provide\r\n>    server-level failure counters; 'num-res-*' and 'num-res-last-*'\r\n>    provide information resource-level failure counters.\r\n",
+      "createdAt": "2023-05-30T12:42:28Z",
+      "updatedAt": "2023-05-31T02:01:00Z",
+      "closedAt": "2023-05-31T02:01:00Z",
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "I don't see any difference between the old and new paragraphs. But It looks like the `*` chars are not escaped.\r\n\r\nThe following change should fix this:\r\n\r\n~~~\r\n'num-total-*' -> 'num-total-\\*'\r\n~~~\r\n\r\nI see the PR tries to use code blocks. It may generate redundant tags in XML.",
+          "createdAt": "2023-05-30T12:50:17Z",
+          "updatedAt": "2023-05-30T12:50:17Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> I don't see any difference between the old and new paragraphs. But It looks like the `*` chars are not escaped.\r\n\r\nYes, you got it. Feel free to update the PR.",
+          "createdAt": "2023-05-30T12:58:59Z",
+          "updatedAt": "2023-05-30T12:58:59Z"
+        }
+      ]
+    },
+    {
+      "number": 75,
+      "id": "I_kwDOFlouSc5nVkL2",
+      "title": "any reason why some of these extensions are listed as normative while other are informative?",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/75",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/57b228c241039dca16753625b71ee982b63dd1f8/introduction.md?plain=1#LL31C1-L32C58",
+      "createdAt": "2023-05-31T08:59:24Z",
+      "updatedAt": "2023-06-14T06:51:30Z",
+      "closedAt": "2023-06-14T06:51:30Z",
+      "comments": [
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "It seems to me that all should be listed as normative. \r\nShould RFC8341(NACM) be declared as informative?",
+          "createdAt": "2023-06-14T01:49:47Z",
+          "updatedAt": "2023-06-14T01:49:47Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Should RFC8341(NACM) be declared as informative?\r\n\r\nNo. Please see the note in https://wiki.ietf.org/group/ops/yang-security-guidelines. Thanks.",
+          "createdAt": "2023-06-14T05:56:36Z",
+          "updatedAt": "2023-06-14T05:56:36Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "> It seems to me that all should be listed as normative.\r\n\r\nAgree. And I think `{{I-D.ietf-alto-performance-metrics}}` should also be normative.",
+          "createdAt": "2023-06-14T06:04:03Z",
+          "updatedAt": "2023-06-14T06:04:03Z"
+        },
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Does this commit ([662feec](https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/commit/662feec36413cac1ee09dc0162ed13422d76f850)) fix this issue? Do we still miss anything?",
+          "createdAt": "2023-06-14T06:12:04Z",
+          "updatedAt": "2023-06-14T06:12:04Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> And I think `{{I-D.ietf-alto-performance-metrics}}` should also be normative.\r\n\r\nFor this one, things are different as we do have the following from rfc8407:\r\n\r\n     If a YANG module\r\n      contains reference or \"description\" statements that refer to an\r\n      I-D, then the I-D is included as an informative reference.\r\n\r\n",
+          "createdAt": "2023-06-14T06:33:27Z",
+          "updatedAt": "2023-06-14T06:33:27Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Does this commit ([662feec](https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/commit/662feec36413cac1ee09dc0162ed13422d76f850)) fix this issue? Do we still miss anything?\r\n\r\nI guess so. \r\n\r\nI just checked https://www.rfc-editor.org/cluster_info.php?cid=C453, and I think that it is safe to move \"I-D.ietf-alto-performance-metrics\" to be listed as normative. ",
+          "createdAt": "2023-06-14T06:45:45Z",
+          "updatedAt": "2023-06-14T06:45:45Z"
+        }
+      ]
+    },
+    {
+      "number": 80,
+      "id": "I_kwDOFlouSc5wK4QU",
+      "title": "Don't define common model for data collection in ALTO O&M",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/80",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "AD review comment by Martin Duke:\r\n\r\n> A YANG model of data collection: I agree it would be a problem if the IETF ended up standardizing 5 different types of data collection and had structurally incompatible YANG models for each of them. The entries in this model seem reasonable to me. But we don't have even an adopted framework for this work! It might have broader application than ALTO (there are certainly use cases that could take advantage of this collection without using ALTO), and I think it's premature to design this and tie it to an ALTO model. If there is to be work on data collection, it would be reasonable to build a common framework for it, and then publish an appropriate YANG model.\r\n",
+      "createdAt": "2023-09-05T12:40:40Z",
+      "updatedAt": "2023-09-22T15:34:30Z",
+      "closedAt": "2023-09-22T15:34:30Z",
+      "comments": []
+    },
+    {
+      "number": 81,
+      "id": "I_kwDOFlouSc5wK5SR",
+      "title": "Move sample architecture to appendix",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/81",
+      "state": "CLOSED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "AD review comment by Martin Duke:\r\n\r\n> As a reader (s4.4) is still jarring to me. It basically divides the ALTO server functionality into a bunch of arbitrary components and maps each of those components to a YANG module. Furthermore, the actual mapping doesn't really add a bunch of insight: stats/monitoring gets ietf-alto-stats and everything else uses ietf-alto, which seems pretty obvious without hundreds of words. In my opinion, this doesn't really add anything to the spec at all. If you really must retain it, maybe this can move to an appendix?",
+      "createdAt": "2023-09-05T12:43:09Z",
+      "updatedAt": "2023-09-05T12:46:21Z",
+      "closedAt": "2023-09-05T12:46:21Z",
+      "comments": []
+    },
+    {
+      "number": 83,
+      "id": "I_kwDOFlouSc5xzKvm",
+      "title": "  == Outdated reference: draft-ietf-alto-performance-metrics has been    published as RFC 9439",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/83",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-09-22T16:55:27Z",
+      "updatedAt": "2023-09-26T13:16:00Z",
+      "closedAt": "2023-09-26T13:16:00Z",
+      "comments": []
+    },
+    {
+      "number": 85,
+      "id": "I_kwDOFlouSc5x7i7f",
+      "title": "container not a case",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/85",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/blob/4f5228d0e3b4d39ef207c632783c6f3666d1edc9/yang/example-vendor-alto-data-source.yang#L88C1-L90C32\r\n\r\nAs we have a \"when\" clause (which is great as it shows how the model can be augmented using source-type), it is weird to use \"case\" statement. We do already fixed similar cases in the core model. I suggest to change case to container.",
+      "createdAt": "2023-09-25T12:45:51Z",
+      "updatedAt": "2023-10-03T12:34:44Z",
+      "closedAt": "2023-10-03T12:34:44Z",
+      "comments": []
+    },
+    {
+      "number": 88,
+      "id": "I_kwDOFlouSc5yrd-W",
+      "title": "Ack all directorate reviewers",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/88",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Please consider adding all directorate reviewers to the ACK section",
+      "createdAt": "2023-10-03T12:14:36Z",
+      "updatedAt": "2023-10-10T13:00:56Z",
+      "closedAt": "2023-10-10T13:00:56Z",
+      "comments": []
+    },
+    {
+      "number": 94,
+      "id": "I_kwDOFlouSc503FbM",
+      "title": "reverse DNS clarification (Ted Lemon)",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/94",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "> I agree with this assessment. My one issue is that when I tried to actually understand, by reading this document and the two RFCs to which it referred, how the YANG model represents the NAPTR record, I failed. This may be because I'm not smart enough, or lack experience in ALTO and/or YANG (both of which are true).\r\n> \r\n> However, if the authors intend that I be able to understand from this document what part of the NAPTR record is represented by the data model, it might be worth revisiting whether the model in fact accomplishes this. In particular, NAPTR records contain quite a few fields, e.g. order and preference, and these fields are not mentioned in the YANG data model. No fields at all are, which makes me think that the data model is only representing one field, or perhaps represents the owner name of the NAPTR record and doesn't represent the NAPTR record's content at all.\r\n> \r\n> If the authors intended that this be understood from what is written there, I would encourage them to clarify the text. I'm calling this a nit rather than raising it as an issue because I'm assuming that the problem is on my end\u2014I certainly didn't read the aforementioned RFCs closely. So perhaps someone who understands those RFCs better than I do would not be confused by the text in the data model document.\r\n",
+      "createdAt": "2023-10-25T05:55:33Z",
+      "updatedAt": "2023-10-25T05:55:33Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 95,
+      "id": "I_kwDOFlouSc503F-M",
+      "title": "mutual TLS/client side certificates (Roman's DISCUSS)",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/95",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "** Implementing mutual TLS/client side certificates (per Section 8.3.5 of\r\nRFC7285) appears to need more guidance.   Client EE certificates and client CAs\r\ncan be specified by the tls:tls-server-group in\r\nalto/server-listen-stack/https/tls-server-parameters.  However, it appears to\r\nme that there isn\u2019t any way then to later reference them in the\r\nalto-server/auth-client section.  When doing username and password\r\nauthentication via http-server-parameters/client-authentication, there is a\r\ncommon user-id field shared with auth-client/https-auth-client.\r\n",
+      "createdAt": "2023-10-25T05:57:25Z",
+      "updatedAt": "2023-10-25T05:57:25Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 96,
+      "id": "I_kwDOFlouSc503GHq",
+      "title": "http listen mode (Roman's DISCUSS)",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/96",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "** Section 5.4.3.  It appears that there is an http-auth-client for both http\r\nand https.  Is this suggesting that it is possible to have authenticated users\r\nover unencrypted HTTP.  How does that work securely?  Is this related to\r\nSection 8\u2019s \u201cThe ietf-alto supports an HTTP listen mode to cover cases where\r\nthe ALTO server stack does not handle the TLS termination itself, but is\r\nhandled by a separate component.\u201d  If so, what is the residual risk of this\r\napproach?\r\n",
+      "createdAt": "2023-10-25T05:58:01Z",
+      "updatedAt": "2023-10-26T11:19:52Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "see also https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/27",
+          "createdAt": "2023-10-25T06:04:14Z",
+          "updatedAt": "2023-10-25T06:04:14Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Also from \u00c9ric V:\r\n\r\n> ## Section 5.3.1.1\r\n> \r\n> As I am trusting the SEC ADs' reviews, I will not ballot a blocking\r\n> DISCUSS,\r\n> please remove all HTTP (as opposed to HTTPS) in the text and in the\r\n> data model\r\n> itself. Or is \"http\" used instead of \"https\" ? But, then why is there\r\n> a \"tls\"\r\n\r\n[Med] The WG had some cycles on this specific point ([https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/27](https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2Fietf-wg-alto%2Fdraft-ietf-alto-oam-yang%2Fissues%2F27&data=05%7C01%7Cmohamed.boucadair%40orange.com%7C329cd5a244c744c1485908dbd5535621%7C90c7a20af34b40bfbc48b9253b6f5d20%7C0%7C0%7C638338326125597877%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=lPbhoJRkPBe8B%2BnjvBsNtG2JYHznTjI%2BuSbT3a0iIlE%3D&reserved=0)). This http-listen is echoing what is in [https://datatracker.ietf.org/doc/draft-ietf-netconf-restconf-client-server/:](https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fdatatracker.ietf.org%2Fdoc%2Fdraft-ietf-netconf-restconf-client-server%2F%3A&data=05%7C01%7Cmohamed.boucadair%40orange.com%7C329cd5a244c744c1485908dbd5535621%7C90c7a20af34b40bfbc48b9253b6f5d20%7C0%7C0%7C638338326125597877%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=cJZToB1OeNIEDbQO7c1MvVD9oJ6sFZOqzV7XbWI%2BiCU%3D&reserved=0)\r\n\r\n   *  The \"transport\" choice node enables either the HTTP or HTTPS\r\n      transports to be configured, with each option enabled by a\r\n      \"feature\" statement.  The HTTP option is provided to support cases\r\n      where a TLS-terminator is deployed in front of the RESTCONF-\r\n      server.\r\n\r\nEV: A variation of the text at the bottom about http vs. https would be nice in section 5.3.1.1 ",
+          "createdAt": "2023-10-25T12:32:26Z",
+          "updatedAt": "2023-10-25T12:32:26Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "From Zahed: \r\n\r\n> Also supporting Roman's discuss. It is very important that we record \r\n> under what circumstances ALTO servers are configured to use HTTP \r\n> instead of HTTPS.\r\n",
+          "createdAt": "2023-10-26T11:19:52Z",
+          "updatedAt": "2023-10-26T11:19:52Z"
+        }
+      ]
+    },
+    {
+      "number": 97,
+      "id": "I_kwDOFlouSc503GSr",
+      "title": "List writeable/readable data (Roman's DISCUSS)",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/97",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "** Section 8.  Per the guidance on writeable data, aren\u2019t significant parts of\r\nalto-server/listen sensitive as one could alter the stored keys for the server\r\nor client; or the username/password combinations (in http-server-parameters)?\r\n\r\n** Section 8.  Per the guidance about readable data:\r\n\r\n-- isn\u2019t tls-server-parameters sensitive since it could contain raw private\r\nkeys (e.g., ks:inline-or-keystore-symmetric-key-grouping)?\r\n\r\n-- Would it be best practice to be able to read all of the authorized users?\r\n",
+      "createdAt": "2023-10-25T05:58:41Z",
+      "updatedAt": "2023-10-25T05:58:41Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 101,
+      "id": "I_kwDOFlouSc51DUfk",
+      "title": "new transport is out of scope",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/101",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Form Zahed: \r\n\r\n> That is understandable, and it this is conscious decision to not cover the\r\n> latest and greatest then I would expect the specification describe that. A\r\n> statement on the current scope and the potential extendibility to cover the\r\n> new ALTO transport will help here.\r\n",
+      "createdAt": "2023-10-26T15:15:29Z",
+      "updatedAt": "2023-10-26T15:15:29Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 6,
+      "id": "PR_kwDOFlouSc5KnV8a",
+      "title": "Minor edits",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/6",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-02-23T14:55:48Z",
+      "updatedAt": "2023-02-24T00:24:14Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "56ad10ae28e89d6b664a198e7e02e5fc8233e196",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-1",
+      "headRefOid": "b4f2d3910b02dc1d02efc2d9646f69f0aad3605b",
+      "closedAt": "2023-02-24T00:24:14Z",
+      "mergedAt": "2023-02-24T00:24:14Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "a7cd4ee5c505932df121edd88a84a83477ca367e"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOFlouSc5KnZ-w",
+      "title": "Minor edits",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/7",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-02-23T15:06:04Z",
+      "updatedAt": "2023-02-24T00:27:24Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "56ad10ae28e89d6b664a198e7e02e5fc8233e196",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-1-1",
+      "headRefOid": "9fe47597dcb5c2486e5e217f68dd96e05d2cff2f",
+      "closedAt": "2023-02-24T00:27:24Z",
+      "mergedAt": "2023-02-24T00:27:24Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "d38327073fe9ebc54324269a1efa744133860853"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOFlouSc5KrPcQ",
+      "title": "Avoid Redundant text + Fix the prefix + align with \"Placeholders in R\u2026",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/9",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026eference Statements\" + indicate that modules are not maintained by IANA",
+      "createdAt": "2023-02-24T08:30:04Z",
+      "updatedAt": "2023-02-25T00:28:05Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "d38327073fe9ebc54324269a1efa744133860853",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-2",
+      "headRefOid": "ca6906609e4ea8ba32b3a5367ccfd9a148a3e1fc",
+      "closedAt": "2023-02-25T00:28:05Z",
+      "mergedAt": "2023-02-25T00:28:05Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "74dc2902cb8929722b75044bed1af0f765e6857a"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOFlouSc5KrSEh",
+      "title": "Align the title/abstract with the current defined moduleS",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/10",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-02-24T08:38:51Z",
+      "updatedAt": "2023-02-25T00:28:57Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "d38327073fe9ebc54324269a1efa744133860853",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-3",
+      "headRefOid": "f7318e94f7358540e45ed462d7ce7581acb0cf62",
+      "closedAt": "2023-02-25T00:28:57Z",
+      "mergedAt": "2023-02-25T00:28:57Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "5107d66a3b413c7527d154d308b680890130b96a"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOFlouSc5LM3Ka",
+      "title": "Minor fixes here and there",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/12",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-03T08:19:24Z",
+      "updatedAt": "2023-03-06T00:08:23Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "74f71c467dd10cddbdbf84a216f2af3d40856872",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-4",
+      "headRefOid": "127042fa38c2f9ebdf9092c6038fd22fec30c3df",
+      "closedAt": "2023-03-06T00:08:23Z",
+      "mergedAt": "2023-03-06T00:08:23Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "926e913798752bf7a2475d00c51b3c5612fe9b54"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOFlouSc5LM8Xk",
+      "title": "Minor fixes in the appendix",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/13",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-03T08:38:11Z",
+      "updatedAt": "2023-03-06T00:09:22Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "74f71c467dd10cddbdbf84a216f2af3d40856872",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-5",
+      "headRefOid": "3db1a941f4fdd62a8be2feed1826587545a9753a",
+      "closedAt": "2023-03-06T00:09:22Z",
+      "mergedAt": "2023-03-06T00:09:22Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "eb64b861645e8444c30f2dc6c48be5996ba23c4f"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOFlouSc5LM_Jf",
+      "title": "Fix normative refs",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/14",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "At least the following have to be listed as normative.  Please double check other entries. If you have doubts, please let me know.\r\n\r\n```\r\n   [I-D.ietf-netconf-http-client-server]\r\n              Watsen, K., \"YANG Groupings for HTTP Clients and HTTP\r\n              Servers\", Work in Progress, Internet-Draft, draft-ietf-\r\n              netconf-http-client-server-12, 12 December 2022,\r\n              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-\r\n              http-client-server-12>.\r\n\r\n   [I-D.ietf-netconf-netconf-client-server]\r\n              Watsen, K., \"NETCONF Client and Server Models\", Work in\r\n              Progress, Internet-Draft, draft-ietf-netconf-netconf-\r\n              client-server-28, 12 December 2022,\r\n              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-\r\n              netconf-client-server-28>.\r\n\r\n   [I-D.ietf-netconf-restconf-client-server]\r\n              Watsen, K., \"RESTCONF Client and Server Models\", Work in\r\n              Progress, Internet-Draft, draft-ietf-netconf-restconf-\r\n              client-server-28, 12 December 2022,\r\n              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-\r\n              restconf-client-server-28>.\r\n\r\n   [I-D.ietf-netconf-tcp-client-server]\r\n              Watsen, K. and M. Scharf, \"YANG Groupings for TCP Clients\r\n              and TCP Servers\", Work in Progress, Internet-Draft, draft-\r\n              ietf-netconf-tcp-client-server-15, 12 December 2022,\r\n              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-\r\n              tcp-client-server-15>.\r\n\r\n   [I-D.ietf-netconf-tls-client-server]\r\n              Watsen, K., \"YANG Groupings for TLS Clients and TLS\r\n              Servers\", Work in Progress, Internet-Draft, draft-ietf-\r\n              netconf-tls-client-server-32, 12 December 2022,\r\n              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-\r\n              tls-client-server-32>.\r\n\r\n   [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,\r\n              and A. Bierman, Ed., \"Network Configuration Protocol\r\n              (NETCONF)\", RFC 6241, DOI 10.17487/RFC6241, June 2011,\r\n              <https://www.rfc-editor.org/rfc/rfc6241>.\r\n\r\n   [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, \"RESTCONF\r\n              Protocol\", RFC 8040, DOI 10.17487/RFC8040, January 2017,\r\n              <https://www.rfc-editor.org/rfc/rfc8040>.\r\n\r\n   [RFC8341]  Bierman, A. and M. Bjorklund, \"Network Configuration\r\n              Access Control Model\", STD 91, RFC 8341,\r\n              DOI 10.17487/RFC8341, March 2018,\r\n              <https://www.rfc-editor.org/rfc/rfc8341>.\r\n```",
+      "createdAt": "2023-03-03T08:48:13Z",
+      "updatedAt": "2023-03-06T00:10:20Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "74f71c467dd10cddbdbf84a216f2af3d40856872",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-6",
+      "headRefOid": "b82199343e73028ad5e7aa9a91f757350f9dd7f0",
+      "closedAt": "2023-03-06T00:10:20Z",
+      "mergedAt": "2023-03-06T00:10:20Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "a0c8eb9c860e599e6e3a59703a38cd37ac2177d5"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOFlouSc5LORof",
+      "title": "Various fixes/consistent use of subtrees/etc.",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/16",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-03T12:53:58Z",
+      "updatedAt": "2023-03-06T00:12:49Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "74f71c467dd10cddbdbf84a216f2af3d40856872",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-7",
+      "headRefOid": "06393e91f4bc53d833493eff3168409a588ed5de",
+      "closedAt": "2023-03-06T00:12:49Z",
+      "mergedAt": "2023-03-06T00:12:49Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "8978d281f3b8393cebf4072ebe75181c8ea81d43"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOFlouSc5LOW4G",
+      "title": "fix units and some minor tweaks",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/17",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-03T13:10:41Z",
+      "updatedAt": "2023-03-06T00:14:14Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "74f71c467dd10cddbdbf84a216f2af3d40856872",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-8",
+      "headRefOid": "01bfa71d7eeffbd86e7a53b6303d84bbd14317b4",
+      "closedAt": "2023-03-06T00:14:14Z",
+      "mergedAt": "2023-03-06T00:14:14Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "f9606d7d71cd1f09449e36ead05922c291eb8e84"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOFlouSc5MIwHF",
+      "title": "Fix the reference and some other edits",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/20",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-03-15T19:07:46Z",
+      "updatedAt": "2023-03-16T00:03:45Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "0ccded1bd1ebada614ccd25706927112907dbeed",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-9",
+      "headRefOid": "6306774527cf667b8b1dafb76d82ed34bc7b6972",
+      "closedAt": "2023-03-16T00:03:45Z",
+      "mergedAt": "2023-03-16T00:03:44Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "91aa3ed3eadb01a6f3960d2f440a239de298255e"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOFlouSc5MIwu7",
+      "title": "Fix the reference",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/21",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-03-15T19:08:53Z",
+      "updatedAt": "2023-03-16T00:03:03Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "0ccded1bd1ebada614ccd25706927112907dbeed",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-10",
+      "headRefOid": "d01a1bde825028b2a276f712a40aac1cee8ec27e",
+      "closedAt": "2023-03-16T00:03:03Z",
+      "mergedAt": "2023-03-16T00:03:03Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "f150d9366cbecead610f8677c04fdb248cd22c28"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOFlouSc5MIzPQ",
+      "title": "Update description/references",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/22",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-03-15T19:13:12Z",
+      "updatedAt": "2023-03-16T00:05:45Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "0ccded1bd1ebada614ccd25706927112907dbeed",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-11",
+      "headRefOid": "2f547e2988ac8e77c789b8dc5ac498cb9f5b2d1a",
+      "closedAt": "2023-03-16T00:05:44Z",
+      "mergedAt": "2023-03-16T00:05:44Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "818d3b1bd39d62eac7732234e688dcc6f42545f6"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDOFlouSc5MI07T",
+      "title": "Update descriptions",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/23",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-03-15T19:16:05Z",
+      "updatedAt": "2023-03-16T00:13:35Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "0ccded1bd1ebada614ccd25706927112907dbeed",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-12",
+      "headRefOid": "7ab667b2f9c3c448c9d5d3ae31c29597609b9f03",
+      "closedAt": "2023-03-16T00:13:34Z",
+      "mergedAt": "2023-03-16T00:13:34Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "17687c25e8350292559a800d65a1f484a66aa20e"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOFlouSc5MMMNo",
+      "title": "fix reference",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/24",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-03-16T10:04:43Z",
+      "updatedAt": "2023-03-17T01:38:20Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "17687c25e8350292559a800d65a1f484a66aa20e",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-13",
+      "headRefOid": "0f182de1fc75df2883dfa2c36cab67325f370459",
+      "closedAt": "2023-03-17T01:38:20Z",
+      "mergedAt": "2023-03-17T01:38:20Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "ae309ea80c8e206ef78de6daeba82a13fc283a7a"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 47,
+      "id": "PR_kwDOFlouSc5OBMk6",
+      "title": "Some nits + consistent references",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/47",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-04-11T12:38:04Z",
+      "updatedAt": "2023-04-11T12:42:07Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "5dea617f7e681a51666c173adab7c575bc1cbb23",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-14",
+      "headRefOid": "8bec3a630458b5086a1a7a2ce960740b633ec20b",
+      "closedAt": "2023-04-11T12:42:07Z",
+      "mergedAt": "2023-04-11T12:42:07Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "d77f13f701855855fc7cc4cc4930fe51dea9481e"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 48,
+      "id": "PR_kwDOFlouSc5OGMer",
+      "title": "remove -grouping from names",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/48",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-04-12T05:46:29Z",
+      "updatedAt": "2023-04-12T05:53:46Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "a66c0fbba42e9a35b78ed403c838a85c9d5ae3ec",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "remove--grouping-from-names",
+      "headRefOid": "8924b4af19923d3ebe9e94eb562b186812b0ae32",
+      "closedAt": "2023-04-12T05:53:46Z",
+      "mergedAt": "2023-04-12T05:53:46Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "7a6cee68e97be3d62e9be92bf0674a0c9845ce3a"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 50,
+      "id": "PR_kwDOFlouSc5OGSHv",
+      "title": "typedefs for references",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/50",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "#46 ",
+      "createdAt": "2023-04-12T06:02:14Z",
+      "updatedAt": "2023-04-12T06:08:45Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "7a6cee68e97be3d62e9be92bf0674a0c9845ce3a",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "typedefs-for-references",
+      "headRefOid": "837f001120b38bee41a273a9677bffb85ffdb454",
+      "closedAt": "2023-04-12T06:08:45Z",
+      "mergedAt": "2023-04-12T06:08:45Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "7b10751db38991a6e949f3ce5e854ad8de707c05"
+      },
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks for taking care of this issue.",
+          "createdAt": "2023-04-12T06:08:37Z",
+          "updatedAt": "2023-04-12T06:08:37Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 52,
+      "id": "PR_kwDOFlouSc5OGaFw",
+      "title": "consistent refs + remove normative language.",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/52",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-04-12T06:25:34Z",
+      "updatedAt": "2023-04-12T06:44:10Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "7b10751db38991a6e949f3ce5e854ad8de707c05",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-15",
+      "headRefOid": "86c8d2150e53fbca67e9cf3a885ccc3401be4bc5",
+      "closedAt": "2023-04-12T06:44:09Z",
+      "mergedAt": "2023-04-12T06:44:09Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "629717c7f60e4ae1a41c2ec95553f252d7863c4b"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 54,
+      "id": "PR_kwDOFlouSc5OMkza",
+      "title": "remove endpoint-cost-cap grouping",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/54",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-04-13T05:38:40Z",
+      "updatedAt": "2023-04-13T12:00:06Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "629717c7f60e4ae1a41c2ec95553f252d7863c4b",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "remove-endpoint-cost-cap",
+      "headRefOid": "d14c32ca4362f5583cdd14720afbc9527988721d",
+      "closedAt": "2023-04-13T12:00:05Z",
+      "mergedAt": "2023-04-13T12:00:05Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "c57db33487d8a36485fc4e182d5212147ad17c41"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 55,
+      "id": "PR_kwDOFlouSc5OMrHQ",
+      "title": "Use folding conventions",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/55",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-04-13T06:06:31Z",
+      "updatedAt": "2023-04-13T13:04:39Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "90683904799fc788539e5a4d9e08a48ebbf53aa3",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "folded-example-appendix",
+      "headRefOid": "4a01040e5bc3f2de0d6693827a13e0cdc69370fe",
+      "closedAt": "2023-04-13T13:04:39Z",
+      "mergedAt": "2023-04-13T13:04:39Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "d300c4ebf615eed94aa0c29554999adb36a53120"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 56,
+      "id": "PR_kwDOFlouSc5OMsLX",
+      "title": "remove redundant typedef",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/56",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-04-13T06:10:41Z",
+      "updatedAt": "2023-04-13T12:13:57Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "90683904799fc788539e5a4d9e08a48ebbf53aa3",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-16",
+      "headRefOid": "bde07dfdd42faed4bc7344b5b10c96e556070c53",
+      "closedAt": "2023-04-13T12:13:57Z",
+      "mergedAt": "2023-04-13T12:13:57Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "e2fdf6773f0074a9ecd6c30371b3adcfcc1397fc"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 57,
+      "id": "PR_kwDOFlouSc5OMs0j",
+      "title": "use data-source-ref type in the augmentation example",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/57",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-04-13T06:13:32Z",
+      "updatedAt": "2023-04-13T14:18:15Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "90683904799fc788539e5a4d9e08a48ebbf53aa3",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-17",
+      "headRefOid": "1baeecedbd8f1596f935944d0698e74605c7ea67",
+      "closedAt": "2023-04-13T14:18:14Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "All the extension modules in the appendix have been linked to `.yang` files. No need to update the code snippets separately.",
+          "createdAt": "2023-04-13T14:18:14Z",
+          "updatedAt": "2023-04-13T14:18:14Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 58,
+      "id": "PR_kwDOFlouSc5OMu0h",
+      "title": "minor updates to the arch overview",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/58",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-04-13T06:21:30Z",
+      "updatedAt": "2023-04-13T12:15:12Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "90683904799fc788539e5a4d9e08a48ebbf53aa3",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-18",
+      "headRefOid": "e44415d519e53075d88990048596020fdc0ecc14",
+      "closedAt": "2023-04-13T12:15:12Z",
+      "mergedAt": "2023-04-13T12:15:12Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "2a0c464951731d8a07c6d789aa238807300c737c"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 62,
+      "id": "PR_kwDOFlouSc5PYnrB",
+      "title": "ACK directorate reviews",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/62",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-04-28T13:01:57Z",
+      "updatedAt": "2023-05-01T23:19:01Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "04322f716a0ba28ff28ed829247afcbd4b46fd63",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "ack-directorate-reviews",
+      "headRefOid": "4af69faa4cf77a9e6390f5110dd47c0daf5f9487",
+      "closedAt": "2023-05-01T23:19:00Z",
+      "mergedAt": "2023-05-01T23:19:00Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "56d5a8251db6e0a06156076bc1153f898a2e7efb"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 63,
+      "id": "PR_kwDOFlouSc5QW1Ix",
+      "title": "https as default",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/63",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-05-12T06:45:48Z",
+      "updatedAt": "2023-05-12T07:39:28Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "5a2a40db5ebe45a3e16a836f8cae38891f4b5bce",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "https-as-default",
+      "headRefOid": "8d009f8a208e22af5c7adcfea432dfc3399ab039",
+      "closedAt": "2023-05-12T07:39:28Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 64,
+      "id": "PR_kwDOFlouSc5QW6h7",
+      "title": "http-listen mode",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/64",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-05-12T07:05:50Z",
+      "updatedAt": "2023-05-12T14:17:36Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "5a2a40db5ebe45a3e16a836f8cae38891f4b5bce",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "note-about-the-use-of-the-http-listen-mode",
+      "headRefOid": "57242225c40000cf92272ebb1c9d6f984363b247",
+      "closedAt": "2023-05-12T14:17:36Z",
+      "mergedAt": "2023-05-12T14:17:36Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "01a3deabaf97e050bc050f33d35a3f0841741ad3"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 65,
+      "id": "PR_kwDOFlouSc5QXDhD",
+      "title": "avoid repeating the top-level prefix in the discovery gp",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/65",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "",
+      "createdAt": "2023-05-12T07:25:59Z",
+      "updatedAt": "2023-05-12T14:19:17Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "5a2a40db5ebe45a3e16a836f8cae38891f4b5bce",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-19",
+      "headRefOid": "ecfb22b3aba0e077e1ec9e8fb20fbb21c0dd2032",
+      "closedAt": "2023-05-12T14:19:16Z",
+      "mergedAt": "2023-05-12T14:19:16Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "156244e344bb59dd94dd1a45cd59f6e224088154"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 66,
+      "id": "PR_kwDOFlouSc5QXKG_",
+      "title": "Some terms do not need to be expanded",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/66",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Please refer to https://www.rfc-editor.org/materials/abbrev.expansion.txt. It says specifically: \r\n\r\n\"Names of resource records do not need to be expanded (e.g., NAPTR).\"",
+      "createdAt": "2023-05-12T07:49:09Z",
+      "updatedAt": "2023-05-12T14:20:43Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "5a2a40db5ebe45a3e16a836f8cae38891f4b5bce",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-20",
+      "headRefOid": "c4bc8d7f168e070dcfa77044c46df028eecb7600",
+      "closedAt": "2023-05-12T14:20:43Z",
+      "mergedAt": "2023-05-12T14:20:43Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "4e88546997b2eb863145e6595e203fd7e04ea7f9"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 68,
+      "id": "PR_kwDOFlouSc5Q_nji",
+      "title": "update security consideration",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/68",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "update security consideration; there are some other nodes that should also be sensitive or vulnerable",
+      "createdAt": "2023-05-22T09:07:22Z",
+      "updatedAt": "2023-05-24T00:59:18Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "6839ed84dac1baa54fd21ff6880f044f8d0f2a82",
+      "headRepository": "QiufangMa/draft-ietf-alto-oam-yang",
+      "headRefName": "main",
+      "headRefOid": "0982bcd8d913bb7ce83d76ab39c8556d2d8a75f4",
+      "closedAt": "2023-05-24T00:59:18Z",
+      "mergedAt": "2023-05-24T00:59:18Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "f588b0cc12058604f43c2fe15e829d7e5ec1b7c0"
+      },
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Related to issue: https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/issues/33",
+          "createdAt": "2023-05-22T10:57:13Z",
+          "updatedAt": "2023-05-22T10:57:13Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFlouSc5VnNYn",
+          "commit": {
+            "abbreviatedOid": "6b955a8"
+          },
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2023-05-22T10:45:02Z",
+          "updatedAt": "2023-05-22T10:55:52Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "```suggestion\r\n  /alto/alto-client/server-discovery:\r\n```",
+              "createdAt": "2023-05-22T10:45:02Z",
+              "updatedAt": "2023-05-22T10:55:52Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "```suggestion\r\n  : This subtree specifies a set of parameters for an ALTO client to discover ALTO servers.\r\n```",
+              "createdAt": "2023-05-22T10:45:17Z",
+              "updatedAt": "2023-05-22T10:55:52Z"
+            },
+            {
+              "originalPosition": 36,
+              "body": "```suggestion\r\n  parameters (e.g., \"dns-server\") in order to expose an ALTO client to fake ALTO servers. Likewise, this data node can be manipulated to prevent an ALTO client from discovering a reachable ALTO server.\r\n```",
+              "createdAt": "2023-05-22T10:47:11Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 38,
+              "body": "```suggestion\r\n  /alto/alto-server/logging-system:\r\n```",
+              "createdAt": "2023-05-22T10:47:28Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 41,
+              "body": "This item is about readable concerns, while the items in this list should focus on \"writable/creatable/deletable\". Please move this one to be positioned right after: \r\n\r\n> Some of the readable data nodes in this YANG module may be considered sensitive or vulnerable in some network environments. It is thus important to control read access (e.g., via get, get-config, or notification) to these data nodes. These are the subtrees and data nodes and their sensitivity/vulnerability:\r\n\r\n",
+              "createdAt": "2023-05-22T10:50:32Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 44,
+              "body": "```suggestion\r\n  /alto/alto-server/auth-client:\r\n```",
+              "createdAt": "2023-05-22T10:50:46Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 48,
+              "body": "```suggestion\r\n  that has already been authenticated. Likewise, this data node can be manipulated to prevent access of legitimate ALTO clients.\r\n```",
+              "createdAt": "2023-05-22T10:51:51Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\r\n  /alto/alto-server/role:\r\n```",
+              "createdAt": "2023-05-22T10:52:12Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 51,
+              "body": "```suggestion\r\n  : This list specifies roles which authenticated ALTO clients were assigned to for\r\n```",
+              "createdAt": "2023-05-22T10:52:50Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 52,
+              "body": "```suggestion\r\n  access control. Unauthorized write access to this list allow intruders to\r\n```",
+              "createdAt": "2023-05-22T10:53:03Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 56,
+              "body": "```suggestion\r\n  /alto/alto-server/data-source/feed-interval:\r\n```",
+              "createdAt": "2023-05-22T10:53:31Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 58,
+              "body": "```suggestion\r\n  by a data source. A malicious ALTO client could attempt to set a very low (or large)\r\n```",
+              "createdAt": "2023-05-22T10:54:02Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 59,
+              "body": "```suggestion\r\n  value to this node. Setting a very low value could attack the data source.\r\n```",
+              "createdAt": "2023-05-22T10:54:14Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 60,
+              "body": "```suggestion\r\n  Setting a very large value would lead to maintaining stale data in the ALTO server.\r\n```",
+              "createdAt": "2023-05-22T10:54:35Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 62,
+              "body": "```suggestion\r\n  /alto/alto-server/data-source/poll-interval:\r\n```",
+              "createdAt": "2023-05-22T10:54:52Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 64,
+              "body": "```suggestion\r\n  from a data source. A malicious client could attempt to set a very low (or large)\r\n```",
+              "createdAt": "2023-05-22T10:55:11Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 65,
+              "body": "```suggestion\r\n  value to this node. Setting a very low value could attack the data source.\r\n```",
+              "createdAt": "2023-05-22T10:55:20Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            },
+            {
+              "originalPosition": 66,
+              "body": "```suggestion\r\n   Setting a very large value would lead to maintaining stale data in the ALTO server.\r\n```",
+              "createdAt": "2023-05-22T10:55:35Z",
+              "updatedAt": "2023-05-22T10:55:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOFlouSc5Vt5oX",
+          "commit": {
+            "abbreviatedOid": "6b955a8"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-05-23T01:52:52Z",
+          "updatedAt": "2023-05-23T01:52:53Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "Sure, finished.",
+              "createdAt": "2023-05-23T01:52:52Z",
+              "updatedAt": "2023-05-23T01:52:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOFlouSc5V02CZ",
+          "commit": {
+            "abbreviatedOid": "0982bcd"
+          },
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "This looks better. Thanks.",
+          "createdAt": "2023-05-23T14:56:33Z",
+          "updatedAt": "2023-05-23T14:56:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 70,
+      "id": "PR_kwDOFlouSc5Rrotc",
+      "title": "fix formatting in Section 6.1",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/70",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-05-30T12:45:00Z",
+      "updatedAt": "2023-05-31T02:00:59Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "b401f52ede9f0ea03a3d1821f0b218f15e0507d9",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-21",
+      "headRefOid": "e8311794250333505f7e74668eed006aba3bd17c",
+      "closedAt": "2023-05-31T02:00:59Z",
+      "mergedAt": "2023-05-31T02:00:59Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "5d32e9061c8c50678dba487ea0c3324b033882bf"
+      },
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Maybe the following change is better?\r\n\r\n~~~\r\n'num-total-*' -> 'num-total-\\*'\r\n~~~",
+          "createdAt": "2023-05-30T12:53:33Z",
+          "updatedAt": "2023-05-30T12:53:33Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Maybe the following change is better?\r\n> \r\n> ```\r\n> 'num-total-*' -> 'num-total-\\*'\r\n> ```\r\n\r\nIndeed. Updated the PR accordingly.",
+          "createdAt": "2023-05-30T13:09:44Z",
+          "updatedAt": "2023-05-30T13:09:44Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 71,
+      "id": "PR_kwDOFlouSc5RrvIX",
+      "title": "edits to reflect that we are defining two models, not one",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/71",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC",
+        "editorial"
+      ],
+      "body": "and other minor fixes",
+      "createdAt": "2023-05-30T12:57:53Z",
+      "updatedAt": "2023-06-13T12:10:45Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "b401f52ede9f0ea03a3d1821f0b218f15e0507d9",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-22",
+      "headRefOid": "2965ac8d3e63e84d35840209071b78b276e191ef",
+      "closedAt": "2023-06-13T12:10:45Z",
+      "mergedAt": "2023-06-13T12:10:45Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "f3b5ef9730a8d20e4f5c705033950746804c7793"
+      },
+      "comments": [
+        {
+          "author": "fno2010",
+          "authorAssociation": "MEMBER",
+          "body": "Is there any guideline about the usage of the term \"data model\"? Is it equivalent to a \"YANG module\" or a top-level container in YANG? Although this document defines two YANG modules, they share a single top-level container.",
+          "createdAt": "2023-05-30T13:17:55Z",
+          "updatedAt": "2023-05-30T13:17:55Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Is there any guideline about the usage of the term \"data model\"? Is it equivalent to a \"YANG module\" or a top-level container in YANG?\r\n\r\nI'm not aware of any, other than the entries in RFC6020:\r\n\r\n    RFC 6020 defines:\r\n\r\n        o  data model: A data model describes how data is represented and\r\n           accessed.\r\n\r\n        o  module: A YANG module defines a hierarchy of nodes that can be\r\n           used for NETCONF-based operations.  With its definitions and the\r\n           definitions it imports or includes from elsewhere, a module is\r\n           self-contained and \"compilable\".\r\n\r\nThat's said, we need to be consistent in our use. For example, we do already have this in the title:\r\n\r\n\"YANG Data Models for the Application-Layer Traffic Optimization (ALTO)..\"",
+          "createdAt": "2023-05-30T13:30:27Z",
+          "updatedAt": "2023-05-30T13:30:27Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 72,
+      "id": "PR_kwDOFlouSc5Rrzyl",
+      "title": "Minor edits to design.md",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/72",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC",
+        "editorial"
+      ],
+      "body": "",
+      "createdAt": "2023-05-30T13:06:27Z",
+      "updatedAt": "2023-05-31T02:02:04Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "b401f52ede9f0ea03a3d1821f0b218f15e0507d9",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-23",
+      "headRefOid": "e3f9e541bd4601e5ce29443e8aa834f1d193c38b",
+      "closedAt": "2023-05-31T02:02:04Z",
+      "mergedAt": "2023-05-31T02:02:04Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "57b228c241039dca16753625b71ee982b63dd1f8"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 73,
+      "id": "PR_kwDOFlouSc5RwrsA",
+      "title": "8340 should be listed as informative.",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/73",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC",
+        "editorial"
+      ],
+      "body": "This is listed by few as normative, but the wide practice is to list this one as informative: Please check https://datatracker.ietf.org/doc/rfc8340/referencedby/",
+      "createdAt": "2023-05-31T08:42:10Z",
+      "updatedAt": "2023-06-06T11:19:24Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "57b228c241039dca16753625b71ee982b63dd1f8",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-24",
+      "headRefOid": "61efc05ca9d389b812b35af65a93b56c91cdfa82",
+      "closedAt": "2023-06-06T11:19:23Z",
+      "mergedAt": "2023-06-06T11:19:23Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "fc718ceae38ffb1f6fb2fe6b90d265911dcc8d23"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 74,
+      "id": "PR_kwDOFlouSc5RwvHh",
+      "title": "nmda is normative",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/74",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "see https://datatracker.ietf.org/doc/rfc8407/, for example.",
+      "createdAt": "2023-05-31T08:51:59Z",
+      "updatedAt": "2023-06-06T11:20:08Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "57b228c241039dca16753625b71ee982b63dd1f8",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-25",
+      "headRefOid": "4ce00e28b0096978570679a61765d9002986bde5",
+      "closedAt": "2023-06-06T11:20:08Z",
+      "mergedAt": "2023-06-06T11:20:08Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "7c986eaa447e990c07e7fdb709280ab05665b3bb"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 76,
+      "id": "PR_kwDOFlouSc5VPVJV",
+      "title": "AD editorial suggestions",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/76",
+      "state": "MERGED",
+      "author": "martinduke",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-07-11T19:33:50Z",
+      "updatedAt": "2023-07-13T15:12:38Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "662feec36413cac1ee09dc0162ed13422d76f850",
+      "headRepository": "martinduke/draft-ietf-alto-oam-yang",
+      "headRefName": "nits",
+      "headRefOid": "5b3c1b1c065e610b1d0bff863b4f18e5ac9cb5f8",
+      "closedAt": "2023-07-13T15:12:37Z",
+      "mergedAt": "2023-07-13T15:12:37Z",
+      "mergedBy": "emiapwil",
+      "mergeCommit": {
+        "oid": "b9f60b572648e474d601f855de2ca23360deb29b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFlouSc5a7ek_",
+          "commit": {
+            "abbreviatedOid": "bc7cfc1"
+          },
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-07-12T05:26:35Z",
+          "updatedAt": "2023-07-12T05:26:36Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\nFor convenience, examples of how related extensions can be defined are provided in the Appendices.\r\n```",
+              "createdAt": "2023-07-12T05:26:35Z",
+              "updatedAt": "2023-07-12T05:26:36Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 77,
+      "id": "PR_kwDOFlouSc5VYG03",
+      "title": "Clarify the intent of Section 4.4 (see AD review)",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/77",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "An attempt to clarify the intent of this section as per the comment raised by @martinduke",
+      "createdAt": "2023-07-13T05:27:34Z",
+      "updatedAt": "2023-07-13T15:15:33Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "662feec36413cac1ee09dc0162ed13422d76f850",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-26",
+      "headRefOid": "4b6f8d2b232e56e7978206fa590a3f13bb960b1d",
+      "closedAt": "2023-07-13T15:15:33Z",
+      "mergedAt": "2023-07-13T15:15:33Z",
+      "mergedBy": "emiapwil",
+      "mergeCommit": {
+        "oid": "75dafa1c2b2271d2bf623a018e1e76a6f559aa8c"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 78,
+      "id": "PR_kwDOFlouSc5Vbuxh",
+      "title": "ACK the AD review",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/78",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-07-13T15:19:36Z",
+      "updatedAt": "2023-07-13T15:22:09Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "75dafa1c2b2271d2bf623a018e1e76a6f559aa8c",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-27",
+      "headRefOid": "d728cd6d835d37c1fcf34c2b996ffef446be2f74",
+      "closedAt": "2023-07-13T15:22:09Z",
+      "mergedAt": "2023-07-13T15:22:09Z",
+      "mergedBy": "emiapwil",
+      "mergeCommit": {
+        "oid": "3028de06a9eef7ad87efd00594ff75b2343c5ad7"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 79,
+      "id": "PR_kwDOFlouSc5VbyTz",
+      "title": "Tweak R5-1 to avoid it is interpreted as we are specifying in more det\u2026",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/79",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026ails the interface with data sources\r\n\r\nFeel free to adjust",
+      "createdAt": "2023-07-13T15:29:13Z",
+      "updatedAt": "2023-07-18T12:20:33Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "3028de06a9eef7ad87efd00594ff75b2343c5ad7",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-28",
+      "headRefOid": "50adb005a4a319db01e040f9b074f26be1472bb0",
+      "closedAt": "2023-07-18T12:20:33Z",
+      "mergedAt": "2023-07-18T12:20:33Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "b98f0536ad262bab967848f5cc0ef404b2fd14fb"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 82,
+      "id": "PR_kwDOFlouSc5arSRe",
+      "title": "Remove \"update-policy\" node to avoid over design",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/82",
+      "state": "MERGED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR is supposedly to resolve #80.",
+      "createdAt": "2023-09-19T13:11:55Z",
+      "updatedAt": "2023-09-22T15:34:29Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "ad034abc680a463279aaec269bdb5565ec1f4af1",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "ad-review-data-source",
+      "headRefOid": "f01c2d341b45d5ef361e0d84dd1a4ac219b5d06e",
+      "closedAt": "2023-09-22T15:34:29Z",
+      "mergedAt": "2023-09-22T15:34:29Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "4f5228d0e3b4d39ef207c632783c6f3666d1edc9"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 84,
+      "id": "PR_kwDOFlouSc5bHbdV",
+      "title": "update-policy is no more defined in the core model",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/84",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Please double check",
+      "createdAt": "2023-09-25T12:07:08Z",
+      "updatedAt": "2023-09-26T12:35:35Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "4f5228d0e3b4d39ef207c632783c6f3666d1edc9",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-29",
+      "headRefOid": "33e52db7db4f1addf55f4e302871f0c250d6a337",
+      "closedAt": "2023-09-26T12:35:35Z",
+      "mergedAt": "2023-09-26T12:35:35Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "36066e18409782203e280351c83f169a62cbf6c5"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 86,
+      "id": "PR_kwDOFlouSc5bIBjh",
+      "title": "example-modules",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/86",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-09-25T13:30:56Z",
+      "updatedAt": "2023-09-26T12:55:44Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "36066e18409782203e280351c83f169a62cbf6c5",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-30",
+      "headRefOid": "55adeecf7d85c7ce41c24ad3819e18a2c4361180",
+      "closedAt": "2023-09-26T12:55:44Z",
+      "mergedAt": "2023-09-26T12:55:43Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "d5f4b9c82cec9093357ff69191522e7aa3f730b1"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 87,
+      "id": "PR_kwDOFlouSc5bPDZM",
+      "title": "Change augmented choice/case to container",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/87",
+      "state": "MERGED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "In practice, choice-case-when is redundant. And simply using augment-when container can better support polymorphsim.\r\n\r\nClose #85.",
+      "createdAt": "2023-09-26T13:59:48Z",
+      "updatedAt": "2023-10-03T12:34:43Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "e02ee7b5a8adecb6b7bd7cfc1dad20ca32309f7b",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "jz-augment-when",
+      "headRefOid": "4274b6791b3c4f2befe768351a51177fed3f61a6",
+      "closedAt": "2023-10-03T12:34:43Z",
+      "mergedAt": "2023-10-03T12:34:43Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "3a05f2d497f5e52cfa827f11d27a295890c30d01"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFlouSc5iBUUv",
+          "commit": {
+            "abbreviatedOid": "65badc6"
+          },
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-09-26T14:58:34Z",
+          "updatedAt": "2023-09-26T14:58:34Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 89,
+      "id": "PR_kwDOFlouSc5bylzS",
+      "title": "Ack directorate reviewers providing LC comments",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/89",
+      "state": "MERGED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "More LC reviews may be received later.\r\n\r\nClose #88.",
+      "createdAt": "2023-10-03T13:14:49Z",
+      "updatedAt": "2023-10-10T13:00:55Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "3a05f2d497f5e52cfa827f11d27a295890c30d01",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "jz-lc-ack",
+      "headRefOid": "a53c6cfd1119b32707cb3fa8c651f8ef1afd6dff",
+      "closedAt": "2023-10-10T13:00:55Z",
+      "mergedAt": "2023-10-10T13:00:55Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "04477e284dd502e0110551d1345741bde6ff2f55"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFlouSc5iqLJz",
+          "commit": {
+            "abbreviatedOid": "1454cdd"
+          },
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-03T13:30:27Z",
+          "updatedAt": "2023-10-03T13:30:28Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nThanks to Dan Romascanu for the opsdir and genart reviews, Andy Bierman for the\r\n```",
+              "createdAt": "2023-10-03T13:30:27Z",
+              "updatedAt": "2023-10-03T13:30:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOFlouSc5iqQt9",
+          "commit": {
+            "abbreviatedOid": "a53c6cf"
+          },
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-10-03T13:40:48Z",
+          "updatedAt": "2023-10-03T13:40:48Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 90,
+      "id": "PR_kwDOFlouSc5dB6qy",
+      "title": "align the sec cons section with the security template",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/90",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://boucadair.github.io/rfc8407bis/draft-ietf-netmod-rfc8407bis.html#name-security-considerations-sect",
+      "createdAt": "2023-10-17T15:06:46Z",
+      "updatedAt": "2023-10-19T01:51:24Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "04477e284dd502e0110551d1345741bde6ff2f55",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-32",
+      "headRefOid": "391519fe335d79e0506625267352325f8b179ce7",
+      "closedAt": "2023-10-19T01:51:24Z",
+      "mergedAt": "2023-10-19T01:51:24Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "67117d86b93dde8f41f6c40c64e1d1b622886b9e"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 91,
+      "id": "PR_kwDOFlouSc5dOa_U",
+      "title": "a nit",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/91",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-19T05:49:18Z",
+      "updatedAt": "2023-10-19T06:13:52Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "67117d86b93dde8f41f6c40c64e1d1b622886b9e",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-33",
+      "headRefOid": "60bc37c5da9fff70903d1324af1a9aadfa959b35",
+      "closedAt": "2023-10-19T06:13:52Z",
+      "mergedAt": "2023-10-19T06:13:52Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "d87aea2a48992015c847fa77f578e7e09f554a62"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 92,
+      "id": "PR_kwDOFlouSc5dOcV3",
+      "title": "Align with latest RFC8407bis + fix errors in some examples",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/92",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-01#name-prefixes",
+      "createdAt": "2023-10-19T05:52:21Z",
+      "updatedAt": "2023-10-19T06:19:28Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "67117d86b93dde8f41f6c40c64e1d1b622886b9e",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-34",
+      "headRefOid": "ea0b1d6566728972f1e87e0f21c69f6eef113c53",
+      "closedAt": "2023-10-19T06:19:28Z",
+      "mergedAt": "2023-10-19T06:19:28Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "2a93b78f8705946c6d4cef465d77019495579003"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 93,
+      "id": "PR_kwDOFlouSc5dOsQo",
+      "title": "Fixed path to reference yang node",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/93",
+      "state": "MERGED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixed path in `example-alto-alg.yang` and the related JSON example in `example-alto-config.json` to align with the updated `example-alto-data-source.json`.",
+      "createdAt": "2023-10-19T06:40:13Z",
+      "updatedAt": "2023-10-19T06:48:13Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "2a93b78f8705946c6d4cef465d77019495579003",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "jz-hotfix-yang-nodes",
+      "headRefOid": "fb6add55b8d405e1c43dea400ce2511cd452e43a",
+      "closedAt": "2023-10-19T06:48:13Z",
+      "mergedAt": "2023-10-19T06:48:13Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "4813a57d7bb3c3203b97ef3a7da2eb29a86dff63"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFlouSc5ki1K8",
+          "commit": {
+            "abbreviatedOid": "fb6add5"
+          },
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-10-19T06:46:13Z",
+          "updatedAt": "2023-10-19T06:46:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 98,
+      "id": "PR_kwDOFlouSc5dvP1x",
+      "title": "NMDA",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/98",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-25T10:57:59Z",
+      "updatedAt": "2023-11-10T12:57:44Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "a832b985c744c9bae6a86fbb95f7322dfbe0a672",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-35",
+      "headRefOid": "6211907449c3eb4b98b31bb28ed4935802bf4d9a",
+      "closedAt": "2023-11-10T12:57:44Z",
+      "mergedAt": "2023-11-10T12:57:44Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "a2f6f73bac5329739f178689ee66d129dbca499d"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 99,
+      "id": "PR_kwDOFlouSc5dvYAF",
+      "title": "Bug in description statements",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/99",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-25T11:20:21Z",
+      "updatedAt": "2023-11-10T12:59:50Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "a832b985c744c9bae6a86fbb95f7322dfbe0a672",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-36",
+      "headRefOid": "ccf006744a9103c58274a787a8eb6365ccedd9f3",
+      "closedAt": "2023-11-10T12:59:50Z",
+      "mergedAt": "2023-11-10T12:59:50Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "2fe2c1b4ac731117094875600f557ba62e232e44"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 100,
+      "id": "PR_kwDOFlouSc5d22UN",
+      "title": "Fixed nits found by Tom Petch",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/100",
+      "state": "MERGED",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "- Added RFC9274 to the references.\r\n- Changed the IP address in the example JSON.",
+      "createdAt": "2023-10-26T11:43:28Z",
+      "updatedAt": "2023-11-10T13:01:04Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "a832b985c744c9bae6a86fbb95f7322dfbe0a672",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "jz-nits-tom-petch",
+      "headRefOid": "5b3fed3757486575c058e9fc3ca7ea7aeb3f6545",
+      "closedAt": "2023-11-10T13:01:04Z",
+      "mergedAt": "2023-11-10T13:01:04Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "8c6f7b95d22fb4ecbed454464bdbd15ccfd8cfbe"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 102,
+      "id": "PR_kwDOFlouSc5d4hON",
+      "title": "TIPS out of scope",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/102",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-26T15:29:40Z",
+      "updatedAt": "2023-10-26T15:29:40Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "a832b985c744c9bae6a86fbb95f7322dfbe0a672",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "boucadair-patch-37",
+      "headRefOid": "b728c5b31af088fec8f9c7d735f2a10945249d35",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 103,
+      "id": "PR_kwDOFlouSc5go7ZC",
+      "title": "Added authentication approach for TLS client",
+      "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/103",
+      "state": "OPEN",
+      "author": "fno2010",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Addressed Roman's comments on supporting TLS/client side certificates. (See #95)",
+      "createdAt": "2023-11-29T08:07:01Z",
+      "updatedAt": "2023-11-29T08:07:01Z",
+      "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "baseRefName": "main",
+      "baseRefOid": "6468649af4203e6ad1ab85b884a542ac5781bfc3",
+      "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
+      "headRefName": "jz-tls-auth-client",
+      "headRefOid": "284d2e630cec00f752ea94f586469797786c6f57",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
