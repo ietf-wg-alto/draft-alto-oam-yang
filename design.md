@@ -97,7 +97,7 @@ basic data nodes for the server setup that are detailed in the following subsect
 #### ALTO Server Listen Stack
 
 The container 'listen' contains all the data nodes for the whole server listen stack
-across HTTP, TLS, and TCP layers ({{tree-alto-gp}}).
+across TCP, TLS, HTTP and application layers ({{tree-alto-gp}}).
 
 ~~~
   grouping alto-server:
@@ -124,6 +124,15 @@ across HTTP, TLS, and TCP layers ({{tree-alto-gp}}).
                 +---u alto-server
 ~~~
 {: #tree-alto-gp title='IETF ALTO Server Groupings Structure' artwork-align="center"}
+
+The 'transport' choice node enables which protocol layers to be configured. By
+default, two cases are defined for different deployment scenarios:
+
+- The 'http' case is provided to support scenarios where the TLS-termination is
+  handled by other external components, e.g., reverse proxies or ingress
+  controllers.
+- The 'https' case is provided to support scenarios where the whole HTTPS
+  server listen stack including TLS is handled by the ALTO server itself.
 
 #### ALTO Server Discovery Setup
 
