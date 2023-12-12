@@ -96,6 +96,7 @@ normative:
   RFC9274:
   RFC9275:
   RFC9439:
+  I-D.ietf-netconf-trust-anchors:
   I-D.ietf-netconf-tcp-client-server:
   I-D.ietf-netconf-tls-client-server:
   I-D.ietf-netconf-http-client-server:
