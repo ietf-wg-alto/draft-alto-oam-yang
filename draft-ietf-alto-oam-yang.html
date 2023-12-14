@@ -26,18 +26,18 @@ to communicate with known ALTO servers.
 <!-- Generator version information:
   xml2rfc 3.18.2
     Python 3.11.6
-    ConfigArgParse 1.5.3
+    ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 3.11.0
+    platformdirs 4.1.0
     pycountry 22.3.5
-    PyYAML 6.0
+    PyYAML 6.0.1
     requests 2.31.0
-    setuptools 67.7.2
+    setuptools 68.2.2
     six 1.16.0
-    wcwidth 0.2.9
+    wcwidth 0.2.12
 -->
 <link href="draft-ietf-alto-oam-yang.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1036,11 +1036,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">ALTO O&amp;M YANG</td>
-<td class="right">November 2023</td>
+<td class="right">December 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Zhang, et al.</td>
-<td class="center">Expires 13 May 2024</td>
+<td class="center">Expires 16 June 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1053,12 +1053,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-alto-oam-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-11-10" class="published">10 November 2023</time>
+<time datetime="2023-12-14" class="published">14 December 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-05-13">13 May 2024</time></dd>
+<dd class="expires"><time datetime="2024-06-16">16 June 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1126,7 +1126,7 @@ to communicate with known ALTO servers.<a href="#section-abstract-1" class="pilc
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 13 May 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 16 June 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1602,7 +1602,8 @@ database schema to store a network map).<a href="#section-4.1-4.1.1" class="pilc
 Routing System (I2RS) client <span>[<a href="#RFC7921" class="cite xref">RFC7921</a>]</span>)<a href="#section-4.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-4.1-5">For convenience, examples of how related extensions can be defined are provided in the Appendices.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+<p id="section-4.1-5">Likewise, the specification does not cover considerations that are specific to the ALTO Transport Information Publication Service (TIPS) <span>[<a href="#I-D.ietf-alto-new-transport" class="cite xref">I-D.ietf-alto-new-transport</a>]</span>. Specifically, considerations related to HTTP/3 are out of scope.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+<p id="section-4.1-6">For convenience, examples of how related extensions can be defined are provided in the Appendices.<a href="#section-4.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="requirements">
@@ -4353,6 +4354,10 @@ define data nodes that do set the NACM "default-deny-all" and
 <a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="I-D.ietf-alto-new-transport">[I-D.ietf-alto-new-transport]</dt>
+        <dd>
+<span class="refAuthor">Gao, K.</span>, <span class="refAuthor">Schott, R.</span>, <span class="refAuthor">Yang, Y. R.</span>, <span class="refAuthor">Delwiche, L.</span>, and <span class="refAuthor">L. Keller</span>, <span class="refTitle">"The ALTO Transport Information Publication Service"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-alto-new-transport-21</span>, <time datetime="2023-12-06" class="refDate">6 December 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-alto-new-transport-21">https://datatracker.ietf.org/doc/html/draft-ietf-alto-new-transport-21</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC6291">[RFC6291]</dt>
         <dd>
 <span class="refAuthor">Andersson, L.</span>, <span class="refAuthor">van Helvoort, H.</span>, <span class="refAuthor">Bonica, R.</span>, <span class="refAuthor">Romascanu, D.</span>, and <span class="refAuthor">S. Mansfield</span>, <span class="refTitle">"Guidelines for the Use of the "OAM" Acronym in the IETF"</span>, <span class="seriesInfo">BCP 161</span>, <span class="seriesInfo">RFC 6291</span>, <span class="seriesInfo">DOI 10.17487/RFC6291</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6291">https://www.rfc-editor.org/rfc/rfc6291</a>&gt;</span>. </dd>

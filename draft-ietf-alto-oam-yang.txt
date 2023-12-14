@@ -5,14 +5,14 @@
 ALTO WG                                                         J. Zhang
 Internet-Draft                                         Tongji University
 Intended status: Standards Track                                D. Dhody
-Expires: 13 May 2024                                 Huawei Technologies
+Expires: 16 June 2024                                Huawei Technologies
                                                                   K. Gao
                                                       Sichuan University
                                                                R. Schott
                                                         Deutsche Telekom
                                                                    Q. Ma
                                                                   Huawei
-                                                        10 November 2023
+                                                        14 December 2023
 
 
  YANG Data Models for the Application-Layer Traffic Optimization (ALTO)
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 May 2024.
+   This Internet-Draft will expire on 16 June 2024.
 
 Copyright Notice
 
@@ -301,6 +301,11 @@ Table of Contents
    *  Data structures for how to store information collected from data
       sources. (e.g., database schema to store topology collected from
       an Interface to the Routing System (I2RS) client [RFC7921])
+
+   Likewise, the specification does not cover considerations that are
+   specific to the ALTO Transport Information Publication Service (TIPS)
+   [I-D.ietf-alto-new-transport].  Specifically, considerations related
+   to HTTP/3 are out of scope.
 
    For convenience, examples of how related extensions can be defined
    are provided in the Appendices.
@@ -2881,6 +2886,14 @@ Table of Contents
               <https://www.rfc-editor.org/rfc/rfc9439>.
 
 10.2.  Informative References
+
+   [I-D.ietf-alto-new-transport]
+              Gao, K., Schott, R., Yang, Y. R., Delwiche, L., and L.
+              Keller, "The ALTO Transport Information Publication
+              Service", Work in Progress, Internet-Draft, draft-ietf-
+              alto-new-transport-21, 6 December 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-alto-
+              new-transport-21>.
 
    [RFC6291]  Andersson, L., van Helvoort, H., Bonica, R., Romascanu,
               D., and S. Mansfield, "Guidelines for the Use of the "OAM"
