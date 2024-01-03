@@ -20,11 +20,11 @@ information resource, and (5) collect statistical data from the ALTO server. The
 application provider can also use this data model to configure ALTO clients
 to communicate with known ALTO servers. 
     " name="description">
-<meta content="xml2rfc 3.18.2" name="generator">
+<meta content="xml2rfc 3.19.0" name="generator">
 <meta content="Automation, Service Provisioning, Control, Operation" name="keyword">
 <meta content="draft-ietf-alto-oam-yang-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.18.2
+  xml2rfc 3.19.0
     Python 3.11.6
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
@@ -1036,11 +1036,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">ALTO O&amp;M YANG</td>
-<td class="right">December 2023</td>
+<td class="right">January 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Zhang, et al.</td>
-<td class="center">Expires 16 June 2024</td>
+<td class="center">Expires 6 July 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1053,12 +1053,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-alto-oam-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-12-14" class="published">14 December 2023</time>
+<time datetime="2024-01-03" class="published">3 January 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-06-16">16 June 2024</time></dd>
+<dd class="expires"><time datetime="2024-07-06">6 July 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1126,7 +1126,7 @@ to communicate with known ALTO servers.<a href="#section-abstract-1" class="pilc
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 16 June 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1135,7 +1135,7 @@ to communicate with known ALTO servers.<a href="#section-abstract-1" class="pilc
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2023 IETF Trust and the persons identified as the
+            Copyright (c) 2024 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1824,7 +1824,7 @@ basic data nodes for the server setup that are detailed in the following subsect
 <a href="#section-5.3.1.1" class="section-number selfRef">5.3.1.1. </a><a href="#name-alto-server-listen-stack" class="section-name selfRef">ALTO Server Listen Stack</a>
             </h5>
 <p id="section-5.3.1.1-1">The container 'listen' contains all the data nodes for the whole server listen stack
-across HTTP, TLS, and TCP layers (<a href="#tree-alto-gp" class="auto internal xref">Figure 4</a>).<a href="#section-5.3.1.1-1" class="pilcrow">¶</a></p>
+across TCP, TLS, HTTP and application layers (<a href="#tree-alto-gp" class="auto internal xref">Figure 4</a>).<a href="#section-5.3.1.1-1" class="pilcrow">¶</a></p>
 <span id="name-ietf-alto-server-groupings-"></span><div id="tree-alto-gp">
 <figure id="figure-4">
               <div class="alignCenter art-text artwork" id="section-5.3.1.1-2.1">
@@ -1857,6 +1857,19 @@ across HTTP, TLS, and TCP layers (<a href="#tree-alto-gp" class="auto internal x
 <a href="#name-ietf-alto-server-groupings-" class="selfRef">IETF ALTO Server Groupings Structure</a>
               </figcaption></figure>
 </div>
+<p id="section-5.3.1.1-3">The 'transport' choice node enables which protocol layers to be configured. By
+default, two cases are defined for different deployment scenarios:<a href="#section-5.3.1.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.3.1.1-4.1">
+                <p id="section-5.3.1.1-4.1.1">The 'http' case is provided to support scenarios where the TLS-termination is
+handled by other external components, e.g., reverse proxies or ingress
+controllers.<a href="#section-5.3.1.1-4.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-5.3.1.1-4.2">
+                <p id="section-5.3.1.1-4.2.1">The 'https' case is provided to support scenarios where the whole HTTPS
+server listen stack including TLS is handled by the ALTO server itself.<a href="#section-5.3.1.1-4.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
 </section>
 </div>
 <div id="alto-server-discovery-setup">
@@ -4235,23 +4248,23 @@ define data nodes that do set the NACM "default-deny-all" and
 <dl class="references">
 <dt id="I-D.ietf-netconf-http-client-server">[I-D.ietf-netconf-http-client-server]</dt>
         <dd>
-<span class="refAuthor">Watsen, K.</span>, <span class="refTitle">"YANG Groupings for HTTP 1.1/2.0 Clients and HTTP Servers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-http-client-server-13</span>, <time datetime="2023-04-17" class="refDate">17 April 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-http-client-server-13">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-http-client-server-13</a>&gt;</span>. </dd>
+<span class="refAuthor">Watsen, K.</span>, <span class="refTitle">"YANG Groupings for HTTP 1.1/2.0 Clients and HTTP Servers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-http-client-server-14</span>, <time datetime="2023-12-28" class="refDate">28 December 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-http-client-server-14">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-http-client-server-14</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-netconf-netconf-client-server">[I-D.ietf-netconf-netconf-client-server]</dt>
         <dd>
-<span class="refAuthor">Watsen, K.</span>, <span class="refTitle">"NETCONF Client and Server Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-netconf-client-server-29</span>, <time datetime="2023-04-17" class="refDate">17 April 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-netconf-client-server-29">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-netconf-client-server-29</a>&gt;</span>. </dd>
+<span class="refAuthor">Watsen, K.</span>, <span class="refTitle">"NETCONF Client and Server Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-netconf-client-server-30</span>, <time datetime="2023-12-28" class="refDate">28 December 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-netconf-client-server-30">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-netconf-client-server-30</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-netconf-restconf-client-server">[I-D.ietf-netconf-restconf-client-server]</dt>
         <dd>
-<span class="refAuthor">Watsen, K.</span>, <span class="refTitle">"RESTCONF Client and Server Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-restconf-client-server-29</span>, <time datetime="2023-04-17" class="refDate">17 April 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-restconf-client-server-29">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-restconf-client-server-29</a>&gt;</span>. </dd>
+<span class="refAuthor">Watsen, K.</span>, <span class="refTitle">"RESTCONF Client and Server Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-restconf-client-server-30</span>, <time datetime="2023-12-28" class="refDate">28 December 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-restconf-client-server-30">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-restconf-client-server-30</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-netconf-tcp-client-server">[I-D.ietf-netconf-tcp-client-server]</dt>
         <dd>
-<span class="refAuthor">Watsen, K.</span> and <span class="refAuthor">M. Scharf</span>, <span class="refTitle">"YANG Groupings for TCP Clients and TCP Servers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-tcp-client-server-16</span>, <time datetime="2023-04-17" class="refDate">17 April 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-tcp-client-server-16">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-tcp-client-server-16</a>&gt;</span>. </dd>
+<span class="refAuthor">Watsen, K.</span> and <span class="refAuthor">M. Scharf</span>, <span class="refTitle">"YANG Groupings for TCP Clients and TCP Servers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-tcp-client-server-17</span>, <time datetime="2023-12-28" class="refDate">28 December 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-tcp-client-server-17">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-tcp-client-server-17</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-netconf-tls-client-server">[I-D.ietf-netconf-tls-client-server]</dt>
         <dd>
-<span class="refAuthor">Watsen, K.</span>, <span class="refTitle">"YANG Groupings for TLS Clients and TLS Servers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-tls-client-server-33</span>, <time datetime="2023-04-17" class="refDate">17 April 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-tls-client-server-33">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-tls-client-server-33</a>&gt;</span>. </dd>
+<span class="refAuthor">Watsen, K.</span>, <span class="refTitle">"YANG Groupings for TLS Clients and TLS Servers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-tls-client-server-34</span>, <time datetime="2023-12-28" class="refDate">28 December 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-tls-client-server-34">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-tls-client-server-34</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>

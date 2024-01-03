@@ -5,14 +5,14 @@
 ALTO WG                                                         J. Zhang
 Internet-Draft                                         Tongji University
 Intended status: Standards Track                                D. Dhody
-Expires: 16 June 2024                                Huawei Technologies
+Expires: 6 July 2024                                 Huawei Technologies
                                                                   K. Gao
                                                       Sichuan University
                                                                R. Schott
                                                         Deutsche Telekom
                                                                    Q. Ma
                                                                   Huawei
-                                                        14 December 2023
+                                                          3 January 2024
 
 
  YANG Data Models for the Application-Layer Traffic Optimization (ALTO)
@@ -57,11 +57,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 June 2024.
+   This Internet-Draft will expire on 6 July 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -460,7 +460,8 @@ Table of Contents
 5.3.1.1.  ALTO Server Listen Stack
 
    The container 'listen' contains all the data nodes for the whole
-   server listen stack across HTTP, TLS, and TCP layers (Figure 4).
+   server listen stack across TCP, TLS, HTTP and application layers
+   (Figure 4).
 
                 grouping alto-server:
                   +-- base-uri?   inet:uri
@@ -486,6 +487,18 @@ Table of Contents
                               +---u alto-server
 
                Figure 4: IETF ALTO Server Groupings Structure
+
+   The 'transport' choice node enables which protocol layers to be
+   configured.  By default, two cases are defined for different
+   deployment scenarios:
+
+   *  The 'http' case is provided to support scenarios where the TLS-
+      termination is handled by other external components, e.g., reverse
+      proxies or ingress controllers.
+
+   *  The 'https' case is provided to support scenarios where the whole
+      HTTPS server listen stack including TLS is handled by the ALTO
+      server itself.
 
 5.3.1.2.  ALTO Server Discovery Setup
 
@@ -2740,37 +2753,37 @@ Table of Contents
    [I-D.ietf-netconf-http-client-server]
               Watsen, K., "YANG Groupings for HTTP 1.1/2.0 Clients and
               HTTP Servers", Work in Progress, Internet-Draft, draft-
-              ietf-netconf-http-client-server-13, 17 April 2023,
+              ietf-netconf-http-client-server-14, 28 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              http-client-server-13>.
+              http-client-server-14>.
 
    [I-D.ietf-netconf-netconf-client-server]
               Watsen, K., "NETCONF Client and Server Models", Work in
               Progress, Internet-Draft, draft-ietf-netconf-netconf-
-              client-server-29, 17 April 2023,
+              client-server-30, 28 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              netconf-client-server-29>.
+              netconf-client-server-30>.
 
    [I-D.ietf-netconf-restconf-client-server]
               Watsen, K., "RESTCONF Client and Server Models", Work in
               Progress, Internet-Draft, draft-ietf-netconf-restconf-
-              client-server-29, 17 April 2023,
+              client-server-30, 28 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              restconf-client-server-29>.
+              restconf-client-server-30>.
 
    [I-D.ietf-netconf-tcp-client-server]
               Watsen, K. and M. Scharf, "YANG Groupings for TCP Clients
               and TCP Servers", Work in Progress, Internet-Draft, draft-
-              ietf-netconf-tcp-client-server-16, 17 April 2023,
+              ietf-netconf-tcp-client-server-17, 28 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              tcp-client-server-16>.
+              tcp-client-server-17>.
 
    [I-D.ietf-netconf-tls-client-server]
               Watsen, K., "YANG Groupings for TLS Clients and TLS
               Servers", Work in Progress, Internet-Draft, draft-ietf-
-              netconf-tls-client-server-33, 17 April 2023,
+              netconf-tls-client-server-34, 28 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              tls-client-server-33>.
+              tls-client-server-34>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
