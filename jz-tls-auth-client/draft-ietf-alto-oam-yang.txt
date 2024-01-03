@@ -5,14 +5,14 @@
 ALTO WG                                                         J. Zhang
 Internet-Draft                                         Tongji University
 Intended status: Standards Track                                D. Dhody
-Expires: 14 June 2024                                Huawei Technologies
+Expires: 6 July 2024                                 Huawei Technologies
                                                                   K. Gao
                                                       Sichuan University
                                                                R. Schott
                                                         Deutsche Telekom
                                                                    Q. Ma
                                                                   Huawei
-                                                        12 December 2023
+                                                          3 January 2024
 
 
  YANG Data Models for the Application-Layer Traffic Optimization (ALTO)
@@ -57,11 +57,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 June 2024.
+   This Internet-Draft will expire on 6 July 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1543,24 +1543,6 @@ Table of Contents
          "Type to reference a raw pubic key.";
      }
 
-     typedef public-key-ref {
-       // Override the leafref path of public-key-ref in the
-       // ietf-truststore module, as the original path uses a fixed
-       // prefix for the sibling 'public-key-bag' leaf which cannot be
-       // used in another module.
-       type leafref {
-         path "/ts:truststore/ts:public-key-bags/ts:public-key-bag"
-            + "[ts:name = current()/../public-key-bag]/"
-            + "ts:public-key/ts:name";
-       }
-       description
-         "This typedef defines a reference to a specific public key
-          in a public key bag in the truststore, when this module is
-          implemented.  This typedef requires that there exist a
-          sibling 'leaf' node called 'public-key-bag' that SHOULD
-          have the typedef 'public-key-bag-ref'.";
-     }
-
      typedef resource-ref {
        type leafref {
          path "/alto:alto/alto:alto-server/alto:resource"
@@ -1863,24 +1845,6 @@ Table of Contents
        }
      }
 
-     grouping truststore-public-key-ref {
-       description
-         "Grouping for the reference to a public key in a public key
-          bag in the truststore.";
-       leaf public-key-bag {
-         type ts:public-key-bag-ref;
-         description
-           "Reference of a public key bag in the truststore inlucding
-            the certificate to authenticate the TLS client.";
-       }
-       leaf public-key {
-         type public-key-ref;
-         description
-           "Reference of a public key to authenticate the TLS
-            client.";
-       }
-     }
-
      grouping inline-or-truststore-ca-cert-ref {
        description
          "Grouping for the reference of a CA certificate to
@@ -1903,7 +1867,7 @@ Table of Contents
          case truststore {
            if-feature "ts:central-truststore-supported";
            if-feature "ts:certificates";
-           uses truststore-public-key-ref;
+           uses ts:public-key-ref-grouping;
            description
              "Reference of a CA certificate in the truststore to
               authenticate the TLS client.";
@@ -1933,7 +1897,7 @@ Table of Contents
          case truststore {
            if-feature "ts:central-truststore-supported";
            if-feature "ts:certificates";
-           uses truststore-public-key-ref;
+           uses ts:public-key-ref-grouping;
            description
              "Reference of a EE certificate in the truststore to
               authenticate the TLS client.";
@@ -2882,20 +2846,6 @@ Table of Contents
       the entries so as to permit access that should not be permitted,
       or deny access that should be permitted.
 
-   '/alto/alto-server/data-source/feed-interval':  This leaf specifies a
-      period for an ALTO server to wait for updates published by a data
-      source.  A malicious ALTO client could attempt to set a very low
-      (or large) value to this node.  Setting a very low value could
-      attack the data source.  Setting a very large value would lead to
-      maintaining stale data in the ALTO server.
-
-   '/alto/alto-server/data-source/poll-interval':  This leaf specifies a
-      period for an ALTO server to proactively poll updates from a data
-      source.  A malicious client could attempt to set a very low (or
-      large) value to this node.  Setting a very low value could attack
-      the data source.  Setting a very large value would lead to
-      maintaining stale data in the ALTO server.
-
    Some of the readable data nodes in the "ietf-alto" YANG module may be
    considered sensitive or vulnerable in some network environments.  It
    is thus important to control read access (e.g., via get, get-config,
@@ -2964,44 +2914,44 @@ Table of Contents
    [I-D.ietf-netconf-http-client-server]
               Watsen, K., "YANG Groupings for HTTP 1.1/2.0 Clients and
               HTTP Servers", Work in Progress, Internet-Draft, draft-
-              ietf-netconf-http-client-server-13, 17 April 2023,
+              ietf-netconf-http-client-server-14, 28 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              http-client-server-13>.
+              http-client-server-14>.
 
    [I-D.ietf-netconf-netconf-client-server]
               Watsen, K., "NETCONF Client and Server Models", Work in
               Progress, Internet-Draft, draft-ietf-netconf-netconf-
-              client-server-29, 17 April 2023,
+              client-server-30, 28 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              netconf-client-server-29>.
+              netconf-client-server-30>.
 
    [I-D.ietf-netconf-restconf-client-server]
               Watsen, K., "RESTCONF Client and Server Models", Work in
               Progress, Internet-Draft, draft-ietf-netconf-restconf-
-              client-server-29, 17 April 2023,
+              client-server-30, 28 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              restconf-client-server-29>.
+              restconf-client-server-30>.
 
    [I-D.ietf-netconf-tcp-client-server]
               Watsen, K. and M. Scharf, "YANG Groupings for TCP Clients
               and TCP Servers", Work in Progress, Internet-Draft, draft-
-              ietf-netconf-tcp-client-server-16, 17 April 2023,
+              ietf-netconf-tcp-client-server-17, 28 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              tcp-client-server-16>.
+              tcp-client-server-17>.
 
    [I-D.ietf-netconf-tls-client-server]
               Watsen, K., "YANG Groupings for TLS Clients and TLS
               Servers", Work in Progress, Internet-Draft, draft-ietf-
-              netconf-tls-client-server-33, 17 April 2023,
+              netconf-tls-client-server-34, 28 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              tls-client-server-33>.
+              tls-client-server-34>.
 
    [I-D.ietf-netconf-trust-anchors]
               Watsen, K., "A YANG Data Model for a Truststore", Work in
               Progress, Internet-Draft, draft-ietf-netconf-trust-
-              anchors-21, 17 April 2023,
+              anchors-22, 28 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              trust-anchors-21>.
+              trust-anchors-22>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
