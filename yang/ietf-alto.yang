@@ -609,24 +609,6 @@ module ietf-alto {
       "Type to reference a raw pubic key.";
   }
 
-  typedef public-key-ref {
-    // Override the leafref path of public-key-ref in the
-    // ietf-truststore module, as the original path uses a fixed
-    // prefix for the sibling 'public-key-bag' leaf which cannot be
-    // used in another module.
-    type leafref {
-      path "/ts:truststore/ts:public-key-bags/ts:public-key-bag"
-         + "[ts:name = current()/../public-key-bag]/"
-         + "ts:public-key/ts:name";
-    }
-    description
-      "This typedef defines a reference to a specific public key
-       in a public key bag in the truststore, when this module is
-       implemented.  This typedef requires that there exist a
-       sibling 'leaf' node called 'public-key-bag' that SHOULD
-       have the typedef 'public-key-bag-ref'.";
-  }
-
   typedef resource-ref {
     type leafref {
       path "/alto:alto/alto:alto-server/alto:resource"
@@ -929,24 +911,6 @@ module ietf-alto {
     }
   }
 
-  grouping truststore-public-key-ref {
-    description
-      "Grouping for the reference to a public key in a public key
-       bag in the truststore.";
-    leaf public-key-bag {
-      type ts:public-key-bag-ref;
-      description
-        "Reference of a public key bag in the truststore inlucding
-         the certificate to authenticate the TLS client.";
-    }
-    leaf public-key {
-      type public-key-ref;
-      description
-        "Reference of a public key to authenticate the TLS
-         client.";
-    }
-  }
-
   grouping inline-or-truststore-ca-cert-ref {
     description
       "Grouping for the reference of a CA certificate to
@@ -969,7 +933,7 @@ module ietf-alto {
       case truststore {
         if-feature "ts:central-truststore-supported";
         if-feature "ts:certificates";
-        uses truststore-public-key-ref;
+        uses ts:public-key-ref-grouping;
         description
           "Reference of a CA certificate in the truststore to
            authenticate the TLS client.";
@@ -999,7 +963,7 @@ module ietf-alto {
       case truststore {
         if-feature "ts:central-truststore-supported";
         if-feature "ts:certificates";
-        uses truststore-public-key-ref;
+        uses ts:public-key-ref-grouping;
         description
           "Reference of a EE certificate in the truststore to
            authenticate the TLS client.";
@@ -1029,7 +993,7 @@ module ietf-alto {
       case truststore {
         if-feature "ts:central-truststore-supported";
         if-feature "ts:public-keys";
-        uses truststore-public-key-ref;
+        uses ts:truststore-public-key-ref;
         description
           "Reference of a raw public key in the truststore to
            authenticate the TLS client.";

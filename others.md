@@ -39,18 +39,6 @@ vulnerability:
   modify the entries so as to permit access that should not be permitted, or deny
   access that should be permitted.
 
-  '/alto/alto-server/data-source/feed-interval':
-  : This leaf specifies a period for an ALTO server to wait for updates published
-  by a data source. A malicious ALTO client could attempt to set a very low (or large)
-  value to this node. Setting a very low value could attack the data source.
-  Setting a very large value would lead to maintaining stale data in the ALTO server.
-
-  '/alto/alto-server/data-source/poll-interval':
-  : This leaf specifies a period for an ALTO server to proactively poll updates
-  from a data source. A malicious client could attempt to set a very low (or large)
-  value to this node. Setting a very low value could attack the data source.
-   Setting a very large value would lead to maintaining stale data in the ALTO server.
-
 Some of the readable data nodes in the "ietf-alto" YANG module may be considered
 sensitive or vulnerable in some network environments. It is thus important to
 control read access (e.g., via get, get-config, or notification) to these data
