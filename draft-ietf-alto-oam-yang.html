@@ -5182,7 +5182,7 @@ resource, and access control).<a href="#appendix-A.5-1" class="pilcrow">¶</a></
         }
       },
       "server-discovery": {
-        "example-vendor-alto-server-discovery:irr-params": {
+        "example-alto-server-discovery:irr-params": {
           "aut-num": 64496
         }
       },
@@ -5195,7 +5195,7 @@ resource, and access control).<a href="#appendix-A.5-1" class="pilcrow">¶</a></
         },
         {
           "client-id": "bob",
-          "example-vendor-alto-auth:oauth2": {
+          "example-alto-auth:oauth2": {
             "oauth2-server": "https://auth.example.com/login"
           }
         }
@@ -5212,40 +5212,40 @@ resource, and access control).<a href="#appendix-A.5-1" class="pilcrow">¶</a></
       "data-source": [
         {
           "source-id": "test-yang-ds",
-          "source-type": "example-vendor-alto-data-source:yang-\
-                                                          datastore",
-          "feed-interval": 30,
-          "example-vendor-alto-data-source:yang-datastore-source-\
-                                                           params": {
-            "datastore": "ietf-datastores:operational",
-            "target-paths": [
-              {
-                "name": "network-topology",
-                "datastore-xpath-filter": "/network-topology:network\
-           -topology/topology[topology-id=bgp-example-ipv4-topology]"
-              }
-            ],
-            "protocol": "restconf",
-            "restconf": {
-              "listen": {
-                "endpoint": [
-                  {
-                    "name": "example restconf server",
-                    "https": {
-                      "tcp-server-parameters": {
-                        "local-address": "172.17.0.2"
-                      },
-                      "http-client-parameters": {
-                        "client-identity": {
-                          "basic": {
-                            "user-id": "carol",
-                            "cleartext-password": "secret"
+          "source-type": "example-alto-data-source:yang-datastore",
+          "source-params": {
+            "example-alto-data-source:yang-datastore-source-params"\
+                                                                  : {
+              "datastore": "ietf-datastores:operational",
+              "target-paths": [
+                {
+                  "name": "network-topology",
+                  "datastore-xpath-filter": "/network-topology:\
+    network-topology/topology[topology-id=bgp-example-ipv4-topology]"
+                }
+              ],
+              "protocol": "restconf",
+              "restconf": {
+                "listen": {
+                  "endpoint": [
+                    {
+                      "name": "example restconf server",
+                      "https": {
+                        "tcp-server-parameters": {
+                          "local-address": "192.0.2.2"
+                        },
+                        "http-client-parameters": {
+                          "client-identity": {
+                            "basic": {
+                              "user-id": "carol",
+                              "cleartext-password": "secret"
+                            }
                           }
                         }
                       }
                     }
-                  }
-                ]
+                  ]
+                }
               }
             }
           }
@@ -5260,7 +5260,7 @@ resource, and access control).<a href="#appendix-A.5-1" class="pilcrow">¶</a></
           ],
           "alto-networkmap-params": {
             "is-default": true,
-            "example-vendor-alto-alg:l3-unicast-cluster-algorithm": {
+            "example-alto-alg:l3-unicast-cluster-algorithm": {
               "l3-unicast-topo": {
                 "source-datastore": "test-yang-ds",
                 "topo-name": "network-topology"
@@ -5275,6 +5275,9 @@ resource, and access control).<a href="#appendix-A.5-1" class="pilcrow">¶</a></
 }
 </pre><a href="#appendix-A.5-2" class="pilcrow">¶</a>
 </div>
+<p id="appendix-A.5-3">Note that this example only uses a clear text password for demonstration
+purpose. In practice, it is NOT RECOMMENDED to use any clear text passwords
+when using this data model.<a href="#appendix-A.5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
