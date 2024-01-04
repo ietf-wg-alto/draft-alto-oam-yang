@@ -5,14 +5,14 @@
 ALTO WG                                                         J. Zhang
 Internet-Draft                                         Tongji University
 Intended status: Standards Track                                D. Dhody
-Expires: 6 July 2024                                 Huawei Technologies
+Expires: 7 July 2024                                 Huawei Technologies
                                                                   K. Gao
                                                       Sichuan University
                                                                R. Schott
                                                         Deutsche Telekom
                                                                    Q. Ma
                                                                   Huawei
-                                                          3 January 2024
+                                                          4 January 2024
 
 
  YANG Data Models for the Application-Layer Traffic Optimization (ALTO)
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 July 2024.
+   This Internet-Draft will expire on 7 July 2024.
 
 Copyright Notice
 
@@ -227,6 +227,9 @@ Table of Contents
     | yp     | ietf-yang- | [RFC8641]                                 |
     |        | push       |                                           |
     +--------+------------+-------------------------------------------+
+    | ts     | ietf-      | [I-D.ietf-netconf-trust-anchors]          |
+    |        | truststore |                                           |
+    +--------+------------+-------------------------------------------+
     | tcp    | ietf-tcp-  | [I-D.ietf-netconf-tcp-client-server]      |
     |        | server     |                                           |
     +--------+------------+-------------------------------------------+
@@ -258,6 +261,9 @@ Table of Contents
    Editor instructions are specified elsewhere in this document.
 
    Please apply the following replacements:
+
+   *  BBBB --> the assigned RFC number for
+      [I-D.ietf-netconf-trust-anchors]
 
    *  DDDD --> the assigned RFC number for
       [I-D.ietf-netconf-tcp-client-server]
@@ -785,9 +791,22 @@ Table of Contents
              |     |     +--rw user-id    http-user-id-ref
              |     +--:(https)
              |        +--rw https-auth-client
-             |                {http:client-auth-supported,
-             |                 http:local-users-supported}?
-             |     |     +--rw user-id    https-user-id-ref
+             |        |       {http:client-auth-supported,
+             |        |        http:local-users-supported}?
+             |        |  +--rw user-id?   https-user-id-ref
+             |        +--rw tls-auth-client
+             |                {http:client-auth-supported}?
+             |           +--rw ca-cert {tls:client-auth-x509-cert}?
+             |           |  +---u inline-or-truststore-ca-cert-ref
+             |           +--rw ee-cert {tls:client-auth-x509-cert}?
+             |           |  +---u inline-or-truststore-ee-cert-ref
+             |           +--rw raw-public-key
+             |           |       {tls:client-auth-raw-public-key}?
+             |           |  +---u inline-or-truststore-public-key-ref
+             |           +--rw tls12-psks?       empty
+             |           |       {tls:client-auth-tls12-psk}?
+             |           +--rw tls13-epsks?      empty
+             |                   {tls:client-auth-tls13-epsk}?
              +--rw role* [role-name]
              |  +--rw role-name    role-name
              |  +--rw client*      client-ref
@@ -801,8 +820,8 @@ Table of Contents
    *  'auth-client' declares a list of ALTO clients that can be
       authenticated by the internal or external authorization server.
       This basic model only includes authentication approach directly
-      provided by the HTTP server, but the operators or future documents
-      can augment the 'authentication' choice for different
+      provided by the HTTP or TLS server, but the operators or future
+      documents can augment the 'authentication' choice for different
       authentication mechanisms.
 
    *  'role' defines a list of roles for access control.  Each role
@@ -940,6 +959,11 @@ Table of Contents
        prefix inet;
        reference
          "RFC 6991: Common YANG Data Types, Section 4";
+     }
+     import ietf-truststore {
+       prefix ts;
+       reference
+         "RFC BBBB: A YANG Data Model for a Truststore";
      }
      import ietf-tcp-server {
        prefix tcp;
@@ -1501,6 +1525,42 @@ Table of Contents
          "Type to reference an HTTPS client user id.";
      }
 
+     typedef inline-ca-cert-ref {
+       type leafref {
+         path "/alto:alto/alto:alto-server/alto:listen"
+            + "/alto:https/alto:tls-server-parameters"
+            + "/alto:client-authentication/alto:ca-certs"
+            + "/alto:inline-definition/alto:certificate"
+            + "/alto:name";
+       }
+       description
+         "Type to reference a TLS CA certificate.";
+     }
+
+     typedef inline-ee-cert-ref {
+       type leafref {
+         path "/alto:alto/alto:alto-server/alto:listen"
+            + "/alto:https/alto:tls-server-parameters"
+            + "/alto:client-authentication/alto:ee-certs"
+            + "/alto:inline-definition/alto:certificate"
+            + "/alto:name";
+       }
+       description
+         "Type to reference a TLS EE certificate.";
+     }
+
+     typedef inline-raw-public-key-ref {
+       type leafref {
+         path "/alto:alto/alto:alto-server/alto:listen"
+            + "/alto:https/alto:tls-server-parameters"
+            + "/alto:client-authentication/alto:raw-public-keys"
+            + "/alto:inline-definition/alto:public-key"
+            + "/alto:name";
+       }
+       description
+         "Type to reference a raw pubic key.";
+     }
+
      typedef resource-ref {
        type leafref {
          path "/alto:alto/alto:alto-server/alto:resource"
@@ -1803,6 +1863,96 @@ Table of Contents
        }
      }
 
+     grouping inline-or-truststore-ca-cert-ref {
+       description
+         "Grouping for the reference of a CA certificate to
+          authenticate the TLS client.";
+       choice inline-or-truststore {
+         description
+           "Selects between inline and truststore";
+         case inline {
+           if-feature "ts:inline-definitions-supported";
+           leaf inline {
+             type inline-ca-cert-ref;
+             description
+               "Reference to an inline CA certificate configured by
+                the TLS server.";
+           }
+           description
+             "Reference of an inline CA certificate to authenticate
+              the TLS client.";
+         }
+         case truststore {
+           if-feature "ts:central-truststore-supported";
+           if-feature "ts:certificates";
+           uses ts:public-key-ref-grouping;
+           description
+             "Reference of a CA certificate in the truststore to
+              authenticate the TLS client.";
+         }
+       }
+     }
+
+     grouping inline-or-truststore-ee-cert-ref {
+       description
+         "Grouping for the reference of a EE certificate to
+          authenticate the TLS client.";
+       choice inline-or-truststore {
+         description
+           "Selects between inline and truststore";
+         case inline {
+           if-feature "ts:inline-definitions-supported";
+           leaf inline {
+             type inline-ee-cert-ref;
+             description
+               "Reference to an inline EE certificate configured by
+                the TLS server.";
+           }
+           description
+             "Reference of an inline EE certificate to authenticate
+              the TLS client.";
+         }
+         case truststore {
+           if-feature "ts:central-truststore-supported";
+           if-feature "ts:certificates";
+           uses ts:public-key-ref-grouping;
+           description
+             "Reference of a EE certificate in the truststore to
+              authenticate the TLS client.";
+         }
+       }
+     }
+
+     grouping inline-or-truststore-public-key-ref {
+       description
+         "Grouping for the reference of a raw public key to
+          authenticate the TLS client.";
+       choice inline-or-truststore {
+         description
+           "Selects between inline and truststore";
+         case inline {
+           if-feature "ts:inline-definitions-supported";
+           leaf inline {
+             type inline-raw-public-key-ref;
+             description
+               "Reference to an inline public key configured by the
+                TLS server.";
+           }
+           description
+             "Reference of an inline public key to authenticate the
+              TLS client.";
+         }
+         case truststore {
+           if-feature "ts:central-truststore-supported";
+           if-feature "ts:public-keys";
+           uses ts:truststore-public-key-ref;
+           description
+             "Reference of a raw public key in the truststore to
+              authenticate the TLS client.";
+         }
+       }
+     }
+
      // Top-level container
 
      container alto {
@@ -1964,13 +2114,56 @@ Table of Contents
                  if-feature "http:client-auth-supported";
                  if-feature "http:local-users-supported";
                  description
-                   "Parameters of the authenticated HTTPS client.";
+                   "Parameters to identify an authenticated HTTPS
+                    client.";
                  leaf user-id {
                    type https-user-id-ref;
-                   mandatory true;
                    description
                      "Reference of the user-id for the authenticated
                       HTTPS client.";
+                 }
+               }
+               container tls-auth-client {
+                 if-feature "http:client-auth-supported";
+                 description
+                   "Parameters to identify na authenticated TLS
+                    client.";
+                 container ca-cert {
+                   if-feature "tls:client-auth-x509-cert";
+                   description
+                     "Reference of the CA certificate to authenticate
+                      the TLS client.";
+                   uses inline-or-truststore-ca-cert-ref;
+                 }
+                 container ee-cert {
+                   if-feature "tls:client-auth-x509-cert";
+                   description
+                     "Reference of the EE certificate to authenticate
+                      the TLS client.";
+                   uses inline-or-truststore-ee-cert-ref;
+                 }
+                 container raw-public-key {
+                   if-feature "tls:client-auth-raw-public-key";
+                   description
+                     "Reference of the raw public key to authenticate
+                      the TLS client.";
+                   uses inline-or-truststore-public-key-ref;
+                 }
+                 leaf tls12-psks {
+                   if-feature "tls:client-auth-tls12-psk";
+                   type empty;
+                   description
+                     "Identicate that the client is authenticated by
+                      the TLS server using the configured PSKs
+                      (pre-shared or pairwise-symmetric keys).";
+                 }
+                 leaf tls13-epsks {
+                   if-feature "tls:client-auth-tls13-epsk";
+                   type empty;
+                   description
+                     "Identicate that the client is authenticated by
+                      the TLS 1.3 server using the configured external
+                      PSKs (pre-shared keys).";
                  }
                }
              }
@@ -2671,20 +2864,6 @@ Table of Contents
       the entries so as to permit access that should not be permitted,
       or deny access that should be permitted.
 
-   '/alto/alto-server/data-source/feed-interval':  This leaf specifies a
-      period for an ALTO server to wait for updates published by a data
-      source.  A malicious ALTO client could attempt to set a very low
-      (or large) value to this node.  Setting a very low value could
-      attack the data source.  Setting a very large value would lead to
-      maintaining stale data in the ALTO server.
-
-   '/alto/alto-server/data-source/poll-interval':  This leaf specifies a
-      period for an ALTO server to proactively poll updates from a data
-      source.  A malicious client could attempt to set a very low (or
-      large) value to this node.  Setting a very low value could attack
-      the data source.  Setting a very large value would lead to
-      maintaining stale data in the ALTO server.
-
    Some of the readable data nodes in the "ietf-alto" YANG module may be
    considered sensitive or vulnerable in some network environments.  It
    is thus important to control read access (e.g., via get, get-config,
@@ -2784,6 +2963,13 @@ Table of Contents
               netconf-tls-client-server-34, 28 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
               tls-client-server-34>.
+
+   [I-D.ietf-netconf-trust-anchors]
+              Watsen, K., "A YANG Data Model for a Truststore", Work in
+              Progress, Internet-Draft, draft-ietf-netconf-trust-
+              anchors-22, 28 December 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
+              trust-anchors-22>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
