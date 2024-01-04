@@ -119,6 +119,10 @@ resource, and access control).
 {::include-fold examples/full-model-usage.json}
 ~~~
 
+Note that this example only uses a clear text password for demonstration
+purpose. In practice, it is NOT RECOMMENDED to use any clear text passwords
+when using this data model.
+
 # A Sample ALTO Server Architecture to Implement ALTO O&M YANG Modules
 
 [](#alto-ref-arch) shows a sample architecture for an ALTO server
