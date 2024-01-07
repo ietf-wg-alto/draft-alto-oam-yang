@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-04T01:06:28.269975+00:00",
+  "timestamp": "2024-01-07T01:12:41.518709+00:00",
   "repo": "ietf-wg-alto/draft-ietf-alto-oam-yang",
   "labels": [
     {
@@ -3410,24 +3410,26 @@
       "id": "PR_kwDOFlouSc5go7ZC",
       "title": "Added authentication approach for TLS client",
       "url": "https://github.com/ietf-wg-alto/draft-ietf-alto-oam-yang/pull/103",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fno2010",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Addressed Roman's comments on supporting TLS/client side certificates. (See #95)",
       "createdAt": "2023-11-29T08:07:01Z",
-      "updatedAt": "2024-01-03T12:33:28Z",
+      "updatedAt": "2024-01-04T01:38:04Z",
       "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
       "baseRefName": "main",
-      "baseRefOid": "6468649af4203e6ad1ab85b884a542ac5781bfc3",
+      "baseRefOid": "34b8cdf6df210dc80f482459d7aa488de0ab16bc",
       "headRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
       "headRefName": "jz-tls-auth-client",
-      "headRefOid": "a637d435322f419be410fcb83846be7f8ecf12e6",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "7c00722257ecd8d89552b9dc2e601681daab1fe9",
+      "closedAt": "2024-01-04T01:38:04Z",
+      "mergedAt": "2024-01-04T01:38:04Z",
+      "mergedBy": "fno2010",
+      "mergeCommit": {
+        "oid": "10e5321546284d7483b176183d6b3597994a55ab"
+      },
       "comments": [],
       "reviews": []
     },
