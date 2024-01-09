@@ -1040,7 +1040,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Zhang, et al.</td>
-<td class="center">Expires 7 July 2024</td>
+<td class="center">Expires 12 July 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1053,12 +1053,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-alto-oam-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-01-04" class="published">4 January 2024</time>
+<time datetime="2024-01-09" class="published">9 January 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-07-07">7 July 2024</time></dd>
+<dd class="expires"><time datetime="2024-07-12">12 July 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1126,7 +1126,7 @@ to communicate with known ALTO servers.<a href="#section-abstract-1" class="pilc
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -3351,7 +3351,7 @@ module ietf-alto {
           "Reference of an inline CA certificate to authenticate
            the TLS client.";
       }
-      case truststore {
+      case central-truststore {
         uses ts:certificate-ref-grouping;
         description
           "Reference of a CA certificate in the truststore to
@@ -3379,7 +3379,7 @@ module ietf-alto {
           "Reference of an inline EE certificate to authenticate
            the TLS client.";
       }
-      case truststore {
+      case central-truststore {
         uses ts:certificate-ref-grouping;
         description
           "Reference of a EE certificate in the truststore to
@@ -3407,7 +3407,7 @@ module ietf-alto {
           "Reference of an inline public key to authenticate the
            TLS client.";
       }
-      case truststore {
+      case central-truststore {
         uses ts:public-key-ref-grouping;
         description
           "Reference of a raw public key in the truststore to
@@ -4548,7 +4548,7 @@ define data nodes that do set the NACM "default-deny-all" and
 <dl class="references">
 <dt id="I-D.ietf-alto-new-transport">[I-D.ietf-alto-new-transport]</dt>
         <dd>
-<span class="refAuthor">Gao, K.</span>, <span class="refAuthor">Schott, R.</span>, <span class="refAuthor">Yang, Y. R.</span>, <span class="refAuthor">Delwiche, L.</span>, and <span class="refAuthor">L. Keller</span>, <span class="refTitle">"The ALTO Transport Information Publication Service"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-alto-new-transport-21</span>, <time datetime="2023-12-06" class="refDate">6 December 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-alto-new-transport-21">https://datatracker.ietf.org/doc/html/draft-ietf-alto-new-transport-21</a>&gt;</span>. </dd>
+<span class="refAuthor">Gao, K.</span>, <span class="refAuthor">Schott, R.</span>, <span class="refAuthor">Yang, Y. R.</span>, <span class="refAuthor">Delwiche, L.</span>, and <span class="refAuthor">L. Keller</span>, <span class="refTitle">"The ALTO Transport Information Publication Service"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-alto-new-transport-22</span>, <time datetime="2024-01-03" class="refDate">3 January 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-alto-new-transport-22">https://datatracker.ietf.org/doc/html/draft-ietf-alto-new-transport-22</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6291">[RFC6291]</dt>
         <dd>

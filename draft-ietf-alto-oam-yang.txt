@@ -5,14 +5,14 @@
 ALTO WG                                                         J. Zhang
 Internet-Draft                                         Tongji University
 Intended status: Standards Track                                D. Dhody
-Expires: 7 July 2024                                 Huawei Technologies
+Expires: 12 July 2024                                Huawei Technologies
                                                                   K. Gao
                                                       Sichuan University
                                                                R. Schott
                                                         Deutsche Telekom
                                                                    Q. Ma
                                                                   Huawei
-                                                          4 January 2024
+                                                          9 January 2024
 
 
  YANG Data Models for the Application-Layer Traffic Optimization (ALTO)
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 July 2024.
+   This Internet-Draft will expire on 12 July 2024.
 
 Copyright Notice
 
@@ -1882,7 +1882,7 @@ Table of Contents
              "Reference of an inline CA certificate to authenticate
               the TLS client.";
          }
-         case truststore {
+         case central-truststore {
            uses ts:certificate-ref-grouping;
            description
              "Reference of a CA certificate in the truststore to
@@ -1910,7 +1910,7 @@ Table of Contents
              "Reference of an inline EE certificate to authenticate
               the TLS client.";
          }
-         case truststore {
+         case central-truststore {
            uses ts:certificate-ref-grouping;
            description
              "Reference of a EE certificate in the truststore to
@@ -1938,7 +1938,7 @@ Table of Contents
              "Reference of an inline public key to authenticate the
               TLS client.";
          }
-         case truststore {
+         case central-truststore {
            uses ts:public-key-ref-grouping;
            description
              "Reference of a raw public key in the truststore to
@@ -3084,9 +3084,9 @@ Table of Contents
               Gao, K., Schott, R., Yang, Y. R., Delwiche, L., and L.
               Keller, "The ALTO Transport Information Publication
               Service", Work in Progress, Internet-Draft, draft-ietf-
-              alto-new-transport-21, 6 December 2023,
+              alto-new-transport-22, 3 January 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-alto-
-              new-transport-21>.
+              new-transport-22>.
 
    [RFC6291]  Andersson, L., van Helvoort, H., Bonica, R., Romascanu,
               D., and S. Mansfield, "Guidelines for the Use of the "OAM"
