@@ -930,7 +930,7 @@ module ietf-alto {
           "Reference of an inline CA certificate to authenticate
            the TLS client.";
       }
-      case truststore {
+      case central-truststore {
         uses ts:certificate-ref-grouping;
         description
           "Reference of a CA certificate in the truststore to
@@ -958,7 +958,7 @@ module ietf-alto {
           "Reference of an inline EE certificate to authenticate
            the TLS client.";
       }
-      case truststore {
+      case central-truststore {
         uses ts:certificate-ref-grouping;
         description
           "Reference of a EE certificate in the truststore to
@@ -986,7 +986,7 @@ module ietf-alto {
           "Reference of an inline public key to authenticate the
            TLS client.";
       }
-      case truststore {
+      case central-truststore {
         uses ts:public-key-ref-grouping;
         description
           "Reference of a raw public key in the truststore to
