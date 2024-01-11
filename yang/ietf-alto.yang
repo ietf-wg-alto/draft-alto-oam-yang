@@ -919,7 +919,6 @@ module ietf-alto {
       description
         "Selects between inline and truststore";
       case inline {
-        if-feature "http:client-auth-supported";
         if-feature "ts:inline-definitions-supported";
         leaf inline {
           type inline-ca-cert-ref;
@@ -932,6 +931,7 @@ module ietf-alto {
            the TLS client.";
       }
       case central-truststore {
+        if-feature "ts:central-truststore-supported";
         if-feature "ts:certificates";
         uses ts:certificate-ref-grouping;
         description
@@ -949,7 +949,6 @@ module ietf-alto {
       description
         "Selects between inline and truststore";
       case inline {
-        if-feature "http:client-auth-supported";
         if-feature "ts:inline-definitions-supported";
         leaf inline {
           type inline-ee-cert-ref;
@@ -962,6 +961,7 @@ module ietf-alto {
            the TLS client.";
       }
       case central-truststore {
+        if-feature "ts:central-truststore-supported";
         if-feature "ts:certificates";
         uses ts:certificate-ref-grouping;
         description
@@ -979,7 +979,6 @@ module ietf-alto {
       description
         "Selects between inline and truststore";
       case inline {
-        if-feature "http:client-auth-supported";
         if-feature "ts:inline-definitions-supported";
         leaf inline {
           type inline-raw-public-key-ref;
@@ -992,6 +991,7 @@ module ietf-alto {
            TLS client.";
       }
       case central-truststore {
+        if-feature "ts:central-truststore-supported";
         if-feature "ts:public-keys";
         uses ts:public-key-ref-grouping;
         description
@@ -1172,7 +1172,7 @@ module ietf-alto {
               }
             }
             container tls-auth-client {
-              if-feature "http:client-auth-supported";
+              if-feature "tls:client-auth-supported";
               description
                 "Parameters to identify na authenticated TLS
                  client.";
