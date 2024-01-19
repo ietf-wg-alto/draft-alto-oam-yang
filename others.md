@@ -67,7 +67,34 @@ extension "default-deny-all" set.
 
 These modules use groupings defined in other RFCs that
 define data nodes that do set the NACM "default-deny-all" and
-"default-deny-write" extensions.
+"default-deny-write" extensions. Specifically, the following data nodes
+reuse groupings with their security considerations:
+
+  '/alto/alto-server/listen/http/http-server-parameters'
+  : This subtree reuses the 'http-server-grouping' grouping defined in
+  {{I-D.ietf-netconf-http-client-server}}. The security considerations of
+  {{I-D.ietf-netconf-http-client-server}} have been applied to it.
+  Specifically, the 'server-name' and 'client-authentication' nodes in it
+  may be considered sensitive or vulnerable. For this reason, the NACM
+  extension "default-deny-write" has been applied to them.
+
+  '/alto/alto-server/listen/https/http-server-parameters'
+  : This subtree reuses the 'http-server-grouping' grouping defined in
+  {{I-D.ietf-netconf-http-client-server}}. The security considerations of
+  {{I-D.ietf-netconf-http-client-server}} have been applied to it.
+  Specifically, the 'server-name'and 'client-authentication' nodes in it
+  may be considered sensitive or vulnerable. For this reason, the NACM
+  extension "default-deny-write" has been applied to them.
+
+  '/alto/alto-server/listen/https/tls-server-parameters'
+  : This subtree reuses the 'tls-server-grouping' grouping defined in
+  {{I-D.ietf-netconf-tls-client-server}}. The security considerations of
+  {{I-D.ietf-netconf-tls-client-server}} have been applied to it.
+  Specifically, all the "key" and "private-key" data nodes in it have the
+  NACM extension "default-deny-all" set, thus preventing unrestricted
+  read-access to the cleartext key values. Also, all writable data nodes
+  in it may be considered sensitive or vulnerable. For this reason, the
+  NACM extension "default-deny-write" has been applied to them.
 
 # IANA Considerations
 
