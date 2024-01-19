@@ -20,11 +20,11 @@ information resource, and (5) collect statistical data from the ALTO server. The
 application provider can also use this data model to configure ALTO clients
 to communicate with known ALTO servers. 
     " name="description">
-<meta content="xml2rfc 3.19.0" name="generator">
+<meta content="xml2rfc 3.19.1" name="generator">
 <meta content="Automation, Service Provisioning, Control, Operation" name="keyword">
 <meta content="draft-ietf-alto-oam-yang-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.19.0
+  xml2rfc 3.19.1
     Python 3.11.6
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
@@ -37,7 +37,7 @@ to communicate with known ALTO servers.
     requests 2.31.0
     setuptools 68.2.2
     six 1.16.0
-    wcwidth 0.2.12
+    wcwidth 0.2.13
 -->
 <link href="draft-ietf-alto-oam-yang.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1040,7 +1040,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Zhang, et al.</td>
-<td class="center">Expires 14 July 2024</td>
+<td class="center">Expires 22 July 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1053,12 +1053,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-alto-oam-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-01-11" class="published">11 January 2024</time>
+<time datetime="2024-01-19" class="published">19 January 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-07-14">14 July 2024</time></dd>
+<dd class="expires"><time datetime="2024-07-22">22 July 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1126,7 +1126,7 @@ to communicate with known ALTO servers.<a href="#section-abstract-1" class="pilc
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 14 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -4378,7 +4378,42 @@ private YANG datastore. Thus, those extended modules may have the NACM
 extension "default-deny-all" set.<a href="#section-8-8" class="pilcrow">¶</a></p>
 <p id="section-8-9">These modules use groupings defined in other RFCs that
 define data nodes that do set the NACM "default-deny-all" and
-"default-deny-write" extensions.<a href="#section-8-9" class="pilcrow">¶</a></p>
+"default-deny-write" extensions. Specifically, the following data nodes
+reuse groupings with their security considerations:<a href="#section-8-9" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-8-10">
+        <dt id="section-8-10.1">'/alto/alto-server/listen/http/http-server-parameters'</dt>
+        <dd style="margin-left: 1.5em" id="section-8-10.2">
+          <p id="section-8-10.2.1">This subtree reuses the 'http-server-grouping' grouping defined in
+  <span>[<a href="#I-D.ietf-netconf-http-client-server" class="cite xref">I-D.ietf-netconf-http-client-server</a>]</span>. The security considerations of
+  <span>[<a href="#I-D.ietf-netconf-http-client-server" class="cite xref">I-D.ietf-netconf-http-client-server</a>]</span> have been applied to it.
+  Specifically, the 'server-name' and 'client-authentication' nodes in it
+  may be considered sensitive or vulnerable. For this reason, the NACM
+  extension "default-deny-write" has been applied to them.<a href="#section-8-10.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-8-10.3">'/alto/alto-server/listen/https/http-server-parameters'</dt>
+        <dd style="margin-left: 1.5em" id="section-8-10.4">
+          <p id="section-8-10.4.1">This subtree reuses the 'http-server-grouping' grouping defined in
+  <span>[<a href="#I-D.ietf-netconf-http-client-server" class="cite xref">I-D.ietf-netconf-http-client-server</a>]</span>. The security considerations of
+  <span>[<a href="#I-D.ietf-netconf-http-client-server" class="cite xref">I-D.ietf-netconf-http-client-server</a>]</span> have been applied to it.
+  Specifically, the 'server-name'and 'client-authentication' nodes in it
+  may be considered sensitive or vulnerable. For this reason, the NACM
+  extension "default-deny-write" has been applied to them.<a href="#section-8-10.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-8-10.5">'/alto/alto-server/listen/https/tls-server-parameters'</dt>
+        <dd style="margin-left: 1.5em" id="section-8-10.6">
+          <p id="section-8-10.6.1">This subtree reuses the 'tls-server-grouping' grouping defined in
+  <span>[<a href="#I-D.ietf-netconf-tls-client-server" class="cite xref">I-D.ietf-netconf-tls-client-server</a>]</span>. The security considerations of
+  <span>[<a href="#I-D.ietf-netconf-tls-client-server" class="cite xref">I-D.ietf-netconf-tls-client-server</a>]</span> have been applied to it.
+  Specifically, all the "key" and "private-key" data nodes in it have the
+  NACM extension "default-deny-all" set, thus preventing unrestricted
+  read-access to the cleartext key values. Also, all writable data nodes
+  in it may be considered sensitive or vulnerable. For this reason, the
+  NACM extension "default-deny-write" has been applied to them.<a href="#section-8-10.6.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="iana-considerations">
