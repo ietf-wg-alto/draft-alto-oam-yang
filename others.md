@@ -70,7 +70,7 @@ define data nodes that do set the NACM "default-deny-all" and
 "default-deny-write" extensions. Specifically, the following data nodes
 reuse groupings with their security considerations:
 
-  '/alto/alto-server/listen/http/http-server-parameters'
+  '/alto/alto-server/listen/http/http-server-parameters':
   : This subtree reuses the 'http-server-grouping' grouping defined in
   {{I-D.ietf-netconf-http-client-server}}. The security considerations of
   {{I-D.ietf-netconf-http-client-server}} have been applied to it.
@@ -78,7 +78,7 @@ reuse groupings with their security considerations:
   may be considered sensitive or vulnerable. For this reason, the NACM
   extension "default-deny-write" has been applied to them.
 
-  '/alto/alto-server/listen/https/http-server-parameters'
+  '/alto/alto-server/listen/https/http-server-parameters':
   : This subtree reuses the 'http-server-grouping' grouping defined in
   {{I-D.ietf-netconf-http-client-server}}. The security considerations of
   {{I-D.ietf-netconf-http-client-server}} have been applied to it.
@@ -86,7 +86,7 @@ reuse groupings with their security considerations:
   may be considered sensitive or vulnerable. For this reason, the NACM
   extension "default-deny-write" has been applied to them.
 
-  '/alto/alto-server/listen/https/tls-server-parameters'
+  '/alto/alto-server/listen/https/tls-server-parameters':
   : This subtree reuses the 'tls-server-grouping' grouping defined in
   {{I-D.ietf-netconf-tls-client-server}}. The security considerations of
   {{I-D.ietf-netconf-tls-client-server}} have been applied to it.
