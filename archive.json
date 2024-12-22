@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-19T01:35:54.920179+00:00",
+  "timestamp": "2024-12-22T01:36:45.730212+00:00",
   "repo": "ietf-wg-alto/draft-ietf-alto-oam-yang",
   "labels": [
     {
@@ -2862,7 +2862,7 @@
       "baseRepository": "ietf-wg-alto/draft-ietf-alto-oam-yang",
       "baseRefName": "main",
       "baseRefOid": "662feec36413cac1ee09dc0162ed13422d76f850",
-      "headRepository": "martinduke/draft-ietf-alto-oam-yang",
+      "headRepository": null,
       "headRefName": "nits",
       "headRefOid": "5b3c1b1c065e610b1d0bff863b4f18e5ac9cb5f8",
       "closedAt": "2023-07-13T15:12:37Z",
