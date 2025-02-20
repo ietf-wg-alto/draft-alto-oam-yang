@@ -5,14 +5,14 @@
 ALTO WG                                                         J. Zhang
 Internet-Draft                                         Tongji University
 Intended status: Standards Track                                D. Dhody
-Expires: 22 July 2024                                Huawei Technologies
+Expires: 24 August 2025                              Huawei Technologies
                                                                   K. Gao
                                                       Sichuan University
                                                                R. Schott
                                                         Deutsche Telekom
                                                                    Q. Ma
                                                                   Huawei
-                                                         19 January 2024
+                                                        20 February 2025
 
 
  YANG Data Models for the Application-Layer Traffic Optimization (ALTO)
@@ -57,11 +57,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 July 2024.
+   This Internet-Draft will expire on 24 August 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -2960,46 +2960,46 @@ Table of Contents
 10.1.  Normative References
 
    [I-D.ietf-netconf-http-client-server]
-              Watsen, K., "YANG Groupings for HTTP 1.1/2.0 Clients and
-              HTTP Servers", Work in Progress, Internet-Draft, draft-
-              ietf-netconf-http-client-server-14, 28 December 2023,
+              Watsen, K., "YANG Groupings for HTTP Clients and HTTP
+              Servers", Work in Progress, Internet-Draft, draft-ietf-
+              netconf-http-client-server-25, 12 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              http-client-server-14>.
+              http-client-server-25>.
 
    [I-D.ietf-netconf-netconf-client-server]
               Watsen, K., "NETCONF Client and Server Models", Work in
               Progress, Internet-Draft, draft-ietf-netconf-netconf-
-              client-server-30, 28 December 2023,
+              client-server-38, 12 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              netconf-client-server-30>.
+              netconf-client-server-38>.
 
    [I-D.ietf-netconf-restconf-client-server]
               Watsen, K., "RESTCONF Client and Server Models", Work in
               Progress, Internet-Draft, draft-ietf-netconf-restconf-
-              client-server-30, 28 December 2023,
+              client-server-40, 12 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              restconf-client-server-30>.
+              restconf-client-server-40>.
 
    [I-D.ietf-netconf-tcp-client-server]
               Watsen, K. and M. Scharf, "YANG Groupings for TCP Clients
               and TCP Servers", Work in Progress, Internet-Draft, draft-
-              ietf-netconf-tcp-client-server-17, 28 December 2023,
+              ietf-netconf-tcp-client-server-26, 4 April 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              tcp-client-server-17>.
+              tcp-client-server-26>.
 
    [I-D.ietf-netconf-tls-client-server]
               Watsen, K., "YANG Groupings for TLS Clients and TLS
               Servers", Work in Progress, Internet-Draft, draft-ietf-
-              netconf-tls-client-server-34, 28 December 2023,
+              netconf-tls-client-server-41, 16 March 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              tls-client-server-34>.
+              tls-client-server-41>.
 
    [I-D.ietf-netconf-trust-anchors]
               Watsen, K., "A YANG Data Model for a Truststore", Work in
               Progress, Internet-Draft, draft-ietf-netconf-trust-
-              anchors-22, 28 December 2023,
+              anchors-28, 16 March 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              trust-anchors-22>.
+              trust-anchors-28>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
